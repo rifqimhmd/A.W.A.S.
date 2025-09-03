@@ -9,6 +9,7 @@
         </a>
     </div>
 
+
     <!-- Flash Message -->
     <?php if ($this->session->flashdata('success')): ?>
         <div id="flash-message"
@@ -26,6 +27,41 @@
             }, 10000); // 10 detik
         </script>
     <?php endif; ?>
+
+    <!-- Dropdown Sort -->
+    <form method="get" class="flex justify-end mb-4">
+        <div class="relative">
+            <select name="order" onchange="this.form.submit()"
+                class="appearance-none px-4 py-2 rounded-xl text-sm text-gray-700 bg-white 
+             border border-gray-200 shadow-sm cursor-pointer transition
+             focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent
+             hover:shadow-md pr-10">
+                <!-- Ganti ▼ dengan ↓ -->
+                <option value="DESC" <?= ($order === 'DESC' && $this->input->get('order')) ? 'selected' : '' ?>>↓ Nilai Terbesar</option>
+                <!-- Ganti ▲ dengan ↑ -->
+                <option value="ASC" <?= ($order === 'ASC') ? 'selected' : '' ?>>↑ Nilai Terkecil</option>
+            </select>
+
+            <!-- Icon dropdown -->
+            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        document.querySelector('select[name="sort"]').addEventListener('change', function() {
+            if (this.value === "nilai_akhir_DESC") {
+                window.location = "?sort=nilai_akhir&order=DESC";
+            } else if (this.value === "nilai_akhir_ASC") {
+                window.location = "?sort=nilai_akhir&order=ASC";
+            } else {
+                window.location = "?sort=h.created_at&order=DESC";
+            }
+        });
+    </script>
 
     <!-- Tabel -->
     <div class="overflow-x-auto border border-gray-200 rounded-xl shadow-sm w-full">
@@ -81,7 +117,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="9" class="text-center py-6 text-gray-500 italic">Tidak ada data hasil.</td>
+                        <td colspan="10" class="text-center py-6 text-gray-500 italic">Tidak ada data hasil.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

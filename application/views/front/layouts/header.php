@@ -110,7 +110,10 @@
             <!-- Desktop Actions -->
             <div class="hidden md:flex items-center gap-3">
                 <a href="<?= base_url('login/logout') ?>"
-                    class="inline-flex items-center px-4 py-2 text-white font-medium rounded-full border border-red-700 bg-red-700 shadow-sm transform transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 cursor-pointer">
+                    class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-white font-medium rounded-lg bg-red-600 hover:bg-red-700 transition shadow-md cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5" />
+                    </svg>
                     Log out
                 </a>
             </div>
@@ -220,7 +223,10 @@
 
             <!-- Logout -->
             <a href="<?= base_url('login/logout') ?>"
-                class="block text-center px-4 py-2 text-white font-medium rounded-full border border-red-700 bg-red-700 shadow-sm transition hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 cursor-pointer">
+                class="sm:hidden flex items-center justify-center gap-2 w-full px-4 py-2 text-white font-medium rounded-lg bg-red-600 hover:bg-red-700 transition shadow-md cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5" />
+                </svg>
                 Log out
             </a>
         </div>

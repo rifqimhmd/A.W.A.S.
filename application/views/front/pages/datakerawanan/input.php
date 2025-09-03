@@ -1,4 +1,4 @@
-<main class="container mx-auto max-w-6xl p-6 bg-white rounded-2xl shadow-lg space-y-8">
+<main class="w-full p-6 bg-white rounded-2xl shadow-lg space-y-8">
 
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-4">
@@ -113,11 +113,11 @@
         <!-- Tombol -->
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <button type="submit"
-                class="w-full sm:w-auto px-8 py-3 bg-red-600 text-white font-semibold rounded-xl shadow hover:bg-red-700 transition">
+                class="w-full sm:w-auto px-8 py-3 bg-red-600 text-white font-semibold rounded-xl shadow hover:bg-red-700 transition cursor-pointer">
                 ✅ Kirim
             </button>
             <button type="reset"
-                class="w-full sm:w-auto px-8 py-3 bg-gray-200 text-gray-800 font-semibold rounded-xl shadow hover:bg-gray-300 transition">
+                class="w-full sm:w-auto px-8 py-3 bg-gray-200 text-gray-800 font-semibold rounded-xl shadow hover:bg-gray-300 transition cursor-pointer">
                 🔄 Reset
             </button>
         </div>
