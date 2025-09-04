@@ -14,7 +14,7 @@
         <!-- Header -->
         <div class="mb-6 text-center">
             <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Logo AWAS" class="w-44 mx-auto mb-2">
-            <h2 class="text-2xl font-bold text-red-700">Login ke Sistem</h2>
+            <h2 class="text-2xl font-bold text-red-700">Masuk ke Sistem</h2>
             <?php if ($this->session->flashdata('error')): ?>
                 <p style="color:red"><?= $this->session->flashdata('error'); ?></p>
             <?php endif; ?>
@@ -25,15 +25,15 @@
 
             <!-- Username -->
             <div>
-                <label for="username" class="block text-gray-800 font-medium mb-2">Username</label>
-                <input type="text" id="username" name="username" placeholder="Masukkan username" required
+                <label for="username" class="block text-gray-800 font-medium mb-2">Nama pengguna</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan Nama pengguna" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition focus:ring-2 focus:ring-red-600 focus:border-red-600 focus:shadow-md focus:outline-none text-base">
             </div>
 
             <!-- Password -->
             <div class="relative">
-                <label for="password" class="block text-gray-800 font-medium mb-2">Password</label>
-                <input type="password" id="password" name="password" placeholder="Masukkan password" required
+                <label for="password" class="block text-gray-800 font-medium mb-2">Kata sandi</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan kata sandi" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition focus:ring-2 focus:ring-red-600 focus:border-red-600 focus:shadow-md focus:outline-none text-base pr-12">
 
                 <!-- Tombol toggle password -->
@@ -55,7 +55,7 @@
             <div>
                 <button type="submit"
                     class="w-full px-6 py-3 bg-red-600 text-white font-semibold rounded-xl shadow-lg hover:bg-red-700 active:scale-95 transition transform duration-150">
-                    Login
+                    Masuk
                 </button>
             </div>
 
@@ -63,8 +63,10 @@
 
         <!-- Footer -->
         <p class="text-center text-sm text-gray-600 mt-6">
-            Lupa password?
-            <a href="#" class="text-red-600 hover:underline font-medium">Hubungi Admin</a>
+            Lupa kata sandi?
+            <a href="https://wa.me/6282110822052" target="_blank" class="text-red-600 hover:underline font-medium">
+                Hubungi Admin
+            </a>
         </p>
     </main>
 

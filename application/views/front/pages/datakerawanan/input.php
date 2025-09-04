@@ -5,7 +5,7 @@
         <h2 class="text-2xl sm:text-3xl font-bold text-red-700">📝 Input Data Kerawanan</h2>
         <a href="<?= site_url('histori') ?>"
             class="mt-3 sm:mt-0 bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-xl shadow text-sm sm:text-base transition">
-            📋 Lihat History
+            📋 Lihat Riwayat
         </a>
     </div>
 

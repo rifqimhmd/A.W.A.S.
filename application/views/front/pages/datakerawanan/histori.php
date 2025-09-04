@@ -2,7 +2,7 @@
 
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200 pb-4">
-        <h2 class="text-2xl sm:text-3xl font-bold text-red-700">📋 Data Hasil</h2>
+        <h2 class="text-2xl sm:text-3xl font-bold text-red-700">📋 Data Riwayat</h2>
         <a href="<?= site_url('input') ?>"
             class="mt-3 sm:mt-0 bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-xl shadow text-sm sm:text-base transition">
             ➕ Input Data

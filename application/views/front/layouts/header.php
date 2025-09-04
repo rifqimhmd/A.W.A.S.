@@ -12,7 +12,7 @@
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex items-center gap-6 text-white text-lg">
                     <a href="<?= base_url('/') ?>"
-                        class="px-3 py-2 rounded-md transition-colors duration-200 hover:bg-red-700 cursor-pointer">HOME</a>
+                        class="px-3 py-2 rounded-md transition-colors duration-200 hover:bg-red-700 cursor-pointer">Beranda</a>
 
                     <!-- Data Kerawanan -->
                     <div class="relative">
@@ -26,10 +26,12 @@
                         </button>
                         <div
                             class="dropdown-panel absolute left-0 mt-1 w-48 bg-black shadow-lg rounded-md hidden">
-                            <a href="<?= base_url('input') ?>"
-                                class="block px-4 py-2 text-white hover:bg-red-700 cursor-pointer">Input</a>
+                            <?php if ($this->session->userdata('role') === 'upt'): ?>
+                                <a href="<?= base_url('input') ?>"
+                                    class="block px-4 py-2 text-white hover:bg-red-700 cursor-pointer">Input</a>
+                            <?php endif; ?>
                             <a href="<?= base_url('histori') ?>"
-                                class="block px-4 py-2 text-white hover:bg-red-700 cursor-pointer">Histori</a>
+                                class="block px-4 py-2 text-white hover:bg-red-700 cursor-pointer">Riwayat</a>
                         </div>
                     </div>
 
@@ -114,7 +116,7 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5" />
                     </svg>
-                    Log out
+                    Keluar
                 </a>
             </div>
 
@@ -137,7 +139,7 @@
         <div class="px-4 pt-3 pb-4 space-y-2 text-white">
 
             <a href="<?= base_url('/') ?>"
-                class="block px-3 py-2 hover:bg-red-700 rounded-md cursor-pointer">HOME</a>
+                class="block px-3 py-2 hover:bg-red-700 rounded-md cursor-pointer">Beranda</a>
 
             <!-- Accordion Data Kerawanan -->
             <div class="accordion">
@@ -153,7 +155,7 @@
                     <a href="<?= base_url('input') ?>"
                         class="block px-6 py-2 hover:bg-red-700 rounded-md cursor-pointer">Input</a>
                     <a href="<?= base_url('histori') ?>"
-                        class="block px-6 py-2 hover:bg-red-700 rounded-md cursor-pointer">Histori</a>
+                        class="block px-6 py-2 hover:bg-red-700 rounded-md cursor-pointer">Riwayat</a>
                 </div>
             </div>
 
@@ -227,7 +229,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5" />
                 </svg>
-                Log out
+                Keluar
             </a>
         </div>
     </div>

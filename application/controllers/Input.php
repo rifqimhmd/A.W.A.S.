@@ -10,6 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Pagination $pagination
  * @property CI_Loader     $load
  * @property CI_DB_query_builder $db
+ * @property LoginModel      $LoginModel
  */
 class Input extends CI_Controller
 {
@@ -17,15 +18,23 @@ class Input extends CI_Controller
     {
         parent::__construct();
         $this->load->model('InputModel');
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login'); // jika belum login
+        }
     }
 
     public function index()
     {
         $id_upt = $this->session->userdata('id_upt');
+        $role = $this->session->userdata('role');
         $upt = null;
 
         if ($id_upt) {
             $upt = $this->InputModel->getNamaUptById($id_upt);
+        }
+
+        if ($role != 'upt') {
+            redirect('/');
         }
 
         $data['instrument'] = $this->InputModel->getInstrument();
