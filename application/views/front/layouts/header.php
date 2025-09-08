@@ -48,8 +48,6 @@
                         <div
                             class="dropdown-panel absolute left-0 mt-1 w-56 bg-black shadow-lg rounded-md hidden">
                             <a href="#"
-                                class="block px-4 py-2 text-white hover:bg-red-700 cursor-pointer">Faktor</a>
-                            <a href="#"
                                 class="block px-4 py-2 text-white hover:bg-red-700 cursor-pointer">Sarana</a>
                             <a href="#"
                                 class="block px-4 py-2 text-white hover:bg-red-700 cursor-pointer">Prasarana</a>
@@ -83,7 +81,8 @@
                             </div>
                         </div>
                     </div>
-
+                    <a href="#"
+                        class="px-3 py-2 rounded-md transition hover:bg-red-700 cursor-pointer">Faktor</a>
                     <!-- Pustaka -->
                     <a href="#"
                         class="px-3 py-2 rounded-md transition hover:bg-red-700 cursor-pointer">Pustaka</a>
@@ -170,7 +169,6 @@
                     </svg>
                 </button>
                 <div class="accordion-panel max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                    <a href="#" class="block px-6 py-2 hover:bg-red-700 rounded-md cursor-pointer">Faktor</a>
                     <a href="#" class="block px-6 py-2 hover:bg-red-700 rounded-md cursor-pointer">Sarana</a>
                     <a href="#" class="block px-6 py-2 hover:bg-red-700 rounded-md cursor-pointer">Prasarana</a>
                     <a href="#" class="block px-6 py-2 hover:bg-red-700 rounded-md cursor-pointer">Pegawai</a>
