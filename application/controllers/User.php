@@ -1,93 +1,91 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 /**
- * @property UserModel $userModel
- * @property CI_Input $input
- * @property CI_Session $session
+ * Class User
+ *
+ * @property UserModel     $UserModel
+ * @property CI_Input      $input
+ * @property CI_Session    $session
+ * @property CI_Loader     $load
+ * @property CI_DB_query_builder $db
  */
-
 class User extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('UserModel', 'userModel');
-        $this->load->library('session');
+        $this->load->model('UserModel');
+        $this->load->helper('url');
+        $this->load->helper('string');
 
-        // cek login
-        if (!$this->session->userdata('logged_in')) {
-            redirect('auth');
+        // hanya admin & kanwil yang boleh masuk
+        if ($this->session->userdata('role') !== 'admin' && $this->session->userdata('role') !== 'kanwil') {
+            show_error('Anda tidak memiliki akses ke halaman ini', 403);
         }
     }
 
     public function index()
     {
-        $role = $this->session->userdata('role');
-        $data['role']         = $this->session->userdata('role');
-
-        // Cek role
-        if ($role === 'user') {
-            redirect(base_url('/')); // kalo user biasa, alihkan
-        }
-
-        // kalau admin, lanjutkan
-        $data['users'] = $this->userModel->get_all();
-        $data['role']  = $role;
-        $data['page']  = 'front/pages/akses/user';
+        $data['kanwil']     = $this->UserModel->get_available_kanwil(); // utk role=kanwil
+        $data['all_kanwil'] = $this->UserModel->get_kanwil();           // utk role=upt
+        $data['page']       = 'front/pages/akses/user';
         $this->load->view('front/layouts/main', $data);
     }
 
-    public function create()
+    public function store()
     {
-        $nama_kanwil = $this->input->post('nama_kanwil', true);
-        $username    = $this->input->post('username', true);
-        $password    = $this->input->post('password', true);
+        $role = $this->input->post('role');
+        $id_kanwil = NULL;
+        $id_upt = NULL;
+
+        if ($role === 'kanwil') {
+            $id_kanwil = $this->input->post('id_kanwil');
+
+            // validasi kanwil apakah masih available
+            $available = $this->UserModel->get_available_kanwil();
+            $allowed = array_column($available, 'id_kanwil');
+            if (!in_array($id_kanwil, $allowed)) {
+                show_error('Kanwil sudah memiliki akun atau tidak valid.', 400);
+            }
+        } elseif ($role === 'upt') {
+            $id_kanwil = $this->input->post('id_kanwil_upt');
+            $id_upt    = $this->input->post('id_upt');
+
+            // validasi upt apakah masih available
+            $available = $this->UserModel->get_available_upt($id_kanwil);
+            $allowed = array_column($available, 'id_upt');
+            if (!in_array($id_upt, $allowed)) {
+                show_error('UPT sudah memiliki akun atau tidak valid.', 400);
+            }
+        }
 
         $data = [
-            'nama_kanwil' => $nama_kanwil,
-            'username'    => $username,
-            'password'    => md5($password),
-            'role'        => 'user'
+            'id_user'    => $this->uuid_v4(),
+            'username'   => $this->input->post('username'),
+            'password'   => md5($this->input->post('password')),
+            'role'       => $role,
+            'id_kanwil'  => $id_kanwil,
+            'id_upt'     => $id_upt,
+            'status'     => 'aktif',
+            'created_at' => date('Y-m-d H:i:s')
         ];
 
-        if ($this->userModel->insert($data)) {
-            $this->session->set_flashdata('success', 'User berhasil ditambahkan');
-        } else {
-            $this->session->set_flashdata('error', 'Gagal menambahkan user');
-        }
-        redirect('user/index');
+        $this->UserModel->insert($data);
+        redirect('user');
     }
 
-    public function update($id_user)
+    public function get_upt_by_kanwil($id_kanwil)
     {
-        $nama_kanwil = $this->input->post('nama_kanwil', true);
-        $username    = $this->input->post('username', true);
-        $password    = $this->input->post('password', true);
-
-        $data = [
-            'nama_kanwil' => $nama_kanwil,
-            'username'    => $username
-        ];
-
-        if (!empty($password)) {
-            $data['password'] = md5($password);
-        }
-
-        if ($this->userModel->update($id_user, $data)) {
-            $this->session->set_flashdata('success', 'User berhasil diupdate');
-        } else {
-            $this->session->set_flashdata('error', 'Gagal update user');
-        }
-        redirect('user/index');
+        $upt = $this->UserModel->get_available_upt($id_kanwil);
+        echo json_encode($upt);
     }
 
-    public function delete($id_user)
+    private function uuid_v4()
     {
-        if ($this->userModel->delete($id_user)) {
-            $this->session->set_flashdata('success', 'User berhasil dihapus');
-        } else {
-            $this->session->set_flashdata('error', 'Gagal hapus user');
-        }
-        redirect('user/index');
+        $data = random_bytes(16);
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 }

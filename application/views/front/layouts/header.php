@@ -149,23 +149,24 @@
         <!-- Pustaka -->
         <a href="#" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Pustaka</a>
 
-        <!-- Akses -->
-        <div class="accordion">
-            <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
-                Akses
-                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-            <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
-                <a href="<?= base_url('opsi') ?>" class="block px-6 py-2 hover:bg-red-700">Tambah Opsi</a>
-                <a href="<?= base_url('user') ?>" class="block px-6 py-2 hover:bg-red-700">Tambah User</a>
+        <!-- Akses: hanya admin -->
+        <?php if (in_array($this->session->userdata('role'), ['admin', 'kanwil'])): ?>
+            <div class="accordion">
+                <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
+                    Akses
+                    <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
+                    <a href="<?= base_url('opsi') ?>" class="block px-6 py-2 hover:bg-red-700">Tambah Opsi</a>
+                    <a href="<?= base_url('user') ?>" class="block px-6 py-2 hover:bg-red-700">Tambah User</a>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     </nav>
 </aside>
 
-<!-- Script -->
 <!-- Script -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -182,28 +183,22 @@
 
         const isMobile = () => window.innerWidth < 640;
 
-        // Fungsi update panah
         const setSidebarArrow = () => {
             if (isMobile()) {
                 if (sidebar.classList.contains("-ml-64")) {
-                    // sidebar hidden → panah ke kanan
                     sidebarPath.setAttribute("d", "M9 5l7 7-7 7");
                 } else {
-                    // sidebar show → panah ke kiri
                     sidebarPath.setAttribute("d", "M15 5l-7 7 7 7");
                 }
             } else {
                 if (!sidebar.classList.contains("-ml-64")) {
-                    // desktop sidebar terbuka → panah ke kiri
                     sidebarPath.setAttribute("d", "M15 5l-7 7 7 7");
                 } else {
-                    // desktop sidebar tertutup → panah ke kanan
                     sidebarPath.setAttribute("d", "M9 5l7 7-7 7");
                 }
             }
         };
 
-        // Update layout sesuai ukuran layar dan status sidebar
         const updateLayout = () => {
             if (isMobile()) {
                 if (contentWrapper) {
@@ -238,7 +233,6 @@
             setSidebarArrow();
         };
 
-        // Tutup sidebar mobile
         const closeSidebarMobile = () => {
             if (isMobile() && !sidebar.classList.contains("-ml-64")) {
                 sidebar.classList.add("-ml-64");
@@ -246,13 +240,11 @@
             }
         };
 
-        // Toggle sidebar
         sidebarToggle.addEventListener("click", () => {
             sidebar.classList.toggle("-ml-64");
             updateLayout();
         });
 
-        // Klik di luar sidebar untuk menutup mobile
         document.addEventListener("click", e => {
             if (isMobile() && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
                 sidebar.classList.add("-ml-64");
@@ -260,7 +252,6 @@
             }
         });
 
-        // Accordion sidebar
         document.querySelectorAll("#sidebar > nav > .accordion > .accordion-btn").forEach(btn => {
             btn.addEventListener("click", () => {
                 const panel = btn.nextElementSibling;
@@ -288,7 +279,6 @@
             });
         });
 
-        // Dropdowns: tidak bisa dibuka bersamaan
         const toggleDropdown = (dropdown, otherDropdown = null) => {
             if (otherDropdown && !otherDropdown.classList.contains("hidden")) {
                 otherDropdown.classList.add("hidden");
@@ -308,7 +298,6 @@
             closeSidebarMobile();
         });
 
-        // Klik di luar untuk menutup dropdown
         document.addEventListener("click", e => {
             if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
                 notificationDropdown.classList.add("hidden");
@@ -318,10 +307,8 @@
             }
         });
 
-        // Resize: update layout otomatis
         window.addEventListener("resize", updateLayout);
 
-        // Inisialisasi layout
         updateLayout();
     });
 </script>

@@ -12,7 +12,7 @@ class LoginModel extends CI_Model
     {
         $this->db->where('username', $username);
         $this->db->where('password', md5($password));
-        $user = $this->db->get('user')->row();
+        $user = $this->db->get('tbl_user')->row();
 
         if ($user) {
             return $user;
