@@ -159,7 +159,9 @@
                     </svg>
                 </button>
                 <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
-                    <a href="<?= base_url('opsi') ?>" class="block px-6 py-2 hover:bg-red-700">Tambah Opsi</a>
+                    <?php if ($this->session->userdata('role') === 'admin'): ?>
+                        <a href="<?= base_url('opsi') ?>" class="block px-6 py-2 hover:bg-red-700">Tambah Opsi</a>
+                    <?php endif; ?>
                     <a href="<?= base_url('user') ?>" class="block px-6 py-2 hover:bg-red-700">Tambah User</a>
                 </div>
             </div>

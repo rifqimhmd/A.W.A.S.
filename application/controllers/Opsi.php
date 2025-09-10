@@ -32,9 +32,8 @@ class Opsi extends CI_Controller
         $limit = $this->input->get('limit') ? (int)$this->input->get('limit') : 25;
 
         // ================== Skrining ==================
-        $page_skrining = $this->input->get('page_skrining', TRUE);
-        $page_skrining = is_null($page_skrining) ? '1' : (string)$page_skrining;
-        $offset_skrining = ((int)$page_skrining - 1) * $limit;
+        $page_skrining = max(1, (int)$this->input->get('page_skrining', TRUE));
+        $offset_skrining = ($page_skrining - 1) * $limit;
 
         $config_skrining = [
             'base_url' => site_url('opsi/index'),
@@ -43,7 +42,18 @@ class Opsi extends CI_Controller
             'page_query_string' => TRUE,
             'query_string_segment' => 'page_skrining',
             'reuse_query_string' => TRUE,
-            'cur_page' => $page_skrining
+            'use_page_numbers' => TRUE, // penting: pakai page number, bukan offset
+            'cur_page' => $page_skrining,
+            'full_tag_open' => '<div class="pagination flex space-x-2 mt-3">',
+            'full_tag_close' => '</div>',
+            'first_link' => '«',
+            'last_link' => '»',
+            'next_link' => '›',
+            'prev_link' => '‹',
+            'num_tag_open' => '<span class="px-3 py-1 bg-gray-200 rounded">',
+            'num_tag_close' => '</span>',
+            'cur_tag_open' => '<span class="px-3 py-1 bg-red-600 text-white rounded">',
+            'cur_tag_close' => '</span>',
         ];
 
         $this->pagination->initialize($config_skrining);
@@ -51,9 +61,8 @@ class Opsi extends CI_Controller
         $data['pagination_skrining'] = $this->pagination->create_links();
 
         // ================== Faktor ==================
-        $page_faktor = $this->input->get('page_faktor', TRUE);
-        $page_faktor = is_null($page_faktor) ? '1' : (string)$page_faktor;
-        $offset_faktor = ((int)$page_faktor - 1) * $limit;
+        $page_faktor = max(1, (int)$this->input->get('page_faktor', TRUE));
+        $offset_faktor = ($page_faktor - 1) * $limit;
 
         $config_faktor = [
             'base_url' => site_url('opsi/index'),
@@ -62,14 +71,26 @@ class Opsi extends CI_Controller
             'page_query_string' => TRUE,
             'query_string_segment' => 'page_faktor',
             'reuse_query_string' => TRUE,
-            'cur_page' => $page_faktor
+            'use_page_numbers' => TRUE, // pakai page number
+            'cur_page' => $page_faktor,
+            'full_tag_open' => '<div class="pagination flex space-x-2 mt-3">',
+            'full_tag_close' => '</div>',
+            'first_link' => '«',
+            'last_link' => '»',
+            'next_link' => '›',
+            'prev_link' => '‹',
+            'num_tag_open' => '<span class="px-3 py-1 bg-gray-200 rounded">',
+            'num_tag_close' => '</span>',
+            'cur_tag_open' => '<span class="px-3 py-1 bg-red-600 text-white rounded">',
+            'cur_tag_close' => '</span>',
         ];
 
+        // reset pagination sebelum initialize Faktor
         $this->pagination->initialize($config_faktor);
         $data['faktor'] = $this->OpsiModel->get_faktor_paginated($limit, $offset_faktor);
         $data['pagination_faktor'] = $this->pagination->create_links();
 
-        // instruments
+        // ================== Instruments ==================
         $data['instrument'] = $this->OpsiModel->get_all_instrument();
 
         $data['limit'] = $limit;
