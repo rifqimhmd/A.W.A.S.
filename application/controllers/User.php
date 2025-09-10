@@ -11,7 +11,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class User extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -27,8 +26,17 @@ class User extends CI_Controller
 
     public function index()
     {
-        $data['kanwil']     = $this->UserModel->get_available_kanwil(); // utk role=kanwil
-        $data['all_kanwil'] = $this->UserModel->get_kanwil();           // utk role=upt
+        $role = $this->session->userdata('role');
+        $id_kanwil_login = $this->session->userdata('id_kanwil');
+
+        if ($role === 'admin') {
+            $data['users'] = $this->UserModel->get_all_users();
+        } elseif ($role === 'kanwil') {
+            $data['users'] = $this->UserModel->get_users_by_kanwil($id_kanwil_login);
+        }
+
+        $data['kanwil']     = $this->UserModel->get_available_kanwil();
+        $data['all_kanwil'] = $this->UserModel->get_kanwil();
         $data['page']       = 'front/pages/akses/user';
         $this->load->view('front/layouts/main', $data);
     }
@@ -42,7 +50,6 @@ class User extends CI_Controller
         if ($role === 'kanwil') {
             $id_kanwil = $this->input->post('id_kanwil');
 
-            // validasi kanwil apakah masih available
             $available = $this->UserModel->get_available_kanwil();
             $allowed = array_column($available, 'id_kanwil');
             if (!in_array($id_kanwil, $allowed)) {
@@ -52,7 +59,6 @@ class User extends CI_Controller
             $id_kanwil = $this->input->post('id_kanwil_upt');
             $id_upt    = $this->input->post('id_upt');
 
-            // validasi upt apakah masih available
             $available = $this->UserModel->get_available_upt($id_kanwil);
             $allowed = array_column($available, 'id_upt');
             if (!in_array($id_upt, $allowed)) {
@@ -72,6 +78,30 @@ class User extends CI_Controller
         ];
 
         $this->UserModel->insert($data);
+        redirect('user');
+    }
+
+    public function update()
+    {
+        $id_user = $this->input->post('id_user');
+        $password = $this->input->post('password');
+        $status   = $this->input->post('status');
+
+        $data = ['status' => $status];
+        if (!empty($password)) {
+            $data['password'] = md5($password);
+        }
+
+        $this->UserModel->update($id_user, $data);
+        redirect('user');
+    }
+
+    public function delete($id_user)
+    {
+        if ($this->session->userdata('role') !== 'admin') {
+            show_error('Hanya admin yang bisa menghapus user', 403);
+        }
+        $this->UserModel->delete($id_user);
         redirect('user');
     }
 

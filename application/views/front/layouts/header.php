@@ -84,50 +84,21 @@
         <!-- Beranda masuk ke sidebar di mobile -->
         <a href="<?= base_url('/') ?>" class="block sm:hidden px-3 py-2 hover:bg-red-700 rounded-md transition">Beranda</a>
 
-        <!-- Data Kerawanan -->
-        <div class="accordion">
-            <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
-                Data Kerawanan
-                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-            <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
-                <?php if ($this->session->userdata('role') === 'upt'): ?>
-                    <a href="<?= base_url('input') ?>" class="block px-6 py-2 hover:bg-red-700">Input</a>
-                <?php endif; ?>
-                <a href="<?= base_url('histori') ?>" class="block px-6 py-2 hover:bg-red-700">Riwayat</a>
-            </div>
-        </div>
+        <!-- Riwayat Kerawanan -->
+        <a href="<?= base_url('histori') ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Riwayat Kerawanan</a>
 
         <!-- Faktor -->
         <div class="accordion">
             <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
-                Faktor
+                Faktor Kerawanan
                 <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
             <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
-                <a href="<?= base_url('opsi') ?>" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
-                <a href="<?= base_url('user') ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
-            </div>
-        </div>
-
-        <!-- Sarana Prasarana -->
-        <div class="accordion">
-            <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
-                Sarana Prasarana
-                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-            <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
-                <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana</a>
-                <a href="#" class="block px-6 py-2 hover:bg-red-700">Prasarana</a>
                 <a href="#" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
                 <a href="#" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
-
+                <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana Prasarana</a>
                 <!-- Nested Operasional -->
                 <div class="accordion nested">
                     <button class="accordion-btn flex justify-between w-full px-6 py-2 hover:bg-red-700 rounded-md transition">
