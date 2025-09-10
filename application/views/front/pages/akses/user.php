@@ -50,25 +50,25 @@
                     foreach ($users as $u): ?>
                         <tr class="hover:bg-red-50 transition">
                             <td class="px-4 py-2"><?= $no++ ?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($u->username) ?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($u->role) ?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($u->nama_kanwil) ?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($u->nama_upt) ?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($u->username ?? '') ?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($u->role ?? '') ?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($u->nama_kanwil ?? '') ?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($u->nama_upt ?? '') ?></td>
                             <td class="px-4 py-2">
-                                <span class="px-2 py-1 rounded text-xs <?= $u->status == 'aktif' ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-700' ?>">
-                                    <?= ucfirst($u->status) ?>
+                                <span class="px-2 py-1 rounded text-xs <?= ($u->status ?? '') == 'aktif' ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-700' ?>">
+                                    <?= ucfirst($u->status ?? '') ?>
                                 </span>
                             </td>
                             <td class="px-4 py-2 flex justify-center space-x-2">
                                 <!-- Edit modal toggle -->
-                                <label for="modal-edit-<?= $u->id_user ?>"
+                                <label for="modal-edit-<?= $u->id_user ?? '' ?>"
                                     class="inline-flex items-center justify-center w-9 h-9 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow cursor-pointer">
                                     ✏️
                                 </label>
 
                                 <!-- Delete only visible to admin -->
                                 <?php if ($this->session->userdata('role') === 'admin'): ?>
-                                    <a href="<?= site_url('user/delete/' . $u->id_user) ?>"
+                                    <a href="<?= site_url('user/delete/' . ($u->id_user ?? '')) ?>"
                                         onclick="return confirm('Yakin hapus user ini?')"
                                         class="inline-flex items-center justify-center w-9 h-9 bg-red-500 hover:bg-red-600 text-white rounded-full shadow">
                                         🗑️
@@ -78,16 +78,16 @@
                         </tr>
 
                         <!-- Modal Edit User -->
-                        <input type="checkbox" id="modal-edit-<?= $u->id_user ?>" class="modal-toggle hidden" />
+                        <input type="checkbox" id="modal-edit-<?= $u->id_user ?? '' ?>" class="modal-toggle hidden" />
                         <div class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
                             <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative">
                                 <h3 class="text-xl font-semibold text-red-700 mb-4">✏️ Edit User</h3>
                                 <form method="post" action="<?= site_url('user/update') ?>" class="space-y-6">
                                     <!-- important: controller update() expects POST id_user -->
-                                    <input type="hidden" name="id_user" value="<?= htmlspecialchars($u->id_user) ?>">
+                                    <input type="hidden" name="id_user" value="<?= htmlspecialchars($u->id_user ?? '') ?>">
                                     <div>
                                         <label class="block text-gray-700 font-medium mb-1">Username</label>
-                                        <input type="text" value="<?= htmlspecialchars($u->username) ?>" readonly
+                                        <input type="text" value="<?= htmlspecialchars($u->username ?? '') ?>" readonly
                                             class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-100">
                                     </div>
                                     <div>
@@ -99,20 +99,20 @@
                                     <div>
                                         <label class="block text-gray-700 font-medium mb-1">Status</label>
                                         <select name="status" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
-                                            <option value="aktif" <?= $u->status == 'aktif' ? 'selected' : '' ?>>Aktif</option>
-                                            <option value="nonaktif" <?= $u->status == 'nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
+                                            <option value="aktif" <?= ($u->status ?? '') == 'aktif' ? 'selected' : '' ?>>Aktif</option>
+                                            <option value="nonaktif" <?= ($u->status ?? '') == 'nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
                                         </select>
                                     </div>
                                     <div class="flex justify-end space-x-4 mt-4">
-                                        <label for="modal-edit-<?= $u->id_user ?>" class="px-4 py-2 bg-gray-300 rounded-lg cursor-pointer">Batal</label>
+                                        <label for="modal-edit-<?= $u->id_user ?? '' ?>" class="px-4 py-2 bg-gray-300 rounded-lg cursor-pointer">Batal</label>
                                         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">Simpan</button>
                                     </div>
                                 </form>
-                                <label for="modal-edit-<?= $u->id_user ?>" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
+                                <label for="modal-edit-<?= $u->id_user ?? '' ?>" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
                             </div>
                         </div>
                         <style>
-                            #modal-edit-<?= $u->id_user ?>:checked+.modal {
+                            #modal-edit-<?= $u->id_user ?? '' ?>:checked+.modal {
                                 opacity: 1;
                                 pointer-events: auto;
                             }
@@ -171,7 +171,7 @@
                     <select name="id_kanwil" id="id_kanwil" class="w-full border border-gray-300 rounded-lg px-3 py-2">
                         <option value="">--Pilih Kanwil--</option>
                         <?php foreach ($kanwil as $k): ?>
-                            <option value="<?= htmlspecialchars($k->id_kanwil) ?>"><?= htmlspecialchars($k->nama_kanwil) ?></option>
+                            <option value="<?= htmlspecialchars($k->id_kanwil ?? '') ?>"><?= htmlspecialchars($k->nama_kanwil ?? '') ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -182,24 +182,24 @@
 
                     <?php if ($session_role === 'kanwil'): ?>
                         <!-- hidden input that JS can read -->
-                        <input type="hidden" id="id_kanwil_upt_hidden" name="id_kanwil_upt" value="<?= htmlspecialchars($session_kanwil) ?>">
+                        <input type="hidden" id="id_kanwil_upt_hidden" name="id_kanwil_upt" value="<?= htmlspecialchars($session_kanwil ?? '') ?>">
                         <div class="px-3 py-2 bg-gray-100 rounded text-sm text-gray-700">
                             <?php
                             $kanwil_name = '-';
                             foreach ($all_kanwil as $a) {
-                                if ($a->id_kanwil == $session_kanwil) {
-                                    $kanwil_name = $a->nama_kanwil;
+                                if (($a->id_kanwil ?? '') == $session_kanwil) {
+                                    $kanwil_name = $a->nama_kanwil ?? '-';
                                     break;
                                 }
                             }
-                            echo htmlspecialchars($kanwil_name);
+                            echo htmlspecialchars($kanwil_name ?? '');
                             ?>
                         </div>
                     <?php else: ?>
                         <select name="id_kanwil_upt" id="id_kanwil_upt" class="w-full border border-gray-300 rounded-lg px-3 py-2">
                             <option value="">--Pilih Kanwil--</option>
                             <?php foreach ($all_kanwil as $k): ?>
-                                <option value="<?= htmlspecialchars($k->id_kanwil) ?>"><?= htmlspecialchars($k->nama_kanwil) ?></option>
+                                <option value="<?= htmlspecialchars($k->id_kanwil ?? '') ?>"><?= htmlspecialchars($k->nama_kanwil ?? '') ?></option>
                             <?php endforeach; ?>
                         </select>
                     <?php endif; ?>
