@@ -1,14 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
 /**
  * Class Opsi
  *
- * @property OpsiModel     $OpsiModel
- * @property CI_Input      $input
- * @property CI_Session    $session
+ * @property OpsiModel $OpsiModel
+ * @property CI_Input $input
+ * @property CI_Session $session
  * @property CI_Pagination $pagination
- * @property CI_Loader     $load
+ * @property CI_Loader $load
  * @property CI_DB_query_builder $db
  */
 class Opsi extends CI_Controller
@@ -28,7 +27,6 @@ class Opsi extends CI_Controller
 
     public function index()
     {
-        // ambil limit dari query string (default 25)
         $limit = $this->input->get('limit') ? (int)$this->input->get('limit') : 25;
 
         // ================== Skrining ==================
@@ -42,7 +40,7 @@ class Opsi extends CI_Controller
             'page_query_string' => TRUE,
             'query_string_segment' => 'page_skrining',
             'reuse_query_string' => TRUE,
-            'use_page_numbers' => TRUE, // penting: pakai page number, bukan offset
+            'use_page_numbers' => TRUE,
             'cur_page' => $page_skrining,
             'full_tag_open' => '<div class="pagination flex space-x-2 mt-3">',
             'full_tag_close' => '</div>',
@@ -71,7 +69,7 @@ class Opsi extends CI_Controller
             'page_query_string' => TRUE,
             'query_string_segment' => 'page_faktor',
             'reuse_query_string' => TRUE,
-            'use_page_numbers' => TRUE, // pakai page number
+            'use_page_numbers' => TRUE,
             'cur_page' => $page_faktor,
             'full_tag_open' => '<div class="pagination flex space-x-2 mt-3">',
             'full_tag_close' => '</div>',
@@ -92,12 +90,12 @@ class Opsi extends CI_Controller
 
         // ================== Instruments ==================
         $data['instrument'] = $this->OpsiModel->get_all_instrument();
-
         $data['limit'] = $limit;
         $data['page'] = 'front/pages/akses/opsi';
         $this->load->view('front/layouts/main', $data);
     }
 
+    // ================== STORE ==================
     public function store()
     {
         $opsi_type = $this->input->post('opsi_type');
@@ -134,6 +132,7 @@ class Opsi extends CI_Controller
         redirect('opsi');
     }
 
+    // ================== UPDATE & DELETE ==================
     public function update_skrining($id)
     {
         $jenis = $this->input->post('jenis_skrining');

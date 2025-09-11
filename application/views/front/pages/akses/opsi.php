@@ -67,7 +67,7 @@
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
                     <tr>
                         <th class="px-4 py-3 font-semibold">No</th>
-                        <th class="px-4 py-3 font-semibold text-center">Indikator</th>
+                        <th class="px-4 py-3 font-semibold text-left">Indikator</th>
                         <th class="px-4 py-3 font-semibold">Jenis</th>
                         <th class="px-4 py-3 font-semibold">Instrument</th>
                         <th class="px-4 py-3 font-semibold">Aksi</th>
@@ -268,7 +268,7 @@
                 <div id="form-skrining" class="hidden space-y-4">
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Indikator Skrining</label>
-                        <input type="text" name="indikator_skrining" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
+                        <input type="text" name="indikator_skrining" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                     </div>
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Jenis Skrining</label>
@@ -313,6 +313,7 @@
             <label for="modal-add" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
         </div>
     </div>
+
     <style>
         /* modal checkbox trick */
         #modal-add:checked+.modal,
@@ -350,38 +351,25 @@
             }
         }
 
-        // Toggle form inside Add modal based on selection
+        // Toggle form add skrining/faktor
         function toggleForm() {
-            const val = document.getElementById('opsi_type').value;
-            const fs = document.getElementById('form-skrining');
-            const ff = document.getElementById('form-faktor');
+            const type = document.getElementById('opsi_type').value;
+            document.getElementById('form-skrining').classList.add('hidden');
+            document.getElementById('form-faktor').classList.add('hidden');
 
-            fs.classList.add('hidden');
-            ff.classList.add('hidden');
-
-            if (val === 'skrining') fs.classList.remove('hidden');
-            if (val === 'faktor') ff.classList.remove('hidden');
+            if (type === 'skrining') document.getElementById('form-skrining').classList.remove('hidden');
+            if (type === 'faktor') document.getElementById('form-faktor').classList.remove('hidden');
         }
 
-        // Change limit (desktop select)
+        // Change limit
         function changeLimit() {
-            const limit = document.getElementById('limit-select').value;
-            const url = new URL(window.location.href);
-            url.searchParams.set('limit', limit);
-            window.location.href = url.toString();
+            const val = document.getElementById('limit-select').value;
+            window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
         }
-        // Change limit (mobile select)
+
         function changeLimitFromMobile() {
-            const limit = document.getElementById('limit-select-mobile').value;
-            const url = new URL(window.location.href);
-            url.searchParams.set('limit', limit);
-            window.location.href = url.toString();
+            const val = document.getElementById('limit-select-mobile').value;
+            window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
         }
-
-        // Initialize default visible table (skrining)
-        document.addEventListener('DOMContentLoaded', () => {
-            toggleTable('skrining');
-        });
     </script>
-
 </main>

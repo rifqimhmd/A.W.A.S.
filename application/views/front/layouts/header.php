@@ -110,7 +110,7 @@
         <!-- Faktor -->
         <div class="accordion">
             <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
-                Faktor Kerawanan
+                Faktor Narkoba
                 <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
@@ -136,7 +136,34 @@
                 </div>
             </div>
         </div>
-
+        <div class="accordion">
+            <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
+                Faktor Teroris
+                <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
+                <a href="#" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
+                <a href="#" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
+                <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana Prasarana</a>
+                <!-- Nested Operasional -->
+                <div class="accordion nested">
+                    <button class="accordion-btn flex justify-between w-full px-6 py-2 hover:bg-red-700 rounded-md transition">
+                        Operasional
+                        <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
+                        <a href="#" class="block px-8 py-2 hover:bg-red-700">SOP</a>
+                        <a href="#" class="block px-8 py-2 hover:bg-red-700">Test Urin</a>
+                        <a href="#" class="block px-8 py-2 hover:bg-red-700">Penggeledahan</a>
+                        <a href="#" class="block px-8 py-2 hover:bg-red-700">Jumlah Petugas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Pustaka -->
         <a href="#" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Pustaka</a>
 
