@@ -54,17 +54,17 @@
 
     <!-- Table User -->
     <div class="overflow-x-auto">
-        <div class="bg-white shadow rounded-xl overflow-hidden">
+        <div class="bg-white shadow rounded-xl overflow-hidden min-w-[700px]">
             <table class="min-w-full text-center border-collapse">
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
                     <tr>
-                        <th class="px-4 py-3 font-semibold">No</th>
-                        <th class="px-4 py-3 font-semibold text-center">Username</th>
-                        <th class="px-4 py-3 font-semibold">Role</th>
-                        <th class="px-4 py-3 font-semibold">Kanwil</th>
-                        <th class="px-4 py-3 font-semibold">UPT</th>
-                        <th class="px-4 py-3 font-semibold">Status</th>
-                        <th class="px-4 py-3 font-semibold">Aksi</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">No</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold text-left">Username</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Role</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Kanwil</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">UPT</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Status</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
@@ -72,12 +72,12 @@
                         <?php $no = 1 + (isset($_GET['page_user']) ? (($_GET['page_user'] - 1) * $limit) : 0);
                         foreach ($users as $u): ?>
                             <tr class="hover:bg-red-50 transition">
-                                <td class="px-4 py-3"><?= $no++ ?></td>
-                                <td class="px-4 py-3 text-left"><?= htmlspecialchars($u->username ?? '') ?></td>
-                                <td class="px-4 py-3"><?= htmlspecialchars($u->role ?? '') ?></td>
-                                <td class="px-4 py-3"><?= htmlspecialchars($u->nama_kanwil ?? '-') ?></td>
-                                <td class="px-4 py-3"><?= htmlspecialchars($u->nama_upt ?? '-') ?></td>
-                                <td class="px-4 py-3">
+                                <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
+                                <td class="px-2 sm:px-4 py-3 text-left"><?= htmlspecialchars($u->username ?? '') ?></td>
+                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->role ?? '') ?></td>
+                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->nama_kanwil ?? '-') ?></td>
+                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->nama_upt ?? '-') ?></td>
+                                <td class="px-2 sm:px-4 py-3">
                                     <?php
                                     $status = strtolower($u->status ?? '');
                                     $bg = $status === 'aktif' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
@@ -85,7 +85,7 @@
                                     ?>
                                     <span class="px-2 py-1 rounded text-xs <?= $bg ?>"><?= $text ?></span>
                                 </td>
-                                <td class="px-4 py-3 flex justify-center gap-2">
+                                <td class="px-2 sm:px-4 py-3 flex justify-center gap-2">
                                     <label for="modal-edit-<?= $u->id_user ?? '' ?>"
                                         class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
                                         title="Edit">✏️</label>
@@ -155,7 +155,7 @@
         </div>
     </div>
 
-    <!-- Modal Tambah User -->
+    <!-- Modal Tambah User (FULL) -->
     <input type="checkbox" id="modal-add" class="modal-toggle hidden" />
     <div class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
@@ -165,7 +165,6 @@
                     <label class="block text-gray-700 font-medium mb-1">Username</label>
                     <input type="text" name="username" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                 </div>
-
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Password</label>
                     <input type="password" name="password" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
@@ -250,7 +249,6 @@
     </style>
 
     <script>
-        // Toggle limit
         function changeLimit() {
             const limit = document.getElementById('limit-select').value;
             const url = new URL(window.location.href);

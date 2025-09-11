@@ -62,15 +62,15 @@
 
     <!-- CONTENT CARD: Skrining -->
     <div id="table-skrining" class="overflow-x-auto">
-        <div class="bg-white shadow rounded-xl overflow-hidden">
+        <div class="bg-white shadow rounded-xl overflow-hidden min-w-[600px]">
             <table class="min-w-full text-center border-collapse">
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
                     <tr>
-                        <th class="px-4 py-3 font-semibold">No</th>
-                        <th class="px-4 py-3 font-semibold text-left">Indikator</th>
-                        <th class="px-4 py-3 font-semibold">Jenis</th>
-                        <th class="px-4 py-3 font-semibold">Instrument</th>
-                        <th class="px-4 py-3 font-semibold">Aksi</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">No</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold text-left">Indikator</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Jenis</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Instrument</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
@@ -78,11 +78,11 @@
                         <?php $no = 1 + (isset($_GET['page_skrining']) ? $_GET['page_skrining'] : 0);
                         foreach ($skrining as $s): ?>
                             <tr class="hover:bg-red-50 transition">
-                                <td class="px-4 py-3"><?= $no++ ?></td>
-                                <td class="px-4 py-3 text-left"><?= htmlspecialchars($s->indikator_skrining) ?></td>
-                                <td class="px-4 py-3"><?= htmlspecialchars($s->jenis_skrining) ?></td>
-                                <td class="px-4 py-3"><?= htmlspecialchars($s->nama_instrument) ?></td>
-                                <td class="px-4 py-3">
+                                <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
+                                <td class="px-2 sm:px-4 py-3 text-left"><?= htmlspecialchars($s->indikator_skrining) ?></td>
+                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($s->jenis_skrining) ?></td>
+                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($s->nama_instrument) ?></td>
+                                <td class="px-2 sm:px-4 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-skrining-<?= $s->id_skrining ?>"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
@@ -98,7 +98,7 @@
                                 </td>
                             </tr>
 
-                            <!-- Modal Edit Skrining (per item) -->
+                            <!-- Modal Edit Skrining -->
                             <input type="checkbox" id="modal-edit-skrining-<?= $s->id_skrining ?>" class="modal-toggle hidden" />
                             <div class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
                                 <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
@@ -155,15 +155,15 @@
 
     <!-- CONTENT CARD: Faktor -->
     <div id="table-faktor" class="overflow-x-auto hidden mt-6">
-        <div class="bg-white shadow rounded-xl overflow-hidden">
+        <div class="bg-white shadow rounded-xl overflow-hidden min-w-[600px]">
             <table class="min-w-full text-center border-collapse">
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
                     <tr>
-                        <th class="px-4 py-3 font-semibold">No</th>
-                        <th class="px-4 py-3 font-semibold text-center">Indikator</th>
-                        <th class="px-4 py-3 font-semibold">Jenis</th>
-                        <th class="px-4 py-3 font-semibold">Instrument</th>
-                        <th class="px-4 py-3 font-semibold">Aksi</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">No</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold text-left">Indikator</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Jenis</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Instrument</th>
+                        <th class="px-2 sm:px-4 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
@@ -171,11 +171,11 @@
                         <?php $no = 1 + (isset($_GET['page_faktor']) ? $_GET['page_faktor'] : 0);
                         foreach ($faktor as $f): ?>
                             <tr class="hover:bg-red-50 transition">
-                                <td class="px-4 py-3"><?= $no++ ?></td>
-                                <td class="px-4 py-3 text-left"><?= htmlspecialchars($f->indikator_faktor) ?></td>
-                                <td class="px-4 py-3"><?= htmlspecialchars($f->jenis_faktor) ?></td>
-                                <td class="px-4 py-3"><?= htmlspecialchars($f->nama_instrument) ?></td>
-                                <td class="px-4 py-3">
+                                <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
+                                <td class="px-2 sm:px-4 py-3 text-left"><?= htmlspecialchars($f->indikator_faktor) ?></td>
+                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($f->jenis_faktor) ?></td>
+                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($f->nama_instrument) ?></td>
+                                <td class="px-2 sm:px-4 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-faktor-<?= $f->id_faktor ?>"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
