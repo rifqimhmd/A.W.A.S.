@@ -4,18 +4,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class UserModel extends CI_Model
 {
     // Ambil semua user (kecuali pamintel admin)
-    public function get_all_users()
+    public function get_all_users($search = null)
     {
         $this->db->select('u.*, k.nama_kanwil, up.nama_upt');
         $this->db->from('tbl_user u');
         $this->db->join('tbl_kanwil k', 'k.id_kanwil = u.id_kanwil', 'left');
         $this->db->join('tbl_upt up', 'up.id_upt = u.id_upt', 'left');
         $this->db->where('NOT (u.username = "pamintel" AND u.role = "admin")');
+
+        if (!empty($search)) {
+            $this->db->like('u.username', $search);
+        }
+
         return $this->db->get()->result();
     }
 
     // Ambil user hanya untuk 1 kanwil tertentu
-    public function get_users_by_kanwil($id_kanwil)
+    public function get_users_by_kanwil($id_kanwil, $search = null)
     {
         $this->db->select('u.*, k.nama_kanwil, up.nama_upt');
         $this->db->from('tbl_user u');
@@ -23,6 +28,11 @@ class UserModel extends CI_Model
         $this->db->join('tbl_upt up', 'up.id_upt = u.id_upt', 'left');
         $this->db->where('u.id_kanwil', $id_kanwil);
         $this->db->where('NOT (u.username = "pamintel" AND u.role = "admin")');
+
+        if (!empty($search)) {
+            $this->db->like('u.username', $search);
+        }
+
         return $this->db->get()->result();
     }
 

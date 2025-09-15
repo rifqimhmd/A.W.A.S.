@@ -34,10 +34,19 @@
                 </select>
             </div>
 
+            <!-- Tombol Tambah User -->
+            <!-- Desktop: tombol normal -->
             <button onclick="document.getElementById('modal-add').checked = true"
-                class="bg-red-600 hover:bg-red-700 text-white font-medium px-4 sm:px-5 py-2 rounded-xl shadow-md transition transform hover:scale-105 text-sm sm:text-base">
+                class="hidden sm:inline-flex cursor-pointer bg-red-600 hover:bg-red-700 text-white font-medium px-4 sm:px-5 py-2 rounded-xl shadow-md transition transform hover:scale-105 text-sm sm:text-base">
                 ➕ Tambah User
             </button>
+
+            <!-- Mobile: FAB bulat kanan bawah -->
+            <button onclick="document.getElementById('modal-add').checked = true"
+                class="sm:hidden fixed bottom-5 right-5 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-110">
+                ➕
+            </button>
+
         </div>
     </div>
 
@@ -51,11 +60,32 @@
             <option value="100" <?= isset($limit) && $limit == 100 ? 'selected' : '' ?>>100</option>
         </select>
     </div>
+    <!-- Search & Filter -->
+    <div class="mb-4">
+        <form method="get" action=""
+            class="flex flex-wrap items-center gap-2 w-full">
+
+            <!-- Input dengan ikon -->
+            <div class="relative flex-1 sm:flex-none sm:w-64">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+                <input type="text" name="search" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>"
+                    placeholder="Cari Username..."
+                    class="pl-9 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm w-full">
+            </div>
+
+            <!-- Tombol Cari -->
+            <button type="submit"
+                class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm shadow w-auto">
+                Cari
+            </button>
+        </form>
+    </div>
 
     <!-- Table User -->
     <div class="overflow-x-auto">
-        <div class="bg-white shadow rounded-xl overflow-hidden min-w-[700px]">
-            <table class="min-w-full text-center border-collapse">
+        <div class="bg-white shadow rounded-xl overflow-hidden">
+            <!-- TABLE: tampil di layar sm ke atas -->
+            <table class="min-w-full text-center border-collapse hidden sm:table">
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
                     <tr>
                         <th class="px-2 sm:px-4 py-3 font-semibold">No</th>
@@ -99,9 +129,9 @@
                                 </td>
                             </tr>
 
-                            <!-- Modal Edit User -->
+                            <!-- Modal tetap sama -->
                             <input type="checkbox" id="modal-edit-<?= $u->id_user ?? '' ?>" class="modal-toggle hidden" />
-                            <div class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+                            <div class="modal fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
                                 <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
                                     <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit User</h3>
                                     <form method="post" action="<?= site_url('user/update') ?>" class="space-y-4">
@@ -148,6 +178,45 @@
                 </tbody>
             </table>
 
+            <!-- CARD: tampil di mobile -->
+            <div class="block sm:hidden divide-y divide-gray-100">
+                <?php if (!empty($users)): ?>
+                    <?php $no = 1 + (isset($_GET['page_user']) ? (($_GET['page_user'] - 1) * $limit) : 0);
+                    foreach ($users as $u): ?>
+                        <div class="p-4 bg-white hover:bg-red-50 transition">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-red-600">#<?= $no++ ?></span>
+                                <span class="text-sm px-2 py-1 rounded 
+                                <?= strtolower($u->status ?? '') === 'aktif'
+                                    ? 'bg-green-100 text-green-700'
+                                    : 'bg-red-100 text-red-700' ?>">
+                                    <?= (strtolower($u->status ?? '') === 'aktif') ? 'Aktif' : 'Tidak Aktif' ?>
+                                </span>
+                            </div>
+                            <div class="text-gray-700 text-sm space-y-1">
+                                <div><span class="font-medium">Username:</span> <?= htmlspecialchars($u->username ?? '') ?></div>
+                                <div><span class="font-medium">Role:</span> <?= htmlspecialchars($u->role ?? '') ?></div>
+                                <div><span class="font-medium">Kanwil:</span> <?= htmlspecialchars($u->nama_kanwil ?? '-') ?></div>
+                                <div><span class="font-medium">UPT:</span> <?= htmlspecialchars($u->nama_upt ?? '-') ?></div>
+                            </div>
+                            <div class="flex justify-end gap-2 mt-3">
+                                <label for="modal-edit-<?= $u->id_user ?? '' ?>"
+                                    class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
+                                    title="Edit">✏️</label>
+                                <?php if ($this->session->userdata('role') === 'admin'): ?>
+                                    <a href="<?= site_url('user/delete/' . ($u->id_user ?? '')) ?>"
+                                        onclick="return confirm('Yakin hapus user ini?')"
+                                        class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
+                                        title="Hapus">🗑️</a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="p-4 text-center text-gray-500 italic">Belum ada user.</div>
+                <?php endif; ?>
+            </div>
+
             <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                 <div class="text-sm text-gray-600">Menampilkan <?= count($users ?? []) ?> entri</div>
                 <div class="text-sm"><?= $pagination ?? '' ?></div>
@@ -155,19 +224,22 @@
         </div>
     </div>
 
+
     <!-- Modal Tambah User (FULL) -->
     <input type="checkbox" id="modal-add" class="modal-toggle hidden" />
-    <div class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
+    <div class="modal fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-xl shadow-lg max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative mx-2 sm:mx-4">
             <h3 class="text-xl font-semibold text-red-700 mb-3">➕ Tambah User</h3>
             <form method="post" action="<?= site_url('user/store') ?>" class="space-y-4" id="form-add-user">
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Username</label>
-                    <input type="text" name="username" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
+                    <input type="text" name="username" required
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Password</label>
-                    <input type="password" name="password" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
+                    <input type="password" name="password" required
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                 </div>
 
                 <?php $session_role = $this->session->userdata('role'); ?>
@@ -239,6 +311,14 @@
             <label for="modal-add" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
         </div>
     </div>
+
+    <style>
+        #modal-add:checked+.modal {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+
 
     <style>
         #modal-add:checked+.modal,

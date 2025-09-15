@@ -28,11 +28,12 @@ class User extends CI_Controller
     {
         $role = $this->session->userdata('role');
         $id_kanwil_login = $this->session->userdata('id_kanwil');
+        $search = $this->input->get('search', true); // ambil parameter pencarian
 
         if ($role === 'admin') {
-            $data['users'] = $this->UserModel->get_all_users();
+            $data['users'] = $this->UserModel->get_all_users($search);
         } elseif ($role === 'kanwil') {
-            $data['users'] = $this->UserModel->get_users_by_kanwil($id_kanwil_login);
+            $data['users'] = $this->UserModel->get_users_by_kanwil($id_kanwil_login, $search);
         }
 
         $data['kanwil']     = $this->UserModel->get_available_kanwil();
