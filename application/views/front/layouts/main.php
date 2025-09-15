@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/icon.png') ?>">
+    <link rel="icon" type="image/png" href="<?= base_url('assets/img/iconlogin.png') ?>">
 </head>
 
 <body class="min-h-screen flex flex-col">

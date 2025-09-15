@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login AWAS</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/icon.png') ?>">
+    <link rel="icon" type="image/png" href="<?= base_url('assets/img/iconlogin.png') ?>">
 </head>
 
 <body class="min-h-screen bg-gray-100 font-sans flex items-center justify-center">
@@ -17,8 +17,8 @@
         <!-- Header -->
         <div class="mb-6 text-center">
             <!-- Icon Gembok -->
-            <div class="flex justify-center mb-4">
-                <img src="<?= base_url('assets/img/icon.png') ?>" alt="Logo AWAS" class="w-28 mx-auto mb-2">
+            <div class="flex justify-center mb-2">
+                <img src="<?= base_url('assets/img/iconlogin.png') ?>" alt="Logo AWAS" class="w-28 mx-auto mb-2">
             </div>
 
             <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Text AWAS" class="w-44 mx-auto mb-2">

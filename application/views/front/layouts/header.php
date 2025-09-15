@@ -1,19 +1,19 @@
 <!-- header.php -->
 <header class="w-full bg-black shadow-md fixed top-0 left-0 z-50">
-    <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+    <div class="px-2 sm:px-4 lg:px-8">
         <div class="flex items-center justify-between h-14 sm:h-16 lg:h-20">
-            <div class="flex items-center sm:gap-4">
+            <div class="flex items-center sm:gap-1">
                 <!-- Logo (hidden di mobile) -->
-                <a href="<?= base_url('/') ?>" class="hidden sm:flex items-center">
+                <a href="<?= base_url('/') ?>" class="hidden sm:flex items-center space-x-0 gap-1 mr-3">
                     <!-- Logo utama (ikon) -->
-                    <img src="<?= base_url('assets/img/icon_white.png') ?>"
+                    <img src="<?= base_url('assets/img/iconlogo.png') ?>"
                         alt="Logo Utama"
-                        class="w-[50px] sm:w-[65px] lg:w-[80px] p-1">
+                        class="w-[40px] sm:w-[55px] lg:w-[70px]">
 
                     <!-- Logo pendukung (teks/logo panjang) -->
                     <img src="<?= base_url('assets/img/logo-nobg.png') ?>"
                         alt="Logo Pendukung"
-                        class="w-[90px] sm:w-[120px] lg:w-[140px] p-1">
+                        class="w-[90px] sm:w-[110px] lg:w-[130px]">
                 </a>
 
                 <!-- Sidebar Toggle -->
