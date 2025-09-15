@@ -43,7 +43,7 @@
 
             <!-- Mobile: FAB bulat kanan bawah -->
             <button onclick="document.getElementById('modal-add').checked = true"
-                class="sm:hidden fixed bottom-5 right-5 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-110">
+                class="sm:hidden fixed bottom-5 right-5 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-110 cursor-pointer text-2xl">
                 ➕
             </button>
 
@@ -157,7 +157,7 @@
                                         </div>
                                         <div class="flex justify-end gap-3 mt-3">
                                             <label for="modal-edit-<?= $u->id_user ?? '' ?>" class="px-4 py-2 bg-gray-200 rounded-lg cursor-pointer">Batal</label>
-                                            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg">Simpan</button>
+                                            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">Simpan</button>
                                         </div>
                                     </form>
                                     <label for="modal-edit-<?= $u->id_user ?? '' ?>" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
@@ -305,7 +305,7 @@
 
                 <div class="flex justify-end space-x-3 mt-4">
                     <label for="modal-add" class="px-4 py-2 bg-gray-200 rounded-lg cursor-pointer">Batal</label>
-                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg">Simpan</button>
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg cursor-pointer">Simpan</button>
                 </div>
             </form>
             <label for="modal-add" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>

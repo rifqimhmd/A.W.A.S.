@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login AWAS</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="<?= base_url('assets/img/icon.png') ?>">
 </head>
 
 <body class="min-h-screen bg-gray-100 font-sans flex items-center justify-center">
@@ -17,17 +18,10 @@
         <div class="mb-6 text-center">
             <!-- Icon Gembok -->
             <div class="flex justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="w-20 h-20 md:w-12 md:h-12 text-red-600"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 11c1.657 0 3-1.343 3-3V5a3 3 0 10-6 0v3c0 1.657 1.343 3 3 3z" />
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M5 11h14v10H5z" />
-                </svg>
+                <img src="<?= base_url('assets/img/icon.png') ?>" alt="Logo AWAS" class="w-28 mx-auto mb-2">
             </div>
 
-            <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Logo AWAS" class="w-44 mx-auto mb-2">
+            <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Text AWAS" class="w-44 mx-auto mb-2">
             <h2 class="text-2xl font-bold text-red-700">Masuk ke Sistem</h2>
             <?php if ($this->session->flashdata('error')): ?>
                 <p class="text-red-600"><?= $this->session->flashdata('error'); ?></p>

@@ -2,12 +2,18 @@
 <header class="w-full bg-black shadow-md fixed top-0 left-0 z-50">
     <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
         <div class="flex items-center justify-between h-14 sm:h-16 lg:h-20">
-            <div class="flex items-center gap-2 sm:gap-4">
+            <div class="flex items-center sm:gap-4">
                 <!-- Logo (hidden di mobile) -->
-                <a href="<?= base_url('/') ?>" class="hidden sm:flex items-center gap-2">
+                <a href="<?= base_url('/') ?>" class="hidden sm:flex items-center">
+                    <!-- Logo utama (ikon) -->
+                    <img src="<?= base_url('assets/img/icon_white.png') ?>"
+                        alt="Logo Utama"
+                        class="w-[50px] sm:w-[65px] lg:w-[80px] p-1">
+
+                    <!-- Logo pendukung (teks/logo panjang) -->
                     <img src="<?= base_url('assets/img/logo-nobg.png') ?>"
-                        alt="Logo"
-                        class="w-[100px] sm:w-[140px] lg:w-[160px] p-1">
+                        alt="Logo Pendukung"
+                        class="w-[90px] sm:w-[120px] lg:w-[140px] p-1">
                 </a>
 
                 <!-- Sidebar Toggle -->
