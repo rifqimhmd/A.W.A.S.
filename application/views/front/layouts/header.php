@@ -2,18 +2,15 @@
 <header class="w-full bg-black shadow-md fixed top-0 left-0 z-50">
     <div class="px-2 sm:px-4 lg:px-8">
         <div class="flex items-center justify-between h-14 sm:h-16 lg:h-20">
-            <div class="flex items-center sm:gap-1">
+            <div class="flex items-center gap-2 sm:gap-4">
                 <!-- Logo (hidden di mobile) -->
-                <a href="<?= base_url('/') ?>" class="hidden sm:flex items-center space-x-0 gap-1 mr-3">
-                    <!-- Logo utama (ikon) -->
-                    <img src="<?= base_url('assets/img/iconlogo.png') ?>"
-                        alt="Logo Utama"
-                        class="w-[40px] sm:w-[55px] lg:w-[70px]">
-
-                    <!-- Logo pendukung (teks/logo panjang) -->
-                    <img src="<?= base_url('assets/img/logo-nobg.png') ?>"
-                        alt="Logo Pendukung"
-                        class="w-[90px] sm:w-[110px] lg:w-[130px]">
+                <a href="<?= base_url("/") ?>" class="hidden sm:flex items-center">
+                    <img src="<?= base_url("assets/img/iconlogo.png") ?>"
+                        alt="Icon"
+                        class="w-[45px] sm:w-[60px] lg:w-[75px]"> <!-- icon lebih besar -->
+                    <img src="<?= base_url("assets/img/logo-nobg.png") ?>"
+                        alt="Logo"
+                        class="w-[80px] sm:w-[110px] lg:w-[130px]"> <!-- logo lebih kecil -->
                 </a>
 
                 <!-- Sidebar Toggle -->
@@ -32,7 +29,7 @@
                 </button>
 
                 <!-- Beranda (hidden di mobile) -->
-                <a href="<?= base_url('/') ?>"
+                <a href="<?= base_url("/") ?>"
                     class="hidden sm:inline-block px-2 sm:px-3 py-1.5 sm:py-2 text-sm sm:text-base text-white rounded-md transition hover:bg-red-700">
                     Beranda
                 </a>
@@ -46,9 +43,9 @@
                         class="text-white p-2 sm:p-2.5 rounded-md hover:bg-red-700 cursor-pointer">
                         <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 
-                                  0118 14.158V11a6 6 0 10-12 0v3.159c0 
-                                  .538-.214 1.055-.595 1.436L4 17h5m6 
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0
+                                  0118 14.158V11a6 6 0 10-12 0v3.159c0
+                                  .538-.214 1.055-.595 1.436L4 17h5m6
                                   0v1a3 3 0 11-6 0v-1m6 0H9" />
                         </svg>
                     </button>
@@ -68,16 +65,18 @@
 
                 <!-- User Dropdown -->
                 <div class="relative">
-                    <?php $username = $this->session->userdata('username'); ?>
+                    <?php $username = $this->session->userdata("username"); ?>
                     <button id="user-btn"
                         class="text-white px-2 sm:px-3 py-1.5 sm:py-2 rounded-md hover:bg-red-700 cursor-pointer flex items-center gap-1 sm:gap-2">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 
-                                  1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6 
+                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4
+                                  1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6
                                   2.67-6 6h12c0-3.33-2.67-6-6-6z" />
                         </svg>
-                        <span class="text-xs sm:text-sm"><?= htmlspecialchars($username) ?></span>
+                        <span class="text-xs sm:text-sm"><?= htmlspecialchars(
+                                                                $username,
+                                                            ) ?></span>
                         <svg class="w-4 h-4 inline-block transition-transform duration-300"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -86,7 +85,7 @@
                     </button>
                     <div id="user-dropdown"
                         class="hidden absolute right-0 mt-2 w-36 sm:w-40 bg-black text-white shadow-lg rounded-md overflow-hidden z-50">
-                        <a href="<?= base_url('login/logout') ?>"
+                        <a href="<?= base_url("login/logout") ?>"
                             class="flex items-center gap-2 px-4 py-2 hover:bg-red-700 text-xs sm:text-sm">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -108,10 +107,14 @@
     class="fixed top-14 sm:top-16 lg:top-20 left-0 w-60 sm:w-64 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)] bg-black text-white shadow-lg -ml-64 transition-all duration-300 overflow-y-auto z-40">
     <nav class="p-2 sm:p-4 space-y-1 sm:space-y-2 text-sm sm:text-base">
         <!-- Beranda masuk ke sidebar di mobile -->
-        <a href="<?= base_url('/') ?>" class="block sm:hidden px-3 py-2 hover:bg-red-700 rounded-md transition">Beranda</a>
+        <a href="<?= base_url(
+                        "/",
+                    ) ?>" class="block sm:hidden px-3 py-2 hover:bg-red-700 rounded-md transition">Beranda</a>
 
         <!-- Riwayat Kerawanan -->
-        <a href="<?= base_url('histori') ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Riwayat Kerawanan</a>
+        <a href="<?= base_url(
+                        "histori",
+                    ) ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Riwayat Kerawanan</a>
 
         <!-- Faktor -->
         <div class="accordion">
@@ -122,8 +125,14 @@
                 </svg>
             </button>
             <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
-                <a href="#" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
-                <a href="#" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
+                <?php if ($this->session->userdata("role") === "upt"): ?>
+                    <a href="<?= base_url(
+                                    "input_pegawai",
+                                ) ?>" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
+                    <a href="<?= base_url(
+                                    "input_narapidana",
+                                ) ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
+                <?php endif; ?>
                 <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana Prasarana</a>
                 <!-- Nested Operasional -->
                 <div class="accordion nested">
@@ -150,8 +159,14 @@
                 </svg>
             </button>
             <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
-                <a href="#" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
-                <a href="#" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
+                <?php if ($this->session->userdata("role") === "upt"): ?>
+                    <a href="<?= base_url(
+                                    "input_pegawai",
+                                ) ?>" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
+                    <a href="<?= base_url(
+                                    "input_narapidana",
+                                ) ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
+                <?php endif; ?>
                 <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana Prasarana</a>
                 <!-- Nested Operasional -->
                 <div class="accordion nested">
@@ -174,7 +189,9 @@
         <a href="#" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Pustaka</a>
 
         <!-- Akses: hanya admin -->
-        <?php if (in_array($this->session->userdata('role'), ['admin', 'kanwil'])): ?>
+        <?php if (
+            in_array($this->session->userdata("role"), ["admin", "kanwil"])
+        ): ?>
             <div class="accordion">
                 <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
                     Akses
@@ -183,10 +200,14 @@
                     </svg>
                 </button>
                 <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
-                    <?php if ($this->session->userdata('role') === 'admin'): ?>
-                        <a href="<?= base_url('opsi') ?>" class="block px-6 py-2 hover:bg-red-700">Manajemen Opsi</a>
+                    <?php if ($this->session->userdata("role") === "admin"): ?>
+                        <a href="<?= base_url(
+                                        "opsi",
+                                    ) ?>" class="block px-6 py-2 hover:bg-red-700">Manajemen Opsi</a>
                     <?php endif; ?>
-                    <a href="<?= base_url('user') ?>" class="block px-6 py-2 hover:bg-red-700">Manajemen User</a>
+                    <a href="<?= base_url(
+                                    "user",
+                                ) ?>" class="block px-6 py-2 hover:bg-red-700">Manajemen User</a>
                 </div>
             </div>
         <?php endif; ?>

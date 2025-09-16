@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined("BASEPATH") or exit("No direct script access allowed");
 
 /*
 | -------------------------------------------------------------------------
@@ -49,14 +49,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'dashboard';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route["default_controller"] = "dashboard";
+$route["404_override"] = "";
+$route["translate_uri_dashes"] = false;
 
-$route['input'] = 'input/index';
-$route['login'] = 'login/index';
-$route['histori'] = 'histori/index';
-$route['user'] = 'user/index';
-$route['opsi'] = 'opsi/index';
+$route["input"] = "input/index";
+$route["input_pegawai"] = "Input_Pegawai/index";
+$route["input_pegawai/kategori"] = "Input_Pegawai/getKategori";
+$route["input_narapidana"] = "Input_Narapidana/index";
+$route["login"] = "login/index";
+$route["histori"] = "histori/index";
+$route["user"] = "user/index";
+$route["opsi"] = "opsi/index";
 
 //front adalah nama controller
