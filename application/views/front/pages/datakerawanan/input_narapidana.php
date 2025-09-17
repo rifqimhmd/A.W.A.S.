@@ -1,22 +1,29 @@
-<main class="w-full p-6 bg-white rounded-2xl shadow-lg space-y-8">
-
-    <!-- Header -->
-    <div>
-        <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">👤 Input Narapidana</h2>
-        <p class="text-sm text-gray-500 mt-1">Lengkapi data narapidana dan lakukan skrining serta penilaian faktor.</p>
-    </div>
+<main class="w-full min-h-screen p-4 sm:p-6 bg-gray-50">
 
     <!-- Flash Message -->
-    <?php if ($this->session->flashdata("success")) { ?>
-        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl shadow-sm">
-            ✅ <?= $this->session->flashdata("success") ?>
+    <?php if ($this->session->flashdata("success")): ?>
+        <div class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
+            <div class="flex items-start gap-3">
+                <div class="text-xl">✅</div>
+                <div><?= $this->session->flashdata("success") ?></div>
+            </div>
         </div>
-    <?php } ?>
-    <?php if ($this->session->flashdata("error")) { ?>
-        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl shadow-sm">
-            ❌ <?= $this->session->flashdata("error") ?>
+    <?php elseif ($this->session->flashdata("error")): ?>
+        <div class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
+            <div class="flex items-start gap-3">
+                <div class="text-xl">❌</div>
+                <div><?= $this->session->flashdata("error") ?></div>
+            </div>
         </div>
-    <?php } ?>
+    <?php endif; ?>
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b pb-4 gap-3">
+        <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">👤 Input Narapidana</h2>
+            <p class="text-sm text-gray-500 mt-1">Lengkapi data narapidana dan lakukan skrining serta penilaian faktor.</p>
+        </div>
+    </div>
 
     <!-- Form -->
     <form action="<?= base_url("Input_Narapidana/save") ?>" method="post" class="space-y-10">
@@ -24,47 +31,47 @@
         <!-- Identitas Narapidana -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">No Register</label>
-                <input type="text" name="no_register"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-red-600"
-                    placeholder="Masukkan No Register WBP" required>
+                <label class="block text-gray-700 font-medium mb-1">No Register</label>
+                <input type="text" name="no_register" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    placeholder="Masukkan No Register WBP">
             </div>
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Nama WBP</label>
-                <input type="text" name="nama_narapidana"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-red-600"
-                    placeholder="Masukkan Nama WBP" required>
+                <label class="block text-gray-700 font-medium mb-1">Nama WBP</label>
+                <input type="text" name="nama_narapidana" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    placeholder="Masukkan Nama WBP">
             </div>
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Perkara</label>
-                <input type="text" name="perkara"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-red-600"
-                    placeholder="Masukkan Perkara" required>
+                <label class="block text-gray-700 font-medium mb-1">Perkara</label>
+                <input type="text" name="perkara" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    placeholder="Masukkan Perkara">
             </div>
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Lama Pidana</label>
-                <input type="text" name="lama_pidana"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-red-600"
-                    placeholder="Masukkan Lama Pidana" required>
+                <label class="block text-gray-700 font-medium mb-1">Lama Pidana</label>
+                <input type="text" name="lama_pidana" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    placeholder="Masukkan Lama Pidana">
             </div>
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Alamat</label>
-                <input type="text" name="alamat"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-red-600"
-                    placeholder="Masukkan Alamat WBP" required>
+                <label class="block text-gray-700 font-medium mb-1">Alamat</label>
+                <input type="text" name="alamat" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    placeholder="Masukkan Alamat WBP">
             </div>
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Tempat Penahanan</label>
-                <input type="text" name="nama_upt" value="<?= htmlspecialchars($nama_upt) ?>"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm bg-gray-100" readonly>
+                <label class="block text-gray-700 font-medium mb-1">Tempat Penahanan</label>
+                <input type="text" name="nama_upt" value="<?= htmlspecialchars($nama_upt) ?>" readonly
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 shadow-sm">
             </div>
         </div>
 
         <!-- Instrument -->
         <div>
-            <label class="block text-gray-700 font-semibold mb-2">Instrument</label>
+            <label class="block text-gray-700 font-medium mb-1">Instrument</label>
             <select name="instrument" id="instrument"
-                class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-red-600">
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none">
                 <option value="">-- Pilih Instrument --</option>
                 <?php foreach ($instrument as $row): ?>
                     <option value="<?= $row->id_instrument ?>"><?= htmlspecialchars($row->nama_instrument) ?></option>
@@ -74,16 +81,16 @@
 
         <!-- Kategori -->
         <div id="kategori-section" class="hidden">
-            <label class="block text-gray-700 font-semibold mb-2">Kategori</label>
+            <label class="block text-gray-700 font-medium mb-1">Kategori</label>
             <select name="kategori" id="kategori"
-                class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-red-600">
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none">
             </select>
         </div>
 
         <!-- Skrining -->
         <div id="skrining-section" class="hidden">
             <h3 class="text-lg font-bold text-red-600 mb-3">📑 Pertanyaan Skrining</h3>
-            <div class="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
+            <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
                 <table class="min-w-full border-collapse text-sm sm:text-base">
                     <thead class="bg-red-600 text-white">
                         <tr>
@@ -99,11 +106,9 @@
 
         <!-- Faktor -->
         <div id="faktor-section" class="hidden space-y-8">
-
-            <!-- Faktor Bahaya -->
             <div id="faktor-bahaya" class="hidden">
                 <h4 class="text-md font-semibold text-gray-700 mb-2">🚨 Faktor Bahaya</h4>
-                <div class="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
+                <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
                     <table class="min-w-full border-collapse text-sm sm:text-base">
                         <thead class="bg-red-600 text-white">
                             <tr>
@@ -116,11 +121,9 @@
                     </table>
                 </div>
             </div>
-
-            <!-- Faktor Kerentanan -->
             <div id="faktor-kerentanan" class="hidden">
                 <h4 class="text-md font-semibold text-gray-700 mb-2">⚠️ Faktor Kerentanan</h4>
-                <div class="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
+                <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
                     <table class="min-w-full border-collapse text-sm sm:text-base">
                         <thead class="bg-red-600 text-white">
                             <tr>
@@ -138,11 +141,11 @@
         <!-- Tombol -->
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <button type="submit"
-                class="w-full sm:w-auto px-8 py-3 bg-red-600 text-white font-semibold rounded-xl shadow hover:bg-red-700 transition cursor-pointer">
+                class="w-full sm:w-auto px-8 py-3 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700 transition cursor-pointer">
                 ✅ Kirim
             </button>
             <button type="reset"
-                class="w-full sm:w-auto px-8 py-3 bg-gray-200 text-gray-800 font-semibold rounded-xl shadow hover:bg-gray-300 transition cursor-pointer">
+                class="w-full sm:w-auto px-8 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow hover:bg-gray-300 transition cursor-pointer">
                 🔄 Reset
             </button>
         </div>
