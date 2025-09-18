@@ -5,12 +5,15 @@
             <div class="flex items-center gap-2 sm:gap-4">
                 <!-- Logo -->
                 <a href="<?= base_url("/") ?>" class="flex items-center">
+                    <!-- Icon Logo -->
                     <img src="<?= base_url("assets/img/iconlogo.png") ?>"
                         alt="Icon"
-                        class="w-[45px] sm:w-[60px] lg:w-[75px]">
+                        class="<?= $this->session->userdata('username') ? 'hidden sm:block' : 'block' ?> w-[45px] sm:w-[60px] lg:w-[75px]">
+
+                    <!-- Logo Teks -->
                     <img src="<?= base_url("assets/img/logo-nobg.png") ?>"
                         alt="Logo"
-                        class="w-[80px] sm:w-[110px] lg:w-[130px]">
+                        class="<?= $this->session->userdata('username') ? 'hidden sm:block' : 'block' ?> w-[80px] sm:w-[110px] lg:w-[130px]">
                 </a>
 
                 <?php if ($this->session->userdata("username")): ?>
