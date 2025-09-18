@@ -7,74 +7,134 @@
     <title>Login AWAS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="<?= base_url('assets/img/iconlogin.png') ?>">
+    <style>
+        /* Animasi fade-in */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tombol merah gradient */
+        .btn-red {
+            background: linear-gradient(90deg, #dc2626, #b91c1c);
+        }
+
+        .btn-red:hover {
+            filter: brightness(1.1);
+        }
+
+        .btn-red:active {
+            transform: scale(0.97);
+        }
+
+        /* Input focus */
+        input:focus {
+            transition: all 0.3s ease;
+        }
+
+        /* Background pattern */
+        .pattern-bg {
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.05;
+        }
+    </style>
 </head>
 
-<body class="min-h-screen bg-gray-100 font-sans flex items-center justify-center">
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 font-sans">
 
-    <main
-        class="w-full max-w-md p-8 bg-white rounded-none md:rounded-2xl shadow-none md:shadow-xl min-h-screen md:min-h-0 flex flex-col justify-center">
+    <div class="w-full min-h-screen flex flex-col md:flex-row overflow-hidden">
 
-        <!-- Header -->
-        <div class="mb-6 text-center">
-            <!-- Icon Gembok -->
-            <div class="flex justify-center mb-2">
-                <img src="<?= base_url('assets/img/iconlogin.png') ?>" alt="Logo AWAS" class="w-28 mx-auto mb-2">
+        <!-- Panel Kiri (desktop only) -->
+        <div class="hidden md:flex md:w-1/2 bg-gradient-to-br from-gray-50 to-gray-100 relative items-center justify-center p-10 flex-col border-r border-gray-200">
+            <div class="absolute inset-0 pattern-bg"></div>
+            <div class="relative z-10 flex flex-col items-center text-center">
+                <img src="<?= base_url('assets/img/iconlogin.png') ?>" alt="Logo AWAS" class="w-28 mb-4 fade-in">
+                <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Text AWAS" class="w-56 mb-6 fade-in">
+                <p class="text-gray-500 max-w-xs fade-in">
+                    Selamat datang di sistem A.W.A.S. Masuk untuk mengakses fitur dan data Anda dengan aman.
+                </p>
             </div>
-
-            <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Text AWAS" class="w-44 mx-auto mb-2">
-            <h2 class="text-2xl font-bold text-red-700">Masuk ke Sistem</h2>
-            <?php if ($this->session->flashdata('error')): ?>
-                <p class="text-red-600"><?= $this->session->flashdata('error'); ?></p>
-            <?php endif; ?>
         </div>
 
-        <!-- Form -->
-        <form action="<?= base_url('login/login') ?>" method="post" class="space-y-6 flex-1 flex flex-col justify-center">
+        <!-- Panel Kanan (form login) -->
+        <div class="flex w-full md:w-1/2 p-6 md:p-12 items-center justify-center min-h-screen">
+            <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-10 md:p-12 fade-in">
 
-            <!-- Username -->
-            <div>
-                <label for="username" class="block text-gray-800 font-medium mb-2">Nama pengguna</label>
-                <input type="text" id="username" name="username" placeholder="Masukkan Nama pengguna" required
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition focus:ring-2 focus:ring-red-600 focus:border-red-600 focus:shadow-md focus:outline-none text-base">
+                <!-- Logo mobile -->
+                <div class="md:hidden text-center mb-6">
+                    <img src="<?= base_url('assets/img/iconlogin.png') ?>" alt="Logo AWAS" class="w-20 mx-auto mb-2 fade-in">
+                    <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Text AWAS" class="w-40 mx-auto fade-in">
+                </div>
+
+                <!-- Title -->
+                <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center fade-in">Selamat Datang!</h2>
+                <p class="text-sm text-gray-500 mb-6 text-center fade-in">Silakan masuk untuk melanjutkan</p>
+
+                <?php if ($this->session->flashdata('error')): ?>
+                    <p class="text-red-600 mb-4 text-sm text-center"><?= $this->session->flashdata('error'); ?></p>
+                <?php endif; ?>
+
+                <!-- Form -->
+                <form action="<?= base_url('login/login') ?>" method="post" class="space-y-5 fade-in">
+
+                    <!-- Username -->
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Nama pengguna</label>
+                        <input type="text" id="username" name="username" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-2xl shadow-sm 
+                            focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none text-sm transition">
+                    </div>
+
+                    <!-- Password -->
+                    <div class="relative">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Kata sandi</label>
+                        <input type="password" id="password" name="password" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-2xl shadow-sm 
+                            focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none text-sm pr-12 transition">
+                        <!-- Toggle Eye -->
+                        <button type="button" onclick="togglePassword()"
+                            class="absolute right-3 bottom-3 text-gray-400 hover:text-red-600 transition">
+                            <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 
+                     0 8.268 2.943 9.542 7-1.274 4.057-5.064 
+                     7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Button -->
+                    <button type="submit"
+                        class="w-full py-3 btn-red text-white font-semibold rounded-2xl shadow-lg transition">
+                        Masuk
+                    </button>
+                </form>
+
+                <!-- Footer -->
+                <p class="text-xs text-gray-500 text-center mt-8">
+                    &copy; <span id="year"></span> A.W.A.S. - Direktorat Jenderal Pemasyarakatan
+                </p>
+
+                <script>
+                    document.getElementById('year').textContent = new Date().getFullYear();
+                </script>
             </div>
-
-            <!-- Password -->
-            <div class="relative">
-                <label for="password" class="block text-gray-800 font-medium mb-2">Kata sandi</label>
-                <input type="password" id="password" name="password" placeholder="Masukkan kata sandi" required
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition focus:ring-2 focus:ring-red-600 focus:border-red-600 focus:shadow-md focus:outline-none text-base pr-12">
-
-                <!-- Tombol toggle password -->
-                <button type="button" onclick="togglePassword()"
-                    class="absolute right-3 text-gray-400 hover:text-red-600 transition duration-300"
-                    style="top: 50%; transform: translateY(10%);">
-                    <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Tombol Login -->
-            <div>
-                <button type="submit"
-                    class="w-full px-6 py-3 bg-red-600 text-white font-semibold rounded-xl shadow-lg hover:bg-red-700 active:scale-95 transition transform duration-150">
-                    Masuk
-                </button>
-            </div>
-        </form>
-
-        <!-- Footer -->
-        <p class="text-center text-sm text-gray-600 mt-6">
-            Lupa kata sandi?
-            <a href="https://wa.me/6282110822052" target="_blank" class="text-red-600 hover:underline font-medium">
-                Hubungi Admin
-            </a>
-        </p>
-    </main>
+        </div>
+    </div>
 
     <script>
         function togglePassword() {
@@ -83,18 +143,23 @@
 
             if (pass.type === "password") {
                 pass.type = "text";
-                eye.innerHTML = `
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.956 9.956 0 012.541-4.263M9.88 9.88a3 3 0 104.24 4.24M6.1 6.1l11.8 11.8" />
-        `;
+                eye.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round"
+                          d="M13.875 18.825A10.05 10.05 0 0112 
+                          19c-4.477 0-8.268-2.943-9.542-7
+                          a9.956 9.956 0 012.541-4.263M9.88 
+                          9.88a3 3 0 104.24 4.24M6.1 
+                          6.1l11.8 11.8" />`;
             } else {
                 pass.type = "password";
-                eye.innerHTML = `
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        `;
+                eye.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round"
+                          d="M15 12a3 3 0 11-6 0 3 3 
+                          0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M2.458 12C3.732 7.943 
+                          7.523 5 12 5c4.478 0 
+                          8.268 2.943 9.542 7-1.274 
+                          4.057-5.064 7-9.542 7-4.477 
+                          0-8.268-2.943-9.542-7z" />`;
             }
         }
     </script>
