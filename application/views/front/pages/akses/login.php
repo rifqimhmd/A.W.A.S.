@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login AWAS</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/iconlogin.png') ?>">
+    <link rel="icon" type="image/png" href="<?= base_url(
+    	"assets/img/iconlogin.png",
+    ) ?>">
     <style>
         /* Animasi fade-in */
         .fade-in {
@@ -59,8 +61,12 @@
         <div class="hidden md:flex md:w-1/2 bg-gradient-to-br from-gray-50 to-gray-100 relative items-center justify-center p-10 flex-col border-r border-gray-200">
             <div class="absolute inset-0 pattern-bg"></div>
             <div class="relative z-10 flex flex-col items-center text-center">
-                <img src="<?= base_url('assets/img/iconlogin.png') ?>" alt="Logo AWAS" class="w-28 mb-4 fade-in">
-                <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Text AWAS" class="w-56 mb-6 fade-in">
+                <img src="<?= base_url(
+                	"assets/img/iconlogin.png",
+                ) ?>" alt="Logo AWAS" class="w-28 mb-4 fade-in">
+                <img src="<?= base_url(
+                	"assets/img/logo-nobg-black.png",
+                ) ?>" alt="Text AWAS" class="w-56 mb-6 fade-in">
                 <p class="text-gray-500 max-w-xs fade-in">
                     Selamat datang di sistem A.W.A.S. Masuk untuk mengakses fitur dan data Anda dengan aman.
                 </p>
@@ -73,26 +79,34 @@
 
                 <!-- Logo mobile -->
                 <div class="md:hidden text-center mb-6">
-                    <img src="<?= base_url('assets/img/iconlogin.png') ?>" alt="Logo AWAS" class="w-20 mx-auto mb-2 fade-in">
-                    <img src="<?= base_url('assets/img/logo-nobg-black.png') ?>" alt="Text AWAS" class="w-40 mx-auto fade-in">
+                    <img src="<?= base_url(
+                    	"assets/img/iconlogin.png",
+                    ) ?>" alt="Logo AWAS" class="w-20 mx-auto mb-2 fade-in">
+                    <img src="<?= base_url(
+                    	"assets/img/logo-nobg-black.png",
+                    ) ?>" alt="Text AWAS" class="w-40 mx-auto fade-in">
                 </div>
 
                 <!-- Title -->
                 <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center fade-in">Selamat Datang!</h2>
                 <p class="text-sm text-gray-500 mb-6 text-center fade-in">Silakan masuk untuk melanjutkan</p>
 
-                <?php if ($this->session->flashdata('error')): ?>
-                    <p class="text-red-600 mb-4 text-sm text-center"><?= $this->session->flashdata('error'); ?></p>
+                <?php if ($this->session->flashdata("error")): ?>
+                    <p class="text-red-600 mb-4 text-sm text-center"><?= $this->session->flashdata(
+                    	"error",
+                    ) ?></p>
                 <?php endif; ?>
 
                 <!-- Form -->
-                <form action="<?= base_url('login/login') ?>" method="post" class="space-y-5 fade-in">
+                <form action="<?= base_url(
+                	"login/login",
+                ) ?>" method="post" class="space-y-5 fade-in">
 
                     <!-- Username -->
                     <div>
                         <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Nama pengguna</label>
                         <input type="text" id="username" name="username" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-2xl shadow-sm 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-2xl shadow-sm
                             focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none text-sm transition">
                     </div>
 
@@ -100,7 +114,7 @@
                     <div class="relative">
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Kata sandi</label>
                         <input type="password" id="password" name="password" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-2xl shadow-sm 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-2xl shadow-sm
                             focus:border-red-600 focus:ring-2 focus:ring-red-200 outline-none text-sm pr-12 transition">
                         <!-- Toggle Eye -->
                         <button type="button" onclick="togglePassword()"
@@ -110,8 +124,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 
-                     0 8.268 2.943 9.542 7-1.274 4.057-5.064 
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478
+                     0 8.268 2.943 9.542 7-1.274 4.057-5.064
                      7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         </button>
@@ -144,21 +158,21 @@
             if (pass.type === "password") {
                 pass.type = "text";
                 eye.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round"
-                          d="M13.875 18.825A10.05 10.05 0 0112 
+                          d="M13.875 18.825A10.05 10.05 0 0112
                           19c-4.477 0-8.268-2.943-9.542-7
-                          a9.956 9.956 0 012.541-4.263M9.88 
-                          9.88a3 3 0 104.24 4.24M6.1 
+                          a9.956 9.956 0 012.541-4.263M9.88
+                          9.88a3 3 0 104.24 4.24M6.1
                           6.1l11.8 11.8" />`;
             } else {
                 pass.type = "password";
                 eye.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round"
-                          d="M15 12a3 3 0 11-6 0 3 3 
+                          d="M15 12a3 3 0 11-6 0 3 3
                           0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M2.458 12C3.732 7.943 
-                          7.523 5 12 5c4.478 0 
-                          8.268 2.943 9.542 7-1.274 
-                          4.057-5.064 7-9.542 7-4.477 
+                          d="M2.458 12C3.732 7.943
+                          7.523 5 12 5c4.478 0
+                          8.268 2.943 9.542 7-1.274
+                          4.057-5.064 7-9.542 7-4.477
                           0-8.268-2.943-9.542-7z" />`;
             }
         }

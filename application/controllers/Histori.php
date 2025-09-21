@@ -1,45 +1,95 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined("BASEPATH") or exit("No direct script access allowed");
 
 /**
- * Class Hasil
+ * Class Histori
  *
- * @property HistoriModel $HistoriModel
- * @property CI_Input $input
  * @property CI_Session $session
- * @property CI_Pagination $pagination
- * @property CI_Loader $load
  * @property CI_DB_query_builder $db
+ * @property HistoriModel $HistoriModel
  */
 class Histori extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('HistoriModel');
-        if (!$this->session->userdata('logged_in')) {
-            redirect('login'); // jika belum login
-        }
-    }
+	public function __construct()
+	{
+		parent::__construct();
+		if (!$this->session->userdata("logged_in")) {
+			redirect("login");
+		}
+		$this->load->model("HistoriModel");
+	}
 
-    public function index()
-    {
-        $order = $this->input->get('order');
+	public function index()
+	{
+		$data["title"] = "Data Hasil";
+		$data["subtitle"] = "Histori Penilaian Skrining dan Faktor";
+		$data["page"] = "front/pages/datakerawanan/histori";
 
-        // Default: urutkan berdasarkan tanggal terbaru
-        if (!$order) {
-            $sort  = 'h.created_at';
-            $order = 'DESC';
-        } else {
-            $sort = 'h.nilai_akhir'; // kalau pilih dropdown, urut berdasarkan nilai
-        }
+		$user = [
+			"id_user" => $this->session->userdata("id_user"),
+			"role" => $this->session->userdata("role"), // 'admin', 'kanwil', 'upt'
+			"id_upt" => $this->session->userdata("id_upt"),
+			"id_kanwil" => $this->session->userdata("id_kanwil"),
+		];
 
-        $data['title'] = "Data Hasil";
-        $data['hasil'] = $this->HistoriModel->getAll($sort, $order);
+		$data["narkotika"] = $this->HistoriModel->get_histori_by_instrument("narkotika", $user);
+		$data["teroris"] = $this->HistoriModel->get_histori_by_instrument("teroris", $user);
 
-        $data['order'] = $order; // cukup kirim ini ke view
+		$this->load->view("front/layouts/main", $data);
+	}
 
-        $data['page'] = 'front/pages/datakerawanan/histori';
-        $this->load->view('front/layouts/main', $data);
-    }
+	/**
+	 * Ambil jawaban skrining & faktor untuk modal
+	 */
+	public function get_jawaban($id_hasil)
+	{
+		try {
+			$skrining = $this->HistoriModel->getJawabanSkrining($id_hasil);
+			$faktor = $this->HistoriModel->getJawabanFaktor($id_hasil);
+
+			$bahaya = [];
+			$kerentanan = [];
+			foreach ($faktor as $row) {
+				if (strtolower($row->jenis_faktor) === "bahaya") {
+					$bahaya[] = $row;
+				} elseif (strtolower($row->jenis_faktor) === "kerentanan") {
+					$kerentanan[] = $row;
+				}
+			}
+
+			echo json_encode([
+				"status" => "success",
+				"skrining" => $skrining,
+				"bahaya" => $bahaya,
+				"kerentanan" => $kerentanan,
+			]);
+		} catch (Exception $e) {
+			echo json_encode([
+				"status" => "error",
+				"message" => $e->getMessage(),
+			]);
+		}
+	}
+
+	/**
+	 * Hapus hasil
+	 */
+	public function delete($id_hasil)
+	{
+		if (empty($id_hasil)) {
+			$this->session->set_flashdata("error", "ID hasil tidak valid.");
+			redirect("histori");
+		}
+
+		$this->db->where("id_hasil", $id_hasil);
+		$deleted = $this->db->delete("tbl_hasil");
+
+		if ($deleted && $this->db->affected_rows() > 0) {
+			$this->session->set_flashdata("success", "Data berhasil dihapus!");
+		} else {
+			$this->session->set_flashdata("error", "Data gagal dihapus atau sudah tidak ada.");
+		}
+
+		redirect("histori");
+	}
 }

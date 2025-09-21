@@ -26,7 +26,9 @@
     </div>
 
     <!-- Form -->
-    <form action="<?= base_url("Input_Narapidana/save") ?>" method="post" class="space-y-10">
+    <form action="<?= base_url(
+                        "Input_Narapidana/save",
+                    ) ?>" method="post" class="space-y-10">
 
         <!-- Identitas Narapidana -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -62,7 +64,9 @@
             </div>
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Tempat Penahanan</label>
-                <input type="text" name="nama_upt" value="<?= htmlspecialchars($nama_upt) ?>" readonly
+                <input type="text" name="nama_upt" value="<?= htmlspecialchars(
+                                                                $nama_upt,
+                                                            ) ?>" readonly
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 shadow-sm">
             </div>
         </div>
@@ -70,11 +74,13 @@
         <!-- Instrument -->
         <div>
             <label class="block text-gray-700 font-medium mb-1">Instrument</label>
-            <select name="instrument" id="instrument"
+            <select name="id_instrument" id="id_instrument" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none">
                 <option value="">-- Pilih Instrument --</option>
                 <?php foreach ($instrument as $row): ?>
-                    <option value="<?= $row->id_instrument ?>"><?= htmlspecialchars($row->nama_instrument) ?></option>
+                    <option value="<?= $row->id_instrument ?>"><?= htmlspecialchars(
+                                                                    $row->nama_instrument,
+                                                                ) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -82,19 +88,19 @@
         <!-- Kategori -->
         <div id="kategori-section" class="hidden">
             <label class="block text-gray-700 font-medium mb-1">Kategori</label>
-            <select name="kategori" id="kategori"
+            <select name="kategori" id="kategori" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none">
             </select>
         </div>
 
         <!-- Skrining -->
         <div id="skrining-section" class="hidden">
-            <h3 class="text-lg font-bold text-red-600 mb-3">📑 Pertanyaan Skrining</h3>
+            <h3 class="text-lg font-bold text-red-600 mb-3">📑 Skrining</h3>
             <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
                 <table class="min-w-full border-collapse text-sm sm:text-base">
                     <thead class="bg-red-600 text-white">
                         <tr>
-                            <th class="px-4 py-3 text-left">Pertanyaan</th>
+                            <th class="px-4 py-3 text-left">Indikator Pertanyaan</th>
                             <th class="px-4 py-3 text-center w-20">Ya</th>
                             <th class="px-4 py-3 text-center w-20">Tidak</th>
                         </tr>
@@ -112,7 +118,7 @@
                     <table class="min-w-full border-collapse text-sm sm:text-base">
                         <thead class="bg-red-600 text-white">
                             <tr>
-                                <th class="px-4 py-3 text-left">Faktor</th>
+                                <th class="px-4 py-3 text-left">Indikator Faktor</th>
                                 <th class="px-4 py-3 text-center w-20">Ya</th>
                                 <th class="px-4 py-3 text-center w-20">Tidak</th>
                             </tr>
@@ -127,7 +133,7 @@
                     <table class="min-w-full border-collapse text-sm sm:text-base">
                         <thead class="bg-red-600 text-white">
                             <tr>
-                                <th class="px-4 py-3 text-left">Faktor</th>
+                                <th class="px-4 py-3 text-left">Indikator Faktor</th>
                                 <th class="px-4 py-3 text-center w-20">Ya</th>
                                 <th class="px-4 py-3 text-center w-20">Tidak</th>
                             </tr>
@@ -157,23 +163,29 @@
 <script>
     $(function() {
         // Instrument dipilih
-        $('#instrument').change(function() {
+        $('#id_instrument').change(function() {
             let id_instrument = $(this).val();
             if (id_instrument) {
-                $.post("<?= site_url("Input_Narapidana/getKategori") ?>", {
-                    id_instrument: id_instrument
-                }, function(data) {
-                    let html = '<option value="">-- Pilih Kategori --</option>';
-                    if (Array.isArray(data)) {
-                        data.forEach(function(row) {
-                            if (row.jenis_skrining !== undefined) {
-                                html += `<option value="${row.jenis_skrining}">${row.jenis_skrining}</option>`;
-                            }
-                        });
+                $.ajax({
+                    url: "<?= site_url("Input_Pegawai/getKategori") ?>",
+                    type: "POST",
+                    data: {
+                        id_instrument: id_instrument
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        let html = '<option value="">-- Pilih Kategori --</option>';
+                        if (Array.isArray(data)) {
+                            data.forEach(function(row) {
+                                if (row.jenis_skrining !== undefined) {
+                                    html += `<option value="${row.jenis_skrining}">${row.jenis_skrining}</option>`;
+                                }
+                            });
+                        }
+                        $('#kategori').html(html);
+                        $('#kategori-section').removeClass('hidden');
                     }
-                    $('#kategori').html(html);
-                    $('#kategori-section').removeClass('hidden');
-                }, "json");
+                });
 
                 // reset skrining & faktor
                 $('#skrining-section').addClass('hidden');
@@ -190,76 +202,87 @@
         // Kategori dipilih
         $('#kategori').change(function() {
             let id_kategori = $(this).val();
-            let id_instrument = $('#instrument').val();
+            let id_instrument = $('#id_instrument').val();
 
             if (id_kategori) {
                 // Ambil skrining
-                $.post("<?= site_url("Input_Narapidana/getSkrining") ?>", {
-                    id_kategori: id_kategori
-                }, function(data) {
-                    let html = '';
-                    if (Array.isArray(data)) {
-                        data.forEach(function(row) {
-                            html += `
-                                <tr>
-                                    <td class="px-4 py-3 text-gray-800 font-medium">${row.indikator_skrining}</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <input type="radio" name="jawaban[${row.id_skrining}]" value="1" class="h-4 w-4 text-red-600">
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <input type="radio" name="jawaban[${row.id_skrining}]" value="0" class="h-4 w-4 text-black">
-                                    </td>
-                                </tr>`;
-                        });
+                $.ajax({
+                    url: "<?= site_url("Input_Pegawai/getSkrining") ?>",
+                    type: "POST",
+                    data: {
+                        id_kategori: id_kategori
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        let html = '';
+                        if (Array.isArray(data)) {
+                            data.forEach(function(row) {
+                                html += `
+                                    <tr>
+                                        <td class="px-4 py-3 text-gray-800 font-medium">${row.indikator_skrining}</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <input type="radio" name="jawaban[${row.id_skrining}]" value="1" class="h-4 w-4 text-red-600" required>
+                                        </td>
+                                        <td class="px-4 py-3 text-center">
+                                            <input type="radio" name="jawaban[${row.id_skrining}]" value="0" class="h-4 w-4 text-black" required>
+                                        </td>
+                                    </tr>`;
+                            });
+                        }
+                        $('#skrining-body').html(html);
+                        $('#skrining-section').removeClass('hidden');
                     }
-                    $('#skrining-body').html(html);
-                    $('#skrining-section').removeClass('hidden');
-                }, "json");
+                });
 
                 // Ambil faktor
-                $.post("<?= site_url("Input_Narapidana/getFaktor") ?>", {
-                    id_instrument: id_instrument
-                }, function(data) {
-                    let htmlBahaya = '';
-                    let htmlKerentanan = '';
+                $.ajax({
+                    url: "<?= site_url("Input_Pegawai/getFaktor") ?>",
+                    type: "POST",
+                    data: {
+                        id_instrument: id_instrument
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        let htmlBahaya = '';
+                        let htmlKerentanan = '';
 
-                    if (Array.isArray(data)) {
-                        data.forEach(function(row) {
-                            let htmlRow = `
-                                <tr>
-                                    <td class="px-4 py-3 text-gray-800 font-medium">${row.indikator_faktor}</td>
-                                    <td class="px-4 py-3 text-center">
-                                        <input type="radio" name="faktor[${row.id_faktor}]" value="1" class="h-4 w-4 text-red-600">
-                                    </td>
-                                    <td class="px-4 py-3 text-center">
-                                        <input type="radio" name="faktor[${row.id_faktor}]" value="0" class="h-4 w-4 text-black">
-                                    </td>
-                                </tr>`;
-                            if (row.jenis_faktor === 'Bahaya') {
-                                htmlBahaya += htmlRow;
-                            } else if (row.jenis_faktor === 'Kerentanan') {
-                                htmlKerentanan += htmlRow;
-                            }
-                        });
+                        if (Array.isArray(data)) {
+                            data.forEach(function(row) {
+                                let htmlRow = `
+                                    <tr>
+                                        <td class="px-4 py-3 text-gray-800 font-medium">${row.indikator_faktor}</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <input type="radio" name="faktor[${row.id_faktor}]" value="1" class="h-4 w-4 text-red-600" required>
+                                        </td>
+                                        <td class="px-4 py-3 text-center">
+                                            <input type="radio" name="faktor[${row.id_faktor}]" value="0" class="h-4 w-4 text-black" required>
+                                        </td>
+                                    </tr>`;
+                                if (row.jenis_faktor === 'Bahaya') {
+                                    htmlBahaya += htmlRow;
+                                } else if (row.jenis_faktor === 'Kerentanan') {
+                                    htmlKerentanan += htmlRow;
+                                }
+                            });
+                        }
+
+                        if (htmlBahaya) {
+                            $('#faktor-bahaya-body').html(htmlBahaya);
+                            $('#faktor-bahaya').removeClass('hidden');
+                        } else {
+                            $('#faktor-bahaya').addClass('hidden');
+                        }
+
+                        if (htmlKerentanan) {
+                            $('#faktor-kerentanan-body').html(htmlKerentanan);
+                            $('#faktor-kerentanan').removeClass('hidden');
+                        } else {
+                            $('#faktor-kerentanan').addClass('hidden');
+                        }
+
+                        $('#faktor-section').removeClass('hidden');
                     }
-
-                    if (htmlBahaya) {
-                        $('#faktor-bahaya-body').html(htmlBahaya);
-                        $('#faktor-bahaya').removeClass('hidden');
-                    } else {
-                        $('#faktor-bahaya').addClass('hidden');
-                    }
-
-                    if (htmlKerentanan) {
-                        $('#faktor-kerentanan-body').html(htmlKerentanan);
-                        $('#faktor-kerentanan').removeClass('hidden');
-                    } else {
-                        $('#faktor-kerentanan').addClass('hidden');
-                    }
-
-                    $('#faktor-section').removeClass('hidden');
-                }, "json");
-
+                });
             } else {
                 $('#skrining-section').addClass('hidden');
                 $('#faktor-section').addClass('hidden');
