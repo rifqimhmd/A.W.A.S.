@@ -7,6 +7,7 @@
   * @property Input_Pegawai_Model $Input_Pegawai_Model
   * @property CI_Input            $input
   * @property CI_Session          $session
+  * @property CI_DB_query_builder   $db
   */
  class Input_Pegawai extends CI_Controller
  {
