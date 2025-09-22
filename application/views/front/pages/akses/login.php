@@ -7,8 +7,8 @@
     <title>Login AWAS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="<?= base_url(
-    	"assets/img/iconlogin.png",
-    ) ?>">
+                                                "assets/img/iconlogin.png",
+                                            ) ?>">
     <style>
         /* Animasi fade-in */
         .fade-in {
@@ -62,11 +62,11 @@
             <div class="absolute inset-0 pattern-bg"></div>
             <div class="relative z-10 flex flex-col items-center text-center">
                 <img src="<?= base_url(
-                	"assets/img/iconlogin.png",
-                ) ?>" alt="Logo AWAS" class="w-28 mb-4 fade-in">
+                                "assets/img/iconlogin.png",
+                            ) ?>" alt="Logo AWAS" class="w-28 mb-4 fade-in">
                 <img src="<?= base_url(
-                	"assets/img/logo-nobg-black.png",
-                ) ?>" alt="Text AWAS" class="w-56 mb-6 fade-in">
+                                "assets/img/logo-nobg-black.png",
+                            ) ?>" alt="Text AWAS" class="w-56 mb-6 fade-in">
                 <p class="text-gray-500 max-w-xs fade-in">
                     Selamat datang di sistem A.W.A.S. Masuk untuk mengakses fitur dan data Anda dengan aman.
                 </p>
@@ -80,11 +80,11 @@
                 <!-- Logo mobile -->
                 <div class="md:hidden text-center mb-6">
                     <img src="<?= base_url(
-                    	"assets/img/iconlogin.png",
-                    ) ?>" alt="Logo AWAS" class="w-20 mx-auto mb-2 fade-in">
+                                    "assets/img/iconlogin.png",
+                                ) ?>" alt="Logo AWAS" class="w-20 mx-auto mb-2 fade-in">
                     <img src="<?= base_url(
-                    	"assets/img/logo-nobg-black.png",
-                    ) ?>" alt="Text AWAS" class="w-40 mx-auto fade-in">
+                                    "assets/img/logo-nobg-black.png",
+                                ) ?>" alt="Text AWAS" class="w-40 mx-auto fade-in">
                 </div>
 
                 <!-- Title -->
@@ -93,14 +93,14 @@
 
                 <?php if ($this->session->flashdata("error")): ?>
                     <p class="text-red-600 mb-4 text-sm text-center"><?= $this->session->flashdata(
-                    	"error",
-                    ) ?></p>
+                                                                            "error",
+                                                                        ) ?></p>
                 <?php endif; ?>
 
                 <!-- Form -->
                 <form action="<?= base_url(
-                	"login/login",
-                ) ?>" method="post" class="space-y-5 fade-in">
+                                    "login/login",
+                                ) ?>" method="post" class="space-y-5 fade-in">
 
                     <!-- Username -->
                     <div>

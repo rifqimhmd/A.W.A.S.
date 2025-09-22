@@ -32,8 +32,14 @@ class Histori extends CI_Controller
 			"id_kanwil" => $this->session->userdata("id_kanwil"),
 		];
 
-		$data["narkotika"] = $this->HistoriModel->get_histori_by_instrument("narkotika", $user);
-		$data["teroris"] = $this->HistoriModel->get_histori_by_instrument("teroris", $user);
+		$data["narkotika"] = $this->HistoriModel->get_histori_by_instrument(
+			"narkotika",
+			$user,
+		);
+		$data["teroris"] = $this->HistoriModel->get_histori_by_instrument(
+			"teroris",
+			$user,
+		);
 
 		$this->load->view("front/layouts/main", $data);
 	}
@@ -81,13 +87,43 @@ class Histori extends CI_Controller
 			redirect("histori");
 		}
 
-		$this->db->where("id_hasil", $id_hasil);
-		$deleted = $this->db->delete("tbl_hasil");
+		// Mulai transaksi
+		$this->db->trans_start();
 
-		if ($deleted && $this->db->affected_rows() > 0) {
-			$this->session->set_flashdata("success", "Data berhasil dihapus!");
+		// Hapus dari tbl_hasil_indikator
+		$this->db->where("id_hasil", $id_hasil);
+		$this->db->delete("tbl_hasil_indikator");
+
+		// Ambil data dari tbl_hasil sebelum dihapus
+		$hasil = $this->db
+			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])
+			->row();
+
+		if ($hasil) {
+			// Hapus di tbl_pegawai (jika ada NIP)
+			if (!empty($hasil->id_object)) {
+				$this->db->where("nip", $hasil->id_object);
+				$this->db->delete("tbl_pegawai");
+			}
+
+			// Hapus di tbl_narapidana (jika ada no_register)
+			if (!empty($hasil->id_object)) {
+				$this->db->where("no_register", $hasil->id_object);
+				$this->db->delete("tbl_narapidana");
+			}
+		}
+
+		// Terakhir, hapus dari tbl_hasil
+		$this->db->where("id_hasil", $id_hasil);
+		$this->db->delete("tbl_hasil");
+
+		// Selesaikan transaksi
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === false) {
+			$this->session->set_flashdata("error", "Data gagal dihapus.");
 		} else {
-			$this->session->set_flashdata("error", "Data gagal dihapus atau sudah tidak ada.");
+			$this->session->set_flashdata("success", "Data berhasil dihapus!");
 		}
 
 		redirect("histori");

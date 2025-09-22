@@ -1,15 +1,14 @@
 <main class="w-full min-h-screen p-4 sm:p-6 bg-gray-50">
 
-    <!-- Flash Message -->
     <?php if ($this->session->flashdata("success")): ?>
-        <div class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
+        <div id="flash-message" class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
             <div class="flex items-start gap-3">
                 <div class="text-xl">✅</div>
                 <div><?= $this->session->flashdata("success") ?></div>
             </div>
         </div>
     <?php elseif ($this->session->flashdata("error")): ?>
-        <div class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
+        <div id="flash-message" class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
             <div class="flex items-start gap-3">
                 <div class="text-xl">❌</div>
                 <div><?= $this->session->flashdata("error") ?></div>
@@ -17,6 +16,43 @@
         </div>
     <?php endif; ?>
 
+    <script>
+        // Hilangkan flash message setelah 5 detik
+        setTimeout(function() {
+            var flash = document.getElementById('flash-message');
+            if (flash) {
+                flash.style.opacity = '0';
+                setTimeout(function() {
+                    flash.style.display = 'none';
+                }, 500); // delay untuk efek fade out
+            }
+        }, 5000);
+    </script>
+    <!-- Modal Pengumuman -->
+    <div id="announcement-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl p-6 max-w-sm w-full text-center relative fade-in">
+            <h3 class="text-lg font-bold text-red-700 mb-3">📢 Pengumuman</h3>
+            <p class="text-gray-700 text-sm">
+                Penginputan hanya diperbolehkan pada tanggal <b>25 – 28</b> setiap bulan.
+            </p>
+            <button onclick="closeAnnouncement()"
+                class="mt-5 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg shadow transition">
+                Mengerti
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Tutup modal manual
+        function closeAnnouncement() {
+            document.getElementById('announcement-modal').style.display = 'none';
+        }
+
+        // Auto close setelah 7 detik
+        setTimeout(function() {
+            closeAnnouncement();
+        }, 7000);
+    </script>
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b pb-4 gap-3">
         <div>
