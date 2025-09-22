@@ -53,6 +53,32 @@
     </style>
 </head>
 
+<!-- Modal Pengumuman -->
+<div id="announcement-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-2xl p-6 max-w-sm w-full text-center relative fade-in">
+        <h3 class="text-lg font-bold text-red-700 mb-3">📢 Pengumuman</h3>
+        <p class="text-gray-700 text-sm">
+            Penginputan hanya diperbolehkan pada tanggal <b>25 – 28</b> setiap bulan.
+        </p>
+        <button onclick="closeAnnouncement()"
+            class="mt-5 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg shadow transition">
+            Mengerti
+        </button>
+    </div>
+</div>
+
+<script>
+    // Tutup modal manual
+    function closeAnnouncement() {
+        document.getElementById('announcement-modal').style.display = 'none';
+    }
+
+    // Auto close setelah 7 detik
+    setTimeout(function() {
+        closeAnnouncement();
+    }, 7000);
+</script>
+
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 font-sans">
 
     <div class="w-full min-h-screen flex flex-col md:flex-row overflow-hidden">
