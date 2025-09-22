@@ -7,6 +7,7 @@
   * @property Input_Narapidana_Model $Input_Narapidana_Model
   * @property CI_Input            $input
   * @property CI_Session          $session
+  * @property CI_DB_query_builder   $db
   */
  class Input_Narapidana extends CI_Controller
  {
