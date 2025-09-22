@@ -1,20 +1,32 @@
 <main class="w-full min-h-screen p-4 sm:p-6 bg-gray-50">
-    <!-- Flash Message -->
     <?php if ($this->session->flashdata('success')): ?>
-        <div class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
+        <div id="flash-message"
+            class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
             <div class="flex items-start gap-3">
                 <div class="text-xl">✅</div>
                 <div><?= $this->session->flashdata('success') ?></div>
             </div>
         </div>
     <?php elseif ($this->session->flashdata('error')): ?>
-        <div class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
+        <div id="flash-message"
+            class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
             <div class="flex items-start gap-3">
                 <div class="text-xl">❌</div>
                 <div><?= $this->session->flashdata('error') ?></div>
             </div>
         </div>
     <?php endif; ?>
+
+    <!-- Script Auto Hide -->
+    <script>
+        setTimeout(() => {
+            const flash = document.getElementById('flash-message');
+            if (flash) {
+                flash.classList.add('opacity-0'); // fade out
+                setTimeout(() => flash.remove(), 500); // hapus elemen setelah animasi selesai
+            }
+        }, 5000); // 5 detik
+    </script>
 
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b pb-4 gap-3">
         <div>
