@@ -24,6 +24,8 @@ class Histori extends CI_Controller
 		$data["title"] = "Data Hasil";
 		$data["subtitle"] = "Histori Penilaian Skrining dan Faktor";
 		$data["page"] = "front/pages/datakerawanan/histori";
+		$data["list_upt"] = $this->HistoriModel->getAllUpt();
+		$data["list_kanwil"] = $this->HistoriModel->getAllKanwil();
 
 		$user = [
 			"id_user" => $this->session->userdata("id_user"),
@@ -55,14 +57,10 @@ class Histori extends CI_Controller
 
 			$bahaya = [];
 			$kerentanan = [];
-
 			foreach ($faktor as $row) {
-				// pastikan tidak null, lalu ubah ke lowercase
-				$jenis_faktor = strtolower($row->jenis_faktor ?? '');
-
-				if ($jenis_faktor === "bahaya") {
+				if (strtolower($row->jenis_faktor) === "bahaya") {
 					$bahaya[] = $row;
-				} elseif ($jenis_faktor === "kerentanan") {
+				} elseif (strtolower($row->jenis_faktor) === "kerentanan") {
 					$kerentanan[] = $row;
 				}
 			}
@@ -81,75 +79,47 @@ class Histori extends CI_Controller
 		}
 	}
 
+	/**
+	 * Hapus hasil
+	 */
 	public function delete($id_hasil)
 	{
 		if (empty($id_hasil)) {
 			$this->session->set_flashdata("error", "ID hasil tidak valid.");
 			redirect("histori");
-			return;
 		}
 
-		// ambil role & identitas user
-		$role     = $this->session->userdata("role"); // admin, kanwil, upt
-		$id_upt   = $this->session->userdata("id_upt");
-		$id_kanwil = $this->session->userdata("id_kanwil");
-
-		// ambil data hasil
-		$hasil = $this->db->get_where("tbl_hasil", ["id_hasil" => $id_hasil])->row();
-
-		if (!$hasil) {
-			$this->session->set_flashdata("error", "Data tidak ditemukan.");
-			redirect("histori");
-			return;
-		}
-
-		// cek akses berdasarkan role
-		if ($role === "admin") {
-			// admin boleh hapus semua
-		} elseif ($role === "kanwil") {
-			// hanya boleh hapus data dalam kanwilnya
-			if ($hasil->id_kanwil != $id_kanwil) {
-				$this->session->set_flashdata("error", "Anda tidak berhak menghapus data ini.");
-				redirect("histori");
-				return;
-			}
-			// tambahan aturan khusus: misalnya level Merah tidak boleh hapus
-			if ($hasil->level === "Merah") {
-				$this->session->set_flashdata("error", "Data level Merah tidak bisa dihapus.");
-				redirect("histori");
-				return;
-			}
-		} elseif ($role === "upt") {
-			// hanya boleh hapus data dalam upt nya
-			if ($hasil->id_upt != $id_upt) {
-				$this->session->set_flashdata("error", "Anda tidak berhak menghapus data ini.");
-				redirect("histori");
-				return;
-			}
-		} else {
-			$this->session->set_flashdata("error", "Role tidak dikenal.");
-			redirect("histori");
-			return;
-		}
-
-		// eksekusi penghapusan dengan transaksi
+		// Mulai transaksi
 		$this->db->trans_start();
 
-		// hapus indikator
-		$this->db->delete("tbl_hasil_indikator", ["id_hasil" => $id_hasil]);
+		// Hapus dari tbl_hasil_indikator
+		$this->db->where("id_hasil", $id_hasil);
+		$this->db->delete("tbl_hasil_indikator");
 
-		// jika ada object, hapus sesuai tipe
-		if (!empty($hasil->id_object)) {
-			if ($hasil->tipe_object === "pegawai") {
-				$this->db->delete("tbl_pegawai", ["nip" => $hasil->id_object]);
-			} elseif ($hasil->tipe_object === "narapidana") {
-				$this->db->delete("tbl_narapidana", ["no_register" => $hasil->id_object]);
+		// Ambil data dari tbl_hasil sebelum dihapus
+		$hasil = $this->db
+			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])
+			->row();
+
+		if ($hasil) {
+			// Hapus di tbl_pegawai (jika ada NIP)
+			if (!empty($hasil->id_object)) {
+				$this->db->where("nip", $hasil->id_object);
+				$this->db->delete("tbl_pegawai");
+			}
+
+			// Hapus di tbl_narapidana (jika ada no_register)
+			if (!empty($hasil->id_object)) {
+				$this->db->where("no_register", $hasil->id_object);
+				$this->db->delete("tbl_narapidana");
 			}
 		}
 
-		// hapus hasil
-		$this->db->delete("tbl_hasil", ["id_hasil" => $id_hasil]);
+		// Terakhir, hapus dari tbl_hasil
+		$this->db->where("id_hasil", $id_hasil);
+		$this->db->delete("tbl_hasil");
 
+		// Selesaikan transaksi
 		$this->db->trans_complete();
 
 		if ($this->db->trans_status() === false) {

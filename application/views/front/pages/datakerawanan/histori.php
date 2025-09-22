@@ -1,15 +1,14 @@
 <main class="w-full min-h-screen p-4 sm:p-6 bg-gray-50">
+    <!-- Flash Message -->
     <?php if ($this->session->flashdata('success')): ?>
-        <div id="flash-message"
-            class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
+        <div id="flash-message" class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
             <div class="flex items-start gap-3">
                 <div class="text-xl">✅</div>
                 <div><?= $this->session->flashdata('success') ?></div>
             </div>
         </div>
     <?php elseif ($this->session->flashdata('error')): ?>
-        <div id="flash-message"
-            class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
+        <div id="flash-message" class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
             <div class="flex items-start gap-3">
                 <div class="text-xl">❌</div>
                 <div><?= $this->session->flashdata('error') ?></div>
@@ -17,21 +16,110 @@
         </div>
     <?php endif; ?>
 
-    <!-- Script Auto Hide -->
     <script>
+        // Auto hide flash message after 5 seconds
         setTimeout(() => {
             const flash = document.getElementById('flash-message');
             if (flash) {
                 flash.classList.add('opacity-0'); // fade out
-                setTimeout(() => flash.remove(), 500); // hapus elemen setelah animasi selesai
+                setTimeout(() => flash.remove(), 500); // remove from DOM after fade
             }
-        }, 5000); // 5 detik
+        }, 5000); // 5000ms = 5 detik
     </script>
 
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b pb-4 gap-3">
         <div>
             <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">📊 <?= $title ?></h2>
             <p class="text-sm text-gray-500 mt-1"><?= $subtitle ?></p>
+        </div>
+        <!-- Tombol Filter Mobile -->
+        <div class="flex sm:hidden justify-end mb-4">
+            <button id="open-filter-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg">
+                Filter
+            </button>
+        </div>
+
+        <!-- Filter Desktop -->
+        <div id="filter-desktop" class="hidden sm:flex flex-col sm:flex-row gap-4 mb-4 items-start sm:items-center">
+
+            <!-- Filter Tipe -->
+            <div class="flex items-center gap-2">
+                <label for="filter-tipe" class="text-sm text-gray-700">Tipe:</label>
+                <select id="filter-tipe" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
+                    <option value="all">Semua</option>
+                    <option value="Pegawai">Pegawai</option>
+                    <option value="Narapidana">Narapidana</option>
+                </select>
+            </div>
+
+            <!-- Filter Level -->
+            <div class="flex items-center gap-2">
+                <label for="filter-level" class="text-sm text-gray-700">Level:</label>
+                <select id="filter-level" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
+                    <option value="all">Semua</option>
+                    <option value="Merah">Merah</option>
+                    <option value="Kuning">Kuning</option>
+                    <option value="Hijau">Hijau</option>
+                </select>
+            </div>
+
+            <!-- Filter UPT -->
+            <div class="flex items-center gap-2">
+                <label for="filter-upt" class="text-sm text-gray-700">UPT:</label>
+                <select id="filter-upt" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
+                    <option value="all">Semua</option>
+                    <?php foreach ($list_upt as $upt): ?>
+                        <option value="<?= htmlspecialchars($upt['nama_upt']) ?>"><?= htmlspecialchars($upt['nama_upt']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <!-- Filter Kanwil -->
+            <div class="flex items-center gap-2">
+                <label for="filter-kanwil" class="text-sm text-gray-700">Kanwil:</label>
+                <select id="filter-kanwil" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
+                    <option value="all">Semua</option>
+                    <?php foreach ($list_kanwil as $kanwil): ?>
+                        <option value="<?= htmlspecialchars($kanwil['nama_kanwil']) ?>"><?= htmlspecialchars($kanwil['nama_kanwil']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- Modal Filter Mobile -->
+        <div id="filter-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-lg p-6 w-11/12 max-w-md">
+                <h2 class="text-lg font-semibold mb-4">Filter</h2>
+
+                <!-- Filter Mobile (sama seperti desktop) -->
+                <div id="filter-mobile-content" class="flex flex-col gap-3">
+                    <div class="flex items-center gap-2">
+                        <label for="filter-tipe-mobile" class="text-sm text-gray-700">Tipe:</label>
+                        <select id="filter-tipe-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <label for="filter-level-mobile" class="text-sm text-gray-700">Level:</label>
+                        <select id="filter-level-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <label for="filter-upt-mobile" class="text-sm text-gray-700">UPT:</label>
+                        <select id="filter-upt-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <label for="filter-kanwil-mobile" class="text-sm text-gray-700">Kanwil:</label>
+                        <select id="filter-kanwil-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 mt-4">
+                    <button id="close-filter-btn" class="bg-gray-300 px-4 py-2 rounded-lg">Batal</button>
+                    <button id="apply-filter-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg">Terapkan</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -494,5 +582,83 @@
             document.getElementById("content-" + tab).classList.remove("hidden");
             document.getElementById("tab-" + tab).classList.add("text-red-600", "border-b-2", "border-red-600");
         }
+
+        function applyFilters() {
+            const tipe = document.getElementById("filter-tipe").value;
+            const level = document.getElementById("filter-level").value;
+            const upt = document.getElementById("filter-upt").value;
+            const kanwil = document.getElementById("filter-kanwil").value;
+
+            const tables = ["narkotika", "teroris"];
+
+            tables.forEach(tableId => {
+                // Desktop rows
+                document.querySelectorAll(`#table-${tableId} tbody tr`).forEach(row => {
+                    const rowTipe = row.querySelector("td:nth-child(8)").textContent.trim();
+                    const rowLevel = row.querySelector("td:nth-child(7)").textContent.trim();
+                    const rowUpt = row.querySelector("td:nth-child(3)").textContent.trim();
+                    const rowKanwil = row.querySelector("td:nth-child(2)").textContent.trim();
+
+                    row.style.display =
+                        (tipe === "all" || rowTipe === tipe) &&
+                        (level === "all" || rowLevel === level) &&
+                        (upt === "all" || rowUpt === upt) &&
+                        (kanwil === "all" || rowKanwil === kanwil) ?
+                        "" : "none";
+                });
+
+                // Mobile cards
+                document.querySelectorAll(`#table-${tableId} .sm\\:hidden > div`).forEach(card => {
+                    const tipeSpan = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === "Tipe:");
+                    const levelSpan = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === "Level:");
+                    const uptSpan = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === "Nama UPT:");
+                    const kanwilSpan = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === "Nama Kanwil:");
+
+                    const cardTipe = tipeSpan ? tipeSpan.nextSibling.textContent.trim() : "";
+                    const cardLevel = levelSpan ? levelSpan.nextSibling.textContent.trim() : "";
+                    const cardUpt = uptSpan ? uptSpan.nextSibling.textContent.trim() : "";
+                    const cardKanwil = kanwilSpan ? kanwilSpan.nextSibling.textContent.trim() : "";
+
+                    card.style.display =
+                        (tipe === "all" || cardTipe === tipe) &&
+                        (level === "all" || cardLevel === level) &&
+                        (upt === "all" || cardUpt === upt) &&
+                        (kanwil === "all" || cardKanwil === kanwil) ?
+                        "" : "none";
+                });
+            });
+        }
+
+        function syncMobileOptions() {
+            ['tipe', 'level', 'upt', 'kanwil'].forEach(f => {
+                const desktop = document.getElementById(`filter-${f}`);
+                const mobile = document.getElementById(`filter-${f}-mobile`);
+                mobile.innerHTML = desktop.innerHTML;
+                mobile.value = desktop.value;
+            });
+        }
+        syncMobileOptions();
+
+        // Buka modal
+        document.getElementById('open-filter-btn').addEventListener('click', () => {
+            syncMobileOptions();
+            document.getElementById('filter-modal').classList.remove('hidden');
+        });
+
+        // Tutup modal
+        document.getElementById('close-filter-btn').addEventListener('click', () => {
+            document.getElementById('filter-modal').classList.add('hidden');
+        });
+
+        // Terapkan filter dari modal ke desktop
+        document.getElementById('apply-filter-btn').addEventListener('click', () => {
+            ['tipe', 'level', 'upt', 'kanwil'].forEach(f => {
+                const desktop = document.getElementById(`filter-${f}`);
+                const mobile = document.getElementById(`filter-${f}-mobile`);
+                desktop.value = mobile.value;
+            });
+            applyFilters();
+            document.getElementById('filter-modal').classList.add('hidden');
+        });
     </script>
 </main>

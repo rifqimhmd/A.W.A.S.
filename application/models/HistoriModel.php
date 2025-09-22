@@ -168,4 +168,13 @@ class HistoriModel extends CI_Model
 			->get()
 			->result();
 	}
+	public function getAllUpt()
+	{
+		return $this->db->select("nama_upt")->from("tbl_upt")->order_by("nama_upt")->get()->result_array();
+	}
+
+	public function getAllKanwil()
+	{
+		return $this->db->select("nama_kanwil")->from("tbl_kanwil")->order_by("nama_kanwil")->get()->result_array();
+	}
 }
