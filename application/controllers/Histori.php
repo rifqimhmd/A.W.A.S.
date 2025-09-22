@@ -81,47 +81,75 @@ class Histori extends CI_Controller
 		}
 	}
 
-	/**
-	 * Hapus hasil
-	 */
 	public function delete($id_hasil)
 	{
 		if (empty($id_hasil)) {
 			$this->session->set_flashdata("error", "ID hasil tidak valid.");
 			redirect("histori");
+			return;
 		}
 
-		// Mulai transaksi
+		// ambil role & identitas user
+		$role     = $this->session->userdata("role"); // admin, kanwil, upt
+		$id_upt   = $this->session->userdata("id_upt");
+		$id_kanwil = $this->session->userdata("id_kanwil");
+
+		// ambil data hasil
+		$hasil = $this->db->get_where("tbl_hasil", ["id_hasil" => $id_hasil])->row();
+
+		if (!$hasil) {
+			$this->session->set_flashdata("error", "Data tidak ditemukan.");
+			redirect("histori");
+			return;
+		}
+
+		// cek akses berdasarkan role
+		if ($role === "admin") {
+			// admin boleh hapus semua
+		} elseif ($role === "kanwil") {
+			// hanya boleh hapus data dalam kanwilnya
+			if ($hasil->id_kanwil != $id_kanwil) {
+				$this->session->set_flashdata("error", "Anda tidak berhak menghapus data ini.");
+				redirect("histori");
+				return;
+			}
+			// tambahan aturan khusus: misalnya level Merah tidak boleh hapus
+			if ($hasil->level === "Merah") {
+				$this->session->set_flashdata("error", "Data level Merah tidak bisa dihapus.");
+				redirect("histori");
+				return;
+			}
+		} elseif ($role === "upt") {
+			// hanya boleh hapus data dalam upt nya
+			if ($hasil->id_upt != $id_upt) {
+				$this->session->set_flashdata("error", "Anda tidak berhak menghapus data ini.");
+				redirect("histori");
+				return;
+			}
+		} else {
+			$this->session->set_flashdata("error", "Role tidak dikenal.");
+			redirect("histori");
+			return;
+		}
+
+		// eksekusi penghapusan dengan transaksi
 		$this->db->trans_start();
 
-		// Hapus dari tbl_hasil_indikator
-		$this->db->where("id_hasil", $id_hasil);
-		$this->db->delete("tbl_hasil_indikator");
+		// hapus indikator
+		$this->db->delete("tbl_hasil_indikator", ["id_hasil" => $id_hasil]);
 
-		// Ambil data dari tbl_hasil sebelum dihapus
-		$hasil = $this->db
-			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])
-			->row();
-
-		if ($hasil) {
-			// Hapus di tbl_pegawai (jika ada NIP)
-			if (!empty($hasil->id_object)) {
-				$this->db->where("nip", $hasil->id_object);
-				$this->db->delete("tbl_pegawai");
-			}
-
-			// Hapus di tbl_narapidana (jika ada no_register)
-			if (!empty($hasil->id_object)) {
-				$this->db->where("no_register", $hasil->id_object);
-				$this->db->delete("tbl_narapidana");
+		// jika ada object, hapus sesuai tipe
+		if (!empty($hasil->id_object)) {
+			if ($hasil->tipe_object === "pegawai") {
+				$this->db->delete("tbl_pegawai", ["nip" => $hasil->id_object]);
+			} elseif ($hasil->tipe_object === "narapidana") {
+				$this->db->delete("tbl_narapidana", ["no_register" => $hasil->id_object]);
 			}
 		}
 
-		// Terakhir, hapus dari tbl_hasil
-		$this->db->where("id_hasil", $id_hasil);
-		$this->db->delete("tbl_hasil");
+		// hapus hasil
+		$this->db->delete("tbl_hasil", ["id_hasil" => $id_hasil]);
 
-		// Selesaikan transaksi
 		$this->db->trans_complete();
 
 		if ($this->db->trans_status() === false) {

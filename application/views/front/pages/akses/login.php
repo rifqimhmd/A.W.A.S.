@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login AWAS</title>
+    <title>Masuk A.W.A.S.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="<?= base_url(
                                                 "assets/img/iconlogin.png",
@@ -54,29 +54,58 @@
 </head>
 
 <!-- Modal Pengumuman -->
-<div id="announcement-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-xl shadow-2xl p-6 max-w-sm w-full text-center relative fade-in">
-        <h3 class="text-lg font-bold text-red-700 mb-3">📢 Pengumuman</h3>
-        <p class="text-gray-700 text-sm">
+<div id="announcement-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-500">
+    <div id="announcement-box"
+        class="bg-white rounded-xl shadow-2xl p-6 max-w-md w-[90%] sm:w-full relative transform scale-90 opacity-0 transition-all duration-700 ease-out">
+
+        <!-- Tombol X -->
+        <button onclick="closeAnnouncement()"
+            class="absolute -top-3 -right-3 bg-red-600 hover:bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-md">
+            ✕
+        </button>
+
+        <h3 class="text-xl font-bold text-red-700 mb-3 text-center">📢 Pengumuman</h3>
+        <p class="text-gray-700 text-sm sm:text-base text-center leading-relaxed">
             Penginputan hanya diperbolehkan pada tanggal <b>25 – 28</b> setiap bulan.
         </p>
-        <button onclick="closeAnnouncement()"
-            class="mt-5 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg shadow transition">
-            Mengerti
-        </button>
     </div>
 </div>
 
 <script>
-    // Tutup modal manual
     function closeAnnouncement() {
-        document.getElementById('announcement-modal').style.display = 'none';
+        const modal = document.getElementById('announcement-modal');
+        const box = document.getElementById('announcement-box');
+
+        // efek keluar (fade + scale out)
+        box.classList.remove('scale-100', 'opacity-100');
+        box.classList.add('scale-90', 'opacity-0');
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0', 'pointer-events-none');
     }
 
-    // Auto close setelah 7 detik
-    setTimeout(function() {
-        closeAnnouncement();
-    }, 7000);
+    window.onload = function() {
+        const modal = document.getElementById('announcement-modal');
+        const box = document.getElementById('announcement-box');
+
+        setTimeout(function() {
+            // tampilkan background
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+
+            // animasi fade + scale in
+            setTimeout(function() {
+                box.classList.remove('scale-90', 'opacity-0');
+                box.classList.add('scale-100', 'opacity-100');
+
+                // auto-close setelah 7 detik
+                setTimeout(function() {
+                    closeAnnouncement();
+                }, 4000);
+
+            }, 100);
+        }, 2000); // muncul 2 detik setelah halaman load
+    };
 </script>
 
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 font-sans">
