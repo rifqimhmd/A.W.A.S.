@@ -35,12 +35,6 @@
                                 d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
-
-                    <!-- Beranda (hidden di mobile) -->
-                    <a href="<?= base_url("/") ?>"
-                        class="hidden sm:inline-block px-2 sm:px-3 py-1.5 sm:py-2 text-sm sm:text-base text-white rounded-md transition hover:bg-red-700">
-                        Beranda
-                    </a>
                 <?php endif; ?>
             </div>
 
@@ -130,10 +124,7 @@
     <aside id="sidebar" class="fixed top-14 sm:top-16 lg:top-20 left-0 w-60 sm:w-64 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)] bg-black text-white shadow-lg -ml-64 transition-all duration-300 overflow-y-auto z-40">
         <nav class="p-2 sm:p-4 space-y-1 sm:space-y-2 text-sm sm:text-base">
             <!-- Semua menu sidebar seperti versi sebelumnya -->
-            <!-- Beranda masuk ke sidebar di mobile -->
-            <a href="<?= base_url(
-                            "/",
-                        ) ?>" class="block sm:hidden px-3 py-2 hover:bg-red-700 rounded-md transition">Beranda</a>
+            <a href="<?= base_url("/") ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Beranda</a>
             <a href="<?= base_url(
                             "histori",
                         ) ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Riwayat Kerawanan</a>
