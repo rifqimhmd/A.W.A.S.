@@ -57,10 +57,14 @@ class Histori extends CI_Controller
 
 			$bahaya = [];
 			$kerentanan = [];
+
 			foreach ($faktor as $row) {
-				if (strtolower($row->jenis_faktor) === "bahaya") {
+				// pastikan tidak null, lalu ubah ke lowercase
+				$jenis_faktor = strtolower($row->jenis_faktor ?? '');
+
+				if ($jenis_faktor === "bahaya") {
 					$bahaya[] = $row;
-				} elseif (strtolower($row->jenis_faktor) === "kerentanan") {
+				} elseif ($jenis_faktor === "kerentanan") {
 					$kerentanan[] = $row;
 				}
 			}
