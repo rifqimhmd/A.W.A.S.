@@ -585,12 +585,11 @@
 
         let initialLoad = true; // flag load pertama
 
-        // ===== Ambil filter dari URL case-insensitive =====
+        // ===== Ambil filter dari URL hash =====
         function getFiltersFromURL() {
-            const params = new URLSearchParams(window.location.search);
+            const params = new URLSearchParams(location.hash.slice(1)); // hash setelah #
             const filters = {};
 
-            // Ambil semua param, ubah key jadi lowercase
             for (const [key, value] of params.entries()) {
                 filters[key.toLowerCase()] = value;
             }
@@ -609,15 +608,16 @@
             const upt = document.getElementById("filter-upt")?.value || "all";
             const kanwil = document.getElementById("filter-kanwil")?.value || "all";
 
-            // ===== Update URL hanya jika bukan load pertama =====
+            // ===== Update hash hanya jika bukan load pertama =====
             if (!initialLoad) {
                 const params = new URLSearchParams();
                 if (tipe !== "all") params.set("tipe", tipe);
                 if (level !== "all") params.set("level", level);
                 if (upt !== "all") params.set("upt", upt);
                 if (kanwil !== "all") params.set("kanwil", kanwil);
-                const newURL = params.toString() ? `/awas/histori?${params.toString()}` : '/awas/histori';
-                window.history.replaceState(null, "", newURL);
+
+                // Hash-based URL: tidak membuat 404
+                window.location.hash = params.toString();
             }
 
             const tables = ["narkotika", "teroris"];
@@ -666,7 +666,7 @@
             });
         }
 
-        // ===== Set filter dropdown dari URL saat load =====
+        // ===== Set filter dropdown dari URL hash saat load =====
         function setFiltersFromURL() {
             const filters = getFiltersFromURL();
 
@@ -676,7 +676,7 @@
             });
 
             applyFilters();
-            initialLoad = false; // setelah load pertama, URL boleh diupdate
+            initialLoad = false; // setelah load pertama, hash boleh diupdate
         }
 
         window.addEventListener("DOMContentLoaded", () => {
