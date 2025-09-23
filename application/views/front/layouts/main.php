@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/iconlogin.png') ?>">
+    <link rel="icon" type="image/png" href="<?= base_url(
+    	"assets/img/iconlogin.png",
+    ) ?>">
 </head>
 
 <body class="min-h-screen flex flex-col">
 
     <!-- Header -->
-    <?php $this->load->view('front/layouts/header'); ?>
+    <?php $this->load->view("front/layouts/header"); ?>
     <!-- End of Header -->
 
     <div id="content-wrapper" style="margin-left:0; width:100%;" class="flex-1 bg-white pt-16 transition-all duration-300 flex flex-col">
@@ -22,7 +24,7 @@
     </div>
 
     <!-- Footer -->
-    <?php $this->load->view('front/layouts/footer'); ?>
+    <?php $this->load->view("front/layouts/footer"); ?>
     <!-- End of Footer -->
 
     <script>

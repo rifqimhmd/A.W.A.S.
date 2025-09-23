@@ -170,11 +170,26 @@ class HistoriModel extends CI_Model
 	}
 	public function getAllUpt()
 	{
-		return $this->db->select("nama_upt")->from("tbl_upt")->order_by("nama_upt")->get()->result_array();
+		return $this->db
+			->select("nama_upt")
+			->from("tbl_upt")
+			->order_by("nama_upt")
+			->get()
+			->result_array();
 	}
 
-	public function getAllKanwil()
+	public function getAllKanwil($user = null)
 	{
-		return $this->db->select("nama_kanwil")->from("tbl_kanwil")->order_by("nama_kanwil")->get()->result_array();
+		$this->db->select("id_kanwil, nama_kanwil");
+		$this->db->from("tbl_kanwil");
+		$this->db->order_by("nama_kanwil");
+
+		// Jika user role = kanwil → hanya tampilkan kanwil sesuai id_kanwil user
+		if ($user && $user["role"] === "kanwil") {
+			$this->db->where("id_kanwil", $user["id_kanwil"]);
+		}
+
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 }

@@ -25,7 +25,6 @@ class Histori extends CI_Controller
 		$data["subtitle"] = "Histori Penilaian Skrining dan Faktor";
 		$data["page"] = "front/pages/datakerawanan/histori";
 		$data["list_upt"] = $this->HistoriModel->getAllUpt();
-		$data["list_kanwil"] = $this->HistoriModel->getAllKanwil();
 
 		$user = [
 			"id_user" => $this->session->userdata("id_user"),
@@ -33,6 +32,9 @@ class Histori extends CI_Controller
 			"id_upt" => $this->session->userdata("id_upt"),
 			"id_kanwil" => $this->session->userdata("id_kanwil"),
 		];
+
+		// Daftar Kanwil sesuai role user
+		$data["list_kanwil"] = $this->HistoriModel->getAllKanwil($user);
 
 		$data["narkotika"] = $this->HistoriModel->get_histori_by_instrument(
 			"narkotika",
@@ -60,7 +62,7 @@ class Histori extends CI_Controller
 
 			foreach ($faktor as $row) {
 				// pastikan tidak null, lalu ubah ke lowercase
-				$jenis_faktor = strtolower($row->jenis_faktor ?? '');
+				$jenis_faktor = strtolower($row->jenis_faktor ?? "");
 
 				if ($jenis_faktor === "bahaya") {
 					$bahaya[] = $row;
