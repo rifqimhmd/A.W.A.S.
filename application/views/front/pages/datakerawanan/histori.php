@@ -34,7 +34,7 @@
         </div>
         <!-- Tombol Filter Mobile -->
         <div class="flex sm:hidden justify-end mb-4">
-            <button id="open-filter-btn" class="curson-pointer bg-red-500 text-white px-4 py-2 rounded-lg">
+            <button id="open-filter-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg">
                 Filter
             </button>
         </div>
@@ -206,7 +206,7 @@
         </div>
 
         <!-- Mobile Cards Narkotika -->
-        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl mobile-card-narkotika">
+        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
             <?php if (!empty($narkotika)):
                 $no = 1;
                 foreach ($narkotika as $row): ?>
@@ -333,7 +333,7 @@
         </div>
 
         <!-- CARD: tampil di mobile -->
-        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl mobile-card-teroris">
+        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
             <?php if (!empty($teroris)):
                 $no = 1;
                 foreach ($teroris as $row): ?>
@@ -583,97 +583,141 @@
             document.getElementById("tab-" + tab).classList.add("text-red-600", "border-b-2", "border-red-600");
         }
 
-        // ===== Fungsi bantu untuk ambil value dari mobile card =====
-        function getCardValue(card, label) {
-            const span = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === label);
-            if (!span) return "";
+        let initialLoad = true; // flag load pertama
 
-            let node = span.nextSibling;
-            while (node) {
-                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== "") {
-                    return node.textContent.trim();
-                } else if (node.nodeType === Node.ELEMENT_NODE) {
-                    return node.textContent.trim();
-                }
-                node = node.nextSibling;
+        // ===== Ambil filter dari URL case-insensitive =====
+        function getFiltersFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const filters = {};
+
+            // Ambil semua param, ubah key jadi lowercase
+            for (const [key, value] of params.entries()) {
+                filters[key.toLowerCase()] = value;
             }
-            return "";
+
+            return {
+                tipe: filters.tipe || "all",
+                level: filters.level || "all",
+                upt: filters.upt || "all",
+                kanwil: filters.kanwil || "all"
+            };
         }
 
-        // ===== Fungsi utama filter =====
         function applyFilters() {
-            const tipe = document.getElementById("filter-tipe").value;
-            const level = document.getElementById("filter-level").value;
-            const upt = document.getElementById("filter-upt").value;
-            const kanwil = document.getElementById("filter-kanwil").value;
+            const tipe = document.getElementById("filter-tipe")?.value || "all";
+            const level = document.getElementById("filter-level")?.value || "all";
+            const upt = document.getElementById("filter-upt")?.value || "all";
+            const kanwil = document.getElementById("filter-kanwil")?.value || "all";
+
+            // ===== Update URL hanya jika bukan load pertama =====
+            if (!initialLoad) {
+                const params = new URLSearchParams();
+                if (tipe !== "all") params.set("tipe", tipe);
+                if (level !== "all") params.set("level", level);
+                if (upt !== "all") params.set("upt", upt);
+                if (kanwil !== "all") params.set("kanwil", kanwil);
+                const newURL = params.toString() ? `/awas/histori?${params.toString()}` : '/awas/histori';
+                window.history.replaceState(null, "", newURL);
+            }
 
             const tables = ["narkotika", "teroris"];
 
             tables.forEach(tableId => {
                 // ===== Desktop rows =====
                 document.querySelectorAll(`#table-${tableId} tbody tr`).forEach(row => {
-                    const rowTipe = row.querySelector("td:nth-child(8)").textContent.trim();
-                    const rowLevel = row.querySelector("td:nth-child(7)").textContent.trim();
-                    const rowUpt = row.querySelector("td:nth-child(3)").textContent.trim();
-                    const rowKanwil = row.querySelector("td:nth-child(2)").textContent.trim();
+                    const rowTipe = (row.querySelector("td:nth-child(8)")?.textContent.trim() || "").toLowerCase();
+                    const rowLevel = (row.querySelector("td:nth-child(7)")?.textContent.trim() || "").toLowerCase();
+                    const rowUpt = (row.querySelector("td:nth-child(3)")?.textContent.trim() || "").toLowerCase();
+                    const rowKanwil = (row.querySelector("td:nth-child(2)")?.textContent.trim() || "").toLowerCase();
 
                     row.style.display =
-                        (tipe === "all" || rowTipe === tipe) &&
-                        (level === "all" || rowLevel === level) &&
-                        (upt === "all" || rowUpt === upt) &&
-                        (kanwil === "all" || rowKanwil === kanwil) ? "" : "none";
+                        (tipe === "all" || rowTipe === tipe.toLowerCase()) &&
+                        (level === "all" || rowLevel === level.toLowerCase()) &&
+                        (upt === "all" || rowUpt === upt.toLowerCase()) &&
+                        (kanwil === "all" || rowKanwil === kanwil.toLowerCase()) ? "table-row" : "none";
                 });
 
                 // ===== Mobile cards =====
-                const mobileCards = document.querySelectorAll(
-                    `.mobile-card-${tableId} > div`
-                );
+                document.querySelectorAll(`#table-${tableId} .block.sm\\:hidden > div.p-4`).forEach(card => {
+                    const getCardValue = (labelText) => {
+                        const labelSpan = Array.from(card.querySelectorAll("span.font-medium"))
+                            .find(s => s.textContent.trim() === labelText);
+                        if (!labelSpan) return "";
+                        let node = labelSpan.nextSibling;
+                        while (node) {
+                            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== "") return node.textContent.trim();
+                            if (node.nodeType === 1) return node.textContent.trim();
+                            node = node.nextSibling;
+                        }
+                        return "";
+                    };
 
-                mobileCards.forEach(card => {
-                    const cardKanwil = getCardValue(card, "Nama Kanwil:");
-                    const cardUpt = getCardValue(card, "Nama UPT:");
-                    const cardTipe = getCardValue(card, "Tipe:");
-                    const cardLevel = getCardValue(card, "Level:");
+                    const cardTipe = getCardValue("Tipe:").toLowerCase();
+                    const cardLevel = getCardValue("Level:").toLowerCase();
+                    const cardUpt = getCardValue("Nama UPT:").toLowerCase();
+                    const cardKanwil = getCardValue("Nama Kanwil:").toLowerCase();
 
                     card.style.display =
-                        (tipe === "all" || cardTipe === tipe) &&
-                        (level === "all" || cardLevel === level) &&
-                        (upt === "all" || cardUpt === upt) &&
-                        (kanwil === "all" || cardKanwil === kanwil) ? "" : "none";
+                        (tipe === "all" || cardTipe === tipe.toLowerCase()) &&
+                        (level === "all" || cardLevel === level.toLowerCase()) &&
+                        (upt === "all" || cardUpt === upt.toLowerCase()) &&
+                        (kanwil === "all" || cardKanwil === kanwil.toLowerCase()) ? "block" : "none";
                 });
             });
         }
 
-        // ===== Sinkronisasi options desktop → mobile =====
-        function syncMobileOptions() {
-            ['tipe', 'level', 'upt', 'kanwil'].forEach(f => {
-                const desktop = document.getElementById(`filter-${f}`);
-                const mobile = document.getElementById(`filter-${f}-mobile`);
-                mobile.innerHTML = desktop.innerHTML;
-                mobile.value = desktop.value;
+        // ===== Set filter dropdown dari URL saat load =====
+        function setFiltersFromURL() {
+            const filters = getFiltersFromURL();
+
+            Object.keys(filters).forEach(f => {
+                const el = document.getElementById(`filter-${f}`);
+                if (el) el.value = filters[f];
             });
-        }
-        syncMobileOptions();
 
-        // ===== Event open/close modal =====
-        document.getElementById('open-filter-btn').addEventListener('click', () => {
-            syncMobileOptions();
-            document.getElementById('filter-modal').classList.remove('hidden');
-        });
-
-        document.getElementById('close-filter-btn').addEventListener('click', () => {
-            document.getElementById('filter-modal').classList.add('hidden');
-        });
-
-        // ===== Terapkan filter dari mobile ke desktop =====
-        document.getElementById('apply-filter-btn').addEventListener('click', () => {
-            ['tipe', 'level', 'upt', 'kanwil'].forEach(f => {
-                const desktop = document.getElementById(`filter-${f}`);
-                const mobile = document.getElementById(`filter-${f}-mobile`);
-                desktop.value = mobile.value;
-            });
             applyFilters();
-            document.getElementById('filter-modal').classList.add('hidden');
+            initialLoad = false; // setelah load pertama, URL boleh diupdate
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            setFiltersFromURL();
+
+            // ===== Desktop dropdown listener =====
+            ["filter-tipe", "filter-level", "filter-upt", "filter-kanwil"].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener("change", applyFilters);
+            });
+
+            // ===== Sinkronisasi modal mobile =====
+            function syncMobileOptions() {
+                ['tipe', 'level', 'upt', 'kanwil'].forEach(f => {
+                    const desktop = document.getElementById(`filter-${f}`);
+                    const mobile = document.getElementById(`filter-${f}-mobile`);
+                    if (desktop && mobile) {
+                        mobile.innerHTML = desktop.innerHTML;
+                        mobile.value = desktop.value;
+                    }
+                });
+            }
+
+            document.getElementById('open-filter-btn').addEventListener('click', () => {
+                syncMobileOptions();
+                document.getElementById('filter-modal').classList.remove('hidden');
+            });
+
+            document.getElementById('close-filter-btn').addEventListener('click', () => {
+                document.getElementById('filter-modal').classList.add('hidden');
+            });
+
+            document.getElementById('apply-filter-btn').addEventListener('click', () => {
+                ['tipe', 'level', 'upt', 'kanwil'].forEach(f => {
+                    const desktop = document.getElementById(`filter-${f}`);
+                    const mobile = document.getElementById(`filter-${f}-mobile`);
+                    if (desktop && mobile) desktop.value = mobile.value;
+                });
+                applyFilters();
+                document.getElementById('filter-modal').classList.add('hidden');
+            });
         });
     </script>
 </main>
