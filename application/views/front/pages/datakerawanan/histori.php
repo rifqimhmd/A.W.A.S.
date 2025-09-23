@@ -34,7 +34,7 @@
         </div>
         <!-- Tombol Filter Mobile -->
         <div class="flex sm:hidden justify-end mb-4">
-            <button id="open-filter-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg">
+            <button id="open-filter-btn" class="curson-pointer bg-red-500 text-white px-4 py-2 rounded-lg">
                 Filter
             </button>
         </div>
@@ -206,7 +206,7 @@
         </div>
 
         <!-- Mobile Cards Narkotika -->
-        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
+        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl mobile-card-narkotika">
             <?php if (!empty($narkotika)):
                 $no = 1;
                 foreach ($narkotika as $row): ?>
@@ -333,7 +333,7 @@
         </div>
 
         <!-- CARD: tampil di mobile -->
-        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
+        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl mobile-card-teroris">
             <?php if (!empty($teroris)):
                 $no = 1;
                 foreach ($teroris as $row): ?>
@@ -583,6 +583,24 @@
             document.getElementById("tab-" + tab).classList.add("text-red-600", "border-b-2", "border-red-600");
         }
 
+        // ===== Fungsi bantu untuk ambil value dari mobile card =====
+        function getCardValue(card, label) {
+            const span = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === label);
+            if (!span) return "";
+
+            let node = span.nextSibling;
+            while (node) {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== "") {
+                    return node.textContent.trim();
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    return node.textContent.trim();
+                }
+                node = node.nextSibling;
+            }
+            return "";
+        }
+
+        // ===== Fungsi utama filter =====
         function applyFilters() {
             const tipe = document.getElementById("filter-tipe").value;
             const level = document.getElementById("filter-level").value;
@@ -592,7 +610,7 @@
             const tables = ["narkotika", "teroris"];
 
             tables.forEach(tableId => {
-                // Desktop rows
+                // ===== Desktop rows =====
                 document.querySelectorAll(`#table-${tableId} tbody tr`).forEach(row => {
                     const rowTipe = row.querySelector("td:nth-child(8)").textContent.trim();
                     const rowLevel = row.querySelector("td:nth-child(7)").textContent.trim();
@@ -603,32 +621,30 @@
                         (tipe === "all" || rowTipe === tipe) &&
                         (level === "all" || rowLevel === level) &&
                         (upt === "all" || rowUpt === upt) &&
-                        (kanwil === "all" || rowKanwil === kanwil) ?
-                        "" : "none";
+                        (kanwil === "all" || rowKanwil === kanwil) ? "" : "none";
                 });
 
-                // Mobile cards
-                document.querySelectorAll(`#table-${tableId} .sm\\:hidden > div`).forEach(card => {
-                    const tipeSpan = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === "Tipe:");
-                    const levelSpan = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === "Level:");
-                    const uptSpan = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === "Nama UPT:");
-                    const kanwilSpan = Array.from(card.querySelectorAll("span")).find(s => s.textContent.trim() === "Nama Kanwil:");
+                // ===== Mobile cards =====
+                const mobileCards = document.querySelectorAll(
+                    `.mobile-card-${tableId} > div`
+                );
 
-                    const cardTipe = tipeSpan ? tipeSpan.nextSibling.textContent.trim() : "";
-                    const cardLevel = levelSpan ? levelSpan.nextSibling.textContent.trim() : "";
-                    const cardUpt = uptSpan ? uptSpan.nextSibling.textContent.trim() : "";
-                    const cardKanwil = kanwilSpan ? kanwilSpan.nextSibling.textContent.trim() : "";
+                mobileCards.forEach(card => {
+                    const cardKanwil = getCardValue(card, "Nama Kanwil:");
+                    const cardUpt = getCardValue(card, "Nama UPT:");
+                    const cardTipe = getCardValue(card, "Tipe:");
+                    const cardLevel = getCardValue(card, "Level:");
 
                     card.style.display =
                         (tipe === "all" || cardTipe === tipe) &&
                         (level === "all" || cardLevel === level) &&
                         (upt === "all" || cardUpt === upt) &&
-                        (kanwil === "all" || cardKanwil === kanwil) ?
-                        "" : "none";
+                        (kanwil === "all" || cardKanwil === kanwil) ? "" : "none";
                 });
             });
         }
 
+        // ===== Sinkronisasi options desktop → mobile =====
         function syncMobileOptions() {
             ['tipe', 'level', 'upt', 'kanwil'].forEach(f => {
                 const desktop = document.getElementById(`filter-${f}`);
@@ -639,18 +655,17 @@
         }
         syncMobileOptions();
 
-        // Buka modal
+        // ===== Event open/close modal =====
         document.getElementById('open-filter-btn').addEventListener('click', () => {
             syncMobileOptions();
             document.getElementById('filter-modal').classList.remove('hidden');
         });
 
-        // Tutup modal
         document.getElementById('close-filter-btn').addEventListener('click', () => {
             document.getElementById('filter-modal').classList.add('hidden');
         });
 
-        // Terapkan filter dari modal ke desktop
+        // ===== Terapkan filter dari mobile ke desktop =====
         document.getElementById('apply-filter-btn').addEventListener('click', () => {
             ['tipe', 'level', 'upt', 'kanwil'].forEach(f => {
                 const desktop = document.getElementById(`filter-${f}`);
