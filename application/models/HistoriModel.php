@@ -16,6 +16,8 @@ class HistoriModel extends CI_Model
             p.nama_pegawai,
             n.nama_narapidana,
             n.perkara,
+            n.no_register,
+            p.nip,
             COALESCE(u_peg.nama_upt, u_nap.nama_upt) AS nama_upt,
             COALESCE(k_peg.nama_kanwil, k_nap.nama_kanwil) AS nama_kanwil
         ");
