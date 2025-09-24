@@ -24,7 +24,6 @@ class Histori extends CI_Controller
 		$data["title"] = "Data Hasil";
 		$data["subtitle"] = "Histori Penilaian Skrining dan Faktor";
 		$data["page"] = "front/pages/datakerawanan/histori";
-		$data["list_upt"] = $this->HistoriModel->getAllUpt();
 
 		$user = [
 			"id_user" => $this->session->userdata("id_user"),
@@ -32,6 +31,9 @@ class Histori extends CI_Controller
 			"id_upt" => $this->session->userdata("id_upt"),
 			"id_kanwil" => $this->session->userdata("id_kanwil"),
 		];
+
+		// Daftar UPT sesuai role user
+		$data["list_upt"] = $this->HistoriModel->getAllUpt($user);
 
 		// Daftar Kanwil sesuai role user
 		$data["list_kanwil"] = $this->HistoriModel->getAllKanwil($user);

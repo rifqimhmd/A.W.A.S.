@@ -66,43 +66,72 @@
             <!-- Filter UPT -->
             <div class="flex items-center gap-2">
                 <label for="filter-upt" class="text-sm text-gray-700">UPT:</label>
-                <select id="filter-upt" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
-                    <option value="all">Semua</option>
+
+                <?php if ($this->session->userdata("role") === "upt"): ?>
+                    <!-- Jika role UPT → tampilkan readonly -->
                     <?php foreach ($list_upt as $upt): ?>
-                        <option value="<?= htmlspecialchars(
-                        	$upt["nama_upt"],
-                        ) ?>"><?= htmlspecialchars($upt["nama_upt"]) ?></option>
+                        <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                               value="<?= $upt["nama_upt"] ?>" readonly>
+                        <input type="hidden" name="upt" value="<?= $upt[
+                        	"id_upt"
+                        ] ?>">
                     <?php endforeach; ?>
-                </select>
+
+                <?php else: ?>
+                    <!-- Jika role admin/kanwil → tetap combobox -->
+                    <select id="filter-upt" name="upt"
+                        class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 text-sm"
+                        onchange="applyFilters()">
+                        <option value="all">Semua</option>
+                        <?php foreach ($list_upt as $upt): ?>
+                            <option value="<?= htmlspecialchars(
+                            	$upt["nama_upt"],
+                            ) ?>">
+                                <?= htmlspecialchars($upt["nama_upt"]) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php endif; ?>
             </div>
 
             <!-- Filter Kanwil -->
             <div class="flex items-center gap-2">
-            <label for="filter-upt" class="text-sm text-gray-700">Kanwil:</label>
-            <?php if ($this->session->userdata("role") === "kanwil"): ?>
-                <!-- Jika role kanwil → tampilkan teks saja -->
-                <?php foreach ($list_kanwil as $kanwil): ?>
-                    <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" value="<?= $kanwil[
-                    	"nama_kanwil"
-                    ] ?>" readonly>
-                    <!-- simpan id_kanwil tersembunyi supaya tetap bisa dikirim -->
-                    <input type="hidden" name="kanwil" value="<?= $kanwil[
-                    	"id_kanwil"
-                    ] ?>">
-                <?php endforeach; ?>
-            <?php else: ?>
-                <!-- Jika role admin/upt → tetap pakai combobox -->
-                <select name="kanwil" id="filter-kanwil" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
-                <option value="all">Semua</option>
+                <label for="filter-kanwil" class="text-sm text-gray-700">Kanwil:</label>
+
+                <?php if ($this->session->userdata("role") === "kanwil"): ?>
                     <?php foreach ($list_kanwil as $kanwil): ?>
-                    <option value="<?= htmlspecialchars(
-                    	$kanwil["nama_kanwil"],
-                    ) ?>"><?= htmlspecialchars(
-	$kanwil["nama_kanwil"],
-) ?></option>
+                        <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                               value="<?= $kanwil["nama_kanwil"] ?>" readonly>
+                        <input type="hidden" name="kanwil" value="<?= $kanwil[
+                        	"id_kanwil"
+                        ] ?>">
                     <?php endforeach; ?>
-                </select>
-            <?php endif; ?>
+
+                <?php elseif ($this->session->userdata("role") === "upt"): ?>
+                    <!-- UPT hanya bisa lihat kanwil tempat dia berada -->
+                    <?php foreach ($list_kanwil as $kanwil): ?>
+                        <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                               value="<?= $kanwil["nama_kanwil"] ?>" readonly>
+                        <input type="hidden" name="kanwil" value="<?= $kanwil[
+                        	"id_kanwil"
+                        ] ?>">
+                    <?php endforeach; ?>
+
+                <?php else: ?>
+                    <!-- Admin bisa pilih semua -->
+                    <select id="filter-kanwil" name="kanwil"
+                        class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 text-sm"
+                        onchange="applyFilters()">
+                        <option value="all">Semua</option>
+                        <?php foreach ($list_kanwil as $kanwil): ?>
+                            <option value="<?= htmlspecialchars(
+                            	$kanwil["nama_kanwil"],
+                            ) ?>">
+                                <?= htmlspecialchars($kanwil["nama_kanwil"]) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php endif; ?>
             </div>
 
         </div>

@@ -168,14 +168,23 @@ class HistoriModel extends CI_Model
 			->get()
 			->result();
 	}
-	public function getAllUpt()
+	public function getAllUpt($user = null)
 	{
-		return $this->db
-			->select("nama_upt")
-			->from("tbl_upt")
-			->order_by("nama_upt")
-			->get()
-			->result_array();
+		$this->db->select("id_upt, nama_upt, id_kanwil");
+		$this->db->from("tbl_upt");
+		$this->db->order_by("nama_upt");
+
+		// Jika role = upt → hanya tampilkan upt sesuai id_upt
+		if ($user && $user["role"] === "upt") {
+			$this->db->where("id_upt", $user["id_upt"]);
+		}
+
+		// Jika role = kanwil → hanya tampilkan upt di kanwil tersebut
+		if ($user && $user["role"] === "kanwil") {
+			$this->db->where("id_kanwil", $user["id_kanwil"]);
+		}
+
+		return $this->db->get()->result_array();
 	}
 
 	public function getAllKanwil($user = null)
@@ -184,12 +193,18 @@ class HistoriModel extends CI_Model
 		$this->db->from("tbl_kanwil");
 		$this->db->order_by("nama_kanwil");
 
-		// Jika user role = kanwil → hanya tampilkan kanwil sesuai id_kanwil user
-		if ($user && $user["role"] === "kanwil") {
-			$this->db->where("id_kanwil", $user["id_kanwil"]);
+		if ($user) {
+			// Jika role = kanwil → hanya tampilkan kanwil sesuai id_kanwil user
+			if ($user["role"] === "kanwil") {
+				$this->db->where("id_kanwil", $user["id_kanwil"]);
+			}
+
+			// Jika role = upt → hanya tampilkan kanwil sesuai id_kanwil dari upt
+			if ($user["role"] === "upt") {
+				$this->db->where("id_kanwil", $user["id_kanwil"]);
+			}
 		}
 
-		$query = $this->db->get();
-		return $query->result_array();
+		return $this->db->get()->result_array();
 	}
 }
