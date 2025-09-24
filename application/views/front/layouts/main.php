@@ -18,7 +18,7 @@
     <!-- End of Header -->
 
     <div id="content-wrapper" style="margin-left:0; width:100%;" class="flex-1 bg-white pt-16 transition-all duration-300 flex flex-col">
-        <main class="w-full min-h-screen flex-1 px-2 sm:px-4 sm:py-4 lg:py-8 py-0">
+        <main class="w-full min-h-screen flex-1 px-2 sm:px-4 sm:pt-4 lg:pt-8 pt-0 pb-2">
             <?php $this->load->view($page); ?>
         </main>
     </div>

@@ -18,7 +18,7 @@
     <?php endif; ?>
 
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b pb-4 gap-3">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-5 border-b pb-0 sm:pb-4 gap-3">
         <div>
             <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">👥 Manajemen User</h2>
             <p class="text-sm text-gray-500 mt-1">Kelola data user — tambahkan, edit, atau hapus.</p>

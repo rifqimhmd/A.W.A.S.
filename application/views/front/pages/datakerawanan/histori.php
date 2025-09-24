@@ -28,13 +28,13 @@
         }, 5000); // 5000ms = 5 detik
     </script>
 
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b pb-4 gap-3">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-5 border-b pb-4 gap-3">
         <div>
             <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">📊 <?= $title ?></h2>
             <p class="text-sm text-gray-500 mt-1"><?= $subtitle ?></p>
         </div>
         <!-- Tombol Filter Mobile -->
-        <div class="flex sm:hidden justify-end mb-4">
+        <div class="flex sm:hidden justify-end">
             <button id="open-filter-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg">
                 Filter
             </button>
