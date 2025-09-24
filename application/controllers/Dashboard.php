@@ -89,7 +89,7 @@ class Dashboard extends CI_Controller
 		//     $data['hasil_upt'] = null;
 		//     $data['message'] = "Anda tidak memiliki akses untuk melihat data ini.";
 		// }
-
+		$data['title'] = "A.W.A.S. - Beranda";
 		$data["page"] = "front/pages/home/dashboard";
 		$this->load->view("front/layouts/main", $data);
 	}

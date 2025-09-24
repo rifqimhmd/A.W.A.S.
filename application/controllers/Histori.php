@@ -21,8 +21,7 @@ class Histori extends CI_Controller
 
 	public function index()
 	{
-		$data["title"] = "Data Hasil";
-		$data["subtitle"] = "Histori Penilaian Skrining dan Faktor";
+		$data['title'] = "A.W.A.S. - Riwayat Kerawanan";
 		$data["page"] = "front/pages/datakerawanan/histori";
 
 		$user = [

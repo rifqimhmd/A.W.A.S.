@@ -37,6 +37,7 @@
 			$data["instrument"] = $this->Input_Narapidana_Model->getInstrument();
 			$data["page"] = "front/pages/datakerawanan/input_narapidana";
 			$data["nama_upt"] = $upt ? $upt->nama_upt : "-";
+			$data['title'] = "A.W.A.S. - Input Narapidana";
 			$this->load->view("front/layouts/main", $data);
 		}
 

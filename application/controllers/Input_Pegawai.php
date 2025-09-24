@@ -37,6 +37,7 @@
 			$data["instrument"] = $this->Input_Pegawai_Model->getInstrument();
 			$data["page"] = "front/pages/datakerawanan/input_pegawai";
 			$data["nama_upt"] = $upt ? $upt->nama_upt : "-";
+			$data['title'] = "A.W.A.S. - Input Pegawai";
 			$this->load->view("front/layouts/main", $data);
 		}
 

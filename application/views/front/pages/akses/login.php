@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk A.W.A.S.</title>
+    <title>A.W.A.S. - Halaman Masuk</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="<?= base_url(
                                                 "assets/img/iconlogin.png",
