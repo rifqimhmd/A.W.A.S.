@@ -143,25 +143,113 @@
 
                 <!-- Filter Mobile (sama seperti desktop) -->
                 <div id="filter-mobile-content" class="flex flex-col gap-3">
+
+                    <!-- Filter Tipe -->
                     <div class="flex items-center gap-2">
                         <label for="filter-tipe-mobile" class="text-sm text-gray-700">Tipe:</label>
-                        <select id="filter-tipe-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+                        <select id="filter-tipe-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
+                            <option value="all">Semua</option>
+                            <option value="Pegawai">Pegawai</option>
+                            <option value="Narapidana">Narapidana</option>
+                        </select>
                     </div>
 
+                    <!-- Filter Level -->
                     <div class="flex items-center gap-2">
                         <label for="filter-level-mobile" class="text-sm text-gray-700">Level:</label>
-                        <select id="filter-level-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+                        <select id="filter-level-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
+                            <option value="all">Semua</option>
+                            <option value="Merah">Merah</option>
+                            <option value="Kuning">Kuning</option>
+                            <option value="Hijau">Hijau</option>
+                        </select>
                     </div>
 
+                    <!-- Filter UPT -->
                     <div class="flex items-center gap-2">
                         <label for="filter-upt-mobile" class="text-sm text-gray-700">UPT:</label>
-                        <select id="filter-upt-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+
+                        <?php if (
+                        	$this->session->userdata("role") === "upt"
+                        ): ?>
+                            <!-- Jika role UPT → readonly -->
+                            <?php foreach ($list_upt as $upt): ?>
+                                <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
+                                       value="<?= $upt["nama_upt"] ?>" readonly>
+                                <input type="hidden" name="upt" value="<?= $upt[
+                                	"id_upt"
+                                ] ?>">
+                            <?php endforeach; ?>
+
+                        <?php else: ?>
+                            <!-- Jika admin/kanwil → tetap combobox -->
+                            <select id="filter-upt-mobile" name="upt"
+                                class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 text-sm"
+                                onchange="applyFilters()">
+                                <option value="all">Semua</option>
+                                <?php foreach ($list_upt as $upt): ?>
+                                    <option value="<?= htmlspecialchars(
+                                    	$upt["nama_upt"],
+                                    ) ?>">
+                                        <?= htmlspecialchars(
+                                        	$upt["nama_upt"],
+                                        ) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        <?php endif; ?>
                     </div>
 
+                    <!-- Filter Kanwil -->
                     <div class="flex items-center gap-2">
                         <label for="filter-kanwil-mobile" class="text-sm text-gray-700">Kanwil:</label>
-                        <select id="filter-kanwil-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+
+                        <?php if (
+                        	$this->session->userdata("role") === "kanwil"
+                        ): ?>
+                            <?php foreach ($list_kanwil as $kanwil): ?>
+                                <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
+                                       value="<?= $kanwil[
+                                       	"nama_kanwil"
+                                       ] ?>" readonly>
+                                <input type="hidden" name="kanwil" value="<?= $kanwil[
+                                	"id_kanwil"
+                                ] ?>">
+                            <?php endforeach; ?>
+
+                        <?php elseif (
+                        	$this->session->userdata("role") === "upt"
+                        ): ?>
+                            <!-- UPT hanya bisa lihat kanwil tempat dia berada -->
+                            <?php foreach ($list_kanwil as $kanwil): ?>
+                                <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
+                                       value="<?= $kanwil[
+                                       	"nama_kanwil"
+                                       ] ?>" readonly>
+                                <input type="hidden" name="kanwil" value="<?= $kanwil[
+                                	"id_kanwil"
+                                ] ?>">
+                            <?php endforeach; ?>
+
+                        <?php else: ?>
+                            <!-- Admin bisa pilih semua -->
+                            <select id="filter-kanwil-mobile" name="kanwil"
+                                class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 text-sm"
+                                onchange="applyFilters()">
+                                <option value="all">Semua</option>
+                                <?php foreach ($list_kanwil as $kanwil): ?>
+                                    <option value="<?= htmlspecialchars(
+                                    	$kanwil["nama_kanwil"],
+                                    ) ?>">
+                                        <?= htmlspecialchars(
+                                        	$kanwil["nama_kanwil"],
+                                        ) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        <?php endif; ?>
                     </div>
+
                 </div>
 
                 <div class="flex justify-end gap-2 mt-4">
