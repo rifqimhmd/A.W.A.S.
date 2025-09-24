@@ -82,7 +82,7 @@
     </div>
 
     <!-- Table User -->
-    <div class="overflow-x-auto shadow-lg">
+    <div class="overflow-x-auto">
         <div class="bg-white shadow rounded-xl overflow-hidden">
             <!-- TABLE: tampil di layar sm ke atas -->
             <table class="min-w-full text-center border-collapse hidden sm:table">
