@@ -82,7 +82,7 @@
             <?php if ($this->session->userdata("role") === "kanwil"): ?>
                 <!-- Jika role kanwil → tampilkan teks saja -->
                 <?php foreach ($list_kanwil as $kanwil): ?>
-                    <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" value="<?= $row[
+                    <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" value="<?= $kanwil[
                     	"nama_kanwil"
                     ] ?>" readonly>
                     <!-- simpan id_kanwil tersembunyi supaya tetap bisa dikirim -->
