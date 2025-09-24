@@ -7,8 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" type="image/png" href="<?= base_url(
-    	"assets/img/iconlogin.png",
-    ) ?>">
+                                                "assets/img/iconlogin.png",
+                                            ) ?>">
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -18,7 +18,7 @@
     <!-- End of Header -->
 
     <div id="content-wrapper" style="margin-left:0; width:100%;" class="flex-1 bg-white pt-16 transition-all duration-300 flex flex-col">
-        <main class="p-4 flex-1">
+        <main class="w-full min-h-screen flex-1 px-2 sm:px-4 sm:py-4 lg:py-8 py-0">
             <?php $this->load->view($page); ?>
         </main>
     </div>

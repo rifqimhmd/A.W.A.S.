@@ -1,4 +1,4 @@
-<main class="w-full min-h-screen p-4 sm:p-6 bg-gray-50">
+<main class="w-full min-h-screen">
 
     <!-- Flash Message -->
     <?php if ($this->session->flashdata("success")): ?>

@@ -1,4 +1,4 @@
-<main class="w-full min-h-screen p-4 sm:p-6 bg-gray-50">
+<main class="w-full min-h-screen">
 
     <?php if ($this->session->flashdata("success")): ?>
         <div id="flash-message" class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
