@@ -248,7 +248,7 @@
     </div>
 
     <!-- Table Narkotika -->
-    <div id="table-narkotika" class="overflow-x-auto mt-6">
+    <div id="table-narkotika" class="overflow-x-auto mt-6 shadow-lg">
 
         <!-- Desktop Table -->
         <div class="hidden sm:block bg-white shadow rounded-xl overflow-hidden min-w-[800px]">
@@ -434,7 +434,7 @@
     </div>
 
     <!-- Table Teroris -->
-    <div id="table-teroris" class="overflow-x-auto hidden mt-6">
+    <div id="table-teroris" class="overflow-x-auto hidden mt-6 shadow-lg">
 
         <!-- Desktop Table -->
         <div class="hidden sm:block bg-white shadow rounded-xl overflow-hidden min-w-[800px]">

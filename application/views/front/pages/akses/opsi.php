@@ -69,7 +69,7 @@
     </div>
 
     <!-- CONTENT CARD: Skrining -->
-    <div id="table-skrining" class="overflow-x-auto">
+    <div id="table-skrining" class="overflow-x-auto shadow-lg">
         <div class="bg-white shadow rounded-xl overflow-hidden">
             <!-- Table untuk Desktop -->
             <table class="min-w-full text-center border-collapse hidden sm:table">
@@ -200,7 +200,7 @@
     </div>
 
     <!-- CONTENT CARD: Faktor -->
-    <div id="table-faktor" class="overflow-x-auto hidden mt-6">
+    <div id="table-faktor" class="overflow-x-auto hidden mt-6 shadow-lg">
 
         <!-- Tampilan Desktop (Table) -->
         <div class="hidden sm:block bg-white shadow rounded-xl overflow-hidden min-w-[600px]">
