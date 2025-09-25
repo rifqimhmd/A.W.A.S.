@@ -38,6 +38,7 @@ class User extends CI_Controller
 
         $data['kanwil']     = $this->UserModel->get_available_kanwil();
         $data['all_kanwil'] = $this->UserModel->get_kanwil();
+        $data['title'] = "A.W.A.S. - Manajemen User";
         $data['page']       = 'front/pages/akses/user';
         $this->load->view('front/layouts/main', $data);
     }

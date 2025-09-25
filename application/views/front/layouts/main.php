@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="<?= base_url(
                                                 "assets/img/iconlogin.png",
                                             ) ?>">
+    <title><?= $title ?></title>
 </head>
 
 <body class="min-h-screen flex flex-col">

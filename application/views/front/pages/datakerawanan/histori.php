@@ -30,8 +30,8 @@
 
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-5 border-b pb-4 gap-3">
         <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">📊 <?= $title ?></h2>
-            <p class="text-sm text-gray-500 mt-1"><?= $subtitle ?></p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">📊 Riwayat Kerawanan</h2>
+            <p class="text-sm text-gray-500 mt-1">Detail Riwayat Skrining & Faktor Kerawanan</p>
         </div>
         <!-- Tombol Filter Mobile -->
         <div class="flex sm:hidden justify-end">
@@ -174,15 +174,15 @@
                         ): ?>
                             <?php foreach ($list_upt as $upt): ?>
                                 <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
-                                       value="<?= $upt["nama_upt"] ?>" readonly>
+                                    value="<?= $upt["nama_upt"] ?>" readonly>
                                 <input type="hidden" name="upt" value="<?= $upt[
                                 	"id_upt"
                                 ] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <select id="filter-upt-mobile" name="upt"
-                                    class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 text-sm"
-                                    onchange="applyFilters()">
+                                class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 text-sm"
+                                onchange="applyFilters()">
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_upt as $upt): ?>
                                     <option value="<?= htmlspecialchars(
@@ -205,9 +205,9 @@
                         ): ?>
                             <?php foreach ($list_kanwil as $kanwil): ?>
                                 <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
-                                       value="<?= $kanwil[
-                                       	"nama_kanwil"
-                                       ] ?>" readonly>
+                                    value="<?= $kanwil[
+                                    	"nama_kanwil"
+                                    ] ?>" readonly>
                                 <input type="hidden" name="kanwil" value="<?= $kanwil[
                                 	"id_kanwil"
                                 ] ?>">
@@ -217,17 +217,17 @@
                         ): ?>
                             <?php foreach ($list_kanwil as $kanwil): ?>
                                 <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
-                                       value="<?= $kanwil[
-                                       	"nama_kanwil"
-                                       ] ?>" readonly>
+                                    value="<?= $kanwil[
+                                    	"nama_kanwil"
+                                    ] ?>" readonly>
                                 <input type="hidden" name="kanwil" value="<?= $kanwil[
                                 	"id_kanwil"
                                 ] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <select id="filter-kanwil-mobile" name="kanwil"
-                                    class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 text-sm"
-                                    onchange="applyFilters()">
+                                class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 text-sm"
+                                onchange="applyFilters()">
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_kanwil as $kanwil): ?>
                                     <option value="<?= htmlspecialchars(
@@ -266,7 +266,7 @@
     <!-- Table Narkotika -->
     <div id="table-narkotika" class="overflow-x-auto mt-6">
 
-        <!-- Desktop Table -->
+        <!-- Desktop Table Narkotika -->
         <div class="hidden sm:block bg-white shadow rounded-xl overflow-hidden min-w-[800px]">
             <table class="min-w-full border-collapse text-center">
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
@@ -285,7 +285,19 @@
                     <?php if (!empty($narkotika)):
                     	$no = 1;
                     	foreach ($narkotika as $row): ?>
-                            <tr class="hover:bg-gray-50 transition">
+                            <tr class="hover:bg-gray-50 transition"
+                                data-tipe="<?= strtolower(
+                                	$row->tipe_object ?? "-",
+                                ) ?>"
+                                data-level="<?= strtolower(
+                                	$row->level ?? "-",
+                                ) ?>"
+                                data-upt="<?= strtolower(
+                                	$row->nama_upt ?? "-",
+                                ) ?>"
+                                data-kanwil="<?= strtolower(
+                                	$row->nama_kanwil ?? "-",
+                                ) ?>">
                                 <td class="px-2 py-3"><?= $no++ ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
                                 	$row->tipe_object === "Pegawai"
@@ -328,8 +340,12 @@
                                     <div class="flex items-center justify-center gap-2">
                                         <button onclick='showDetail(<?= json_encode(
                                         	$row,
-                                        ) ?>)' class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow" title="Detail">🔍</button>
-                                        <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')" class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow" title="Jawaban">📄</button>
+                                        ) ?>)'
+                                            class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
+                                            title="Detail">🔍</button>
+                                        <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
+                                            class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
+                                            title="Jawaban">📄</button>
                                         <?php
                                         $role = $this->session->userdata(
                                         	"role",
@@ -368,7 +384,13 @@
             <?php if (!empty($narkotika)):
             	$no = 1;
             	foreach ($narkotika as $row): ?>
-                    <div class="p-4 hover:bg-red-50 transition">
+                    <div class="p-4 hover:bg-red-50 transition"
+                        data-tipe="<?= strtolower($row->tipe_object ?? "-") ?>"
+                        data-level="<?= strtolower($row->level ?? "-") ?>"
+                        data-upt="<?= strtolower($row->nama_upt ?? "-") ?>"
+                        data-kanwil="<?= strtolower(
+                        	$row->nama_kanwil ?? "-",
+                        ) ?>">
                         <div class="mb-2">
                             <span class="font-semibold text-red-600">#<?= $no++ ?></span>
                         </div>
@@ -389,16 +411,9 @@
                             	$row->nama_upt ?? "-",
                             ) ?></div>
                             <div><span class="font-medium">Level:</span>
-                                <?php
-                                $levelColor = [
-                                	"Merah" => "bg-red-100 text-red-700",
-                                	"Kuning" => "bg-yellow-100 text-yellow-700",
-                                	"Hijau" => "bg-green-100 text-green-700",
-                                ];
-                                $color =
+                                <?php $color =
                                 	$levelColor[$row->level] ??
-                                	"bg-gray-100 text-gray-600";
-                                ?>
+                                	"bg-gray-100 text-gray-600"; ?>
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                     <?= htmlspecialchars($row->level ?? "-") ?>
                                 </span>
@@ -408,7 +423,7 @@
                             ) ?></div>
                         </div>
 
-                        <!-- Tombol aksi dipindahkan ke bawah card -->
+                        <!-- Tombol aksi -->
                         <div class="flex justify-end gap-2 mt-3">
                             <button onclick='showDetail(<?= json_encode(
                             	$row,
@@ -416,11 +431,9 @@
                                 class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
                                 title="Detail">🔍</button>
                             <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
-                                class="cursor-pointer  w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
+                                class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
                                 title="Jawaban">📄</button>
-                            <?php
-                            $role = $this->session->userdata("role");
-                            if (
+                            <?php if (
                             	$role === "admin" ||
                             	($role === "kanwil" && $row->level !== "Merah")
                             ): ?>
@@ -430,8 +443,7 @@
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
                                     title="Hapus">🗑️</a>
-                            <?php endif;
-                            ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach;
@@ -446,7 +458,7 @@
     <!-- Table Teroris -->
     <div id="table-teroris" class="overflow-x-auto hidden mt-6">
 
-        <!-- Desktop Table -->
+        <!-- Desktop Table Teroris -->
         <div class="hidden sm:block bg-white shadow rounded-xl overflow-hidden min-w-[800px]">
             <table class="min-w-full border-collapse text-center">
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
@@ -465,7 +477,19 @@
                     <?php if (!empty($teroris)):
                     	$no = 1;
                     	foreach ($teroris as $row): ?>
-                            <tr class="hover:bg-gray-50 transition">
+                            <tr class="hover:bg-gray-50 transition"
+                                data-tipe="<?= strtolower(
+                                	$row->tipe_object ?? "-",
+                                ) ?>"
+                                data-level="<?= strtolower(
+                                	$row->level ?? "-",
+                                ) ?>"
+                                data-upt="<?= strtolower(
+                                	$row->nama_upt ?? "-",
+                                ) ?>"
+                                data-kanwil="<?= strtolower(
+                                	$row->nama_kanwil ?? "-",
+                                ) ?>">
                                 <td class="px-2 py-3"><?= $no++ ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
                                 	$row->tipe_object === "Pegawai"
@@ -508,8 +532,12 @@
                                     <div class="flex items-center justify-center gap-2">
                                         <button onclick='showDetail(<?= json_encode(
                                         	$row,
-                                        ) ?>)' class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow" title="Detail">🔍</button>
-                                        <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')" class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow" title="Jawaban">📄</button>
+                                        ) ?>)'
+                                            class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
+                                            title="Detail">🔍</button>
+                                        <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
+                                            class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
+                                            title="Jawaban">📄</button>
                                         <?php
                                         $role = $this->session->userdata(
                                         	"role",
@@ -543,43 +571,41 @@
             </table>
         </div>
 
-        <!-- CARD: tampil di mobile -->
+        <!-- Mobile Cards Teroris -->
         <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
             <?php if (!empty($teroris)):
             	$no = 1;
             	foreach ($teroris as $row): ?>
-                    <div class="p-4 hover:bg-red-50 transition">
+                    <div class="p-4 hover:bg-red-50 transition"
+                        data-tipe="<?= strtolower($row->tipe_object ?? "-") ?>"
+                        data-level="<?= strtolower($row->level ?? "-") ?>"
+                        data-upt="<?= strtolower($row->nama_upt ?? "-") ?>"
+                        data-kanwil="<?= strtolower(
+                        	$row->nama_kanwil ?? "-",
+                        ) ?>">
                         <div class="mb-2">
                             <span class="font-semibold text-red-600">#<?= $no++ ?></span>
                         </div>
                         <div class="text-gray-700 text-sm space-y-1">
-	                        <div><span class="font-medium">No Register/NIP:</span> <?= htmlspecialchars(
-                         	$row->tipe_object === "Pegawai"
-                         		? $row->nip ?? "-"
-                         		: $row->no_register ?? "-",
-                         ) ?></div>
-	                        <div><span class="font-medium">Nama:</span> <?= htmlspecialchars(
-                         	$row->nama_pegawai ??
-                         		($row->nama_narapidana ?? "-"),
-                         ) ?></div>
+                            <div><span class="font-medium">No Register/NIP:</span> <?= htmlspecialchars(
+                            	$row->tipe_object === "Pegawai"
+                            		? $row->nip ?? "-"
+                            		: $row->no_register ?? "-",
+                            ) ?></div>
+                            <div><span class="font-medium">Nama:</span> <?= htmlspecialchars(
+                            	$row->nama_pegawai ??
+                            		($row->nama_narapidana ?? "-"),
+                            ) ?></div>
                             <div><span class="font-medium">Kanwil:</span> <?= htmlspecialchars(
                             	$row->nama_kanwil ?? "-",
                             ) ?></div>
                             <div><span class="font-medium">UPT:</span> <?= htmlspecialchars(
                             	$row->nama_upt ?? "-",
                             ) ?></div>
-                            ) ?></div>
                             <div><span class="font-medium">Level:</span>
-                                <?php
-                                $levelColor = [
-                                	"Merah" => "bg-red-100 text-red-700",
-                                	"Kuning" => "bg-yellow-100 text-yellow-700",
-                                	"Hijau" => "bg-green-100 text-green-700",
-                                ];
-                                $color =
+                                <?php $color =
                                 	$levelColor[$row->level] ??
-                                	"bg-gray-100 text-gray-600";
-                                ?>
+                                	"bg-gray-100 text-gray-600"; ?>
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                     <?= htmlspecialchars($row->level ?? "-") ?>
                                 </span>
@@ -589,7 +615,7 @@
                             ) ?></div>
                         </div>
 
-                        <!-- Tombol aksi dipindahkan ke bawah card -->
+                        <!-- Tombol aksi -->
                         <div class="flex justify-end gap-2 mt-3">
                             <button onclick='showDetail(<?= json_encode(
                             	$row,
@@ -599,9 +625,7 @@
                             <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
                                 class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
                                 title="Jawaban">📄</button>
-                            <?php
-                            $role = $this->session->userdata("role");
-                            if (
+                            <?php if (
                             	$role === "admin" ||
                             	($role === "kanwil" && $row->level !== "Merah")
                             ): ?>
@@ -611,8 +635,7 @@
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
                                     title="Hapus">🗑️</a>
-                            <?php endif;
-                            ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach;
@@ -623,6 +646,7 @@
             endif; ?>
         </div>
     </div>
+
 
     <!-- Modal Detail -->
     <div id="detailModal"
@@ -855,7 +879,6 @@
                 if (upt !== "all") params.set("upt", upt);
                 if (kanwil !== "all") params.set("kanwil", kanwil);
 
-                // Hash-based URL: tidak membuat 404
                 window.location.hash = params.toString();
             }
 
@@ -863,44 +886,35 @@
 
             tables.forEach(tableId => {
                 // ===== Desktop rows =====
-                document.querySelectorAll(`#table-${tableId} tbody tr`).forEach(row => {
-                    const rowTipe = (row.querySelector("td:nth-child(8)")?.textContent.trim() || "").toLowerCase();
-                    const rowLevel = (row.querySelector("td:nth-child(7)")?.textContent.trim() || "").toLowerCase();
-                    const rowUpt = (row.querySelector("td:nth-child(3)")?.textContent.trim() || "").toLowerCase();
-                    const rowKanwil = (row.querySelector("td:nth-child(2)")?.textContent.trim() || "").toLowerCase();
+                document.querySelectorAll(`#table-${tableId} tbody tr[data-tipe]`).forEach(row => {
+                    const rowTipe = row.dataset.tipe;
+                    const rowLevel = row.dataset.level;
+                    const rowUpt = row.dataset.upt;
+                    const rowKanwil = row.dataset.kanwil;
 
                     row.style.display =
                         (tipe === "all" || rowTipe === tipe.toLowerCase()) &&
                         (level === "all" || rowLevel === level.toLowerCase()) &&
                         (upt === "all" || rowUpt === upt.toLowerCase()) &&
-                        (kanwil === "all" || rowKanwil === kanwil.toLowerCase()) ? "table-row" : "none";
+                        (kanwil === "all" || rowKanwil === kanwil.toLowerCase()) ?
+                        "table-row" :
+                        "none";
                 });
 
                 // ===== Mobile cards =====
-                document.querySelectorAll(`#table-${tableId} .block.sm\\:hidden > div.p-4`).forEach(card => {
-                    const getCardValue = (labelText) => {
-                        const labelSpan = Array.from(card.querySelectorAll("span.font-medium"))
-                            .find(s => s.textContent.trim() === labelText);
-                        if (!labelSpan) return "";
-                        let node = labelSpan.nextSibling;
-                        while (node) {
-                            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== "") return node.textContent.trim();
-                            if (node.nodeType === 1) return node.textContent.trim();
-                            node = node.nextSibling;
-                        }
-                        return "";
-                    };
-
-                    const cardTipe = getCardValue("Tipe:").toLowerCase();
-                    const cardLevel = getCardValue("Level:").toLowerCase();
-                    const cardUpt = getCardValue("Nama UPT:").toLowerCase();
-                    const cardKanwil = getCardValue("Nama Kanwil:").toLowerCase();
+                document.querySelectorAll(`#table-${tableId} .block.sm\\:hidden > div[data-tipe]`).forEach(card => {
+                    const cardTipe = card.dataset.tipe;
+                    const cardLevel = card.dataset.level;
+                    const cardUpt = card.dataset.upt;
+                    const cardKanwil = card.dataset.kanwil;
 
                     card.style.display =
                         (tipe === "all" || cardTipe === tipe.toLowerCase()) &&
                         (level === "all" || cardLevel === level.toLowerCase()) &&
                         (upt === "all" || cardUpt === upt.toLowerCase()) &&
-                        (kanwil === "all" || cardKanwil === kanwil.toLowerCase()) ? "block" : "none";
+                        (kanwil === "all" || cardKanwil === kanwil.toLowerCase()) ?
+                        "block" :
+                        "none";
                 });
             });
         }

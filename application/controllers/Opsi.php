@@ -91,6 +91,7 @@ class Opsi extends CI_Controller
         // ================== Instruments ==================
         $data['instrument'] = $this->OpsiModel->get_all_instrument();
         $data['limit'] = $limit;
+        $data['title'] = "A.W.A.S. - Manajemen Opsi";
         $data['page'] = 'front/pages/akses/opsi';
         $this->load->view('front/layouts/main', $data);
     }
