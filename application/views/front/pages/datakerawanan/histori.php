@@ -388,12 +388,6 @@
                             <div><span class="font-medium">UPT:</span> <?= htmlspecialchars(
                             	$row->nama_upt ?? "-",
                             ) ?></div>
-                            <div><span class="font-medium">Kategori:</span> <?= htmlspecialchars(
-                            	$row->jenis_skrining ?? "-",
-                            ) ?></div>
-                            <div><span class="font-medium">Nilai Akhir:</span> <?= htmlspecialchars(
-                            	$row->nilai_akhir ?? "-",
-                            ) ?></div>
                             <div><span class="font-medium">Level:</span>
                                 <?php
                                 $levelColor = [
@@ -574,11 +568,6 @@
                             <div><span class="font-medium">UPT:</span> <?= htmlspecialchars(
                             	$row->nama_upt ?? "-",
                             ) ?></div>
-                            <div><span class="font-medium">Kategori:</span> <?= htmlspecialchars(
-                            	$row->jenis_skrining ?? "-",
-                            ) ?></div>
-                            <div><span class="font-medium">Nilai Akhir:</span> <?= htmlspecialchars(
-                            	$row->nilai_akhir ?? "-",
                             ) ?></div>
                             <div><span class="font-medium">Level:</span>
                                 <?php
