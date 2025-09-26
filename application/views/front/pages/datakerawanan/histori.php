@@ -660,6 +660,7 @@
                 <p><strong>UPT:</strong> <span id="detailUPT">-</span></p>
                 <p><strong>Kategori:</strong> <span id="detailKategori">-</span></p>
                 <p><strong>Nilai Akhir:</strong> <span id="detailNilai">-</span></p>
+                <p><strong>Level:</strong> <span id="detailLevel">-</span></p>
                 <p><strong>Tipe:</strong> <span id="detailTipe">-</span></p>
                 <p><strong>Perkara:</strong> <span id="detailPerkara">-</span></p>
                 <p><strong>Antisipasi:</strong> <span id="detailAntisipasi">-</span></p>
@@ -767,6 +768,19 @@
             document.getElementById("detailUPT").textContent = rowData.nama_upt || "-";
             document.getElementById("detailKategori").textContent = rowData.jenis_skrining || "-";
             document.getElementById("detailNilai").textContent = rowData.nilai_akhir || "-";
+            const levelEl = document.getElementById("detailLevel");
+            const levelVal = rowData.level ? rowData.level.toString() : "-";
+                // Set teks tetap dulu
+                levelEl.textContent = levelVal;
+            if (levelVal.toLowerCase() === "merah") {
+                    levelEl.classList.add("text-red-600");
+                } else if (levelVal.toLowerCase() === "kuning") {
+                    levelEl.classList.add("text-yellow-600");
+                } else if (levelVal.toLowerCase() === "hijau") {
+                    levelEl.classList.add("text-green-600");
+                } else {
+                    levelEl.classList.add("text-gray-600");
+                }
             document.getElementById("detailTipe").textContent = rowData.tipe_object || "-";
             document.getElementById("detailPerkara").textContent = rowData.perkara || "-";
             document.getElementById("detailAntisipasi").textContent = rowData.nama_antisipasi || "-";
