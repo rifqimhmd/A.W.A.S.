@@ -710,13 +710,17 @@
                 btnT.classList.remove('bg-gray-200', 'text-gray-800', 'hover:bg-gray-300');
             }
 
-            // Simpan tab aktif ke localStorage
-                localStorage.setItem('activeTab', type);
+            // simpan tab aktif
+                localStorage.setItem("activeTab", type);
         }
 
         // Saat halaman dimuat, cek localStorage
         window.addEventListener('DOMContentLoaded', function() {
-            const activeTab = localStorage.getItem('activeTab') || 'narkotika';
+            let activeTab = localStorage.getItem('activeTab');
+            if (activeTab !== "narkotika" && activeTab !== "teroris") {
+                activeTab = "narkotika"; // default
+                localStorage.setItem("activeTab", "narkotika");
+            }
             toggleTable(activeTab);
         });
 

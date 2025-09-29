@@ -29,14 +29,14 @@
                 <select id="limit-select" onchange="changeLimit()"
                     class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                     <option value="25" <?= $limit == 25
-                                            ? "selected"
-                                            : "" ?>>25</option>
+                    	? "selected"
+                    	: "" ?>>25</option>
                     <option value="50" <?= $limit == 50
-                                            ? "selected"
-                                            : "" ?>>50</option>
+                    	? "selected"
+                    	: "" ?>>50</option>
                     <option value="100" <?= $limit == 100
-                                            ? "selected"
-                                            : "" ?>>100</option>
+                    	? "selected"
+                    	: "" ?>>100</option>
                 </select>
             </div>
 
@@ -112,11 +112,15 @@
         <div class="sm:hidden">
             <label for="limit-select-mobile" class="text-sm text-gray-700 mr-2">Tampilkan:</label>
             <select id="limit-select-mobile" onchange="changeLimitFromMobile()" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
-                <option value="25" <?= $limit == 25 ? "selected" : "" ?>>25</option>
-                <option value="50" <?= $limit == 50 ? "selected" : "" ?>>50</option>
+                <option value="25" <?= $limit == 25
+                	? "selected"
+                	: "" ?>>25</option>
+                <option value="50" <?= $limit == 50
+                	? "selected"
+                	: "" ?>>50</option>
                 <option value="100" <?= $limit == 100
-                                        ? "selected"
-                                        : "" ?>>100</option>
+                	? "selected"
+                	: "" ?>>100</option>
             </select>
         </div>
     </div>
@@ -144,23 +148,23 @@
                             <tr class="hover:bg-red-100 transition">
                                 <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
                                 <td class="px-2 sm:px-4 py-3 text-left indikator"><?= htmlspecialchars(
-                                                                                        $s->indikator_skrining,
-                                                                                    ) ?></td>
+                                	$s->indikator_skrining,
+                                ) ?></td>
                                 <td class="px-2 sm:px-4 py-3 jenis"><?= htmlspecialchars(
-                                                                        $s->jenis_skrining,
-                                                                    ) ?></td>
+                                	$s->jenis_skrining,
+                                ) ?></td>
                                 <td class="px-2 sm:px-4 py-3 instrument"><?= htmlspecialchars(
-                                                                                $s->nama_instrument,
-                                                                            ) ?></td>
+                                	$s->nama_instrument,
+                                ) ?></td>
                                 <td class="px-2 sm:px-4 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-skrining-<?= $s->id_skrining ?>"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
                                             title="Edit">✏️</label>
                                         <a href="<?= site_url(
-                                                        "opsi/delete_skrining/" .
-                                                            $s->id_skrining,
-                                                    ) ?>"
+                                        	"opsi/delete_skrining/" .
+                                        		$s->id_skrining,
+                                        ) ?>"
                                             onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
                                     </div>
@@ -173,14 +177,14 @@
                                 <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
                                     <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit Skrining</h3>
                                     <form method="post" action="<?= site_url(
-                                                                    "opsi/update_skrining/" .
-                                                                        $s->id_skrining,
-                                                                ) ?>" class="space-y-4">
+                                    	"opsi/update_skrining/" .
+                                    		$s->id_skrining,
+                                    ) ?>" class="space-y-4">
                                         <div>
                                             <label class="block text-gray-700 font-medium mb-1">Indikator Skrining</label>
                                             <input type="text" name="indikator_skrining" value="<?= htmlspecialchars(
-                                                                                                    $s->indikator_skrining,
-                                                                                                ) ?>"
+                                            	$s->indikator_skrining,
+                                            ) ?>"
                                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                         </div>
                                         <div>
@@ -188,17 +192,17 @@
                                             <select name="jenis_skrining" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                                 <?php
                                                 $options = [
-                                                    "Pengguna",
-                                                    "Pengedar",
-                                                    "Pengendali",
-                                                    "Ideolog",
-                                                    "Pengikut",
+                                                	"Pengguna",
+                                                	"Pengedar",
+                                                	"Pengendali",
+                                                	"Ideolog",
+                                                	"Pengikut",
                                                 ];
                                                 foreach ($options as $opt): ?>
                                                     <option value="<?= $opt ?>" <?= $s->jenis_skrining ==
-                                                                                    $opt
-                                                                                    ? "selected"
-                                                                                    : "" ?>><?= $opt ?></option>
+$opt
+	? "selected"
+	: "" ?>><?= $opt ?></option>
                                                 <?php endforeach;
                                                 ?>
                                             </select>
@@ -206,8 +210,8 @@
                                         <div>
                                             <label class="block text-gray-700 font-medium mb-1">Instrument</label>
                                             <input type="text" value="<?= htmlspecialchars(
-                                                                            $s->nama_instrument,
-                                                                        ) ?>" class="w-full border border-gray-200 rounded-lg px-3 py-2 bg-gray-50" readonly>
+                                            	$s->nama_instrument,
+                                            ) ?>" class="w-full border border-gray-200 rounded-lg px-3 py-2 bg-gray-50" readonly>
                                         </div>
 
                                         <div class="flex justify-end items-center gap-3 mt-3">
@@ -247,14 +251,14 @@
 
                             <div class="text-gray-700 text-sm space-y-1">
                                 <div><span class="font-medium">Indikator:</span> <?= htmlspecialchars(
-                                                                                        $s->indikator_skrining,
-                                                                                    ) ?></div>
+                                	$s->indikator_skrining,
+                                ) ?></div>
                                 <div><span class="font-medium">Jenis:</span> <?= htmlspecialchars(
-                                                                                    $s->jenis_skrining,
-                                                                                ) ?></div>
+                                	$s->jenis_skrining,
+                                ) ?></div>
                                 <div><span class="font-medium">Instrument:</span> <?= htmlspecialchars(
-                                                                                        $s->nama_instrument,
-                                                                                    ) ?></div>
+                                	$s->nama_instrument,
+                                ) ?></div>
                             </div>
 
                             <div class="flex justify-end gap-2 mt-3">
@@ -263,8 +267,8 @@
                                     title="Edit">✏️</label>
 
                                 <a href="<?= site_url(
-                                                "opsi/delete_skrining/" . $s->id_skrining,
-                                            ) ?>"
+                                	"opsi/delete_skrining/" . $s->id_skrining,
+                                ) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
                                     class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
                             </div>
@@ -279,8 +283,8 @@
 
         <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
             <div class="text-sm text-gray-600">Menampilkan <?= count(
-                                                                $skrining ?? [],
-                                                            ) ?> entri</div>
+            	$skrining ?? [],
+            ) ?> entri</div>
             <div class="text-sm"><?= $pagination_skrining ?? "" ?></div>
         </div>
     </div>
@@ -308,23 +312,23 @@
                             <tr class="hover:bg-red-100 transition">
                                 <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
                                 <td class="px-2 sm:px-4 py-3 text-left indikator"><?= htmlspecialchars(
-                                                                                        $f->indikator_faktor,
-                                                                                    ) ?></td>
+                                	$f->indikator_faktor,
+                                ) ?></td>
                                 <td class="px-2 sm:px-4 py-3 jenis"><?= htmlspecialchars(
-                                                                        $f->jenis_faktor,
-                                                                    ) ?></td>
+                                	$f->jenis_faktor,
+                                ) ?></td>
                                 <td class="px-2 sm:px-4 py-3 instrument"><?= htmlspecialchars(
-                                                                                $f->nama_instrument,
-                                                                            ) ?></td>
+                                	$f->nama_instrument,
+                                ) ?></td>
                                 <td class="px-2 sm:px-4 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-faktor-<?= $f->id_faktor ?>"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
                                             title="Edit">✏️</label>
                                         <a href="<?= site_url(
-                                                        "opsi/delete_faktor/" .
-                                                            $f->id_faktor,
-                                                    ) ?>"
+                                        	"opsi/delete_faktor/" .
+                                        		$f->id_faktor,
+                                        ) ?>"
                                             onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
                                     </div>
@@ -354,14 +358,14 @@
 
                         <div class="text-gray-700 text-sm space-y-1">
                             <div><span class="font-medium">Indikator:</span> <?= htmlspecialchars(
-                                                                                    $f->indikator_faktor,
-                                                                                ) ?></div>
+                            	$f->indikator_faktor,
+                            ) ?></div>
                             <div><span class="font-medium">Jenis:</span> <?= htmlspecialchars(
-                                                                                $f->jenis_faktor,
-                                                                            ) ?></div>
+                            	$f->jenis_faktor,
+                            ) ?></div>
                             <div><span class="font-medium">Instrument:</span> <?= htmlspecialchars(
-                                                                                    $f->nama_instrument,
-                                                                                ) ?></div>
+                            	$f->nama_instrument,
+                            ) ?></div>
                         </div>
 
                         <div class="flex justify-end gap-2 mt-3">
@@ -369,8 +373,8 @@
                                 class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
                                 title="Edit">✏️</label>
                             <a href="<?= site_url(
-                                            "opsi/delete_faktor/" . $f->id_faktor,
-                                        ) ?>"
+                            	"opsi/delete_faktor/" . $f->id_faktor,
+                            ) ?>"
                                 onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
                                 class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
                         </div>
@@ -390,26 +394,26 @@
                     <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
                         <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit Faktor</h3>
                         <form method="post" action="<?= site_url(
-                                                        "opsi/update_faktor/" . $f->id_faktor,
-                                                    ) ?>" class="space-y-4">
+                        	"opsi/update_faktor/" . $f->id_faktor,
+                        ) ?>" class="space-y-4">
                             <div>
                                 <label class="block text-gray-700 font-medium mb-1">Indikator Faktor</label>
                                 <input type="text" name="indikator_faktor" value="<?= htmlspecialchars(
-                                                                                        $f->indikator_faktor,
-                                                                                    ) ?>"
+                                	$f->indikator_faktor,
+                                ) ?>"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                             </div>
                             <div>
                                 <label class="block text-gray-700 font-medium mb-1">Jenis Faktor</label>
                                 <select name="jenis_faktor" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                     <option value="Bahaya" <?= $f->jenis_faktor ==
-                                                                "Bahaya"
-                                                                ? "selected"
-                                                                : "" ?>>Bahaya</option>
+                                    "Bahaya"
+                                    	? "selected"
+                                    	: "" ?>>Bahaya</option>
                                     <option value="Kerentanan" <?= $f->jenis_faktor ==
-                                                                    "Kerentanan"
-                                                                    ? "selected"
-                                                                    : "" ?>>Kerentanan</option>
+                                    "Kerentanan"
+                                    	? "selected"
+                                    	: "" ?>>Kerentanan</option>
                                 </select>
                             </div>
                             <div>
@@ -417,11 +421,11 @@
                                 <select name="id_instrument" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                     <?php foreach ($instrument as $i): ?>
                                         <option value="<?= $i->id_instrument ?>" <?= $f->id_instrument ==
-                                                                                        $i->id_instrument
-                                                                                        ? "selected"
-                                                                                        : "" ?>>
+$i->id_instrument
+	? "selected"
+	: "" ?>>
                                             <?= htmlspecialchars(
-                                                $i->nama_instrument,
+                                            	$i->nama_instrument,
                                             ) ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -448,8 +452,8 @@
         <!-- Footer -->
         <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
             <div class="text-sm text-gray-600">Menampilkan <?= count(
-                                                                $faktor ?? [],
-                                                            ) ?> entri</div>
+            	$faktor ?? [],
+            ) ?> entri</div>
             <div class="text-sm"><?= $pagination_faktor ?? "" ?></div>
         </div>
     </div>
@@ -460,8 +464,8 @@
         <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
             <h3 class="text-xl font-semibold text-red-700 mb-3">➕ Tambah Opsi</h3>
             <form method="post" action="<?= site_url(
-                                            "opsi/store",
-                                        ) ?>" class="space-y-4" id="form-opsi">
+            	"opsi/store",
+            ) ?>" class="space-y-4" id="form-opsi">
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Pilih Opsi</label>
                     <select name="opsi_type" id="opsi_type" onchange="toggleForm()" required
@@ -508,8 +512,8 @@
                         <select name="id_instrument" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                             <?php foreach ($instrument as $i): ?>
                                 <option value="<?= $i->id_instrument ?>"><?= htmlspecialchars(
-                                                                                $i->nama_instrument,
-                                                                            ) ?></option>
+	$i->nama_instrument,
+) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -633,11 +637,21 @@
             populateJenis(type);
 
             // simpan tab aktif
-            localStorage.setItem("activeTab", type);
+                localStorage.setItem("activeTab", type);
 
-            // jalankan filter setelah tab diganti supaya tampilan sesuai
-            applyFilters();
+                // jalankan filter setelah tab diganti supaya tampilan sesuai
+                if (typeof applyFilters === "function") applyFilters();
         }
+
+        // Saat halaman dimuat, cek localStorage
+        window.addEventListener('DOMContentLoaded', function() {
+            let activeTab = localStorage.getItem('activeTab');
+            if (activeTab !== "skrining" && activeTab !== "faktor") {
+                activeTab = "skrining"; // default
+                localStorage.setItem("activeTab", "skrining");
+            }
+            toggleTable(activeTab);
+        });
 
         // helper untuk parsing card mobile (mencari "Jenis:" dan "Instrument:")
         function parseCardInfo(card) {
