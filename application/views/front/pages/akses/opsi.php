@@ -29,14 +29,14 @@
                 <select id="limit-select" onchange="changeLimit()"
                     class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                     <option value="25" <?= $limit == 25
-                    	? "selected"
-                    	: "" ?>>25</option>
+                                            ? "selected"
+                                            : "" ?>>25</option>
                     <option value="50" <?= $limit == 50
-                    	? "selected"
-                    	: "" ?>>50</option>
+                                            ? "selected"
+                                            : "" ?>>50</option>
                     <option value="100" <?= $limit == 100
-                    	? "selected"
-                    	: "" ?>>100</option>
+                                            ? "selected"
+                                            : "" ?>>100</option>
                 </select>
             </div>
 
@@ -56,7 +56,7 @@
     </div>
 
     <!-- Tabs -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div class="flex flex-row items-center justify-between gap-4 mb-6">
         <div class="flex items-center gap-3">
             <button onclick="toggleTable('skrining')" id="btn-skrining"
                 class="px-4 py-2 rounded-lg shadow font-medium bg-red-600 text-white transition cursor-pointer">Skrining</button>
@@ -87,20 +87,33 @@
                 <div class="flex flex-col gap-3">
                     <!-- Filter Jenis -->
                     <div class="flex items-center gap-2">
-                        <label for="filter-jenis" class="text-sm text-gray-700">Jenis:</label>
+                        <label for="filter-jenis" class="w-24 text-sm text-gray-700">Jenis:</label>
                         <select id="filter-jenis" onchange="onFilterChange('filter-jenis')"
-                            class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+                            class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
                     </div>
+
                     <!-- Filter Instrument -->
                     <div class="flex items-center gap-2">
-                        <label for="filter-instrument" class="text-sm text-gray-700">Instrument:</label>
+                        <label for="filter-instrument" class="w-24 text-sm text-gray-700">Instrument:</label>
                         <select id="filter-instrument" onchange="onFilterChange('filter-instrument')"
-                            class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
+                            class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                             <option value="all">Semua</option>
                             <option value="Narkotika">Narkotika</option>
                             <option value="Teroris">Teroris</option>
                         </select>
                     </div>
+
+                    <!-- Filter Limit (khusus mobile) -->
+                    <div class="sm:hidden flex items-center gap-2">
+                        <label for="limit-select-mobile" class="w-24 text-sm text-gray-700">Tampilkan:</label>
+                        <select id="limit-select-mobile" onchange="changeLimitFromMobile()"
+                            class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
+                            <option value="25" <?= $limit == 25 ? "selected" : "" ?>>25</option>
+                            <option value="50" <?= $limit == 50 ? "selected" : "" ?>>50</option>
+                            <option value="100" <?= $limit == 100 ? "selected" : "" ?>>100</option>
+                        </select>
+                    </div>
+
                 </div>
                 <!-- Tombol Modal -->
                 <div class="flex justify-end gap-2 mt-4">
@@ -110,21 +123,6 @@
             </div>
         </div>
 
-        <!-- Mobile limit control -->
-        <div class="sm:hidden">
-            <label for="limit-select-mobile" class="text-sm text-gray-700 mr-2">Tampilkan:</label>
-            <select id="limit-select-mobile" onchange="changeLimitFromMobile()" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
-                <option value="25" <?= $limit == 25
-                	? "selected"
-                	: "" ?>>25</option>
-                <option value="50" <?= $limit == 50
-                	? "selected"
-                	: "" ?>>50</option>
-                <option value="100" <?= $limit == 100
-                	? "selected"
-                	: "" ?>>100</option>
-            </select>
-        </div>
     </div>
 
 
@@ -150,23 +148,23 @@
                             <tr class="hover:bg-red-100 transition">
                                 <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
                                 <td class="px-2 sm:px-4 py-3 text-left indikator"><?= htmlspecialchars(
-                                	$s->indikator_skrining,
-                                ) ?></td>
+                                                                                        $s->indikator_skrining,
+                                                                                    ) ?></td>
                                 <td class="px-2 sm:px-4 py-3 jenis"><?= htmlspecialchars(
-                                	$s->jenis_skrining,
-                                ) ?></td>
+                                                                        $s->jenis_skrining,
+                                                                    ) ?></td>
                                 <td class="px-2 sm:px-4 py-3 instrument"><?= htmlspecialchars(
-                                	$s->nama_instrument,
-                                ) ?></td>
+                                                                                $s->nama_instrument,
+                                                                            ) ?></td>
                                 <td class="px-2 sm:px-4 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-skrining-<?= $s->id_skrining ?>"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
                                             title="Edit">✏️</label>
                                         <a href="<?= site_url(
-                                        	"opsi/delete_skrining/" .
-                                        		$s->id_skrining,
-                                        ) ?>"
+                                                        "opsi/delete_skrining/" .
+                                                            $s->id_skrining,
+                                                    ) ?>"
                                             onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
                                     </div>
@@ -179,14 +177,14 @@
                                 <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
                                     <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit Skrining</h3>
                                     <form method="post" action="<?= site_url(
-                                    	"opsi/update_skrining/" .
-                                    		$s->id_skrining,
-                                    ) ?>" class="space-y-4">
+                                                                    "opsi/update_skrining/" .
+                                                                        $s->id_skrining,
+                                                                ) ?>" class="space-y-4">
                                         <div>
                                             <label class="block text-gray-700 font-medium mb-1">Indikator Skrining</label>
                                             <input type="text" name="indikator_skrining" value="<?= htmlspecialchars(
-                                            	$s->indikator_skrining,
-                                            ) ?>"
+                                                                                                    $s->indikator_skrining,
+                                                                                                ) ?>"
                                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                         </div>
                                         <div>
@@ -194,17 +192,17 @@
                                             <select name="jenis_skrining" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                                 <?php
                                                 $options = [
-                                                	"Pengguna",
-                                                	"Pengedar",
-                                                	"Pengendali",
-                                                	"Ideolog",
-                                                	"Pengikut",
+                                                    "Pengguna",
+                                                    "Pengedar",
+                                                    "Pengendali",
+                                                    "Ideolog",
+                                                    "Pengikut",
                                                 ];
                                                 foreach ($options as $opt): ?>
                                                     <option value="<?= $opt ?>" <?= $s->jenis_skrining ==
-$opt
-	? "selected"
-	: "" ?>><?= $opt ?></option>
+                                                                                    $opt
+                                                                                    ? "selected"
+                                                                                    : "" ?>><?= $opt ?></option>
                                                 <?php endforeach;
                                                 ?>
                                             </select>
@@ -212,8 +210,8 @@ $opt
                                         <div>
                                             <label class="block text-gray-700 font-medium mb-1">Instrument</label>
                                             <input type="text" value="<?= htmlspecialchars(
-                                            	$s->nama_instrument,
-                                            ) ?>" class="w-full border border-gray-200 rounded-lg px-3 py-2 bg-gray-50" readonly>
+                                                                            $s->nama_instrument,
+                                                                        ) ?>" class="w-full border border-gray-200 rounded-lg px-3 py-2 bg-gray-50" readonly>
                                         </div>
 
                                         <div class="flex justify-end items-center gap-3 mt-3">
@@ -253,14 +251,14 @@ $opt
 
                             <div class="text-gray-700 text-sm space-y-1">
                                 <div><span class="font-medium">Indikator:</span> <?= htmlspecialchars(
-                                	$s->indikator_skrining,
-                                ) ?></div>
+                                                                                        $s->indikator_skrining,
+                                                                                    ) ?></div>
                                 <div><span class="font-medium">Jenis:</span> <?= htmlspecialchars(
-                                	$s->jenis_skrining,
-                                ) ?></div>
+                                                                                    $s->jenis_skrining,
+                                                                                ) ?></div>
                                 <div><span class="font-medium">Instrument:</span> <?= htmlspecialchars(
-                                	$s->nama_instrument,
-                                ) ?></div>
+                                                                                        $s->nama_instrument,
+                                                                                    ) ?></div>
                             </div>
 
                             <div class="flex justify-end gap-2 mt-3">
@@ -269,8 +267,8 @@ $opt
                                     title="Edit">✏️</label>
 
                                 <a href="<?= site_url(
-                                	"opsi/delete_skrining/" . $s->id_skrining,
-                                ) ?>"
+                                                "opsi/delete_skrining/" . $s->id_skrining,
+                                            ) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
                                     class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
                             </div>
@@ -285,8 +283,8 @@ $opt
 
         <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
             <div class="text-sm text-gray-600">Menampilkan <?= count(
-            	$skrining ?? [],
-            ) ?> entri</div>
+                                                                $skrining ?? [],
+                                                            ) ?> entri</div>
             <div class="text-sm"><?= $pagination_skrining ?? "" ?></div>
         </div>
     </div>
@@ -314,23 +312,23 @@ $opt
                             <tr class="hover:bg-red-100 transition">
                                 <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
                                 <td class="px-2 sm:px-4 py-3 text-left indikator"><?= htmlspecialchars(
-                                	$f->indikator_faktor,
-                                ) ?></td>
+                                                                                        $f->indikator_faktor,
+                                                                                    ) ?></td>
                                 <td class="px-2 sm:px-4 py-3 jenis"><?= htmlspecialchars(
-                                	$f->jenis_faktor,
-                                ) ?></td>
+                                                                        $f->jenis_faktor,
+                                                                    ) ?></td>
                                 <td class="px-2 sm:px-4 py-3 instrument"><?= htmlspecialchars(
-                                	$f->nama_instrument,
-                                ) ?></td>
+                                                                                $f->nama_instrument,
+                                                                            ) ?></td>
                                 <td class="px-2 sm:px-4 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-faktor-<?= $f->id_faktor ?>"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
                                             title="Edit">✏️</label>
                                         <a href="<?= site_url(
-                                        	"opsi/delete_faktor/" .
-                                        		$f->id_faktor,
-                                        ) ?>"
+                                                        "opsi/delete_faktor/" .
+                                                            $f->id_faktor,
+                                                    ) ?>"
                                             onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
                                             class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
                                     </div>
@@ -360,14 +358,14 @@ $opt
 
                         <div class="text-gray-700 text-sm space-y-1">
                             <div><span class="font-medium">Indikator:</span> <?= htmlspecialchars(
-                            	$f->indikator_faktor,
-                            ) ?></div>
+                                                                                    $f->indikator_faktor,
+                                                                                ) ?></div>
                             <div><span class="font-medium">Jenis:</span> <?= htmlspecialchars(
-                            	$f->jenis_faktor,
-                            ) ?></div>
+                                                                                $f->jenis_faktor,
+                                                                            ) ?></div>
                             <div><span class="font-medium">Instrument:</span> <?= htmlspecialchars(
-                            	$f->nama_instrument,
-                            ) ?></div>
+                                                                                    $f->nama_instrument,
+                                                                                ) ?></div>
                         </div>
 
                         <div class="flex justify-end gap-2 mt-3">
@@ -375,8 +373,8 @@ $opt
                                 class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
                                 title="Edit">✏️</label>
                             <a href="<?= site_url(
-                            	"opsi/delete_faktor/" . $f->id_faktor,
-                            ) ?>"
+                                            "opsi/delete_faktor/" . $f->id_faktor,
+                                        ) ?>"
                                 onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
                                 class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
                         </div>
@@ -396,26 +394,26 @@ $opt
                     <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
                         <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit Faktor</h3>
                         <form method="post" action="<?= site_url(
-                        	"opsi/update_faktor/" . $f->id_faktor,
-                        ) ?>" class="space-y-4">
+                                                        "opsi/update_faktor/" . $f->id_faktor,
+                                                    ) ?>" class="space-y-4">
                             <div>
                                 <label class="block text-gray-700 font-medium mb-1">Indikator Faktor</label>
                                 <input type="text" name="indikator_faktor" value="<?= htmlspecialchars(
-                                	$f->indikator_faktor,
-                                ) ?>"
+                                                                                        $f->indikator_faktor,
+                                                                                    ) ?>"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                             </div>
                             <div>
                                 <label class="block text-gray-700 font-medium mb-1">Jenis Faktor</label>
                                 <select name="jenis_faktor" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                     <option value="Bahaya" <?= $f->jenis_faktor ==
-                                    "Bahaya"
-                                    	? "selected"
-                                    	: "" ?>>Bahaya</option>
+                                                                "Bahaya"
+                                                                ? "selected"
+                                                                : "" ?>>Bahaya</option>
                                     <option value="Kerentanan" <?= $f->jenis_faktor ==
-                                    "Kerentanan"
-                                    	? "selected"
-                                    	: "" ?>>Kerentanan</option>
+                                                                    "Kerentanan"
+                                                                    ? "selected"
+                                                                    : "" ?>>Kerentanan</option>
                                 </select>
                             </div>
                             <div>
@@ -423,11 +421,11 @@ $opt
                                 <select name="id_instrument" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                     <?php foreach ($instrument as $i): ?>
                                         <option value="<?= $i->id_instrument ?>" <?= $f->id_instrument ==
-$i->id_instrument
-	? "selected"
-	: "" ?>>
+                                                                                        $i->id_instrument
+                                                                                        ? "selected"
+                                                                                        : "" ?>>
                                             <?= htmlspecialchars(
-                                            	$i->nama_instrument,
+                                                $i->nama_instrument,
                                             ) ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -454,8 +452,8 @@ $i->id_instrument
         <!-- Footer -->
         <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
             <div class="text-sm text-gray-600">Menampilkan <?= count(
-            	$faktor ?? [],
-            ) ?> entri</div>
+                                                                $faktor ?? [],
+                                                            ) ?> entri</div>
             <div class="text-sm"><?= $pagination_faktor ?? "" ?></div>
         </div>
     </div>
@@ -466,8 +464,8 @@ $i->id_instrument
         <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
             <h3 class="text-xl font-semibold text-red-700 mb-3">➕ Tambah Opsi</h3>
             <form method="post" action="<?= site_url(
-            	"opsi/store",
-            ) ?>" class="space-y-4" id="form-opsi">
+                                            "opsi/store",
+                                        ) ?>" class="space-y-4" id="form-opsi">
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Pilih Opsi</label>
                     <select name="opsi_type" id="opsi_type" onchange="toggleForm()" required
@@ -514,8 +512,8 @@ $i->id_instrument
                         <select name="id_instrument" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                             <?php foreach ($instrument as $i): ?>
                                 <option value="<?= $i->id_instrument ?>"><?= htmlspecialchars(
-	$i->nama_instrument,
-) ?></option>
+                                                                                $i->nama_instrument,
+                                                                            ) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -541,217 +539,226 @@ $i->id_instrument
 
     <!-- SCRIPTS -->
     <script>
-    // Toggle form add skrining/faktor
-            function toggleForm() {
-                const type = document.getElementById('opsi_type').value;
-                document.getElementById('form-skrining').classList.add('hidden');
-                document.getElementById('form-faktor').classList.add('hidden');
+        // Toggle form add skrining/faktor
+        function toggleForm() {
+            const type = document.getElementById('opsi_type').value;
+            document.getElementById('form-skrining').classList.add('hidden');
+            document.getElementById('form-faktor').classList.add('hidden');
 
-                if (type === 'skrining') document.getElementById('form-skrining').classList.remove('hidden');
-                if (type === 'faktor') document.getElementById('form-faktor').classList.remove('hidden');
-            }
-
-            // Change limit (desktop)
-            function changeLimit() {
-                const val = document.getElementById('limit-select').value;
-                window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
-            }
-
-            // Change limit (mobile)
-            function changeLimitFromMobile() {
-                const val = document.getElementById('limit-select-mobile').value;
-                window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
-            }
-
-    // --- Helper: toggleTable (stub, sesuaikan dengan logika tab Anda) ---
-    // toggle tab + simpan ke localStorage + update UI
-            function toggleTable(type) {
-                const skr = document.getElementById("table-skrining");
-                const fak = document.getElementById("table-faktor");
-                const btnS = document.getElementById("btn-skrining");
-                const btnF = document.getElementById("btn-faktor");
-
-                // hide both first
-                skr.classList.add("hidden");
-                fak.classList.add("hidden");
-                btnS.classList.remove("bg-red-600", "text-white");
-                btnS.classList.add("bg-gray-200", "text-gray-800");
-                btnF.classList.remove("bg-red-600", "text-white");
-                btnF.classList.add("bg-gray-200", "text-gray-800");
-
-                if (type === "skrining") {
-                    skr.classList.remove("hidden");
-                    btnS.classList.add("bg-red-600", "text-white");
-                    btnS.classList.remove("bg-gray-200", "text-gray-800");
-                } else {
-                    fak.classList.remove("hidden");
-                    btnF.classList.add("bg-red-600", "text-white");
-                    btnF.classList.remove("bg-gray-200", "text-gray-800");
-                }
-
-                // populate jenis sesuai tab aktif
-                populateJenis(type);
-
-                // simpan tab aktif
-                    localStorage.setItem("activeTab", type);
-
-                    // jalankan filter setelah tab diganti supaya tampilan sesuai
-                    if (typeof applyFilters === "function") applyFilters();
-            }
-
-            // Saat halaman dimuat, cek localStorage
-            window.addEventListener('DOMContentLoaded', function() {
-                let activeTab = localStorage.getItem('activeTab');
-                if (activeTab !== "skrining" && activeTab !== "faktor") {
-                    activeTab = "skrining"; // default
-                    localStorage.setItem("activeTab", "skrining");
-                }
-                toggleTable(activeTab);
-            });
-
-            // --- Helper: parseCardInfo (stub, sesuaikan dengan struktur card Anda) ---
-            function parseCardInfo(card) {
-                // Contoh parsing, sesuaikan dengan struktur card sebenarnya
-                // Misal: <div><div>Jenis: Pengguna</div><div>Instrument: Narkotika</div></div>
-                let jenis = '', instrument = '';
-                const txt = card.innerText || '';
-                const jenisMatch = txt.match(/Jenis\s*:\s*([^\n]+)/i);
-                const instrMatch = txt.match(/Instrument\s*:\s*([^\n]+)/i);
-                if (jenisMatch) jenis = jenisMatch[1].trim();
-                if (instrMatch) instrument = instrMatch[1].trim();
-                return { jenis, instrument };
-            }
-
-    // --- Jenis Options ---
-    const jenisOptions = {
-        skrining: ["Pengguna", "Pengedar", "Pengendali", "Ideolog", "Pengikut"],
-        faktor: ["Bahaya", "Kerentanan"]
-    };
-
-    // --- Populate Jenis Select ---
-    function populateJenis(type) {
-        const desktop = document.getElementById("filter-jenis");
-        const mobile = document.getElementById("filter-jenis-mobile");
-        if (!desktop && !mobile) return;
-
-        const current = desktop ? desktop.value : (mobile ? mobile.value : "all");
-
-        function fillSelect(select) {
-            if (!select) return;
-            select.innerHTML = "";
-            const optAll = document.createElement("option");
-            optAll.value = "all";
-            optAll.textContent = "Semua";
-            select.appendChild(optAll);
-            (jenisOptions[type] || []).forEach(j => {
-                const opt = document.createElement("option");
-                opt.value = j;
-                opt.textContent = j;
-                select.appendChild(opt);
-            });
-            // Restore previous selection if available
-            if ([...select.options].some(o => o.value === current)) select.value = current;
-        }
-        fillSelect(desktop);
-        fillSelect(mobile);
-    }
-
-    // --- Apply Filters ---
-    function applyFilters() {
-        const jenis = document.getElementById("filter-jenis") ? document.getElementById("filter-jenis").value : "all";
-        const instrument = document.getElementById("filter-instrument") ? document.getElementById("filter-instrument").value : "all";
-        localStorage.setItem("filterJenis", jenis);
-        localStorage.setItem("filterInstrument", instrument);
-
-        // Cek tab aktif
-        const isSkrining = !document.getElementById("table-skrining").classList.contains("hidden");
-        const activeTableId = isSkrining ? "table-skrining" : "table-faktor";
-
-        // Filter Desktop Table
-        const desktopTable = document.querySelector(`#${activeTableId} table`);
-        if (desktopTable) {
-            desktopTable.querySelectorAll('tbody tr').forEach(row => {
-                const jenisCell = row.querySelector('td.jenis') ? row.querySelector('td.jenis').innerText.trim() : (row.cells[2] ? row.cells[2].innerText.trim() : '');
-                const instrCell = row.querySelector('td.instrument') ? row.querySelector('td.instrument').innerText.trim() : (row.cells[3] ? row.cells[3].innerText.trim() : '');
-                let visible = true;
-                if (jenis !== "all" && jenisCell !== jenis) visible = false;
-                if (instrument !== "all" && instrCell !== instrument) visible = false;
-                row.style.display = visible ? "" : "none";
-            });
+            if (type === 'skrining') document.getElementById('form-skrining').classList.remove('hidden');
+            if (type === 'faktor') document.getElementById('form-faktor').classList.remove('hidden');
         }
 
-        // Filter Mobile Card
-        const mobileContainer = document.querySelector(`#${activeTableId} [class*="sm:hidden"]`);
-        if (mobileContainer) {
-            Array.from(mobileContainer.children).forEach(card => {
-                const txt = card.innerText || '';
-                if (!txt.toLowerCase().includes('indikator') && !txt.toLowerCase().includes('jenis')) {
-                    card.style.display = "";
-                    return;
-                }
-                const info = parseCardInfo(card);
-                let visible = true;
-                if (jenis !== "all" && info.jenis !== jenis) visible = false;
-                if (instrument !== "all" && info.instrument !== instrument) visible = false;
-                card.style.display = visible ? "" : "none";
-            });
+        // Change limit (desktop)
+        function changeLimit() {
+            const val = document.getElementById('limit-select').value;
+            window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
         }
-    }
 
-    // --- Sinkronisasi Filter Desktop <-> Mobile ---
-    function onFilterChange(id) {
-        if (id === 'filter-jenis') {
-            const v = document.getElementById('filter-jenis').value;
-            const mob = document.getElementById('filter-jenis-mobile');
-            if (mob) mob.value = v;
-        } else if (id === 'filter-jenis-mobile') {
-            const v = document.getElementById('filter-jenis-mobile').value;
-            const des = document.getElementById('filter-jenis');
-            if (des) des.value = v;
-        } else if (id === 'filter-instrument') {
-            const v = document.getElementById('filter-instrument').value;
-            const mob = document.getElementById('filter-instrument-mobile');
-            if (mob) mob.value = v;
-        } else if (id === 'filter-instrument-mobile') {
-            const v = document.getElementById('filter-instrument-mobile').value;
-            const des = document.getElementById('filter-instrument');
-            if (des) des.value = v;
+        // Change limit (mobile)
+        function changeLimitFromMobile() {
+            const val = document.getElementById('limit-select-mobile').value;
+            window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
         }
-        applyFilters();
-    }
 
-    // --- Modal Logic & Inisialisasi ---
-    document.addEventListener("DOMContentLoaded", function() {
-        // Modal event
-        const openBtn = document.getElementById("open-filter-btn");
-        const closeBtn = document.getElementById("close-filter-btn");
-        const modal = document.getElementById("filter-modal");
-        const applyBtn = document.getElementById("apply-filter-btn");
-        if (openBtn && modal) openBtn.onclick = () => modal.classList.remove("hidden");
-        if (closeBtn && modal) closeBtn.onclick = () => modal.classList.add("hidden");
-        if (modal) modal.onclick = (e) => { if (e.target === modal) modal.classList.add("hidden"); };
-        if (applyBtn && modal) applyBtn.onclick = () => { applyFilters(); modal.classList.add("hidden"); };
+        // --- Helper: toggleTable (stub, sesuaikan dengan logika tab Anda) ---
+        // toggle tab + simpan ke localStorage + update UI
+        function toggleTable(type) {
+            const skr = document.getElementById("table-skrining");
+            const fak = document.getElementById("table-faktor");
+            const btnS = document.getElementById("btn-skrining");
+            const btnF = document.getElementById("btn-faktor");
 
-        // Inisialisasi filter
-        let savedTab = localStorage.getItem("activeTab") || "skrining";
-        let savedJenis = localStorage.getItem("filterJenis") || "all";
-        let savedInstrument = localStorage.getItem("filterInstrument") || "all";
-        populateJenis(savedTab);
+            // hide both first
+            skr.classList.add("hidden");
+            fak.classList.add("hidden");
+            btnS.classList.remove("bg-red-600", "text-white");
+            btnS.classList.add("bg-gray-200", "text-gray-800");
+            btnF.classList.remove("bg-red-600", "text-white");
+            btnF.classList.add("bg-gray-200", "text-gray-800");
 
-        // Set instrument selects
-        const instDesktop = document.getElementById('filter-instrument');
-        const instMobile = document.getElementById('filter-instrument-mobile');
-        if (instDesktop) instDesktop.value = savedInstrument;
-        if (instMobile) instMobile.value = savedInstrument;
+            if (type === "skrining") {
+                skr.classList.remove("hidden");
+                btnS.classList.add("bg-red-600", "text-white");
+                btnS.classList.remove("bg-gray-200", "text-gray-800");
+            } else {
+                fak.classList.remove("hidden");
+                btnF.classList.add("bg-red-600", "text-white");
+                btnF.classList.remove("bg-gray-200", "text-gray-800");
+            }
 
-        // Set jenis selects
-        const jenisDesktop = document.getElementById('filter-jenis');
-        const jenisMobile = document.getElementById('filter-jenis-mobile');
-        if (jenisDesktop) jenisDesktop.value = savedJenis;
-        if (jenisMobile) jenisMobile.value = savedJenis;
+            // populate jenis sesuai tab aktif
+            populateJenis(type);
 
-        toggleTable(savedTab);
-        applyFilters();
-    });
+            // simpan tab aktif
+            localStorage.setItem("activeTab", type);
+
+            // jalankan filter setelah tab diganti supaya tampilan sesuai
+            if (typeof applyFilters === "function") applyFilters();
+        }
+
+        // Saat halaman dimuat, cek localStorage
+        window.addEventListener('DOMContentLoaded', function() {
+            let activeTab = localStorage.getItem('activeTab');
+            if (activeTab !== "skrining" && activeTab !== "faktor") {
+                activeTab = "skrining"; // default
+                localStorage.setItem("activeTab", "skrining");
+            }
+            toggleTable(activeTab);
+        });
+
+        // --- Helper: parseCardInfo (stub, sesuaikan dengan struktur card Anda) ---
+        function parseCardInfo(card) {
+            // Contoh parsing, sesuaikan dengan struktur card sebenarnya
+            // Misal: <div><div>Jenis: Pengguna</div><div>Instrument: Narkotika</div></div>
+            let jenis = '',
+                instrument = '';
+            const txt = card.innerText || '';
+            const jenisMatch = txt.match(/Jenis\s*:\s*([^\n]+)/i);
+            const instrMatch = txt.match(/Instrument\s*:\s*([^\n]+)/i);
+            if (jenisMatch) jenis = jenisMatch[1].trim();
+            if (instrMatch) instrument = instrMatch[1].trim();
+            return {
+                jenis,
+                instrument
+            };
+        }
+
+        // --- Jenis Options ---
+        const jenisOptions = {
+            skrining: ["Pengguna", "Pengedar", "Pengendali", "Ideolog", "Pengikut"],
+            faktor: ["Bahaya", "Kerentanan"]
+        };
+
+        // --- Populate Jenis Select ---
+        function populateJenis(type) {
+            const desktop = document.getElementById("filter-jenis");
+            const mobile = document.getElementById("filter-jenis-mobile");
+            if (!desktop && !mobile) return;
+
+            const current = desktop ? desktop.value : (mobile ? mobile.value : "all");
+
+            function fillSelect(select) {
+                if (!select) return;
+                select.innerHTML = "";
+                const optAll = document.createElement("option");
+                optAll.value = "all";
+                optAll.textContent = "Semua";
+                select.appendChild(optAll);
+                (jenisOptions[type] || []).forEach(j => {
+                    const opt = document.createElement("option");
+                    opt.value = j;
+                    opt.textContent = j;
+                    select.appendChild(opt);
+                });
+                // Restore previous selection if available
+                if ([...select.options].some(o => o.value === current)) select.value = current;
+            }
+            fillSelect(desktop);
+            fillSelect(mobile);
+        }
+
+        // --- Apply Filters ---
+        function applyFilters() {
+            const jenis = document.getElementById("filter-jenis") ? document.getElementById("filter-jenis").value : "all";
+            const instrument = document.getElementById("filter-instrument") ? document.getElementById("filter-instrument").value : "all";
+            localStorage.setItem("filterJenis", jenis);
+            localStorage.setItem("filterInstrument", instrument);
+
+            // Cek tab aktif
+            const isSkrining = !document.getElementById("table-skrining").classList.contains("hidden");
+            const activeTableId = isSkrining ? "table-skrining" : "table-faktor";
+
+            // Filter Desktop Table
+            const desktopTable = document.querySelector(`#${activeTableId} table`);
+            if (desktopTable) {
+                desktopTable.querySelectorAll('tbody tr').forEach(row => {
+                    const jenisCell = row.querySelector('td.jenis') ? row.querySelector('td.jenis').innerText.trim() : (row.cells[2] ? row.cells[2].innerText.trim() : '');
+                    const instrCell = row.querySelector('td.instrument') ? row.querySelector('td.instrument').innerText.trim() : (row.cells[3] ? row.cells[3].innerText.trim() : '');
+                    let visible = true;
+                    if (jenis !== "all" && jenisCell !== jenis) visible = false;
+                    if (instrument !== "all" && instrCell !== instrument) visible = false;
+                    row.style.display = visible ? "" : "none";
+                });
+            }
+
+            // Filter Mobile Card
+            const mobileContainer = document.querySelector(`#${activeTableId} [class*="sm:hidden"]`);
+            if (mobileContainer) {
+                Array.from(mobileContainer.children).forEach(card => {
+                    const txt = card.innerText || '';
+                    if (!txt.toLowerCase().includes('indikator') && !txt.toLowerCase().includes('jenis')) {
+                        card.style.display = "";
+                        return;
+                    }
+                    const info = parseCardInfo(card);
+                    let visible = true;
+                    if (jenis !== "all" && info.jenis !== jenis) visible = false;
+                    if (instrument !== "all" && info.instrument !== instrument) visible = false;
+                    card.style.display = visible ? "" : "none";
+                });
+            }
+        }
+
+        // --- Sinkronisasi Filter Desktop <-> Mobile ---
+        function onFilterChange(id) {
+            if (id === 'filter-jenis') {
+                const v = document.getElementById('filter-jenis').value;
+                const mob = document.getElementById('filter-jenis-mobile');
+                if (mob) mob.value = v;
+            } else if (id === 'filter-jenis-mobile') {
+                const v = document.getElementById('filter-jenis-mobile').value;
+                const des = document.getElementById('filter-jenis');
+                if (des) des.value = v;
+            } else if (id === 'filter-instrument') {
+                const v = document.getElementById('filter-instrument').value;
+                const mob = document.getElementById('filter-instrument-mobile');
+                if (mob) mob.value = v;
+            } else if (id === 'filter-instrument-mobile') {
+                const v = document.getElementById('filter-instrument-mobile').value;
+                const des = document.getElementById('filter-instrument');
+                if (des) des.value = v;
+            }
+            applyFilters();
+        }
+
+        // --- Modal Logic & Inisialisasi ---
+        document.addEventListener("DOMContentLoaded", function() {
+            // Modal event
+            const openBtn = document.getElementById("open-filter-btn");
+            const closeBtn = document.getElementById("close-filter-btn");
+            const modal = document.getElementById("filter-modal");
+            const applyBtn = document.getElementById("apply-filter-btn");
+            if (openBtn && modal) openBtn.onclick = () => modal.classList.remove("hidden");
+            if (closeBtn && modal) closeBtn.onclick = () => modal.classList.add("hidden");
+            if (modal) modal.onclick = (e) => {
+                if (e.target === modal) modal.classList.add("hidden");
+            };
+            if (applyBtn && modal) applyBtn.onclick = () => {
+                applyFilters();
+                modal.classList.add("hidden");
+            };
+
+            // Inisialisasi filter
+            let savedTab = localStorage.getItem("activeTab") || "skrining";
+            let savedJenis = localStorage.getItem("filterJenis") || "all";
+            let savedInstrument = localStorage.getItem("filterInstrument") || "all";
+            populateJenis(savedTab);
+
+            // Set instrument selects
+            const instDesktop = document.getElementById('filter-instrument');
+            const instMobile = document.getElementById('filter-instrument-mobile');
+            if (instDesktop) instDesktop.value = savedInstrument;
+            if (instMobile) instMobile.value = savedInstrument;
+
+            // Set jenis selects
+            const jenisDesktop = document.getElementById('filter-jenis');
+            const jenisMobile = document.getElementById('filter-jenis-mobile');
+            if (jenisDesktop) jenisDesktop.value = savedJenis;
+            if (jenisMobile) jenisMobile.value = savedJenis;
+
+            toggleTable(savedTab);
+            applyFilters();
+        });
     </script>
 </main>

@@ -41,24 +41,27 @@
             <!-- Notifikasi + User Dropdown / Masuk -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <?php if ($this->session->userdata("username")): ?>
-                    <!-- Notifikasi -->
                     <div class="relative">
+                        <!-- Tombol Notifikasi -->
                         <button id="notification-btn"
-                            class="text-white p-2 sm:p-2.5 rounded-md hover:bg-red-700 cursor-pointer">
+                            class="relative text-white p-2 sm:p-2.5 rounded-md hover:bg-red-700 cursor-pointer">
                             <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 17h5l-1.405-1.405A2.032 2.032 0
-                                      0118 14.158V11a6 6 0 10-12 0v3.159c0
-                                      .538-.214 1.055-.595 1.436L4 17h5m6
-                                      0v1a3 3 0 11-6 0v-1m6 0H9" />
+               0118 14.158V11a6 6 0 10-12 0v3.159c0
+               .538-.214 1.055-.595 1.436L4 17h5m6
+               0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
+                            <!-- Badge -->
+                            <span id="notification-badge"
+                                class="absolute -top-0 -right-0 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 text-white bg-red-600 rounded-full">
+                                10
+                            </span>
                         </button>
-                        <span id="notification-badge"
-                            class="absolute -top-1 -right-1 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 text-white bg-red-600 rounded-full">
-                            10
-                        </span>
+
+                        <!-- Dropdown -->
                         <div id="notification-dropdown"
-                            class="hidden absolute right-0 mt-2 w-48 sm:w-56 bg-white text-black border border-gray-200 shadow-lg rounded-md overflow-hidden z-50">
+                            class="hidden absolute top-full right-0 mt-2 w-48 sm:w-56 bg-white text-black border border-gray-200 shadow-lg rounded-md overflow-hidden z-50">
                             <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 1</a>
                             <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 2</a>
                             <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 3</a>
@@ -66,31 +69,29 @@
                             <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 5</a>
                         </div>
                     </div>
-
-                    <!-- User Dropdown -->
                     <div class="relative">
-                        <?php $username = $this->session->userdata(
-                            "username",
-                        ); ?>
+                        <?php $username = $this->session->userdata("username"); ?>
+
+                        <!-- Tombol User -->
                         <button id="user-btn"
                             class="text-white px-2 sm:px-3 py-1.5 sm:py-2 rounded-md hover:bg-red-700 cursor-pointer flex items-center gap-1 sm:gap-2">
                             <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4
-                                      1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6
-                                      2.67-6 6h12c0-3.33-2.67-6-6-6z" />
+               1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6
+               2.67-6 6h12c0-3.33-2.67-6-6-6z" />
                             </svg>
-                            <span class="text-xs sm:text-sm"><?= htmlspecialchars(
-                                                                    $username,
-                                                                ) ?></span>
+                            <span class="text-xs sm:text-sm"><?= htmlspecialchars($username) ?></span>
                             <svg class="w-4 h-4 inline-block transition-transform duration-300"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
+
+                        <!-- Dropdown User -->
                         <div id="user-dropdown"
-                            class="hidden absolute right-0 mt-2 w-36 sm:w-40 bg-white text-black border border-gray-200 shadow-lg rounded-md overflow-hidden z-50">
+                            class="hidden absolute top-full right-0 mt-2 w-36 sm:w-40 bg-white text-black border border-gray-200 shadow-lg rounded-md overflow-hidden z-50">
                             <a href="<?= base_url("login/logout") ?>"
                                 class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm flex items-center gap-2">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,6 +104,7 @@
                             </a>
                         </div>
                     </div>
+
                 <?php else: ?>
                     <!-- Tombol Masuk jika belum login -->
                     <a href="<?= base_url("login") ?>"
