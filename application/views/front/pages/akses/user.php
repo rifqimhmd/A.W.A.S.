@@ -102,7 +102,7 @@
                         <?php if (!empty($users)): ?>
                             <?php $no = 1 + (isset($_GET['page_user']) ? (($_GET['page_user'] - 1) * $limit) : 0);
                             foreach ($users as $u): ?>
-                                <tr class="hover:bg-red-50 transition">
+                                <tr class="hover:bg-red-100 transition">
                                     <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
                                     <td class="px-2 sm:px-4 py-3 text-left"><?= htmlspecialchars($u->username ?? '') ?></td>
                                     <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->role ?? '') ?></td>

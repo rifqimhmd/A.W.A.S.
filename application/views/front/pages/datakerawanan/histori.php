@@ -33,126 +33,60 @@
             <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">📊 Riwayat Kerawanan</h2>
             <p class="text-sm text-gray-500 mt-1">Detail Riwayat Skrining & Faktor Kerawanan</p>
         </div>
-        <!-- Tombol Filter Mobile -->
-        <div class="flex sm:hidden justify-end">
-            <button id="open-filter-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg">
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex flex-row items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3">
+            <button onclick="toggleTable('narkotika')" id="btn-narkotika"
+                class="px-4 py-2 rounded-lg shadow font-medium bg-red-600 text-white transition cursor-pointer">
+                Narkotika
+            </button>
+            <button onclick="toggleTable('teroris')" id="btn-teroris"
+                class="px-4 py-2 rounded-lg shadow font-medium bg-gray-200 text-gray-800 transition hover:bg-gray-300 cursor-pointer">
+                Teroris
+            </button>
+        </div>
+        <!-- Tombol Filter -->
+        <div class="flex items-center gap-3">
+            <button id="open-filter-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v2l-7 7v6l-4-2v-4L3 6z" />
+                </svg>
                 Filter
             </button>
         </div>
 
-        <!-- Filter Desktop -->
-        <div id="filter-desktop" class="hidden sm:flex flex-col sm:flex-row gap-4 mb-4 items-start sm:items-center">
-
-            <!-- Filter Tipe -->
-            <div class="flex items-center gap-2">
-                <label for="filter-tipe" class="text-sm text-gray-700">Tipe:</label>
-                <select id="filter-tipe" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
-                    <option value="all">Semua</option>
-                    <option value="Pegawai">Pegawai</option>
-                    <option value="Narapidana">Narapidana</option>
-                </select>
-            </div>
-
-            <!-- Filter Level -->
-            <div class="flex items-center gap-2">
-                <label for="filter-level" class="text-sm text-gray-700">Level:</label>
-                <select id="filter-level" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
-                    <option value="all">Semua</option>
-                    <option value="Merah">Merah</option>
-                    <option value="Kuning">Kuning</option>
-                    <option value="Hijau">Hijau</option>
-                </select>
-            </div>
-
-            <!-- Filter UPT -->
-            <div class="flex items-center gap-2">
-                <label for="filter-upt" class="text-sm text-gray-700">UPT:</label>
-
-                <?php if ($this->session->userdata("role") === "upt"): ?>
-                    <!-- Jika role UPT → tampilkan readonly -->
-                    <?php foreach ($list_upt as $upt): ?>
-                        <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                            value="<?= $upt["nama_upt"] ?>" readonly>
-                        <input type="hidden" name="upt" value="<?= $upt["id_upt"] ?>">
-                    <?php endforeach; ?>
-
-                <?php else: ?>
-                    <!-- Jika role admin/kanwil → tetap combobox -->
-                    <select id="filter-upt" name="upt"
-                        class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 text-sm"
-                        onchange="applyFilters()">
-                        <option value="all">Semua</option>
-                        <?php foreach ($list_upt as $upt): ?>
-                            <option value="<?= htmlspecialchars(
-                                                $upt["nama_upt"],
-                                            ) ?>">
-                                <?= htmlspecialchars($upt["nama_upt"]) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                <?php endif; ?>
-            </div>
-
-            <!-- Filter Kanwil -->
-            <div class="flex items-center gap-2">
-                <label for="filter-kanwil" class="text-sm text-gray-700">Kanwil:</label>
-
-                <?php if ($this->session->userdata("role") === "kanwil"): ?>
-                    <?php foreach ($list_kanwil as $kanwil): ?>
-                        <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                            value="<?= $kanwil["nama_kanwil"] ?>" readonly>
-                        <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
-                    <?php endforeach; ?>
-
-                <?php elseif ($this->session->userdata("role") === "upt"): ?>
-                    <!-- UPT hanya bisa lihat kanwil tempat dia berada -->
-                    <?php foreach ($list_kanwil as $kanwil): ?>
-                        <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                            value="<?= $kanwil["nama_kanwil"] ?>" readonly>
-                        <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
-                    <?php endforeach; ?>
-
-                <?php else: ?>
-                    <!-- Admin bisa pilih semua -->
-                    <select id="filter-kanwil" name="kanwil"
-                        class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 text-sm"
-                        onchange="applyFilters()">
-                        <option value="all">Semua</option>
-                        <?php foreach ($list_kanwil as $kanwil): ?>
-                            <option value="<?= htmlspecialchars(
-                                                $kanwil["nama_kanwil"],
-                                            ) ?>">
-                                <?= htmlspecialchars($kanwil["nama_kanwil"]) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                <?php endif; ?>
-            </div>
-
-        </div>
-
-        <!-- Modal Filter Mobile -->
+        <!-- Modal Filter -->
         <div id="filter-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
             <div class="bg-white rounded-lg p-6 w-11/12 max-w-md">
-                <h2 class="text-lg font-semibold mb-4">Filter</h2>
+                <h2 class="text-lg font-semibold mb-4 flex items-center gap-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v2l-7 7v6l-4-2v-4L3 6z" />
+                    </svg>
+                    Filter
+                </h2>
 
-                <!-- Filter Mobile (sama seperti desktop) -->
-                <div id="filter-mobile-content" class="flex flex-col gap-3">
-
-                    <!-- Tipe -->
+                <!-- Isi Filter -->
+                <div class="flex flex-col gap-3">
+                    <!-- Filter Tipe -->
                     <div class="flex items-center gap-2">
-                        <label for="filter-tipe-mobile" class="text-sm text-gray-700">Tipe:</label>
-                        <select id="filter-tipe-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
+                        <label for="filter-tipe" class="w-24 text-sm text-gray-700">Tipe:</label>
+                        <select id="filter-tipe"
+                            class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                             <option value="all">Semua</option>
                             <option value="Pegawai">Pegawai</option>
                             <option value="Narapidana">Narapidana</option>
                         </select>
                     </div>
 
-                    <!-- Level -->
+                    <!-- Filter Level -->
                     <div class="flex items-center gap-2">
-                        <label for="filter-level-mobile" class="text-sm text-gray-700">Level:</label>
-                        <select id="filter-level-mobile" class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 focus:outline-none text-sm" onchange="applyFilters()">
+                        <label for="filter-level" class="w-24 text-sm text-gray-700">Level:</label>
+                        <select id="filter-level"
+                            class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                             <option value="all">Semua</option>
                             <option value="Merah">Merah</option>
                             <option value="Kuning">Kuning</option>
@@ -160,66 +94,46 @@
                         </select>
                     </div>
 
-                    <!-- UPT -->
+                    <!-- Filter UPT -->
                     <div class="flex items-center gap-2">
-                        <label for="filter-upt-mobile" class="text-sm text-gray-700">UPT:</label>
-                        <?php if (
-                            $this->session->userdata("role") === "upt"
-                        ): ?>
+                        <label for="filter-upt" class="w-24 text-sm text-gray-700">UPT:</label>
+                        <?php if ($this->session->userdata("role") === "upt"): ?>
                             <?php foreach ($list_upt as $upt): ?>
-                                <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
+                                <input type="text"
+                                    class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
                                     value="<?= $upt["nama_upt"] ?>" readonly>
                                 <input type="hidden" name="upt" value="<?= $upt["id_upt"] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <select id="filter-upt-mobile" name="upt"
-                                class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 text-sm"
-                                onchange="applyFilters()">
+                            <select id="filter-upt" name="upt"
+                                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_upt as $upt): ?>
-                                    <option value="<?= htmlspecialchars(
-                                                        $upt["nama_upt"],
-                                                    ) ?>">
-                                        <?= htmlspecialchars(
-                                            $upt["nama_upt"],
-                                        ) ?>
+                                    <option value="<?= htmlspecialchars($upt["nama_upt"]) ?>">
+                                        <?= htmlspecialchars($upt["nama_upt"]) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
                         <?php endif; ?>
                     </div>
 
-                    <!-- Kanwil -->
+                    <!-- Filter Kanwil -->
                     <div class="flex items-center gap-2">
-                        <label for="filter-kanwil-mobile" class="text-sm text-gray-700">Kanwil:</label>
-                        <?php if (
-                            $this->session->userdata("role") === "kanwil"
-                        ): ?>
+                        <label for="filter-kanwil" class="w-24 text-sm text-gray-700">Kanwil:</label>
+                        <?php if ($this->session->userdata("role") === "kanwil" || $this->session->userdata("role") === "upt"): ?>
                             <?php foreach ($list_kanwil as $kanwil): ?>
-                                <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
-                                    value="<?= $kanwil["nama_kanwil"] ?>" readonly>
-                                <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
-                            <?php endforeach; ?>
-                        <?php elseif (
-                            $this->session->userdata("role") === "upt"
-                        ): ?>
-                            <?php foreach ($list_kanwil as $kanwil): ?>
-                                <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
+                                <input type="text"
+                                    class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
                                     value="<?= $kanwil["nama_kanwil"] ?>" readonly>
                                 <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <select id="filter-kanwil-mobile" name="kanwil"
-                                class="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-red-500 text-sm"
-                                onchange="applyFilters()">
+                            <select id="filter-kanwil" name="kanwil"
+                                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_kanwil as $kanwil): ?>
-                                    <option value="<?= htmlspecialchars(
-                                                        $kanwil["nama_kanwil"],
-                                                    ) ?>">
-                                        <?= htmlspecialchars(
-                                            $kanwil["nama_kanwil"],
-                                        ) ?>
+                                    <option value="<?= htmlspecialchars($kanwil["nama_kanwil"]) ?>">
+                                        <?= htmlspecialchars($kanwil["nama_kanwil"]) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -227,25 +141,58 @@
                     </div>
                 </div>
 
+                <!-- Tombol Modal -->
                 <div class="flex justify-end gap-2 mt-4">
-                    <button id="close-filter-btn" class="bg-gray-300 px-4 py-2 rounded-lg">Batal</button>
-                    <button id="apply-filter-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg">Terapkan</button>
+                    <button id="close-filter-btn" class="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer">Batal</button>
+                    <button id="apply-filter-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg cursor-pointer">Terapkan</button>
                 </div>
             </div>
         </div>
+
+        <!-- Script Modal -->
+        <script>
+            const openBtn = document.getElementById("open-filter-btn");
+            const closeBtn = document.getElementById("close-filter-btn");
+            const modal = document.getElementById("filter-modal");
+
+            openBtn.addEventListener("click", () => {
+                modal.classList.remove("hidden");
+            });
+
+            closeBtn.addEventListener("click", () => {
+                modal.classList.add("hidden");
+            });
+
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    modal.classList.add("hidden");
+                }
+            });
+
+            // Tombol Terapkan (contoh trigger filter)
+            document.getElementById("apply-filter-btn").addEventListener("click", () => {
+                // jalankan fungsi filter (contoh)
+                applyFilters();
+                modal.classList.add("hidden");
+            });
+
+            function applyFilters() {
+                const tipe = document.getElementById("filter-tipe").value;
+                const level = document.getElementById("filter-level").value;
+                const upt = document.getElementById("filter-upt")?.value || null;
+                const kanwil = document.getElementById("filter-kanwil")?.value || null;
+
+                console.log("Filter diterapkan:", {
+                    tipe,
+                    level,
+                    upt,
+                    kanwil
+                });
+                // TODO: panggil AJAX atau reload tabel sesuai kebutuhanmu
+            }
+        </script>
     </div>
 
-    <!-- Tabs -->
-    <div class="flex items-center gap-3 mb-6">
-        <button onclick="toggleTable('narkotika')" id="btn-narkotika"
-            class="px-4 py-2 rounded-lg shadow font-medium bg-red-600 text-white transition cursor-pointer">
-            Narkotika
-        </button>
-        <button onclick="toggleTable('teroris')" id="btn-teroris"
-            class="px-4 py-2 rounded-lg shadow font-medium bg-gray-200 text-gray-800 transition hover:bg-gray-300 cursor-pointer">
-            Teroris
-        </button>
-    </div>
 
     <!-- Table Narkotika -->
     <div id="table-narkotika" class="overflow-x-auto mt-6">
@@ -269,7 +216,7 @@
                     <?php if (!empty($narkotika)):
                         $no = 1;
                         foreach ($narkotika as $row): ?>
-                            <tr class="hover:bg-gray-50 transition"
+                            <tr class="hover:bg-red-100 transition"
                                 data-tipe="<?= strtolower(
                                                 $row->tipe_object ?? "-",
                                             ) ?>"
@@ -461,7 +408,7 @@
                     <?php if (!empty($teroris)):
                         $no = 1;
                         foreach ($teroris as $row): ?>
-                            <tr class="hover:bg-gray-50 transition"
+                            <tr class="hover:bg-red-100 transition"
                                 data-tipe="<?= strtolower(
                                                 $row->tipe_object ?? "-",
                                             ) ?>"

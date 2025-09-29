@@ -141,7 +141,7 @@
                         <?php
                         $no = $start_skrining + 1;
                         foreach ($skrining as $s): ?>
-                            <tr class="hover:bg-red-50 transition">
+                            <tr class="hover:bg-red-100 transition">
                                 <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
                                 <td class="px-2 sm:px-4 py-3 text-left indikator"><?= htmlspecialchars(
                                                                                         $s->indikator_skrining,
@@ -305,7 +305,7 @@
                         <?php
                         $no = $start_faktor + 1;
                         foreach ($faktor as $f): ?>
-                            <tr class="hover:bg-red-50 transition">
+                            <tr class="hover:bg-red-100 transition">
                                 <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
                                 <td class="px-2 sm:px-4 py-3 text-left indikator"><?= htmlspecialchars(
                                                                                         $f->indikator_faktor,
