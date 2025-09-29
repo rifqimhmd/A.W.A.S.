@@ -73,9 +73,7 @@
                     <?php foreach ($list_upt as $upt): ?>
                         <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
                             value="<?= $upt["nama_upt"] ?>" readonly>
-                        <input type="hidden" name="upt" value="<?= $upt[
-                        	"id_upt"
-                        ] ?>">
+                        <input type="hidden" name="upt" value="<?= $upt["id_upt"] ?>">
                     <?php endforeach; ?>
 
                 <?php else: ?>
@@ -86,8 +84,8 @@
                         <option value="all">Semua</option>
                         <?php foreach ($list_upt as $upt): ?>
                             <option value="<?= htmlspecialchars(
-                            	$upt["nama_upt"],
-                            ) ?>">
+                                                $upt["nama_upt"],
+                                            ) ?>">
                                 <?= htmlspecialchars($upt["nama_upt"]) ?>
                             </option>
                         <?php endforeach; ?>
@@ -103,9 +101,7 @@
                     <?php foreach ($list_kanwil as $kanwil): ?>
                         <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
                             value="<?= $kanwil["nama_kanwil"] ?>" readonly>
-                        <input type="hidden" name="kanwil" value="<?= $kanwil[
-                        	"id_kanwil"
-                        ] ?>">
+                        <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
                     <?php endforeach; ?>
 
                 <?php elseif ($this->session->userdata("role") === "upt"): ?>
@@ -113,9 +109,7 @@
                     <?php foreach ($list_kanwil as $kanwil): ?>
                         <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
                             value="<?= $kanwil["nama_kanwil"] ?>" readonly>
-                        <input type="hidden" name="kanwil" value="<?= $kanwil[
-                        	"id_kanwil"
-                        ] ?>">
+                        <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
                     <?php endforeach; ?>
 
                 <?php else: ?>
@@ -126,8 +120,8 @@
                         <option value="all">Semua</option>
                         <?php foreach ($list_kanwil as $kanwil): ?>
                             <option value="<?= htmlspecialchars(
-                            	$kanwil["nama_kanwil"],
-                            ) ?>">
+                                                $kanwil["nama_kanwil"],
+                                            ) ?>">
                                 <?= htmlspecialchars($kanwil["nama_kanwil"]) ?>
                             </option>
                         <?php endforeach; ?>
@@ -170,14 +164,12 @@
                     <div class="flex items-center gap-2">
                         <label for="filter-upt-mobile" class="text-sm text-gray-700">UPT:</label>
                         <?php if (
-                        	$this->session->userdata("role") === "upt"
+                            $this->session->userdata("role") === "upt"
                         ): ?>
                             <?php foreach ($list_upt as $upt): ?>
                                 <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
                                     value="<?= $upt["nama_upt"] ?>" readonly>
-                                <input type="hidden" name="upt" value="<?= $upt[
-                                	"id_upt"
-                                ] ?>">
+                                <input type="hidden" name="upt" value="<?= $upt["id_upt"] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <select id="filter-upt-mobile" name="upt"
@@ -186,10 +178,10 @@
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_upt as $upt): ?>
                                     <option value="<?= htmlspecialchars(
-                                    	$upt["nama_upt"],
-                                    ) ?>">
+                                                        $upt["nama_upt"],
+                                                    ) ?>">
                                         <?= htmlspecialchars(
-                                        	$upt["nama_upt"],
+                                            $upt["nama_upt"],
                                         ) ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -201,28 +193,20 @@
                     <div class="flex items-center gap-2">
                         <label for="filter-kanwil-mobile" class="text-sm text-gray-700">Kanwil:</label>
                         <?php if (
-                        	$this->session->userdata("role") === "kanwil"
+                            $this->session->userdata("role") === "kanwil"
                         ): ?>
                             <?php foreach ($list_kanwil as $kanwil): ?>
                                 <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
-                                    value="<?= $kanwil[
-                                    	"nama_kanwil"
-                                    ] ?>" readonly>
-                                <input type="hidden" name="kanwil" value="<?= $kanwil[
-                                	"id_kanwil"
-                                ] ?>">
+                                    value="<?= $kanwil["nama_kanwil"] ?>" readonly>
+                                <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
                             <?php endforeach; ?>
                         <?php elseif (
-                        	$this->session->userdata("role") === "upt"
+                            $this->session->userdata("role") === "upt"
                         ): ?>
                             <?php foreach ($list_kanwil as $kanwil): ?>
                                 <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
-                                    value="<?= $kanwil[
-                                    	"nama_kanwil"
-                                    ] ?>" readonly>
-                                <input type="hidden" name="kanwil" value="<?= $kanwil[
-                                	"id_kanwil"
-                                ] ?>">
+                                    value="<?= $kanwil["nama_kanwil"] ?>" readonly>
+                                <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <select id="filter-kanwil-mobile" name="kanwil"
@@ -231,10 +215,10 @@
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_kanwil as $kanwil): ?>
                                     <option value="<?= htmlspecialchars(
-                                    	$kanwil["nama_kanwil"],
-                                    ) ?>">
+                                                        $kanwil["nama_kanwil"],
+                                                    ) ?>">
                                         <?= htmlspecialchars(
-                                        	$kanwil["nama_kanwil"],
+                                            $kanwil["nama_kanwil"],
                                         ) ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -267,7 +251,7 @@
     <div id="table-narkotika" class="overflow-x-auto mt-6">
 
         <!-- Desktop Table Narkotika -->
-        <div class="hidden sm:block bg-white shadow rounded-xl overflow-hidden min-w-[800px]">
+        <div class="hidden sm:block overflow-hidden min-w-[800px] bg-white shadow-md rounded-lg border border-gray-200">
             <table class="min-w-full border-collapse text-center">
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
                     <tr>
@@ -283,64 +267,64 @@
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
                     <?php if (!empty($narkotika)):
-                    	$no = 1;
-                    	foreach ($narkotika as $row): ?>
+                        $no = 1;
+                        foreach ($narkotika as $row): ?>
                             <tr class="hover:bg-gray-50 transition"
                                 data-tipe="<?= strtolower(
-                                	$row->tipe_object ?? "-",
-                                ) ?>"
+                                                $row->tipe_object ?? "-",
+                                            ) ?>"
                                 data-level="<?= strtolower(
-                                	$row->level ?? "-",
-                                ) ?>"
+                                                $row->level ?? "-",
+                                            ) ?>"
                                 data-upt="<?= strtolower(
-                                	$row->nama_upt ?? "-",
-                                ) ?>"
+                                                $row->nama_upt ?? "-",
+                                            ) ?>"
                                 data-kanwil="<?= strtolower(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?>">
+                                                    $row->nama_kanwil ?? "-",
+                                                ) ?>">
                                 <td class="px-2 py-3"><?= $no++ ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object === "Pegawai"
-                                		? $row->nip ?? "-"
-                                		: $row->no_register ?? "-",
-                                ) ?></td>
+                                                            $row->tipe_object === "Pegawai"
+                                                                ? $row->nip ?? "-"
+                                                                : $row->no_register ?? "-",
+                                                        ) ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_pegawai ??
-                                		($row->nama_narapidana ?? "-"),
-                                ) ?></td>
+                                                            $row->nama_pegawai ??
+                                                                ($row->nama_narapidana ?? "-"),
+                                                        ) ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?></td>
+                                                            $row->nama_kanwil ?? "-",
+                                                        ) ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_upt ?? "-",
-                                ) ?></td>
+                                                            $row->nama_upt ?? "-",
+                                                        ) ?></td>
                                 <td class="px-2 py-3">
                                     <?php
                                     $levelColor = [
-                                    	"Merah" => "bg-red-100 text-red-700",
-                                    	"Kuning" =>
-                                    		"bg-yellow-100 text-yellow-700",
-                                    	"Hijau" =>
-                                    		"bg-green-100 text-green-700",
+                                        "Merah" => "bg-red-100 text-red-700",
+                                        "Kuning" =>
+                                        "bg-yellow-100 text-yellow-700",
+                                        "Hijau" =>
+                                        "bg-green-100 text-green-700",
                                     ];
                                     $color =
-                                    	$levelColor[$row->level] ??
-                                    	"bg-gray-100 text-gray-600";
+                                        $levelColor[$row->level] ??
+                                        "bg-gray-100 text-gray-600";
                                     ?>
                                     <span class="px-3 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                         <?= htmlspecialchars(
-                                        	$row->level ?? "-",
+                                            $row->level ?? "-",
                                         ) ?>
                                     </span>
                                 </td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object ?? "-",
-                                ) ?></td>
+                                                            $row->tipe_object ?? "-",
+                                                        ) ?></td>
                                 <td class="px-2 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <button onclick='showDetail(<?= json_encode(
-                                        	$row,
-                                        ) ?>)'
+                                                                        $row,
+                                                                    ) ?>)'
                                             class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
                                             title="Detail">🔍</button>
                                         <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
@@ -348,17 +332,17 @@
                                             title="Jawaban">📄</button>
                                         <?php
                                         $role = $this->session->userdata(
-                                        	"role",
+                                            "role",
                                         );
                                         if (
-                                        	$role === "admin" ||
-                                        	($role === "kanwil" &&
-                                        		$row->level !== "Merah")
+                                            $role === "admin" ||
+                                            ($role === "kanwil" &&
+                                                $row->level !== "Merah")
                                         ): ?>
                                             <a href="<?= site_url(
-                                            	"histori/delete/" .
-                                            		$row->id_hasil,
-                                            ) ?>"
+                                                            "histori/delete/" .
+                                                                $row->id_hasil,
+                                                        ) ?>"
                                                 onclick="return confirm('Yakin hapus data ini?')"
                                                 class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
                                                 title="Hapus">🗑️</a>
@@ -369,7 +353,7 @@
                             </tr>
                         <?php endforeach;
                     else:
-                    	 ?>
+                        ?>
                         <tr>
                             <td colspan="9" class="py-6 text-gray-500 italic">Belum ada data narkotika</td>
                         </tr>
@@ -382,64 +366,64 @@
         <!-- Mobile Cards Narkotika -->
         <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
             <?php if (!empty($narkotika)):
-            	$no = 1;
-            	foreach ($narkotika as $row): ?>
+                $no = 1;
+                foreach ($narkotika as $row): ?>
                     <div class="p-4 hover:bg-red-50 transition"
                         data-tipe="<?= strtolower($row->tipe_object ?? "-") ?>"
                         data-level="<?= strtolower($row->level ?? "-") ?>"
                         data-upt="<?= strtolower($row->nama_upt ?? "-") ?>"
                         data-kanwil="<?= strtolower(
-                        	$row->nama_kanwil ?? "-",
-                        ) ?>">
+                                            $row->nama_kanwil ?? "-",
+                                        ) ?>">
                         <div class="mb-2">
                             <span class="font-semibold text-red-600">#<?= $no++ ?></span>
                         </div>
                         <div class="text-gray-700 text-sm space-y-1">
-	                        <div><span class="font-medium">No Register/NIP:</span> <?= htmlspecialchars(
-                         	$row->tipe_object === "Pegawai"
-                         		? $row->nip ?? "-"
-                         		: $row->no_register ?? "-",
-                         ) ?></div>
-	                        <div><span class="font-medium">Nama:</span> <?= htmlspecialchars(
-                         	$row->nama_pegawai ??
-                         		($row->nama_narapidana ?? "-"),
-                         ) ?></div>
+                            <div><span class="font-medium">No Register/NIP:</span> <?= htmlspecialchars(
+                                                                                        $row->tipe_object === "Pegawai"
+                                                                                            ? $row->nip ?? "-"
+                                                                                            : $row->no_register ?? "-",
+                                                                                    ) ?></div>
+                            <div><span class="font-medium">Nama:</span> <?= htmlspecialchars(
+                                                                            $row->nama_pegawai ??
+                                                                                ($row->nama_narapidana ?? "-"),
+                                                                        ) ?></div>
                             <div><span class="font-medium">Kanwil:</span> <?= htmlspecialchars(
-                            	$row->nama_kanwil ?? "-",
-                            ) ?></div>
+                                                                                $row->nama_kanwil ?? "-",
+                                                                            ) ?></div>
                             <div><span class="font-medium">UPT:</span> <?= htmlspecialchars(
-                            	$row->nama_upt ?? "-",
-                            ) ?></div>
+                                                                            $row->nama_upt ?? "-",
+                                                                        ) ?></div>
                             <div><span class="font-medium">Level:</span>
                                 <?php $color =
-                                	$levelColor[$row->level] ??
-                                	"bg-gray-100 text-gray-600"; ?>
+                                    $levelColor[$row->level] ??
+                                    "bg-gray-100 text-gray-600"; ?>
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                     <?= htmlspecialchars($row->level ?? "-") ?>
                                 </span>
                             </div>
                             <div><span class="font-medium">Tipe:</span> <?= htmlspecialchars(
-                            	$row->tipe_object ?? "-",
-                            ) ?></div>
+                                                                            $row->tipe_object ?? "-",
+                                                                        ) ?></div>
                         </div>
 
                         <!-- Tombol aksi -->
                         <div class="flex justify-end gap-2 mt-3">
                             <button onclick='showDetail(<?= json_encode(
-                            	$row,
-                            ) ?>)'
+                                                            $row,
+                                                        ) ?>)'
                                 class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
                                 title="Detail">🔍</button>
                             <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
                                 class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
                                 title="Jawaban">📄</button>
                             <?php if (
-                            	$role === "admin" ||
-                            	($role === "kanwil" && $row->level !== "Merah")
+                                $role === "admin" ||
+                                ($role === "kanwil" && $row->level !== "Merah")
                             ): ?>
                                 <a href="<?= site_url(
-                                	"histori/delete/" . $row->id_hasil,
-                                ) ?>"
+                                                "histori/delete/" . $row->id_hasil,
+                                            ) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
                                     title="Hapus">🗑️</a>
@@ -448,7 +432,7 @@
                     </div>
                 <?php endforeach;
             else:
-            	 ?>
+                ?>
                 <div class="p-4 text-center text-gray-500 italic">Belum ada data narkotika</div>
             <?php
             endif; ?>
@@ -459,7 +443,7 @@
     <div id="table-teroris" class="overflow-x-auto hidden mt-6">
 
         <!-- Desktop Table Teroris -->
-        <div class="hidden sm:block bg-white shadow rounded-xl overflow-hidden min-w-[800px]">
+        <div class="hidden sm:block bg-white shadow-md rounded-lg border border-gray-200 overflow-hidden min-w-[800px]">
             <table class="min-w-full border-collapse text-center">
                 <thead class="bg-red-600 text-white text-sm sm:text-base">
                     <tr>
@@ -475,64 +459,64 @@
                 </thead>
                 <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
                     <?php if (!empty($teroris)):
-                    	$no = 1;
-                    	foreach ($teroris as $row): ?>
+                        $no = 1;
+                        foreach ($teroris as $row): ?>
                             <tr class="hover:bg-gray-50 transition"
                                 data-tipe="<?= strtolower(
-                                	$row->tipe_object ?? "-",
-                                ) ?>"
+                                                $row->tipe_object ?? "-",
+                                            ) ?>"
                                 data-level="<?= strtolower(
-                                	$row->level ?? "-",
-                                ) ?>"
+                                                $row->level ?? "-",
+                                            ) ?>"
                                 data-upt="<?= strtolower(
-                                	$row->nama_upt ?? "-",
-                                ) ?>"
+                                                $row->nama_upt ?? "-",
+                                            ) ?>"
                                 data-kanwil="<?= strtolower(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?>">
+                                                    $row->nama_kanwil ?? "-",
+                                                ) ?>">
                                 <td class="px-2 py-3"><?= $no++ ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object === "Pegawai"
-                                		? $row->nip ?? "-"
-                                		: $row->no_register ?? "-",
-                                ) ?></td>
+                                                            $row->tipe_object === "Pegawai"
+                                                                ? $row->nip ?? "-"
+                                                                : $row->no_register ?? "-",
+                                                        ) ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_pegawai ??
-                                		($row->nama_narapidana ?? "-"),
-                                ) ?></td>
+                                                            $row->nama_pegawai ??
+                                                                ($row->nama_narapidana ?? "-"),
+                                                        ) ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?></td>
+                                                            $row->nama_kanwil ?? "-",
+                                                        ) ?></td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_upt ?? "-",
-                                ) ?></td>
+                                                            $row->nama_upt ?? "-",
+                                                        ) ?></td>
                                 <td class="px-2 py-3">
                                     <?php
                                     $levelColor = [
-                                    	"Merah" => "bg-red-100 text-red-700",
-                                    	"Kuning" =>
-                                    		"bg-yellow-100 text-yellow-700",
-                                    	"Hijau" =>
-                                    		"bg-green-100 text-green-700",
+                                        "Merah" => "bg-red-100 text-red-700",
+                                        "Kuning" =>
+                                        "bg-yellow-100 text-yellow-700",
+                                        "Hijau" =>
+                                        "bg-green-100 text-green-700",
                                     ];
                                     $color =
-                                    	$levelColor[$row->level] ??
-                                    	"bg-gray-100 text-gray-600";
+                                        $levelColor[$row->level] ??
+                                        "bg-gray-100 text-gray-600";
                                     ?>
                                     <span class="px-3 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                         <?= htmlspecialchars(
-                                        	$row->level ?? "-",
+                                            $row->level ?? "-",
                                         ) ?>
                                     </span>
                                 </td>
                                 <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object ?? "-",
-                                ) ?></td>
+                                                            $row->tipe_object ?? "-",
+                                                        ) ?></td>
                                 <td class="px-2 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <button onclick='showDetail(<?= json_encode(
-                                        	$row,
-                                        ) ?>)'
+                                                                        $row,
+                                                                    ) ?>)'
                                             class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
                                             title="Detail">🔍</button>
                                         <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
@@ -540,17 +524,17 @@
                                             title="Jawaban">📄</button>
                                         <?php
                                         $role = $this->session->userdata(
-                                        	"role",
+                                            "role",
                                         );
                                         if (
-                                        	$role === "admin" ||
-                                        	($role === "kanwil" &&
-                                        		$row->level !== "Merah")
+                                            $role === "admin" ||
+                                            ($role === "kanwil" &&
+                                                $row->level !== "Merah")
                                         ): ?>
                                             <a href="<?= site_url(
-                                            	"histori/delete/" .
-                                            		$row->id_hasil,
-                                            ) ?>"
+                                                            "histori/delete/" .
+                                                                $row->id_hasil,
+                                                        ) ?>"
                                                 onclick="return confirm('Yakin hapus data ini?')"
                                                 class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
                                                 title="Hapus">🗑️</a>
@@ -561,7 +545,7 @@
                             </tr>
                         <?php endforeach;
                     else:
-                    	 ?>
+                        ?>
                         <tr>
                             <td colspan="9" class="py-6 text-gray-500 italic">Belum ada data teroris</td>
                         </tr>
@@ -574,64 +558,64 @@
         <!-- Mobile Cards Teroris -->
         <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
             <?php if (!empty($teroris)):
-            	$no = 1;
-            	foreach ($teroris as $row): ?>
+                $no = 1;
+                foreach ($teroris as $row): ?>
                     <div class="p-4 hover:bg-red-50 transition"
                         data-tipe="<?= strtolower($row->tipe_object ?? "-") ?>"
                         data-level="<?= strtolower($row->level ?? "-") ?>"
                         data-upt="<?= strtolower($row->nama_upt ?? "-") ?>"
                         data-kanwil="<?= strtolower(
-                        	$row->nama_kanwil ?? "-",
-                        ) ?>">
+                                            $row->nama_kanwil ?? "-",
+                                        ) ?>">
                         <div class="mb-2">
                             <span class="font-semibold text-red-600">#<?= $no++ ?></span>
                         </div>
                         <div class="text-gray-700 text-sm space-y-1">
                             <div><span class="font-medium">No Register/NIP:</span> <?= htmlspecialchars(
-                            	$row->tipe_object === "Pegawai"
-                            		? $row->nip ?? "-"
-                            		: $row->no_register ?? "-",
-                            ) ?></div>
+                                                                                        $row->tipe_object === "Pegawai"
+                                                                                            ? $row->nip ?? "-"
+                                                                                            : $row->no_register ?? "-",
+                                                                                    ) ?></div>
                             <div><span class="font-medium">Nama:</span> <?= htmlspecialchars(
-                            	$row->nama_pegawai ??
-                            		($row->nama_narapidana ?? "-"),
-                            ) ?></div>
+                                                                            $row->nama_pegawai ??
+                                                                                ($row->nama_narapidana ?? "-"),
+                                                                        ) ?></div>
                             <div><span class="font-medium">Kanwil:</span> <?= htmlspecialchars(
-                            	$row->nama_kanwil ?? "-",
-                            ) ?></div>
+                                                                                $row->nama_kanwil ?? "-",
+                                                                            ) ?></div>
                             <div><span class="font-medium">UPT:</span> <?= htmlspecialchars(
-                            	$row->nama_upt ?? "-",
-                            ) ?></div>
+                                                                            $row->nama_upt ?? "-",
+                                                                        ) ?></div>
                             <div><span class="font-medium">Level:</span>
                                 <?php $color =
-                                	$levelColor[$row->level] ??
-                                	"bg-gray-100 text-gray-600"; ?>
+                                    $levelColor[$row->level] ??
+                                    "bg-gray-100 text-gray-600"; ?>
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                     <?= htmlspecialchars($row->level ?? "-") ?>
                                 </span>
                             </div>
                             <div><span class="font-medium">Tipe:</span> <?= htmlspecialchars(
-                            	$row->tipe_object ?? "-",
-                            ) ?></div>
+                                                                            $row->tipe_object ?? "-",
+                                                                        ) ?></div>
                         </div>
 
                         <!-- Tombol aksi -->
                         <div class="flex justify-end gap-2 mt-3">
                             <button onclick='showDetail(<?= json_encode(
-                            	$row,
-                            ) ?>)'
+                                                            $row,
+                                                        ) ?>)'
                                 class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
                                 title="Detail">🔍</button>
                             <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
                                 class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
                                 title="Jawaban">📄</button>
                             <?php if (
-                            	$role === "admin" ||
-                            	($role === "kanwil" && $row->level !== "Merah")
+                                $role === "admin" ||
+                                ($role === "kanwil" && $row->level !== "Merah")
                             ): ?>
                                 <a href="<?= site_url(
-                                	"histori/delete/" . $row->id_hasil,
-                                ) ?>"
+                                                "histori/delete/" . $row->id_hasil,
+                                            ) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
                                     title="Hapus">🗑️</a>
@@ -640,7 +624,7 @@
                     </div>
                 <?php endforeach;
             else:
-            	 ?>
+                ?>
                 <div class="p-4 text-center text-gray-500 italic">Belum ada data teroris</div>
             <?php
             endif; ?>
@@ -770,17 +754,17 @@
             document.getElementById("detailNilai").textContent = rowData.nilai_akhir || "-";
             const levelEl = document.getElementById("detailLevel");
             const levelVal = rowData.level ? rowData.level.toString() : "-";
-                // Set teks tetap dulu
-                levelEl.textContent = levelVal;
+            // Set teks tetap dulu
+            levelEl.textContent = levelVal;
             if (levelVal.toLowerCase() === "merah") {
-                    levelEl.classList.add("text-red-600");
-                } else if (levelVal.toLowerCase() === "kuning") {
-                    levelEl.classList.add("text-yellow-600");
-                } else if (levelVal.toLowerCase() === "hijau") {
-                    levelEl.classList.add("text-green-600");
-                } else {
-                    levelEl.classList.add("text-gray-600");
-                }
+                levelEl.classList.add("text-red-600");
+            } else if (levelVal.toLowerCase() === "kuning") {
+                levelEl.classList.add("text-yellow-600");
+            } else if (levelVal.toLowerCase() === "hijau") {
+                levelEl.classList.add("text-green-600");
+            } else {
+                levelEl.classList.add("text-gray-600");
+            }
             document.getElementById("detailTipe").textContent = rowData.tipe_object || "-";
             document.getElementById("detailPerkara").textContent = rowData.perkara || "-";
             document.getElementById("detailAntisipasi").textContent = rowData.nama_antisipasi || "-";

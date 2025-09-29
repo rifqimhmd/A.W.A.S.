@@ -75,7 +75,7 @@
 
             <!-- Tombol Cari -->
             <button type="submit"
-                class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm shadow w-auto">
+                class="cursor-pointer bg-black hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm shadow w-auto">
                 Cari
             </button>
         </form>
@@ -85,98 +85,100 @@
     <div class="overflow-x-auto">
         <div class="bg-white shadow rounded-xl overflow-hidden">
             <!-- TABLE: tampil di layar sm ke atas -->
-            <table class="min-w-full text-center border-collapse hidden sm:table">
-                <thead class="bg-red-600 text-white text-sm sm:text-base">
-                    <tr>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">No</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold text-left">Username</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Role</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Kanwil</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">UPT</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Status</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
-                    <?php if (!empty($users)): ?>
-                        <?php $no = 1 + (isset($_GET['page_user']) ? (($_GET['page_user'] - 1) * $limit) : 0);
-                        foreach ($users as $u): ?>
-                            <tr class="hover:bg-red-50 transition">
-                                <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
-                                <td class="px-2 sm:px-4 py-3 text-left"><?= htmlspecialchars($u->username ?? '') ?></td>
-                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->role ?? '') ?></td>
-                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->nama_kanwil ?? '-') ?></td>
-                                <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->nama_upt ?? '-') ?></td>
-                                <td class="px-2 sm:px-4 py-3">
-                                    <?php
-                                    $status = strtolower($u->status ?? '');
-                                    $bg = $status === 'aktif' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
-                                    $text = $status === 'aktif' ? 'Aktif' : 'Tidak Aktif';
-                                    ?>
-                                    <span class="px-2 py-1 rounded text-xs <?= $bg ?>"><?= $text ?></span>
-                                </td>
-                                <td class="px-2 sm:px-4 py-3 flex justify-center gap-2">
-                                    <label for="modal-edit-<?= $u->id_user ?? '' ?>"
-                                        class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
-                                        title="Edit">✏️</label>
-
-                                    <?php if ($this->session->userdata('role') === 'admin'): ?>
-                                        <a href="<?= site_url('user/delete/' . ($u->id_user ?? '')) ?>"
-                                            onclick="return confirm('Yakin hapus user ini?')"
-                                            class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
-                                            title="Hapus">🗑️</a>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
-
-                            <!-- Modal tetap sama -->
-                            <input type="checkbox" id="modal-edit-<?= $u->id_user ?? '' ?>" class="modal-toggle hidden" />
-                            <div class="modal fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-                                <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
-                                    <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit User</h3>
-                                    <form method="post" action="<?= site_url('user/update') ?>" class="space-y-4">
-                                        <input type="hidden" name="id_user" value="<?= htmlspecialchars($u->id_user ?? '') ?>">
-                                        <div>
-                                            <label class="block text-gray-700 font-medium mb-1">Username</label>
-                                            <input type="text" value="<?= htmlspecialchars($u->username ?? '') ?>" readonly
-                                                class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50">
-                                        </div>
-                                        <div>
-                                            <label class="block text-gray-700 font-medium mb-1">Password Baru</label>
-                                            <input type="password" name="password"
-                                                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
-                                                placeholder="Kosongkan jika tidak ingin mengubah">
-                                        </div>
-                                        <div>
-                                            <label class="block text-gray-700 font-medium mb-1">Status</label>
-                                            <select name="status"
-                                                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
-                                                <option value="aktif" <?= ($u->status ?? '') == 'aktif' ? 'selected' : '' ?>>Aktif</option>
-                                                <option value="tidak aktif" <?= ($u->status ?? '') == 'tidak aktif' ? 'selected' : '' ?>>Tidak Aktif</option>
-                                            </select>
-                                        </div>
-                                        <div class="flex justify-end gap-3 mt-3">
-                                            <label for="modal-edit-<?= $u->id_user ?? '' ?>" class="px-4 py-2 bg-gray-200 rounded-lg cursor-pointer">Batal</label>
-                                            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">Simpan</button>
-                                        </div>
-                                    </form>
-                                    <label for="modal-edit-<?= $u->id_user ?? '' ?>" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
-                                </div>
-                            </div>
-                            <style>
-                                #modal-edit-<?= $u->id_user ?? '' ?>:checked+.modal {
-                                    opacity: 1;
-                                    pointer-events: auto;
-                                }
-                            </style>
-                        <?php endforeach; ?>
-                    <?php else: ?>
+            <div class="overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200">
+                <table class="min-w-full text-center border-collapse hidden sm:table">
+                    <thead class="bg-red-600 text-white text-sm sm:text-base">
                         <tr>
-                            <td colspan="7" class="text-center py-8 text-gray-500 italic">Belum ada user.</td>
+                            <th class="px-2 sm:px-4 py-3 font-semibold">No</th>
+                            <th class="px-2 sm:px-4 py-3 font-semibold text-left">Username</th>
+                            <th class="px-2 sm:px-4 py-3 font-semibold">Role</th>
+                            <th class="px-2 sm:px-4 py-3 font-semibold">Kanwil</th>
+                            <th class="px-2 sm:px-4 py-3 font-semibold">UPT</th>
+                            <th class="px-2 sm:px-4 py-3 font-semibold">Status</th>
+                            <th class="px-2 sm:px-4 py-3 font-semibold">Aksi</th>
                         </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
+                        <?php if (!empty($users)): ?>
+                            <?php $no = 1 + (isset($_GET['page_user']) ? (($_GET['page_user'] - 1) * $limit) : 0);
+                            foreach ($users as $u): ?>
+                                <tr class="hover:bg-red-50 transition">
+                                    <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
+                                    <td class="px-2 sm:px-4 py-3 text-left"><?= htmlspecialchars($u->username ?? '') ?></td>
+                                    <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->role ?? '') ?></td>
+                                    <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->nama_kanwil ?? '-') ?></td>
+                                    <td class="px-2 sm:px-4 py-3"><?= htmlspecialchars($u->nama_upt ?? '-') ?></td>
+                                    <td class="px-2 sm:px-4 py-3">
+                                        <?php
+                                        $status = strtolower($u->status ?? '');
+                                        $bg = $status === 'aktif' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
+                                        $text = $status === 'aktif' ? 'Aktif' : 'Tidak Aktif';
+                                        ?>
+                                        <span class="px-2 py-1 rounded text-xs <?= $bg ?>"><?= $text ?></span>
+                                    </td>
+                                    <td class="px-2 sm:px-4 py-3 flex justify-center gap-2">
+                                        <label for="modal-edit-<?= $u->id_user ?? '' ?>"
+                                            class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
+                                            title="Edit">✏️</label>
+
+                                        <?php if ($this->session->userdata('role') === 'admin'): ?>
+                                            <a href="<?= site_url('user/delete/' . ($u->id_user ?? '')) ?>"
+                                                onclick="return confirm('Yakin hapus user ini?')"
+                                                class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
+                                                title="Hapus">🗑️</a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+
+                                <!-- Modal tetap sama -->
+                                <input type="checkbox" id="modal-edit-<?= $u->id_user ?? '' ?>" class="modal-toggle hidden" />
+                                <div class="modal fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+                                    <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
+                                        <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit User</h3>
+                                        <form method="post" action="<?= site_url('user/update') ?>" class="space-y-4">
+                                            <input type="hidden" name="id_user" value="<?= htmlspecialchars($u->id_user ?? '') ?>">
+                                            <div>
+                                                <label class="block text-gray-700 font-medium mb-1">Username</label>
+                                                <input type="text" value="<?= htmlspecialchars($u->username ?? '') ?>" readonly
+                                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-50">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-700 font-medium mb-1">Password Baru</label>
+                                                <input type="password" name="password"
+                                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
+                                                    placeholder="Kosongkan jika tidak ingin mengubah">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-700 font-medium mb-1">Status</label>
+                                                <select name="status"
+                                                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
+                                                    <option value="aktif" <?= ($u->status ?? '') == 'aktif' ? 'selected' : '' ?>>Aktif</option>
+                                                    <option value="tidak aktif" <?= ($u->status ?? '') == 'tidak aktif' ? 'selected' : '' ?>>Tidak Aktif</option>
+                                                </select>
+                                            </div>
+                                            <div class="flex justify-end gap-3 mt-3">
+                                                <label for="modal-edit-<?= $u->id_user ?? '' ?>" class="px-4 py-2 bg-gray-200 rounded-lg cursor-pointer">Batal</label>
+                                                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">Simpan</button>
+                                            </div>
+                                        </form>
+                                        <label for="modal-edit-<?= $u->id_user ?? '' ?>" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
+                                    </div>
+                                </div>
+                                <style>
+                                    #modal-edit-<?= $u->id_user ?? '' ?>:checked+.modal {
+                                        opacity: 1;
+                                        pointer-events: auto;
+                                    }
+                                </style>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="7" class="text-center py-8 text-gray-500 italic">Belum ada user.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
 
             <!-- CARD: tampil di mobile -->
             <div class="block sm:hidden divide-y divide-gray-100">

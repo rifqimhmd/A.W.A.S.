@@ -58,12 +58,12 @@
                             10
                         </span>
                         <div id="notification-dropdown"
-                            class="hidden absolute right-0 mt-2 w-48 sm:w-56 bg-black text-white shadow-lg rounded-md overflow-hidden z-50">
-                            <a href="#" class="block px-4 py-2 hover:bg-red-700 text-xs sm:text-sm">Notifikasi 1</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-700 text-xs sm:text-sm">Notifikasi 2</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-700 text-xs sm:text-sm">Notifikasi 3</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-700 text-xs sm:text-sm">Notifikasi 4</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-700 text-xs sm:text-sm">Notifikasi 5</a>
+                            class="hidden absolute right-0 mt-2 w-48 sm:w-56 bg-white text-black border border-gray-200 shadow-lg rounded-md overflow-hidden z-50">
+                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 1</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 2</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 3</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 4</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 5</a>
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@
                         <div id="user-dropdown"
                             class="hidden absolute right-0 mt-2 w-36 sm:w-40 bg-black text-white shadow-lg rounded-md overflow-hidden z-50">
                             <a href="<?= base_url("login/logout") ?>"
-                                class="flex items-center gap-2 px-4 py-2 hover:bg-red-700 text-xs sm:text-sm">
+                                class="block px-4 py-2 bg-white text-black hover:bg-red-100 text-xs sm:text-sm flex items-center gap-2">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 17l5-5-5-5M15 12H3" />
@@ -101,6 +101,7 @@
                                 </svg>
                                 Keluar
                             </a>
+
                         </div>
                     </div>
                 <?php else: ?>
