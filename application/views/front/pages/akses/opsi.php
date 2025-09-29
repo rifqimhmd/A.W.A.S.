@@ -64,48 +64,50 @@
                 class="px-4 py-2 rounded-lg shadow font-medium bg-gray-200 text-gray-800 transition hover:bg-gray-300 cursor-pointer">Faktor</button>
         </div>
 
-        <!-- FILTER: Desktop & Mobile -->
+        <!-- Tombol Filter -->
         <div class="flex items-center gap-4">
-            <!-- Desktop filters -->
-            <div class="hidden sm:flex items-center gap-4" id="filters-desktop">
-                <div class="flex items-center gap-2">
-                    <label for="filter-jenis" class="text-sm text-gray-700">Jenis:</label>
-                    <select id="filter-jenis" onchange="onFilterChange('filter-jenis')"
-                        class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
-                    </select>
-                </div>
+            <button id="open-filter-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v2l-7 7v6l-4-2v-4L3 6z" />
+                </svg>
+                Filter
+            </button>
+        </div>
 
-                <div class="flex items-center gap-2">
-                    <label for="filter-instrument" class="text-sm text-gray-700">Instrument:</label>
-                    <select id="filter-instrument" onchange="onFilterChange('filter-instrument')"
-                        class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
-                        <option value="all">Semua</option>
-                        <option value="Narkotika">Narkotika</option>
-                        <option value="Teroris">Teroris</option>
-                    </select>
+        <!-- Modal Filter -->
+        <div id="filter-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-lg p-6 w-11/12 max-w-md">
+                <h2 class="text-lg font-semibold mb-4 flex items-center gap-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v2l-7 7v6l-4-2v-4L3 6z" />
+                    </svg>
+                    Filter
+                </h2>
+                <!-- Isi Filter -->
+                <div class="flex flex-col gap-3">
+                    <!-- Filter Jenis -->
+                    <div class="flex items-center gap-2">
+                        <label for="filter-jenis" class="text-sm text-gray-700">Jenis:</label>
+                        <select id="filter-jenis" onchange="onFilterChange('filter-jenis')"
+                            class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"></select>
+                    </div>
+                    <!-- Filter Instrument -->
+                    <div class="flex items-center gap-2">
+                        <label for="filter-instrument" class="text-sm text-gray-700">Instrument:</label>
+                        <select id="filter-instrument" onchange="onFilterChange('filter-instrument')"
+                            class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
+                            <option value="all">Semua</option>
+                            <option value="Narkotika">Narkotika</option>
+                            <option value="Teroris">Teroris</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Tombol Modal -->
+                <div class="flex justify-end gap-2 mt-4">
+                    <button id="close-filter-btn" class="bg-gray-300 px-4 py-2 rounded-lg cursor-pointer">Batal</button>
+                    <button id="apply-filter-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg cursor-pointer">Terapkan</button>
                 </div>
             </div>
-
-            <!-- Mobile filters -->
-            <div class="sm:hidden flex flex-col gap-3 w-full" id="filters-mobile">
-                <div class="flex items-center gap-2 w-full">
-                    <label for="filter-jenis-mobile" class="text-sm text-gray-700">Jenis:</label>
-                    <select id="filter-jenis-mobile" onchange="onFilterChange('filter-jenis-mobile')"
-                        class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm w-full">
-                    </select>
-                </div>
-
-                <div class="flex items-center gap-2 w-full">
-                    <label for="filter-instrument-mobile" class="text-sm text-gray-700">Instrument:</label>
-                    <select id="filter-instrument-mobile" onchange="onFilterChange('filter-instrument-mobile')"
-                        class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm w-full">
-                        <option value="all">Semua</option>
-                        <option value="Narkotika">Narkotika</option>
-                        <option value="Teroris">Teroris</option>
-                    </select>
-                </div>
-            </div>
-
         </div>
 
         <!-- Mobile limit control -->
@@ -539,245 +541,217 @@ $i->id_instrument
 
     <!-- SCRIPTS -->
     <script>
-        // Toggle form add skrining/faktor
-        function toggleForm() {
-            const type = document.getElementById('opsi_type').value;
-            document.getElementById('form-skrining').classList.add('hidden');
-            document.getElementById('form-faktor').classList.add('hidden');
+    // Toggle form add skrining/faktor
+            function toggleForm() {
+                const type = document.getElementById('opsi_type').value;
+                document.getElementById('form-skrining').classList.add('hidden');
+                document.getElementById('form-faktor').classList.add('hidden');
 
-            if (type === 'skrining') document.getElementById('form-skrining').classList.remove('hidden');
-            if (type === 'faktor') document.getElementById('form-faktor').classList.remove('hidden');
-        }
+                if (type === 'skrining') document.getElementById('form-skrining').classList.remove('hidden');
+                if (type === 'faktor') document.getElementById('form-faktor').classList.remove('hidden');
+            }
 
-        // Change limit (desktop)
-        function changeLimit() {
-            const val = document.getElementById('limit-select').value;
-            window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
-        }
+            // Change limit (desktop)
+            function changeLimit() {
+                const val = document.getElementById('limit-select').value;
+                window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
+            }
 
-        // Change limit (mobile)
-        function changeLimitFromMobile() {
-            const val = document.getElementById('limit-select-mobile').value;
-            window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
-        }
+            // Change limit (mobile)
+            function changeLimitFromMobile() {
+                const val = document.getElementById('limit-select-mobile').value;
+                window.location.href = '<?= site_url("opsi") ?>?limit=' + val;
+            }
 
-        // opsi jenis
-        const jenisOptions = {
-            skrining: ["Pengguna", "Pengedar", "Pengendali", "Ideolog", "Pengikut"],
-            faktor: ["Bahaya", "Kerentanan"]
-        };
+    // --- Helper: toggleTable (stub, sesuaikan dengan logika tab Anda) ---
+    // toggle tab + simpan ke localStorage + update UI
+            function toggleTable(type) {
+                const skr = document.getElementById("table-skrining");
+                const fak = document.getElementById("table-faktor");
+                const btnS = document.getElementById("btn-skrining");
+                const btnF = document.getElementById("btn-faktor");
 
-        // populate pilihan Jenis untuk desktop & mobile
-        function populateJenis(type) {
-            const desktop = document.getElementById("filter-jenis");
-            const mobile = document.getElementById("filter-jenis-mobile");
-            if (!desktop || !mobile) return;
+                // hide both first
+                skr.classList.add("hidden");
+                fak.classList.add("hidden");
+                btnS.classList.remove("bg-red-600", "text-white");
+                btnS.classList.add("bg-gray-200", "text-gray-800");
+                btnF.classList.remove("bg-red-600", "text-white");
+                btnF.classList.add("bg-gray-200", "text-gray-800");
 
-            // simpan current supaya kalau opsi sama tetap terpilih bila memungkinkan
-            const current = desktop.value || "all";
+                if (type === "skrining") {
+                    skr.classList.remove("hidden");
+                    btnS.classList.add("bg-red-600", "text-white");
+                    btnS.classList.remove("bg-gray-200", "text-gray-800");
+                } else {
+                    fak.classList.remove("hidden");
+                    btnF.classList.add("bg-red-600", "text-white");
+                    btnF.classList.remove("bg-gray-200", "text-gray-800");
+                }
 
-            desktop.innerHTML = "";
-            mobile.innerHTML = "";
+                // populate jenis sesuai tab aktif
+                populateJenis(type);
 
-            // opsi "Semua"
+                // simpan tab aktif
+                    localStorage.setItem("activeTab", type);
+
+                    // jalankan filter setelah tab diganti supaya tampilan sesuai
+                    if (typeof applyFilters === "function") applyFilters();
+            }
+
+            // Saat halaman dimuat, cek localStorage
+            window.addEventListener('DOMContentLoaded', function() {
+                let activeTab = localStorage.getItem('activeTab');
+                if (activeTab !== "skrining" && activeTab !== "faktor") {
+                    activeTab = "skrining"; // default
+                    localStorage.setItem("activeTab", "skrining");
+                }
+                toggleTable(activeTab);
+            });
+
+            // --- Helper: parseCardInfo (stub, sesuaikan dengan struktur card Anda) ---
+            function parseCardInfo(card) {
+                // Contoh parsing, sesuaikan dengan struktur card sebenarnya
+                // Misal: <div><div>Jenis: Pengguna</div><div>Instrument: Narkotika</div></div>
+                let jenis = '', instrument = '';
+                const txt = card.innerText || '';
+                const jenisMatch = txt.match(/Jenis\s*:\s*([^\n]+)/i);
+                const instrMatch = txt.match(/Instrument\s*:\s*([^\n]+)/i);
+                if (jenisMatch) jenis = jenisMatch[1].trim();
+                if (instrMatch) instrument = instrMatch[1].trim();
+                return { jenis, instrument };
+            }
+
+    // --- Jenis Options ---
+    const jenisOptions = {
+        skrining: ["Pengguna", "Pengedar", "Pengendali", "Ideolog", "Pengikut"],
+        faktor: ["Bahaya", "Kerentanan"]
+    };
+
+    // --- Populate Jenis Select ---
+    function populateJenis(type) {
+        const desktop = document.getElementById("filter-jenis");
+        const mobile = document.getElementById("filter-jenis-mobile");
+        if (!desktop && !mobile) return;
+
+        const current = desktop ? desktop.value : (mobile ? mobile.value : "all");
+
+        function fillSelect(select) {
+            if (!select) return;
+            select.innerHTML = "";
             const optAll = document.createElement("option");
             optAll.value = "all";
             optAll.textContent = "Semua";
-            desktop.appendChild(optAll);
-            mobile.appendChild(optAll.cloneNode(true));
-
+            select.appendChild(optAll);
             (jenisOptions[type] || []).forEach(j => {
                 const opt = document.createElement("option");
                 opt.value = j;
                 opt.textContent = j;
-                desktop.appendChild(opt);
-
-                const opt2 = document.createElement("option");
-                opt2.value = j;
-                opt2.textContent = j;
-                mobile.appendChild(opt2);
+                select.appendChild(opt);
             });
-
-            // try to restore previous selection if available
-            if ([...desktop.options].some(o => o.value === current)) {
-                desktop.value = current;
-                mobile.value = current;
-            } else {
-                desktop.value = "all";
-                mobile.value = "all";
-            }
+            // Restore previous selection if available
+            if ([...select.options].some(o => o.value === current)) select.value = current;
         }
+        fillSelect(desktop);
+        fillSelect(mobile);
+    }
 
-        // toggle tab + simpan ke localStorage + update UI
-        function toggleTable(type) {
-            const skr = document.getElementById("table-skrining");
-            const fak = document.getElementById("table-faktor");
-            const btnS = document.getElementById("btn-skrining");
-            const btnF = document.getElementById("btn-faktor");
+    // --- Apply Filters ---
+    function applyFilters() {
+        const jenis = document.getElementById("filter-jenis") ? document.getElementById("filter-jenis").value : "all";
+        const instrument = document.getElementById("filter-instrument") ? document.getElementById("filter-instrument").value : "all";
+        localStorage.setItem("filterJenis", jenis);
+        localStorage.setItem("filterInstrument", instrument);
 
-            // hide both first
-            skr.classList.add("hidden");
-            fak.classList.add("hidden");
-            btnS.classList.remove("bg-red-600", "text-white");
-            btnS.classList.add("bg-gray-200", "text-gray-800");
-            btnF.classList.remove("bg-red-600", "text-white");
-            btnF.classList.add("bg-gray-200", "text-gray-800");
+        // Cek tab aktif
+        const isSkrining = !document.getElementById("table-skrining").classList.contains("hidden");
+        const activeTableId = isSkrining ? "table-skrining" : "table-faktor";
 
-            if (type === "skrining") {
-                skr.classList.remove("hidden");
-                btnS.classList.add("bg-red-600", "text-white");
-                btnS.classList.remove("bg-gray-200", "text-gray-800");
-            } else {
-                fak.classList.remove("hidden");
-                btnF.classList.add("bg-red-600", "text-white");
-                btnF.classList.remove("bg-gray-200", "text-gray-800");
-            }
-
-            // populate jenis sesuai tab aktif
-            populateJenis(type);
-
-            // simpan tab aktif
-                localStorage.setItem("activeTab", type);
-
-                // jalankan filter setelah tab diganti supaya tampilan sesuai
-                if (typeof applyFilters === "function") applyFilters();
-        }
-
-        // Saat halaman dimuat, cek localStorage
-        window.addEventListener('DOMContentLoaded', function() {
-            let activeTab = localStorage.getItem('activeTab');
-            if (activeTab !== "skrining" && activeTab !== "faktor") {
-                activeTab = "skrining"; // default
-                localStorage.setItem("activeTab", "skrining");
-            }
-            toggleTable(activeTab);
-        });
-
-        // helper untuk parsing card mobile (mencari "Jenis:" dan "Instrument:")
-        function parseCardInfo(card) {
-            // cari elemen yang biasanya memuat informasi
-            const infoEl = card.querySelector('.text-gray-700') || card;
-            const text = infoEl.innerText.replace(/\r/g, '').trim();
-            const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-            let jenis = '';
-            let instrument = '';
-            lines.forEach(line => {
-                if (line.toLowerCase().startsWith('jenis:')) {
-                    jenis = line.substring(6).trim();
-                }
-                if (line.toLowerCase().startsWith('instrument:')) {
-                    instrument = line.substring(11).trim();
-                }
+        // Filter Desktop Table
+        const desktopTable = document.querySelector(`#${activeTableId} table`);
+        if (desktopTable) {
+            desktopTable.querySelectorAll('tbody tr').forEach(row => {
+                const jenisCell = row.querySelector('td.jenis') ? row.querySelector('td.jenis').innerText.trim() : (row.cells[2] ? row.cells[2].innerText.trim() : '');
+                const instrCell = row.querySelector('td.instrument') ? row.querySelector('td.instrument').innerText.trim() : (row.cells[3] ? row.cells[3].innerText.trim() : '');
+                let visible = true;
+                if (jenis !== "all" && jenisCell !== jenis) visible = false;
+                if (instrument !== "all" && instrCell !== instrument) visible = false;
+                row.style.display = visible ? "" : "none";
             });
-            return {
-                jenis,
-                instrument
-            };
         }
 
-        // applyFilters + simpan ke localStorage
-        function applyFilters() {
-            const jenis = document.getElementById("filter-jenis") ? document.getElementById("filter-jenis").value : "all";
-            const instrument = document.getElementById("filter-instrument") ? document.getElementById("filter-instrument").value : "all";
-
-            // simpan filter
-            localStorage.setItem("filterJenis", jenis);
-            localStorage.setItem("filterInstrument", instrument);
-
-            // cek tab aktif (skrining atau faktor)
-            const isSkrining = !document.getElementById("table-skrining").classList.contains("hidden");
-            const activeTableId = isSkrining ? "table-skrining" : "table-faktor";
-
-            // FILTER BARIS DESKTOP (jika ada)
-            const desktopTable = document.querySelector(`#${activeTableId} table`);
-            if (desktopTable) {
-                desktopTable.querySelectorAll('tbody tr').forEach(row => {
-                    // pastikan baris data (skip empty/placeholder)
-                    const jenisCell = row.querySelector('td.jenis') ? row.querySelector('td.jenis').innerText.trim() : (row.cells[2] ? row.cells[2].innerText.trim() : '');
-                    const instrCell = row.querySelector('td.instrument') ? row.querySelector('td.instrument').innerText.trim() : (row.cells[3] ? row.cells[3].innerText.trim() : '');
-
-                    let visible = true;
-                    if (jenis !== "all" && jenisCell !== jenis) visible = false;
-                    if (instrument !== "all" && instrCell !== instrument) visible = false;
-
-                    row.style.display = visible ? "" : "none";
-                });
-            }
-
-            // FILTER CARD MOBILE
-            // cari container yang memiliki kelas responsive 'sm:hidden' menggunakan attribute selector agar tidak perlu escape colon
-            const mobileContainer = document.querySelector(`#${activeTableId} [class*="sm:hidden"]`);
-            if (mobileContainer) {
-                Array.from(mobileContainer.children).forEach(card => {
-                    // card bisa berupa div modal/style (skip jika bukan card data) => anggap card yang memiliki teks "Indikator" / "Jenis"
-                    const txt = card.innerText || '';
-                    if (!txt.toLowerCase().includes('indikator') && !txt.toLowerCase().includes('jenis')) {
-                        // kemungkinan bukan card data (mis. placeholder). tampilkan default.
-                        card.style.display = "";
-                        return;
-                    }
-
-                    const info = parseCardInfo(card);
-                    let visible = true;
-                    if (jenis !== "all" && info.jenis !== jenis) visible = false;
-                    if (instrument !== "all" && info.instrument !== instrument) visible = false;
-
-                    card.style.display = visible ? "" : "none";
-                });
-            }
+        // Filter Mobile Card
+        const mobileContainer = document.querySelector(`#${activeTableId} [class*="sm:hidden"]`);
+        if (mobileContainer) {
+            Array.from(mobileContainer.children).forEach(card => {
+                const txt = card.innerText || '';
+                if (!txt.toLowerCase().includes('indikator') && !txt.toLowerCase().includes('jenis')) {
+                    card.style.display = "";
+                    return;
+                }
+                const info = parseCardInfo(card);
+                let visible = true;
+                if (jenis !== "all" && info.jenis !== jenis) visible = false;
+                if (instrument !== "all" && info.instrument !== instrument) visible = false;
+                card.style.display = visible ? "" : "none";
+            });
         }
+    }
 
-        // central handler untuk perubahan pada filter (desktop atau mobile)
-        function onFilterChange(id) {
-            // sync desktop <-> mobile
-            if (id === 'filter-jenis') {
-                const v = document.getElementById('filter-jenis').value;
-                const mob = document.getElementById('filter-jenis-mobile');
-                if (mob) mob.value = v;
-            } else if (id === 'filter-jenis-mobile') {
-                const v = document.getElementById('filter-jenis-mobile').value;
-                const des = document.getElementById('filter-jenis');
-                if (des) des.value = v;
-            } else if (id === 'filter-instrument') {
-                const v = document.getElementById('filter-instrument').value;
-                const mob = document.getElementById('filter-instrument-mobile');
-                if (mob) mob.value = v;
-            } else if (id === 'filter-instrument-mobile') {
-                const v = document.getElementById('filter-instrument-mobile').value;
-                const des = document.getElementById('filter-instrument');
-                if (des) des.value = v;
-            }
-
-            // apply
-            applyFilters();
+    // --- Sinkronisasi Filter Desktop <-> Mobile ---
+    function onFilterChange(id) {
+        if (id === 'filter-jenis') {
+            const v = document.getElementById('filter-jenis').value;
+            const mob = document.getElementById('filter-jenis-mobile');
+            if (mob) mob.value = v;
+        } else if (id === 'filter-jenis-mobile') {
+            const v = document.getElementById('filter-jenis-mobile').value;
+            const des = document.getElementById('filter-jenis');
+            if (des) des.value = v;
+        } else if (id === 'filter-instrument') {
+            const v = document.getElementById('filter-instrument').value;
+            const mob = document.getElementById('filter-instrument-mobile');
+            if (mob) mob.value = v;
+        } else if (id === 'filter-instrument-mobile') {
+            const v = document.getElementById('filter-instrument-mobile').value;
+            const des = document.getElementById('filter-instrument');
+            if (des) des.value = v;
         }
+        applyFilters();
+    }
 
-        // inisialisasi saat load
-        document.addEventListener("DOMContentLoaded", function() {
-            const savedTab = localStorage.getItem("activeTab") || "skrining";
-            const savedJenis = localStorage.getItem("filterJenis") || "all";
-            const savedInstrument = localStorage.getItem("filterInstrument") || "all";
+    // --- Modal Logic & Inisialisasi ---
+    document.addEventListener("DOMContentLoaded", function() {
+        // Modal event
+        const openBtn = document.getElementById("open-filter-btn");
+        const closeBtn = document.getElementById("close-filter-btn");
+        const modal = document.getElementById("filter-modal");
+        const applyBtn = document.getElementById("apply-filter-btn");
+        if (openBtn && modal) openBtn.onclick = () => modal.classList.remove("hidden");
+        if (closeBtn && modal) closeBtn.onclick = () => modal.classList.add("hidden");
+        if (modal) modal.onclick = (e) => { if (e.target === modal) modal.classList.add("hidden"); };
+        if (applyBtn && modal) applyBtn.onclick = () => { applyFilters(); modal.classList.add("hidden"); };
 
-            // populate jenis sesuai savedTab
-            populateJenis(savedTab);
+        // Inisialisasi filter
+        let savedTab = localStorage.getItem("activeTab") || "skrining";
+        let savedJenis = localStorage.getItem("filterJenis") || "all";
+        let savedInstrument = localStorage.getItem("filterInstrument") || "all";
+        populateJenis(savedTab);
 
-            // set instrument selects (desktop & mobile)
-            const instDesktop = document.getElementById('filter-instrument');
-            const instMobile = document.getElementById('filter-instrument-mobile');
-            if (instDesktop) instDesktop.value = savedInstrument;
-            if (instMobile) instMobile.value = savedInstrument;
+        // Set instrument selects
+        const instDesktop = document.getElementById('filter-instrument');
+        const instMobile = document.getElementById('filter-instrument-mobile');
+        if (instDesktop) instDesktop.value = savedInstrument;
+        if (instMobile) instMobile.value = savedInstrument;
 
-            // set jenis selects
-            const jenisDesktop = document.getElementById('filter-jenis');
-            const jenisMobile = document.getElementById('filter-jenis-mobile');
-            if (jenisDesktop) jenisDesktop.value = savedJenis;
-            if (jenisMobile) jenisMobile.value = savedJenis;
+        // Set jenis selects
+        const jenisDesktop = document.getElementById('filter-jenis');
+        const jenisMobile = document.getElementById('filter-jenis-mobile');
+        if (jenisDesktop) jenisDesktop.value = savedJenis;
+        if (jenisMobile) jenisMobile.value = savedJenis;
 
-            // tampilkan tab tersimpan (ini juga memanggil populateJenis)
-            toggleTable(savedTab);
-
-            // jalankan filter otomatis berdasarkan nilai tersimpan
-            applyFilters();
-        });
+        toggleTable(savedTab);
+        applyFilters();
+    });
     </script>
 </main>
