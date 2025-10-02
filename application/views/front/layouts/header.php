@@ -56,19 +56,19 @@
                             </svg>
                             <!-- Badge -->
                             <span id="notification-badge"
-                                class="absolute -top-1 -right-1 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 text-white bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-md">
+                                class="absolute -top-0 -right-0 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 text-white bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-md">
                                 10
                             </span>
                         </button>
 
                         <!-- Dropdown -->
                         <div id="notification-dropdown"
-                            class="hidden absolute top-full right-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 shadow-xl rounded-lg overflow-hidden z-50 animate-fadeIn">
-                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 1</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 2</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 3</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 4</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 5</a>
+                            class="hidden absolute top-full right-0 mt-2 w-48 bg-white text-gray-800 border border-gray-200 shadow-xl rounded-lg overflow-hidden z-50 animate-fadeIn">
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">Notifikasi 1</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">Notifikasi 2</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">Notifikasi 3</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">Notifikasi 4</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">Notifikasi 5</a>
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@
                         </button>
 
                         <div id="user-dropdown"
-                            class="hidden absolute top-full right-0 mt-2 w-40 bg-white text-gray-800 border border-gray-200 shadow-xl rounded-lg overflow-hidden z-50 animate-fadeIn">
+                            class="hidden absolute top-full right-0 mt-2 w-32 bg-white text-gray-800 border border-gray-200 shadow-xl rounded-lg overflow-hidden z-50 animate-fadeIn">
                             <a href="<?= base_url("login/logout") ?>"
                                 class="block px-4 py-2 hover:bg-red-50 text-sm flex items-center gap-2">
                                 <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
