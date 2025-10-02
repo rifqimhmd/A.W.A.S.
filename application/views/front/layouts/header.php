@@ -1,34 +1,36 @@
 <!-- header.php -->
-<header class="w-full bg-black shadow-md fixed top-0 left-0 z-50">
-    <div class="px-2 sm:px-4 lg:px-8">
+<header class="w-full bg-gradient-to-r from-black via-gray-900 to-black shadow-lg fixed top-0 left-0 z-50 backdrop-blur-sm">
+    <div class="px-3 sm:px-6 lg:px-10">
         <div class="flex items-center justify-between h-14 sm:h-16 lg:h-20">
-            <div class="flex items-center gap-2 sm:gap-4">
+            <div class="flex items-center gap-3 sm:gap-5">
                 <!-- Logo -->
-                <a href="<?= base_url("/") ?>" class="flex items-center">
+                <a href="<?= base_url("/") ?>" class="flex items-center group">
                     <!-- Icon Logo -->
                     <img src="<?= base_url("assets/img/iconlogo.png") ?>"
                         alt="Icon"
                         class="<?= $this->session->userdata("username")
                                     ? "hidden sm:block"
-                                    : "block" ?> w-[45px] sm:w-[60px] lg:w-[70px]">
+                                    : "block" ?> w-[45px] sm:w-[60px] lg:w-[70px] transition-transform duration-300 group-hover:scale-105">
 
                     <!-- Logo Teks -->
                     <img src="<?= base_url("assets/img/logo-nobg.png") ?>"
                         alt="Logo"
                         class="<?= $this->session->userdata("username")
                                     ? "hidden sm:block"
-                                    : "block" ?> w-[80px] sm:w-[110px] lg:w-[130px]">
+                                    : "block" ?> w-[80px] sm:w-[110px] lg:w-[130px] transition-opacity duration-300 group-hover:opacity-90">
                 </a>
 
                 <?php if ($this->session->userdata("username")): ?>
                     <!-- Sidebar Toggle -->
                     <button id="sidebar-toggle"
-                        class="text-white p-2 rounded-md hover:bg-red-700 cursor-pointer flex items-center">
+                        class="text-white p-2 rounded-md bg-transparent hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 cursor-pointer flex items-center shadow-md transition-all duration-300">
+
                         <!-- Mobile: panah -->
                         <svg id="sidebar-icon" class="w-6 h-6 sm:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path id="sidebar-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5l7 7-7 7" />
                         </svg>
+
                         <!-- Desktop: hamburger -->
                         <svg class="w-6 h-6 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -41,10 +43,10 @@
             <!-- Notifikasi + User Dropdown / Masuk -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <?php if ($this->session->userdata("username")): ?>
+                    <!-- Notifikasi -->
                     <div class="relative">
-                        <!-- Tombol Notifikasi -->
                         <button id="notification-btn"
-                            class="relative text-white p-2 sm:p-2.5 rounded-md hover:bg-red-700 cursor-pointer">
+                            class="relative text-white p-2 sm:p-2.5 rounded-full hover:bg-red-700/80 cursor-pointer shadow-md transition-all duration-300">
                             <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 17h5l-1.405-1.405A2.032 2.032 0
@@ -54,34 +56,34 @@
                             </svg>
                             <!-- Badge -->
                             <span id="notification-badge"
-                                class="absolute -top-0 -right-0 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 text-white bg-red-600 rounded-full">
+                                class="absolute -top-1 -right-1 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 text-white bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-md">
                                 10
                             </span>
                         </button>
 
                         <!-- Dropdown -->
                         <div id="notification-dropdown"
-                            class="hidden absolute top-full right-0 mt-2 w-48 sm:w-56 bg-white text-black border border-gray-200 shadow-lg rounded-md overflow-hidden z-50">
-                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 1</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 2</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 3</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 4</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm">Notifikasi 5</a>
+                            class="hidden absolute top-full right-0 mt-2 w-56 bg-white text-gray-800 border border-gray-200 shadow-xl rounded-lg overflow-hidden z-50 animate-fadeIn">
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 1</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 2</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 3</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 4</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-red-50 text-sm">🔔 Notifikasi 5</a>
                         </div>
                     </div>
+
+                    <!-- User -->
                     <div class="relative">
                         <?php $username = $this->session->userdata("username"); ?>
-
-                        <!-- Tombol User -->
                         <button id="user-btn"
-                            class="text-white px-2 sm:px-3 py-1.5 sm:py-2 rounded-md hover:bg-red-700 cursor-pointer flex items-center gap-1 sm:gap-2">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            class="text-white px-3 sm:px-4 py-2 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 cursor-pointer flex items-center gap-2 shadow-md transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4
                1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6
                2.67-6 6h12c0-3.33-2.67-6-6-6z" />
                             </svg>
-                            <span class="text-xs sm:text-sm"><?= htmlspecialchars($username) ?></span>
+                            <span class="text-sm font-medium"><?= htmlspecialchars($username) ?></span>
                             <svg class="w-4 h-4 inline-block transition-transform duration-300"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -89,16 +91,13 @@
                             </svg>
                         </button>
 
-                        <!-- Dropdown User -->
                         <div id="user-dropdown"
-                            class="hidden absolute top-full right-0 mt-2 w-36 sm:w-40 bg-white text-black border border-gray-200 shadow-lg rounded-md overflow-hidden z-50">
+                            class="hidden absolute top-full right-0 mt-2 w-40 bg-white text-gray-800 border border-gray-200 shadow-xl rounded-lg overflow-hidden z-50 animate-fadeIn">
                             <a href="<?= base_url("login/logout") ?>"
-                                class="block px-4 py-2 hover:bg-red-100 text-xs sm:text-sm flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                class="block px-4 py-2 hover:bg-red-50 text-sm flex items-center gap-2">
+                                <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 17l5-5-5-5M15 12H3" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 19V5a2 2 0 00-2-2H10v2h9v14h-9v2h9a2 2 0 002-2z" />
                                 </svg>
                                 Keluar
                             </a>
@@ -106,9 +105,9 @@
                     </div>
 
                 <?php else: ?>
-                    <!-- Tombol Masuk jika belum login -->
+                    <!-- Tombol Masuk -->
                     <a href="<?= base_url("login") ?>"
-                        class="text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-md hover:bg-red-700 flex items-center gap-2 transition">
+                        class="text-white px-4 py-2 rounded-full bg-gradient-to-br from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 flex items-center gap-2 shadow-md transition-all duration-300">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12H3m12 0l-4 4m4-4l-4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -123,7 +122,10 @@
 
 <!-- Sidebar -->
 <?php if ($this->session->userdata("username")): ?>
-    <aside id="sidebar" class="fixed top-14 sm:top-16 lg:top-20 left-0 w-60 sm:w-64 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)] bg-black text-white shadow-lg -ml-64 transition-all duration-300 overflow-y-auto z-40">
+    <aside id="sidebar" class="fixed top-14 sm:top-16 lg:top-20 left-0 
+    w-60 sm:w-64 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)] 
+    bg-gradient-to-b from-black via-gray-900 to-black text-white 
+    shadow-xl -ml-64 transition-all duration-300 overflow-y-auto z-40 border-r border-gray-800/60">
         <nav class="p-2 sm:p-4 space-y-1 sm:space-y-2 text-sm sm:text-base">
             <!-- Semua menu sidebar seperti versi sebelumnya -->
             <a href="<?= base_url("/") ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Beranda</a>
