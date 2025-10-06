@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" href="<?= base_url(
                                                 "assets/img/iconlogin.png",
                                             ) ?>">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <title><?= $title ?></title>
 </head>
 

@@ -31,8 +31,13 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-5 border-b pb-4 gap-3">
         <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">👤 Input Narapidana</h2>
-            <p class="text-sm text-gray-500 mt-1">Lengkapi data narapidana dan lakukan skrining serta penilaian faktor.</p>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3 text-red-700">
+                <span class="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-red-100 text-red-600 shadow-sm">
+                    <i class="ri-user-line text-2xl"></i>
+                </span>
+                <span class="hover:text-red-800 transition-colors duration-200">Input Narapidana</span>
+            </h2>
+            <p class="text-sm text-gray-600 mt-2 ml-0.5">Lengkapi data narapidana dan lakukan skrining serta penilaian faktor.</p>
         </div>
     </div>
 

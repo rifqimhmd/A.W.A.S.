@@ -44,17 +44,34 @@ class Opsi extends CI_Controller
 			"reuse_query_string" => true,
 			"use_page_numbers" => true,
 			"cur_page" => $page_skrining,
-			"full_tag_open" => '<div class="pagination flex space-x-2 mt-3">',
+
+			// Wrapper
+			"full_tag_open" => '<div class="flex flex-wrap justify-center gap-2 mt-4">',
 			"full_tag_close" => "</div>",
+
+			// First / Last
 			"first_link" => "«",
 			"last_link" => "»",
-			"next_link" => "›",
+			"first_tag_open" => '<button class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 transition">',
+			"first_tag_close" => "</button>",
+			"last_tag_open" => '<button class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 transition">',
+			"last_tag_close" => "</button>",
+
+			// Prev / Next
 			"prev_link" => "‹",
-			"num_tag_open" => '<span class="px-3 py-1 bg-gray-200 rounded">',
-			"num_tag_close" => "</span>",
-			"cur_tag_open" =>
-				'<span class="px-3 py-1 bg-red-600 text-white rounded">',
-			"cur_tag_close" => "</span>",
+			"next_link" => "›",
+			"prev_tag_open" => '<button class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 transition">',
+			"prev_tag_close" => "</button>",
+			"next_tag_open" => '<button class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 transition">',
+			"next_tag_close" => "</button>",
+
+			// Number links
+			"num_tag_open" => '<button class="px-3 py-1 rounded bg-gray-100 hover:bg-gray-200 transition">',
+			"num_tag_close" => "</button>",
+
+			// Current page
+			"cur_tag_open" => '<button class="px-3 py-1 rounded bg-red-600 text-white font-semibold shadow">',
+			"cur_tag_close" => "</button>",
 		];
 
 		$this->pagination->initialize($config_skrining);
@@ -78,17 +95,34 @@ class Opsi extends CI_Controller
 			"reuse_query_string" => true,
 			"use_page_numbers" => true,
 			"cur_page" => $page_faktor,
-			"full_tag_open" => '<div class="pagination flex space-x-2 mt-3">',
+
+			// Wrapper
+			"full_tag_open" => '<div class="flex flex-wrap justify-center gap-2 mt-4">',
 			"full_tag_close" => "</div>",
+
+			// First / Last
 			"first_link" => "«",
 			"last_link" => "»",
-			"next_link" => "›",
+			"first_tag_open" => '<button class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 transition">',
+			"first_tag_close" => "</button>",
+			"last_tag_open" => '<button class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 transition">',
+			"last_tag_close" => "</button>",
+
+			// Prev / Next
 			"prev_link" => "‹",
-			"num_tag_open" => '<span class="px-3 py-1 bg-gray-200 rounded">',
-			"num_tag_close" => "</span>",
-			"cur_tag_open" =>
-				'<span class="px-3 py-1 bg-red-600 text-white rounded">',
-			"cur_tag_close" => "</span>",
+			"next_link" => "›",
+			"prev_tag_open" => '<button class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 transition">',
+			"prev_tag_close" => "</button>",
+			"next_tag_open" => '<button class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 transition">',
+			"next_tag_close" => "</button>",
+
+			// Number links
+			"num_tag_open" => '<button class="px-3 py-1 rounded bg-gray-100 hover:bg-gray-200 transition">',
+			"num_tag_close" => "</button>",
+
+			// Current page
+			"cur_tag_open" => '<button class="px-3 py-1 rounded bg-red-600 text-white font-semibold shadow">',
+			"cur_tag_close" => "</button>",
 		];
 
 		// reset pagination sebelum initialize Faktor
@@ -120,8 +154,8 @@ class Opsi extends CI_Controller
 				$jenis == "Pengguna" ||
 				$jenis == "Pengedar" ||
 				$jenis == "Pengendali"
-					? $this->OpsiModel->get_instrument_id_by_name("Narkotika")
-					: $this->OpsiModel->get_instrument_id_by_name("Teroris");
+				? $this->OpsiModel->get_instrument_id_by_name("Narkotika")
+				: $this->OpsiModel->get_instrument_id_by_name("Teroris");
 
 			$data = [
 				"id_skrining" => $this->uuid_v4(),
@@ -164,8 +198,8 @@ class Opsi extends CI_Controller
 			$jenis == "Pengguna" ||
 			$jenis == "Pengedar" ||
 			$jenis == "Pengendali"
-				? $this->OpsiModel->get_instrument_id_by_name("Narkotika")
-				: $this->OpsiModel->get_instrument_id_by_name("Teroris");
+			? $this->OpsiModel->get_instrument_id_by_name("Narkotika")
+			: $this->OpsiModel->get_instrument_id_by_name("Teroris");
 
 		$data = [
 			"indikator_skrining" => $this->input->post("indikator_skrining"),

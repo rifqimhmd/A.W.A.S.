@@ -2,14 +2,14 @@
 
     <!-- Flash Message -->
     <?php if ($this->session->flashdata("success")): ?>
-        <div class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
+        <div id="flash-message" class="bg-green-50 border-l-4 border-green-600 text-green-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
             <div class="flex items-start gap-3">
                 <div class="text-xl">✅</div>
                 <div><?= $this->session->flashdata("success") ?></div>
             </div>
         </div>
     <?php elseif ($this->session->flashdata("error")): ?>
-        <div class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base">
+        <div id="flash-message" class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 mb-6 rounded-lg shadow-sm text-sm sm:text-base transition-opacity duration-500">
             <div class="flex items-start gap-3">
                 <div class="text-xl">❌</div>
                 <div><?= $this->session->flashdata("error") ?></div>
@@ -17,11 +17,26 @@
         </div>
     <?php endif; ?>
 
+    <script>
+        setTimeout(() => {
+            const flash = document.getElementById('flash-message');
+            if (flash) {
+                flash.style.opacity = '0';
+                setTimeout(() => flash.remove(), 500); // hapus elemen setelah animasi 0.5 detik
+            }
+        }, 5000);
+    </script>
+
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center  mb-4 sm:mb-5 border-b pb-0 sm:pb-4 gap-3">
         <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">⚙️ Manajemen Opsi</h2>
-            <p class="text-sm text-gray-500 mt-1">Kelola data Skrining dan Faktor — tambahkan, edit, atau hapus.</p>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3 text-red-700">
+                <span class="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-red-100 text-red-600 shadow-sm">
+                    <i class="ri-settings-4-line text-2xl"></i>
+                </span>
+                <span class="hover:text-red-800 transition-colors duration-200">Manajemen Opsi</span>
+            </h2>
+            <p class="text-sm text-gray-600 mt-2 ml-0.5">Kelola data Skrining dan Faktor — tambahkan, edit, atau hapus.</p>
         </div>
         <div class="flex items-center gap-3">
             <div class="hidden sm:flex items-center gap-2">
@@ -40,17 +55,17 @@
                 </select>
             </div>
 
-            <!-- Tombol Tambah Opsi -->
             <!-- Desktop -->
             <button onclick="document.getElementById('modal-add').checked = true"
-                class="cursor-pointer hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white font-medium px-4 sm:px-5 py-2 rounded-xl shadow-md transition transform hover:scale-105 text-sm sm:text-base">
-                ➕ Tambah Opsi
+                class="cursor-pointer hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white font-medium px-4 sm:px-5 py-2 rounded-xl shadow-md transition transform hover:scale-105 text-sm sm:text-base items-center gap-2">
+                <i class="ri-add-line text-lg"></i>
+                Tambah Opsi
             </button>
 
             <!-- Mobile (FAB) -->
             <button onclick="document.getElementById('modal-add').checked = true"
                 class="cursor-pointer sm:hidden fixed bottom-5 right-5 w-14 h-14 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg transition transform hover:scale-110">
-                ➕
+                <i class="ri-add-line text-2xl"></i>
             </button>
         </div>
     </div>
@@ -66,10 +81,9 @@
 
         <!-- Tombol Filter -->
         <div class="flex items-center gap-4">
-            <button id="open-filter-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center cursor-pointer">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v2l-7 7v6l-4-2v-4L3 6z" />
-                </svg>
+            <button id="open-filter-btn"
+                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition">
+                <i class="ri-filter-3-line text-lg"></i>
                 Filter
             </button>
         </div>
@@ -77,10 +91,8 @@
         <!-- Modal Filter -->
         <div id="filter-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
             <div class="bg-white rounded-lg p-6 w-11/12 max-w-md">
-                <h2 class="text-lg font-semibold mb-4 flex items-center gap-1">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v2l-7 7v6l-4-2v-4L3 6z" />
-                    </svg>
+                <h2 class="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-800">
+                    <i class="ri-filter-3-line text-lg text-red-600"></i>
                     Filter
                 </h2>
                 <!-- Isi Filter -->
@@ -128,45 +140,42 @@
 
     <!-- CONTENT CARD: Skrining -->
     <div id="table-skrining" class="overflow-x-auto">
-        <div class="overflow-hidden bg-white shadow-md rounded-lg border border-gray-200">
+        <div class="overflow-hidden bg-white shadow-md rounded-lg sm:border sm:border-gray-200">
             <!-- Table untuk Desktop -->
             <table class="min-w-full text-center border-collapse hidden sm:table">
-                <thead class="bg-red-600 text-white text-sm sm:text-base">
+                <thead class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm sm:text-base">
                     <tr>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">No</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Indikator</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Jenis</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Instrument</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Aksi</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold tracking-wide">No</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Indikator</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Jenis</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Instrumen</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
+
+                <tbody class="divide-y divide-gray-100 text-sm sm:text-base text-gray-700">
                     <?php if (!empty($skrining)): ?>
                         <?php
                         $no = $start_skrining + 1;
                         foreach ($skrining as $s): ?>
-                            <tr class="hover:bg-red-100 transition">
-                                <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
-                                <td class="px-2 sm:px-4 py-3 text-left indikator"><?= htmlspecialchars(
-                                                                                        $s->indikator_skrining,
-                                                                                    ) ?></td>
-                                <td class="px-2 sm:px-4 py-3 jenis"><?= htmlspecialchars(
-                                                                        $s->jenis_skrining,
-                                                                    ) ?></td>
-                                <td class="px-2 sm:px-4 py-3 instrument"><?= htmlspecialchars(
-                                                                                $s->nama_instrument,
-                                                                            ) ?></td>
-                                <td class="px-2 sm:px-4 py-3">
+                            <tr class="hover:bg-gray-50 transition-all duration-200">
+                                <td class="px-3 sm:px-5 py-3 font-medium text-gray-800"><?= $no++ ?></td>
+                                <td class="px-3 sm:px-5 py-3 text-left font-medium"><?= htmlspecialchars($s->indikator_skrining) ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($s->jenis_skrining) ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($s->nama_instrument) ?></td>
+                                <td class="px-3 sm:px-5 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-skrining-<?= $s->id_skrining ?>"
-                                            class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
-                                            title="Edit">✏️</label>
-                                        <a href="<?= site_url(
-                                                        "opsi/delete_skrining/" .
-                                                            $s->id_skrining,
-                                                    ) ?>"
-                                            onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
-                                            class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm cursor-pointer transition"
+                                            title="Edit">
+                                            <i class="ri-edit-2-line text-lg"></i>
+                                        </label>
+                                        <a href="<?= site_url('opsi/delete_skrining/' . $s->id_skrining) ?>"
+                                            onclick="return confirm('Yakin hapus data ini?')"
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm cursor-pointer transition"
+                                            title="Hapus">
+                                            <i class="ri-delete-bin-6-line text-lg"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -175,113 +184,114 @@
                             <input type="checkbox" id="modal-edit-skrining-<?= $s->id_skrining ?>" class="modal-toggle hidden" />
                             <div class="modal fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
                                 <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
-                                    <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit Skrining</h3>
-                                    <form method="post" action="<?= site_url(
-                                                                    "opsi/update_skrining/" .
-                                                                        $s->id_skrining,
-                                                                ) ?>" class="space-y-4">
+                                    <h3 class="text-xl font-semibold text-red-700 mb-3 flex items-center gap-2">
+                                        <i class="ri-edit-2-line"></i> Edit Skrining
+                                    </h3>
+                                    <form method="post" action="<?= site_url('opsi/update_skrining/' . $s->id_skrining) ?>" class="space-y-4">
                                         <div>
                                             <label class="block text-gray-700 font-medium mb-1">Indikator Skrining</label>
-                                            <input type="text" name="indikator_skrining" value="<?= htmlspecialchars(
-                                                                                                    $s->indikator_skrining,
-                                                                                                ) ?>"
+                                            <input type="text" name="indikator_skrining"
+                                                value="<?= htmlspecialchars($s->indikator_skrining) ?>"
                                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                         </div>
+
                                         <div>
                                             <label class="block text-gray-700 font-medium mb-1">Jenis Skrining</label>
-                                            <select name="jenis_skrining" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
+                                            <select name="jenis_skrining"
+                                                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                                 <?php
-                                                $options = [
-                                                    "Pengguna",
-                                                    "Pengedar",
-                                                    "Pengendali",
-                                                    "Ideolog",
-                                                    "Pengikut",
-                                                ];
+                                                $options = ["Pengguna", "Pengedar", "Pengendali", "Ideolog", "Pengikut"];
                                                 foreach ($options as $opt): ?>
-                                                    <option value="<?= $opt ?>" <?= $s->jenis_skrining ==
-                                                                                    $opt
-                                                                                    ? "selected"
-                                                                                    : "" ?>><?= $opt ?></option>
-                                                <?php endforeach;
-                                                ?>
+                                                    <option value="<?= $opt ?>" <?= $s->jenis_skrining == $opt ? "selected" : "" ?>><?= $opt ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
+
                                         <div>
-                                            <label class="block text-gray-700 font-medium mb-1">Instrument</label>
-                                            <input type="text" value="<?= htmlspecialchars(
-                                                                            $s->nama_instrument,
-                                                                        ) ?>" class="w-full border border-gray-200 rounded-lg px-3 py-2 bg-gray-50" readonly>
+                                            <label class="block text-gray-700 font-medium mb-1">Instrumen</label>
+                                            <select name="nama_instrument"
+                                                class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-red-500 focus:outline-none" required>
+                                                <?php
+                                                $instrument_opts = ["Narkotika", "Terorisme"];
+                                                foreach ($instrument_opts as $iopt): ?>
+                                                    <option value="<?= $iopt ?>" <?= $s->nama_instrument == $iopt ? "selected" : "" ?>><?= $iopt ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
                                         </div>
 
-                                        <div class="flex justify-end items-center gap-3 mt-3">
-                                            <label for="modal-edit-skrining-<?= $s->id_skrining ?>" class="px-4 py-2 bg-gray-200 rounded-lg cursor-pointer">Batal</label>
-                                            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">Simpan</button>
+                                        <div class="flex justify-end items-center gap-3 mt-4">
+                                            <label for="modal-edit-skrining-<?= $s->id_skrining ?>"
+                                                class="px-4 py-2 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300 transition">Batal</label>
+                                            <button type="submit"
+                                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">Simpan</button>
                                         </div>
                                     </form>
-                                    <label for="modal-edit-skrining-<?= $s->id_skrining ?>" class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
+
+                                    <label for="modal-edit-skrining-<?= $s->id_skrining ?>"
+                                        class="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-800 text-2xl">&times;</label>
                                 </div>
                             </div>
+
                             <style>
                                 #modal-edit-skrining-<?= $s->id_skrining ?>:checked+.modal {
                                     opacity: 1;
                                     pointer-events: auto;
                                 }
                             </style>
-                        <?php endforeach;
-                        ?>
+                        <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5" class="text-center py-8 text-gray-500 italic">Belum ada data Skrining.</td>
+                            <td colspan="5" class="text-center py-10 text-gray-500 italic">Belum ada data Skrining.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
 
             <!-- Card untuk Mobile -->
-            <div class="block sm:hidden divide-y divide-gray-100">
+            <div class="block sm:hidden space-y-3">
                 <?php if (!empty($skrining)): ?>
                     <?php
                     $no = $start_skrining + 1;
                     foreach ($skrining as $s): ?>
-                        <div class="p-4 bg-white hover:bg-red-50 transition">
-                            <div class="flex justify-between items-center mb-2">
+                        <div class="p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg hover:bg-gray-50 transition-all duration-200">
+                            <!-- Header -->
+                            <div class="flex justify-between items-center mb-3">
                                 <span class="font-semibold text-red-600">#<?= $no++ ?></span>
                             </div>
 
+                            <!-- Body -->
                             <div class="text-gray-700 text-sm space-y-1">
-                                <div><span class="font-medium">Indikator:</span> <?= htmlspecialchars(
-                                                                                        $s->indikator_skrining,
-                                                                                    ) ?></div>
-                                <div><span class="font-medium">Jenis:</span> <?= htmlspecialchars(
-                                                                                    $s->jenis_skrining,
-                                                                                ) ?></div>
-                                <div><span class="font-medium">Instrument:</span> <?= htmlspecialchars(
-                                                                                        $s->nama_instrument,
-                                                                                    ) ?></div>
+                                <div><span class="font-medium text-gray-900">Indikator:</span> <?= htmlspecialchars($s->indikator_skrining) ?></div>
+                                <div><span class="font-medium text-gray-900">Jenis:</span> <?= htmlspecialchars($s->jenis_skrining) ?></div>
+                                <div><span class="font-medium text-gray-900">Instrumen:</span> <?= htmlspecialchars($s->nama_instrument) ?></div>
                             </div>
 
-                            <div class="flex justify-end gap-2 mt-3">
+                            <!-- Actions -->
+                            <div class="flex justify-end gap-2 mt-4">
+                                <!-- Tombol Edit -->
                                 <label for="modal-edit-skrining-<?= $s->id_skrining ?>"
-                                    class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
-                                    title="Edit">✏️</label>
+                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
+                                    title="Edit">
+                                    <i class="ri-edit-2-line text-lg"></i>
+                                </label>
 
-                                <a href="<?= site_url(
-                                                "opsi/delete_skrining/" . $s->id_skrining,
-                                            ) ?>"
-                                    onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
-                                    class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
+                                <!-- Tombol Hapus -->
+                                <a href="<?= site_url('opsi/delete_skrining/' . $s->id_skrining) ?>"
+                                    onclick="return confirm('Yakin hapus data ini?')"
+                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
+                                    title="Hapus">
+                                    <i class="ri-delete-bin-6-line text-lg"></i>
+                                </a>
                             </div>
                         </div>
-                    <?php endforeach;
-                    ?>
+                    <?php endforeach; ?>
                 <?php else: ?>
                     <div class="p-4 text-center text-gray-500 italic">Belum ada data Skrining.</div>
                 <?php endif; ?>
             </div>
         </div>
 
-        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
             <div class="text-sm text-gray-600">Menampilkan <?= count(
                                                                 $skrining ?? [],
                                                             ) ?> entri</div>
@@ -295,50 +305,46 @@
         <!-- Tampilan Desktop (Table) -->
         <div class="hidden sm:block overflow-hidden min-w-[600px] bg-white shadow-md rounded-lg border border-gray-200">
             <table class="min-w-full text-center border-collapse">
-                <thead class="bg-red-600 text-white text-sm sm:text-base">
+                <thead class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm sm:text-base">
                     <tr>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">No</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Indikator</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Jenis</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Instrument</th>
-                        <th class="px-2 sm:px-4 py-3 font-semibold">Aksi</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold tracking-wide">No</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Indikator</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Jenis</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Instrumen</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
+
+                <tbody class="divide-y divide-gray-100 text-sm sm:text-base text-gray-700">
                     <?php if (!empty($faktor)): ?>
                         <?php
                         $no = $start_faktor + 1;
                         foreach ($faktor as $f): ?>
-                            <tr class="hover:bg-red-100 transition">
-                                <td class="px-2 sm:px-4 py-3"><?= $no++ ?></td>
-                                <td class="px-2 sm:px-4 py-3 text-left indikator"><?= htmlspecialchars(
-                                                                                        $f->indikator_faktor,
-                                                                                    ) ?></td>
-                                <td class="px-2 sm:px-4 py-3 jenis"><?= htmlspecialchars(
-                                                                        $f->jenis_faktor,
-                                                                    ) ?></td>
-                                <td class="px-2 sm:px-4 py-3 instrument"><?= htmlspecialchars(
-                                                                                $f->nama_instrument,
-                                                                            ) ?></td>
-                                <td class="px-2 sm:px-4 py-3">
+                            <tr class="hover:bg-gray-50 transition-all duration-200">
+                                <td class="px-3 sm:px-5 py-3 font-medium text-gray-800"><?= $no++ ?></td>
+                                <td class="px-3 sm:px-5 py-3 text-left font-medium"><?= htmlspecialchars($f->indikator_faktor) ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($f->jenis_faktor) ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($f->nama_instrument) ?></td>
+                                <td class="px-3 sm:px-5 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-faktor-<?= $f->id_faktor ?>"
-                                            class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
-                                            title="Edit">✏️</label>
-                                        <a href="<?= site_url(
-                                                        "opsi/delete_faktor/" .
-                                                            $f->id_faktor,
-                                                    ) ?>"
-                                            onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
-                                            class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm cursor-pointer transition"
+                                            title="Edit">
+                                            <i class="ri-edit-2-line text-lg"></i>
+                                        </label>
+                                        <a href="<?= site_url('opsi/delete_faktor/' . $f->id_faktor) ?>"
+                                            onclick="return confirm('Yakin hapus data ini?')"
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm cursor-pointer transition"
+                                            title="Hapus">
+                                            <i class="ri-delete-bin-6-line text-lg"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
-                        <?php endforeach;
-                        ?>
+                        <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5" class="text-center py-8 text-gray-500 italic">Belum ada data Faktor.</td>
+                            <td colspan="5" class="text-center py-10 text-gray-500 italic">Belum ada data Faktor.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -346,41 +352,43 @@
         </div>
 
         <!-- Tampilan Mobile (Cards) -->
-        <div class="block sm:hidden divide-y divide-gray-100">
+        <div class="block sm:hidden space-y-3">
             <?php if (!empty($faktor)): ?>
                 <?php
                 $no = $start_faktor + 1;
                 foreach ($faktor as $f): ?>
-                    <div class="p-4 bg-white hover:bg-red-50 transition">
-                        <div class="flex justify-between items-center mb-2">
+                    <div class="p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg hover:bg-gray-50 transition-all duration-200">
+                        <!-- Header -->
+                        <div class="flex justify-between items-center mb-3">
                             <span class="font-semibold text-red-600">#<?= $no++ ?></span>
                         </div>
 
+                        <!-- Body -->
                         <div class="text-gray-700 text-sm space-y-1">
-                            <div><span class="font-medium">Indikator:</span> <?= htmlspecialchars(
-                                                                                    $f->indikator_faktor,
-                                                                                ) ?></div>
-                            <div><span class="font-medium">Jenis:</span> <?= htmlspecialchars(
-                                                                                $f->jenis_faktor,
-                                                                            ) ?></div>
-                            <div><span class="font-medium">Instrument:</span> <?= htmlspecialchars(
-                                                                                    $f->nama_instrument,
-                                                                                ) ?></div>
+                            <div><span class="font-medium text-gray-900">Indikator:</span> <?= htmlspecialchars($f->indikator_faktor) ?></div>
+                            <div><span class="font-medium text-gray-900">Jenis:</span> <?= htmlspecialchars($f->jenis_faktor) ?></div>
+                            <div><span class="font-medium text-gray-900">Instrumen:</span> <?= htmlspecialchars($f->nama_instrument) ?></div>
                         </div>
 
-                        <div class="flex justify-end gap-2 mt-3">
+                        <!-- Actions -->
+                        <div class="flex justify-end gap-2 mt-4">
+                            <!-- Tombol Edit -->
                             <label for="modal-edit-faktor-<?= $f->id_faktor ?>"
-                                class="w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow cursor-pointer"
-                                title="Edit">✏️</label>
-                            <a href="<?= site_url(
-                                            "opsi/delete_faktor/" . $f->id_faktor,
-                                        ) ?>"
-                                onclick="return confirm('Yakin hapus data ini?')" title="Hapus"
-                                class="w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow">🗑️</a>
+                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
+                                title="Edit">
+                                <i class="ri-edit-2-line text-lg"></i>
+                            </label>
+
+                            <!-- Tombol Hapus -->
+                            <a href="<?= site_url('opsi/delete_faktor/' . $f->id_faktor) ?>"
+                                onclick="return confirm('Yakin hapus data ini?')"
+                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
+                                title="Hapus">
+                                <i class="ri-delete-bin-6-line text-lg"></i>
+                            </a>
                         </div>
                     </div>
-                <?php endforeach;
-                ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <div class="p-4 text-center text-gray-500 italic">Belum ada data Faktor.</div>
             <?php endif; ?>
@@ -392,7 +400,9 @@
                 <input type="checkbox" id="modal-edit-faktor-<?= $f->id_faktor ?>" class="modal-toggle hidden" />
                 <div class="modal fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
                     <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
-                        <h3 class="text-xl font-semibold text-red-700 mb-3">✏️ Edit Faktor</h3>
+                        <h3 class="text-xl font-semibold text-red-700 mb-3 flex items-center gap-2">
+                            <i class="ri-edit-2-line"></i> Edit Faktor
+                        </h3>
                         <form method="post" action="<?= site_url(
                                                         "opsi/update_faktor/" . $f->id_faktor,
                                                     ) ?>" class="space-y-4">
@@ -450,7 +460,7 @@
         <?php endif; ?>
 
         <!-- Footer -->
-        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
             <div class="text-sm text-gray-600">Menampilkan <?= count(
                                                                 $faktor ?? [],
                                                             ) ?> entri</div>
@@ -462,7 +472,9 @@
     <input type="checkbox" id="modal-add" class="modal-toggle hidden" />
     <div class="modal fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-6 relative mx-4">
-            <h3 class="text-xl font-semibold text-red-700 mb-3">➕ Tambah Opsi</h3>
+            <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                <i class="ri-add-line text-red-600"></i> Tambah Opsi
+            </h3>
             <form method="post" action="<?= site_url(
                                             "opsi/store",
                                         ) ?>" class="space-y-4" id="form-opsi">

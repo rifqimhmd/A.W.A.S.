@@ -30,8 +30,13 @@
 
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-5 border-b pb-4 gap-3">
         <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-red-700 tracking-tight">📊 Riwayat Kerawanan</h2>
-            <p class="text-sm text-gray-500 mt-1">Detail Riwayat Skrining & Faktor Kerawanan</p>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3 text-red-700">
+                <span class="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-red-100 text-red-600 shadow-sm">
+                    <i class="ri-bar-chart-box-line text-2xl"></i>
+                </span>
+                <span class="hover:text-red-800 transition-colors duration-200">Riwayat Kerawanan</span>
+            </h2>
+            <p class="text-sm text-gray-600 mt-2 ml-0.5">Detail riwayat skrining dan faktor kerawanan</p>
         </div>
     </div>
 
@@ -49,11 +54,9 @@
         </div>
         <!-- Tombol Filter -->
         <div class="flex items-center gap-3">
-            <button id="open-filter-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center cursor-pointer">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v2l-7 7v6l-4-2v-4L3 6z" />
-                </svg>
+            <button id="open-filter-btn"
+                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition">
+                <i class="ri-filter-3-line text-lg"></i>
                 Filter
             </button>
         </div>
@@ -61,11 +64,8 @@
         <!-- Modal Filter -->
         <div id="filter-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
             <div class="bg-white rounded-lg p-6 w-11/12 max-w-md">
-                <h2 class="text-lg font-semibold mb-4 flex items-center gap-1">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4h18v2l-7 7v6l-4-2v-4L3 6z" />
-                    </svg>
+                <h2 class="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-800">
+                    <i class="ri-filter-3-line text-lg text-red-600"></i>
                     Filter
                 </h2>
 
@@ -98,15 +98,13 @@
                     <div class="flex items-center gap-2">
                         <label for="filter-upt" class="w-24 text-sm text-gray-700">UPT:</label>
                         <?php if (
-                        	$this->session->userdata("role") === "upt"
+                            $this->session->userdata("role") === "upt"
                         ): ?>
                             <?php foreach ($list_upt as $upt): ?>
                                 <input type="text"
                                     class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
                                     value="<?= $upt["nama_upt"] ?>" readonly>
-                                <input type="hidden" name="upt" value="<?= $upt[
-                                	"id_upt"
-                                ] ?>">
+                                <input type="hidden" name="upt" value="<?= $upt["id_upt"] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <select id="filter-upt" name="upt"
@@ -114,10 +112,10 @@
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_upt as $upt): ?>
                                     <option value="<?= htmlspecialchars(
-                                    	$upt["nama_upt"],
-                                    ) ?>">
+                                                        $upt["nama_upt"],
+                                                    ) ?>">
                                         <?= htmlspecialchars(
-                                        	$upt["nama_upt"],
+                                            $upt["nama_upt"],
                                         ) ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -129,18 +127,14 @@
                     <div class="flex items-center gap-2">
                         <label for="filter-kanwil" class="w-24 text-sm text-gray-700">Kanwil:</label>
                         <?php if (
-                        	$this->session->userdata("role") === "kanwil" ||
-                        	$this->session->userdata("role") === "upt"
+                            $this->session->userdata("role") === "kanwil" ||
+                            $this->session->userdata("role") === "upt"
                         ): ?>
                             <?php foreach ($list_kanwil as $kanwil): ?>
                                 <input type="text"
                                     class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                                    value="<?= $kanwil[
-                                    	"nama_kanwil"
-                                    ] ?>" readonly>
-                                <input type="hidden" name="kanwil" value="<?= $kanwil[
-                                	"id_kanwil"
-                                ] ?>">
+                                    value="<?= $kanwil["nama_kanwil"] ?>" readonly>
+                                <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <select id="filter-kanwil" name="kanwil"
@@ -148,10 +142,10 @@
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_kanwil as $kanwil): ?>
                                     <option value="<?= htmlspecialchars(
-                                    	$kanwil["nama_kanwil"],
-                                    ) ?>">
+                                                        $kanwil["nama_kanwil"],
+                                                    ) ?>">
                                         <?= htmlspecialchars(
-                                        	$kanwil["nama_kanwil"],
+                                            $kanwil["nama_kanwil"],
                                         ) ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -219,190 +213,178 @@
         <!-- Desktop Table Narkotika -->
         <div class="hidden sm:block overflow-hidden min-w-[800px] bg-white shadow-md rounded-lg border border-gray-200">
             <table class="min-w-full border-collapse text-center">
-                <thead class="bg-red-600 text-white text-sm sm:text-base">
+                <thead class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm sm:text-base">
                     <tr>
-                        <th class="px-2 py-3 font-semibold">No</th>
-                        <th class="px-2 py-3 font-semibold">No Register/NIP</th>
-                        <th class="px-2 py-3 font-semibold">Nama</th>
-                        <th class="px-2 py-3 font-semibold">Kanwil</th>
-                        <th class="px-2 py-3 font-semibold">UPT</th>
-                        <th class="px-2 py-3 font-semibold">Level</th>
-                        <th class="px-2 py-3 font-semibold">Tipe</th>
-                        <th class="px-2 py-3 font-semibold">Aksi</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold tracking-wide">No</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">No Register/NIP</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Nama</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Kanwil</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">UPT</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Level</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Tipe</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
+
+                <tbody class="divide-y divide-gray-100 text-sm sm:text-base text-gray-700">
                     <?php if (!empty($narkotika)):
-                    	$no = 1;
-                    	foreach ($narkotika as $row): ?>
-                            <tr class="hover:bg-red-100 transition"
-                                data-tipe="<?= strtolower(
-                                	$row->tipe_object ?? "-",
-                                ) ?>"
-                                data-level="<?= strtolower(
-                                	$row->level ?? "-",
-                                ) ?>"
-                                data-upt="<?= strtolower(
-                                	$row->nama_upt ?? "-",
-                                ) ?>"
-                                data-kanwil="<?= strtolower(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?>">
-                                <td class="px-2 py-3"><?= $no++ ?></td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object === "Pegawai"
-                                		? $row->nip ?? "-"
-                                		: $row->no_register ?? "-",
-                                ) ?></td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_pegawai ??
-                                		($row->nama_narapidana ?? "-"),
-                                ) ?></td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?></td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_upt ?? "-",
-                                ) ?></td>
-                                <td class="px-2 py-3">
+                        $no = 1;
+                        foreach ($narkotika as $row): ?>
+                            <tr class="hover:bg-gray-50 transition-all duration-200"
+                                data-tipe="<?= strtolower($row->tipe_object ?? '-') ?>"
+                                data-level="<?= strtolower($row->level ?? '-') ?>"
+                                data-upt="<?= strtolower($row->nama_upt ?? '-') ?>"
+                                data-kanwil="<?= strtolower($row->nama_kanwil ?? '-') ?>">
+
+                                <td class="px-3 sm:px-5 py-3 font-medium text-gray-800"><?= $no++ ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
+                                                                    $row->tipe_object === 'Pegawai'
+                                                                        ? $row->nip ?? '-'
+                                                                        : $row->no_register ?? '-',
+                                                                ) ?></td>
+                                <td class="px-3 sm:px-5 py-3 font-medium text-left"><?= htmlspecialchars(
+                                                                                        $row->nama_pegawai ?? ($row->nama_narapidana ?? '-'),
+                                                                                    ) ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($row->nama_kanwil ?? '-') ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($row->nama_upt ?? '-') ?></td>
+                                <td class="px-3 sm:px-5 py-3">
                                     <?php
                                     $levelColor = [
-                                    	"Merah" => "bg-red-100 text-red-700",
-                                    	"Kuning" =>
-                                    		"bg-yellow-100 text-yellow-700",
-                                    	"Hijau" =>
-                                    		"bg-green-100 text-green-700",
+                                        'Merah' => 'bg-red-100 text-red-700',
+                                        'Kuning' => 'bg-yellow-100 text-yellow-700',
+                                        'Hijau' => 'bg-green-100 text-green-700',
                                     ];
-                                    $color =
-                                    	$levelColor[$row->level] ??
-                                    	"bg-gray-100 text-gray-600";
+                                    $color = $levelColor[$row->level] ?? 'bg-gray-100 text-gray-600';
                                     ?>
                                     <span class="px-3 py-1 rounded-full text-xs font-semibold <?= $color ?>">
-                                        <?= htmlspecialchars(
-                                        	$row->level ?? "-",
-                                        ) ?>
+                                        <?= htmlspecialchars($row->level ?? '-') ?>
                                     </span>
                                 </td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object ?? "-",
-                                ) ?></td>
-                                <td class="px-2 py-3">
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($row->tipe_object ?? '-') ?></td>
+                                <td class="px-3 sm:px-5 py-3">
                                     <div class="flex items-center justify-center gap-2">
-                                        <button onclick='showDetail(<?= json_encode(
-                                        	$row,
-                                        ) ?>)'
-                                            class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
-                                            title="Detail">🔍</button>
+                                        <button onclick='showDetail(<?= json_encode($row) ?>)'
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
+                                            title="Detail">
+                                            <i class="ri-search-line text-lg"></i>
+                                        </button>
                                         <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
-                                            class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
-                                            title="Jawaban">📄</button>
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm transition"
+                                            title="Jawaban">
+                                            <i class="ri-file-list-2-line text-lg"></i>
+                                        </button>
+
                                         <?php
-                                        $role = $this->session->userdata(
-                                        	"role",
-                                        );
+                                        $role = $this->session->userdata('role');
                                         if (
-                                        	$role === "admin" ||
-                                        	($role === "kanwil" &&
-                                        		$row->level !== "Merah")
+                                            $role === 'admin' ||
+                                            ($role === 'kanwil' && $row->level !== 'Merah')
                                         ): ?>
-                                            <a href="<?= site_url(
-                                            	"histori/delete/" .
-                                            		$row->id_hasil,
-                                            ) ?>"
+                                            <a href="<?= site_url('histori/delete/' . $row->id_hasil) ?>"
                                                 onclick="return confirm('Yakin hapus data ini?')"
-                                                class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
-                                                title="Hapus">🗑️</a>
-                                        <?php endif;
-                                        ?>
+                                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
+                                                title="Hapus">
+                                                <i class="ri-delete-bin-6-line text-lg"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>
                         <?php endforeach;
-                    else:
-                    	 ?>
+                    else: ?>
                         <tr>
-                            <td colspan="9" class="py-6 text-gray-500 italic">Belum ada data narkotika</td>
+                            <td colspan="8" class="py-10 text-gray-500 italic">Belum ada data narkotika</td>
                         </tr>
-                    <?php
-                    endif; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
 
         <!-- Mobile Cards Narkotika -->
-        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
+        <div class="block sm:hidden space-y-3">
             <?php if (!empty($narkotika)):
-            	$no = 1;
-            	foreach ($narkotika as $row): ?>
-                    <div class="p-4 hover:bg-red-50 transition"
-                        data-tipe="<?= strtolower($row->tipe_object ?? "-") ?>"
-                        data-level="<?= strtolower($row->level ?? "-") ?>"
-                        data-upt="<?= strtolower($row->nama_upt ?? "-") ?>"
-                        data-kanwil="<?= strtolower(
-                        	$row->nama_kanwil ?? "-",
-                        ) ?>">
-                        <div class="mb-2">
+                $no = 1;
+                foreach ($narkotika as $row): ?>
+                    <div class="p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg hover:bg-red-50 transition-all duration-200"
+                        data-tipe="<?= strtolower($row->tipe_object ?? '-') ?>"
+                        data-level="<?= strtolower($row->level ?? '-') ?>"
+                        data-upt="<?= strtolower($row->nama_upt ?? '-') ?>"
+                        data-kanwil="<?= strtolower($row->nama_kanwil ?? '-') ?>">
+
+                        <!-- Header -->
+                        <div class="flex justify-between items-center mb-2">
                             <span class="font-semibold text-red-600">#<?= $no++ ?></span>
                         </div>
+
+                        <!-- Body -->
                         <div class="text-gray-700 text-sm space-y-1">
-                            <div><span class="font-medium">No Register/NIP:</span> <?= htmlspecialchars(
-                            	$row->tipe_object === "Pegawai"
-                            		? $row->nip ?? "-"
-                            		: $row->no_register ?? "-",
-                            ) ?></div>
-                            <div><span class="font-medium">Nama:</span> <?= htmlspecialchars(
-                            	$row->nama_pegawai ??
-                            		($row->nama_narapidana ?? "-"),
-                            ) ?></div>
-                            <div><span class="font-medium">Kanwil:</span> <?= htmlspecialchars(
-                            	$row->nama_kanwil ?? "-",
-                            ) ?></div>
-                            <div><span class="font-medium">UPT:</span> <?= htmlspecialchars(
-                            	$row->nama_upt ?? "-",
-                            ) ?></div>
-                            <div><span class="font-medium">Level:</span>
-                                <?php $color =
-                                	$levelColor[$row->level] ??
-                                	"bg-gray-100 text-gray-600"; ?>
+                            <div><span class="font-medium text-gray-900">No Register/NIP:</span>
+                                <?= htmlspecialchars(
+                                    $row->tipe_object === 'Pegawai'
+                                        ? $row->nip ?? '-'
+                                        : $row->no_register ?? '-'
+                                ) ?>
+                            </div>
+                            <div><span class="font-medium text-gray-900">Nama:</span>
+                                <?= htmlspecialchars($row->nama_pegawai ?? ($row->nama_narapidana ?? '-')) ?>
+                            </div>
+                            <div><span class="font-medium text-gray-900">Kanwil:</span>
+                                <?= htmlspecialchars($row->nama_kanwil ?? '-') ?>
+                            </div>
+                            <div><span class="font-medium text-gray-900">UPT:</span>
+                                <?= htmlspecialchars($row->nama_upt ?? '-') ?>
+                            </div>
+                            <div><span class="font-medium text-gray-900">Level:</span>
+                                <?php $color = $levelColor[$row->level] ?? 'bg-gray-100 text-gray-600'; ?>
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold <?= $color ?>">
-                                    <?= htmlspecialchars($row->level ?? "-") ?>
+                                    <?= htmlspecialchars($row->level ?? '-') ?>
                                 </span>
                             </div>
-                            <div><span class="font-medium">Tipe:</span> <?= htmlspecialchars(
-                            	$row->tipe_object ?? "-",
-                            ) ?></div>
+                            <div><span class="font-medium text-gray-900">Tipe:</span>
+                                <?= htmlspecialchars($row->tipe_object ?? '-') ?>
+                            </div>
                         </div>
 
-                        <!-- Tombol aksi -->
-                        <div class="flex justify-end gap-2 mt-3">
-                            <button onclick='showDetail(<?= json_encode(
-                            	$row,
-                            ) ?>)'
-                                class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
-                                title="Detail">🔍</button>
+                        <!-- Actions -->
+                        <div class="flex justify-end gap-2 mt-4">
+                            <button onclick='showDetail(<?= json_encode($row) ?>)'
+                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
+                                title="Detail">
+                                <i class="ri-search-line text-lg"></i>
+                            </button>
+
                             <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
-                                class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
-                                title="Jawaban">📄</button>
-                            <?php if (
-                            	$role === "admin" ||
-                            	($role === "kanwil" && $row->level !== "Merah")
-                            ): ?>
-                                <a href="<?= site_url(
-                                	"histori/delete/" . $row->id_hasil,
-                                ) ?>"
+                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm transition"
+                                title="Jawaban">
+                                <i class="ri-file-text-line text-lg"></i>
+                            </button>
+
+                            <?php if ($role === 'admin' || ($role === 'kanwil' && $row->level !== 'Merah')): ?>
+                                <a href="<?= site_url('histori/delete/' . $row->id_hasil) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
-                                    class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
-                                    title="Hapus">🗑️</a>
+                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
+                                    title="Hapus">
+                                    <i class="ri-delete-bin-6-line text-lg"></i>
+                                </a>
                             <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach;
-            else:
-            	 ?>
+            else: ?>
                 <div class="p-4 text-center text-gray-500 italic">Belum ada data narkotika</div>
-            <?php
-            endif; ?>
+            <?php endif; ?>
         </div>
+
+        <!-- Footer Pagination -->
+        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
+            <div class="text-sm text-gray-600">
+                Menampilkan <?= count($narkotika ?? []) ?> entri
+            </div>
+            <div class="text-sm">
+                <?= $pagination_narkotika ?? '' ?>
+            </div>
+        </div>
+
     </div>
 
     <!-- Table Teroris -->
@@ -411,190 +393,179 @@
         <!-- Desktop Table Teroris -->
         <div class="hidden sm:block bg-white shadow-md rounded-lg border border-gray-200 overflow-hidden min-w-[800px]">
             <table class="min-w-full border-collapse text-center">
-                <thead class="bg-red-600 text-white text-sm sm:text-base">
+                <thead class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm sm:text-base">
                     <tr>
-                        <th class="px-2 py-3 font-semibold">No</th>
-                        <th class="px-2 py-3 font-semibold">No Register/NIP</th>
-                        <th class="px-2 py-3 font-semibold">Nama</th>
-                        <th class="px-2 py-3 font-semibold">Kanwil</th>
-                        <th class="px-2 py-3 font-semibold">UPT</th>
-                        <th class="px-2 py-3 font-semibold">Level</th>
-                        <th class="px-2 py-3 font-semibold">Tipe</th>
-                        <th class="px-2 py-3 font-semibold">Aksi</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold tracking-wide">No</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">No Register/NIP</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Nama</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Kanwil</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">UPT</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Level</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Tipe</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 text-sm sm:text-base">
+
+                <tbody class="divide-y divide-gray-100 text-sm sm:text-base text-gray-700">
                     <?php if (!empty($teroris)):
-                    	$no = 1;
-                    	foreach ($teroris as $row): ?>
-                            <tr class="hover:bg-red-100 transition"
-                                data-tipe="<?= strtolower(
-                                	$row->tipe_object ?? "-",
-                                ) ?>"
-                                data-level="<?= strtolower(
-                                	$row->level ?? "-",
-                                ) ?>"
-                                data-upt="<?= strtolower(
-                                	$row->nama_upt ?? "-",
-                                ) ?>"
-                                data-kanwil="<?= strtolower(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?>">
-                                <td class="px-2 py-3"><?= $no++ ?></td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object === "Pegawai"
-                                		? $row->nip ?? "-"
-                                		: $row->no_register ?? "-",
-                                ) ?></td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_pegawai ??
-                                		($row->nama_narapidana ?? "-"),
-                                ) ?></td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?></td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->nama_upt ?? "-",
-                                ) ?></td>
-                                <td class="px-2 py-3">
+                        $no = 1;
+                        foreach ($teroris as $row): ?>
+                            <tr class="hover:bg-gray-50 transition-all duration-200"
+                                data-tipe="<?= strtolower($row->tipe_object ?? '-') ?>"
+                                data-level="<?= strtolower($row->level ?? '-') ?>"
+                                data-upt="<?= strtolower($row->nama_upt ?? '-') ?>"
+                                data-kanwil="<?= strtolower($row->nama_kanwil ?? '-') ?>">
+
+                                <td class="px-3 sm:px-5 py-3 font-medium text-gray-800"><?= $no++ ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
+                                                                    $row->tipe_object === "Pegawai"
+                                                                        ? $row->nip ?? "-"
+                                                                        : $row->no_register ?? "-"
+                                                                ) ?></td>
+                                <td class="px-3 sm:px-5 py-3 text-left font-medium"><?= htmlspecialchars(
+                                                                                        $row->nama_pegawai ?? ($row->nama_narapidana ?? "-")
+                                                                                    ) ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($row->nama_kanwil ?? "-") ?></td>
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($row->nama_upt ?? "-") ?></td>
+                                <td class="px-3 sm:px-5 py-3">
                                     <?php
                                     $levelColor = [
-                                    	"Merah" => "bg-red-100 text-red-700",
-                                    	"Kuning" =>
-                                    		"bg-yellow-100 text-yellow-700",
-                                    	"Hijau" =>
-                                    		"bg-green-100 text-green-700",
+                                        "Merah" => "bg-red-100 text-red-700",
+                                        "Kuning" => "bg-yellow-100 text-yellow-700",
+                                        "Hijau" => "bg-green-100 text-green-700",
                                     ];
-                                    $color =
-                                    	$levelColor[$row->level] ??
-                                    	"bg-gray-100 text-gray-600";
+                                    $color = $levelColor[$row->level] ?? "bg-gray-100 text-gray-600";
                                     ?>
                                     <span class="px-3 py-1 rounded-full text-xs font-semibold <?= $color ?>">
-                                        <?= htmlspecialchars(
-                                        	$row->level ?? "-",
-                                        ) ?>
+                                        <?= htmlspecialchars($row->level ?? "-") ?>
                                     </span>
                                 </td>
-                                <td class="px-2 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object ?? "-",
-                                ) ?></td>
-                                <td class="px-2 py-3">
+                                <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars($row->tipe_object ?? "-") ?></td>
+                                <td class="px-3 sm:px-5 py-3">
                                     <div class="flex items-center justify-center gap-2">
-                                        <button onclick='showDetail(<?= json_encode(
-                                        	$row,
-                                        ) ?>)'
-                                            class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
-                                            title="Detail">🔍</button>
+                                        <button onclick='showDetail(<?= json_encode($row) ?>)'
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
+                                            title="Detail">
+                                            <i class="ri-search-line text-lg"></i>
+                                        </button>
+
                                         <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
-                                            class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
-                                            title="Jawaban">📄</button>
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm transition"
+                                            title="Jawaban">
+                                            <i class="ri-file-list-2-line text-lg"></i>
+                                        </button>
+
                                         <?php
-                                        $role = $this->session->userdata(
-                                        	"role",
-                                        );
-                                        if (
-                                        	$role === "admin" ||
-                                        	($role === "kanwil" &&
-                                        		$row->level !== "Merah")
-                                        ): ?>
-                                            <a href="<?= site_url(
-                                            	"histori/delete/" .
-                                            		$row->id_hasil,
-                                            ) ?>"
+                                        $role = $this->session->userdata("role");
+                                        if ($role === "admin" || ($role === "kanwil" && $row->level !== "Merah")): ?>
+                                            <a href="<?= site_url("histori/delete/" . $row->id_hasil) ?>"
                                                 onclick="return confirm('Yakin hapus data ini?')"
-                                                class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
-                                                title="Hapus">🗑️</a>
-                                        <?php endif;
-                                        ?>
+                                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
+                                                title="Hapus">
+                                                <i class="ri-delete-bin-6-line text-lg"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>
                         <?php endforeach;
-                    else:
-                    	 ?>
+                    else: ?>
                         <tr>
-                            <td colspan="9" class="py-6 text-gray-500 italic">Belum ada data teroris</td>
+                            <td colspan="8" class="py-10 text-gray-500 italic">Belum ada data teroris</td>
                         </tr>
-                    <?php
-                    endif; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
 
         <!-- Mobile Cards Teroris -->
-        <div class="block sm:hidden divide-y divide-gray-100 bg-white shadow rounded-xl">
+        <div class="block sm:hidden space-y-3">
             <?php if (!empty($teroris)):
-            	$no = 1;
-            	foreach ($teroris as $row): ?>
-                    <div class="p-4 hover:bg-red-50 transition"
-                        data-tipe="<?= strtolower($row->tipe_object ?? "-") ?>"
-                        data-level="<?= strtolower($row->level ?? "-") ?>"
-                        data-upt="<?= strtolower($row->nama_upt ?? "-") ?>"
-                        data-kanwil="<?= strtolower(
-                        	$row->nama_kanwil ?? "-",
-                        ) ?>">
-                        <div class="mb-2">
+                $no = 1;
+                foreach ($teroris as $row): ?>
+                    <div class="p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg hover:bg-red-50 transition-all duration-200"
+                        data-tipe="<?= strtolower($row->tipe_object ?? '-') ?>"
+                        data-level="<?= strtolower($row->level ?? '-') ?>"
+                        data-upt="<?= strtolower($row->nama_upt ?? '-') ?>"
+                        data-kanwil="<?= strtolower($row->nama_kanwil ?? '-') ?>">
+
+                        <!-- Header -->
+                        <div class="flex justify-between items-center mb-2">
                             <span class="font-semibold text-red-600">#<?= $no++ ?></span>
                         </div>
+
+                        <!-- Body -->
                         <div class="text-gray-700 text-sm space-y-1">
-                            <div><span class="font-medium">No Register/NIP:</span> <?= htmlspecialchars(
-                            	$row->tipe_object === "Pegawai"
-                            		? $row->nip ?? "-"
-                            		: $row->no_register ?? "-",
-                            ) ?></div>
-                            <div><span class="font-medium">Nama:</span> <?= htmlspecialchars(
-                            	$row->nama_pegawai ??
-                            		($row->nama_narapidana ?? "-"),
-                            ) ?></div>
-                            <div><span class="font-medium">Kanwil:</span> <?= htmlspecialchars(
-                            	$row->nama_kanwil ?? "-",
-                            ) ?></div>
-                            <div><span class="font-medium">UPT:</span> <?= htmlspecialchars(
-                            	$row->nama_upt ?? "-",
-                            ) ?></div>
-                            <div><span class="font-medium">Level:</span>
-                                <?php $color =
-                                	$levelColor[$row->level] ??
-                                	"bg-gray-100 text-gray-600"; ?>
+                            <div><span class="font-medium text-gray-900">No Register/NIP:</span>
+                                <?= htmlspecialchars(
+                                    $row->tipe_object === 'Pegawai'
+                                        ? $row->nip ?? '-'
+                                        : $row->no_register ?? '-'
+                                ) ?>
+                            </div>
+                            <div><span class="font-medium text-gray-900">Nama:</span>
+                                <?= htmlspecialchars($row->nama_pegawai ?? ($row->nama_narapidana ?? '-')) ?>
+                            </div>
+                            <div><span class="font-medium text-gray-900">Kanwil:</span>
+                                <?= htmlspecialchars($row->nama_kanwil ?? '-') ?>
+                            </div>
+                            <div><span class="font-medium text-gray-900">UPT:</span>
+                                <?= htmlspecialchars($row->nama_upt ?? '-') ?>
+                            </div>
+                            <div><span class="font-medium text-gray-900">Level:</span>
+                                <?php $color = $levelColor[$row->level] ?? 'bg-gray-100 text-gray-600'; ?>
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold <?= $color ?>">
-                                    <?= htmlspecialchars($row->level ?? "-") ?>
+                                    <?= htmlspecialchars($row->level ?? '-') ?>
                                 </span>
                             </div>
-                            <div><span class="font-medium">Tipe:</span> <?= htmlspecialchars(
-                            	$row->tipe_object ?? "-",
-                            ) ?></div>
+                            <div><span class="font-medium text-gray-900">Tipe:</span>
+                                <?= htmlspecialchars($row->tipe_object ?? '-') ?>
+                            </div>
                         </div>
 
-                        <!-- Tombol aksi -->
-                        <div class="flex justify-end gap-2 mt-3">
-                            <button onclick='showDetail(<?= json_encode(
-                            	$row,
-                            ) ?>)'
-                                class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow"
-                                title="Detail">🔍</button>
+                        <!-- Actions -->
+                        <div class="flex justify-end gap-2 mt-4">
+                            <!-- Detail -->
+                            <button onclick='showDetail(<?= json_encode($row) ?>)'
+                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
+                                title="Detail">
+                                <i class="ri-search-line text-lg"></i>
+                            </button>
+
+                            <!-- Jawaban -->
                             <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
-                                class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500 hover:bg-indigo-600 text-white shadow"
-                                title="Jawaban">📄</button>
-                            <?php if (
-                            	$role === "admin" ||
-                            	($role === "kanwil" && $row->level !== "Merah")
-                            ): ?>
-                                <a href="<?= site_url(
-                                	"histori/delete/" . $row->id_hasil,
-                                ) ?>"
+                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm transition"
+                                title="Jawaban">
+                                <i class="ri-file-text-line text-lg"></i>
+                            </button>
+
+                            <!-- Hapus -->
+                            <?php if ($role === 'admin' || ($role === 'kanwil' && $row->level !== 'Merah')): ?>
+                                <a href="<?= site_url('histori/delete/' . $row->id_hasil) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
-                                    class="cursor-pointer w-9 h-9 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 text-white shadow"
-                                    title="Hapus">🗑️</a>
+                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
+                                    title="Hapus">
+                                    <i class="ri-delete-bin-6-line text-lg"></i>
+                                </a>
                             <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach;
-            else:
-            	 ?>
+            else: ?>
                 <div class="p-4 text-center text-gray-500 italic">Belum ada data teroris</div>
-            <?php
-            endif; ?>
+            <?php endif; ?>
         </div>
+
+        <!-- Footer Pagination Teroris -->
+        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
+            <div class="text-sm text-gray-600">
+                Menampilkan <?= count($teroris ?? []) ?> entri
+            </div>
+            <div class="text-sm">
+                <?= $pagination_teroris ?? '' ?>
+            </div>
+        </div>
+
     </div>
 
 
@@ -602,7 +573,10 @@
     <div id="detailModal"
         class="hidden fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="bg-white rounded-xl shadow-lg max-w-2xl w-full relative mx-4">
-            <h3 class="text-xl font-semibold text-blue-700 p-6 pb-3">📋 Detail Data</h3>
+            <h3 class="text-xl font-semibold text-blue-700 p-6 pb-3 flex items-center gap-2">
+                <i class="ri-file-list-3-line text-2xl"></i>
+                Detail Data
+            </h3>
             <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto" id="detailContent">
                 <p><strong>No Register/NIP:</strong> <span id="detailNoReg">-</span></p>
                 <p><strong>Nama:</strong> <span id="detailNama">-</span></p>
@@ -630,7 +604,10 @@
     <div id="jawabanModal"
         class="hidden fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="bg-white rounded-xl shadow-lg max-w-3xl w-full relative mx-4">
-            <h3 class="text-xl font-semibold text-red-700 p-6 pb-3">📑 Detail Jawaban</h3>
+            <h3 class="text-xl font-semibold text-red-700 p-6 pb-3 flex items-center gap-2">
+                <i class="ri-file-list-line text-2xl"></i>
+                Detail Jawaban
+            </h3>
             <div class="flex border-b border-gray-200 px-6">
                 <button onclick="switchTab('skrining')" id="tab-skrining"
                     class="px-4 py-2 font-medium text-red-600 border-b-2 border-red-600">Skrining</button>
@@ -711,7 +688,7 @@
             }
 
             // simpan tab aktif
-                localStorage.setItem("activeTab", type);
+            localStorage.setItem("activeTab", type);
         }
 
         // Saat halaman dimuat, cek localStorage

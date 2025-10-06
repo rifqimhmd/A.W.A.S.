@@ -17,7 +17,7 @@
                         alt="Logo"
                         class="<?= $this->session->userdata("username")
                                     ? "hidden sm:block"
-                                    : "block" ?> w-[80px] sm:w-[110px] lg:w-[130px] transition-opacity duration-300 group-hover:opacity-90">
+                                    : "block" ?> w-[80px] sm:w-[110px] lg:w-[130px]">
                 </a>
 
                 <?php if ($this->session->userdata("username")): ?>
