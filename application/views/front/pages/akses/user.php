@@ -277,7 +277,7 @@
                 <?php endif; ?>
             </div>
 
-            <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+            <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
                 <div class="text-sm text-gray-600">Menampilkan <?= count($users ?? []) ?> entri</div>
                 <div class="text-sm"><?= $pagination ?? '' ?></div>
             </div>
