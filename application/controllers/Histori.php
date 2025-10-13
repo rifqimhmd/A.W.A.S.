@@ -100,6 +100,10 @@ class Histori extends CI_Controller
 		$this->db->where("id_hasil", $id_hasil);
 		$this->db->delete("tbl_hasil_indikator");
 
+		// Hapus dari tbl_upload (berdasarkan id_hasil)
+		$this->db->where("id_hasil", $id_hasil);
+		$this->db->delete("tbl_upload");
+
 		// Ambil data dari tbl_hasil sebelum dihapus
 		$hasil = $this->db
 			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])

@@ -213,6 +213,7 @@
 					$dataUpload = [
 						"id_upload" => $this->uuid_v4(),
 						"id_hasil" => $id_hasil,
+						"tindak_lanjut" => "-",
 					];
 					$this->db->insert("tbl_upload", $dataUpload);
 				}
