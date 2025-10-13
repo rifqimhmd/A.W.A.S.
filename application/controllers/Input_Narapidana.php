@@ -74,18 +74,18 @@
 
 		public function save()
 		{
-			// Ambil tanggal hari ini (1–31)
-			$today = date("j");
+			// // Ambil tanggal hari ini (1–31)
+			// $today = date("j");
 
-			// Validasi: hanya boleh input tanggal 25–28
-			if ($today < 25 || $today > 28) {
-				$this->session->set_flashdata(
-					"error",
-					"Input hanya diperbolehkan tanggal 25–28 setiap bulan.",
-				);
-				redirect("input_narapidana");
-				return;
-			}
+			// // Validasi: hanya boleh input tanggal 25–28
+			// if ($today < 25 || $today > 28) {
+			// 	$this->session->set_flashdata(
+			// 		"error",
+			// 		"Input hanya diperbolehkan tanggal 25–28 setiap bulan.",
+			// 	);
+			// 	redirect("input_narapidana");
+			// 	return;
+			// }
 
 			$no_register = $this->input->post("no_register");
 			$nama_narapidana = $this->input->post("nama_narapidana");
@@ -207,6 +207,15 @@
 					"created_at" => date("Y-m-d H:i:s"),
 				];
 				$this->Input_Narapidana_Model->saveHasil($dataHasil);
+
+				// Simpan ke tbl_upload
+				if ($nilaiAkhir >= 41) {
+					$dataUpload = [
+						"id_upload" => $this->uuid_v4(),
+						"id_hasil" => $id_hasil,
+					];
+					$this->db->insert("tbl_upload", $dataUpload);
+				}
 
 				// Simpan semua hasil indikator
 				$dataHasilIndikator = [];
