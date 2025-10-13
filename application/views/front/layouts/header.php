@@ -9,21 +9,21 @@
                     <img src="<?= base_url("assets/img/iconlogo.png") ?>"
                         alt="Icon"
                         class="<?= $this->session->userdata("username")
-                                    ? "hidden sm:block"
-                                    : "block" ?> w-[45px] sm:w-[60px] lg:w-[70px] transition-transform duration-300 group-hover:scale-105">
+                        	? "hidden sm:block"
+                        	: "block" ?> w-[45px] sm:w-[60px] lg:w-[70px] transition-transform duration-300 group-hover:scale-105">
 
                     <!-- Logo Teks -->
                     <img src="<?= base_url("assets/img/logo-nobg.png") ?>"
                         alt="Logo"
                         class="<?= $this->session->userdata("username")
-                                    ? "hidden sm:block"
-                                    : "block" ?> w-[80px] sm:w-[110px] lg:w-[130px]">
+                        	? "hidden sm:block"
+                        	: "block" ?> w-[80px] sm:w-[110px] lg:w-[130px]">
                 </a>
 
                 <?php if ($this->session->userdata("username")): ?>
                     <!-- Sidebar Toggle -->
                     <button id="sidebar-toggle"
-                        class="text-white p-2 rounded-md bg-transparent hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 cursor-pointer flex items-center shadow-md transition-all duration-300">
+                        class="sm:ml-0 -ml-3 text-white p-2 rounded-md bg-transparent hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 cursor-pointer flex items-center shadow-md transition-all duration-300">
 
                         <!-- Mobile: panah -->
                         <svg id="sidebar-icon" class="w-6 h-6 sm:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,7 +74,9 @@
 
                     <!-- User -->
                     <div class="relative">
-                        <?php $username = $this->session->userdata("username"); ?>
+                        <?php $username = $this->session->userdata(
+                        	"username",
+                        ); ?>
                         <button id="user-btn"
                             class="text-white px-3 sm:px-4 py-2 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 cursor-pointer flex items-center gap-2 shadow-md transition-all duration-300">
                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -83,7 +85,9 @@
                1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6
                2.67-6 6h12c0-3.33-2.67-6-6-6z" />
                             </svg>
-                            <span class="text-sm font-medium"><?= htmlspecialchars($username) ?></span>
+                            <span class="text-sm font-medium"><?= htmlspecialchars(
+                            	$username,
+                            ) ?></span>
                             <svg class="w-4 h-4 inline-block transition-transform duration-300"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -122,16 +126,18 @@
 
 <!-- Sidebar -->
 <?php if ($this->session->userdata("username")): ?>
-    <aside id="sidebar" class="fixed top-14 sm:top-16 lg:top-20 left-0 
-    w-60 sm:w-64 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)] 
-    bg-gradient-to-b from-black via-gray-900 to-black text-white 
+    <aside id="sidebar" class="fixed top-14 sm:top-16 lg:top-20 left-0
+    w-60 sm:w-64 h-[calc(100vh-3.5rem)] sm:h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)]
+    bg-gradient-to-b from-black via-gray-900 to-black text-white
     shadow-xl -ml-64 transition-all duration-300 overflow-y-auto z-40 border-r border-gray-800/60">
         <nav class="p-2 sm:p-4 space-y-1 sm:space-y-2 text-sm sm:text-base">
             <!-- Semua menu sidebar seperti versi sebelumnya -->
-            <a href="<?= base_url("/") ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Beranda</a>
             <a href="<?= base_url(
-                            "histori",
-                        ) ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Riwayat Kerawanan</a>
+            	"/",
+            ) ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Beranda</a>
+            <a href="<?= base_url(
+            	"histori",
+            ) ?>" class="block px-3 py-2 hover:bg-red-700 rounded-md transition">Riwayat Kerawanan</a>
 
             <!-- Faktor Narkoba -->
             <div class="accordion">
@@ -144,11 +150,11 @@
                 <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
                     <?php if ($this->session->userdata("role") === "upt"): ?>
                         <a href="<?= base_url(
-                                        "input_pegawai",
-                                    ) ?>" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
+                        	"input_pegawai",
+                        ) ?>" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
                         <a href="<?= base_url(
-                                        "input_narapidana",
-                                    ) ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
+                        	"input_narapidana",
+                        ) ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
                     <?php endif; ?>
                     <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana Prasarana</a>
                     <div class="accordion nested">
@@ -179,11 +185,11 @@
                 <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
                     <?php if ($this->session->userdata("role") === "upt"): ?>
                         <a href="<?= base_url(
-                                        "input_pegawai",
-                                    ) ?>" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
+                        	"input_pegawai",
+                        ) ?>" class="block px-6 py-2 hover:bg-red-700">Pegawai</a>
                         <a href="<?= base_url(
-                                        "input_narapidana",
-                                    ) ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
+                        	"input_narapidana",
+                        ) ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
                     <?php endif; ?>
                     <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana Prasarana</a>
                     <div class="accordion nested">
@@ -208,7 +214,7 @@
 
             <!-- Akses admin/kanwil -->
             <?php if (
-                in_array($this->session->userdata("role"), ["admin", "kanwil"])
+            	in_array($this->session->userdata("role"), ["admin", "kanwil"])
             ): ?>
                 <div class="accordion">
                     <button class="accordion-btn flex justify-between w-full px-3 py-2 hover:bg-red-700 rounded-md transition">
@@ -219,15 +225,15 @@
                     </button>
                     <div class="accordion-panel hidden flex-col transition-all duration-300 overflow-hidden">
                         <?php if (
-                            $this->session->userdata("role") === "admin"
+                        	$this->session->userdata("role") === "admin"
                         ): ?>
                             <a href="<?= base_url(
-                                            "opsi",
-                                        ) ?>" class="block px-6 py-2 hover:bg-red-700">Manajemen Opsi</a>
+                            	"opsi",
+                            ) ?>" class="block px-6 py-2 hover:bg-red-700">Manajemen Opsi</a>
                         <?php endif; ?>
                         <a href="<?= base_url(
-                                        "user",
-                                    ) ?>" class="block px-6 py-2 hover:bg-red-700">Manajemen User</a>
+                        	"user",
+                        ) ?>" class="block px-6 py-2 hover:bg-red-700">Manajemen User</a>
                     </div>
                 </div>
             <?php endif; ?>
