@@ -222,6 +222,7 @@
                         <th class="px-3 sm:px-5 py-3 font-semibold">UPT</th>
                         <th class="px-3 sm:px-5 py-3 font-semibold">Level</th>
                         <th class="px-3 sm:px-5 py-3 font-semibold">Tipe</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Tindak Lanjut</th>
                         <th class="px-3 sm:px-5 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
@@ -273,7 +274,11 @@
                                             title="Jawaban">
                                             <i class="ri-file-list-2-line text-lg"></i>
                                         </button>
-
+                                        <a href="<?= site_url('histori/edit/' . $row->id_hasil) ?>"
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
+                                            title="Edit">
+                                            <i class="ri-edit-2-line text-lg"></i>
+                                        </a>
                                         <?php
                                         $role = $this->session->userdata('role');
                                         if (
@@ -340,6 +345,8 @@
                                     <?= htmlspecialchars($row->level ?? '-') ?>
                                 </span>
                             </div>
+                            <div><span class="font-medium text-gray-900">Tindak Lanjut:</span>
+                            </div>
                             <div><span class="font-medium text-gray-900">Tipe:</span>
                                 <?= htmlspecialchars($row->tipe_object ?? '-') ?>
                             </div>
@@ -352,13 +359,16 @@
                                 title="Detail">
                                 <i class="ri-search-line text-lg"></i>
                             </button>
-
                             <button type="button" onclick="showJawaban('<?= $row->id_hasil ?>')"
                                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white shadow-sm transition"
                                 title="Jawaban">
                                 <i class="ri-file-text-line text-lg"></i>
                             </button>
-
+                            <a href="<?= site_url('histori/edit/' . $row->id_hasil) ?>"
+                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
+                                title="Edit">
+                                <i class="ri-edit-2-line text-lg"></i>
+                            </a>
                             <?php if ($role === 'admin' || ($role === 'kanwil' && $row->level !== 'Merah')): ?>
                                 <a href="<?= site_url('histori/delete/' . $row->id_hasil) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
@@ -402,6 +412,7 @@
                         <th class="px-3 sm:px-5 py-3 font-semibold">UPT</th>
                         <th class="px-3 sm:px-5 py-3 font-semibold">Level</th>
                         <th class="px-3 sm:px-5 py-3 font-semibold">Tipe</th>
+                        <th class="px-3 sm:px-5 py-3 font-semibold">Tindak Lanjut</th>
                         <th class="px-3 sm:px-5 py-3 font-semibold">Aksi</th>
                     </tr>
                 </thead>
@@ -454,7 +465,11 @@
                                             title="Jawaban">
                                             <i class="ri-file-list-2-line text-lg"></i>
                                         </button>
-
+                                        <a href="<?= site_url('histori/edit/' . $row->id_hasil) ?>"
+                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
+                                            title="Edit">
+                                            <i class="ri-edit-2-line text-lg"></i>
+                                        </a>
                                         <?php
                                         $role = $this->session->userdata("role");
                                         if ($role === "admin" || ($role === "kanwil" && $row->level !== "Merah")): ?>
@@ -518,6 +533,9 @@
                                     <?= htmlspecialchars($row->level ?? '-') ?>
                                 </span>
                             </div>
+                            <div><span class="font-medium text-gray-900">Tindak Lanjut:</span>
+                                <?= htmlspecialchars($row->tipe_object ?? '-') ?>
+                            </div>
                             <div><span class="font-medium text-gray-900">Tipe:</span>
                                 <?= htmlspecialchars($row->tipe_object ?? '-') ?>
                             </div>
@@ -538,7 +556,11 @@
                                 title="Jawaban">
                                 <i class="ri-file-text-line text-lg"></i>
                             </button>
-
+                            <a href="<?= site_url('histori/edit/' . $row->id_hasil) ?>"
+                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
+                                title="Edit">
+                                <i class="ri-edit-2-line text-lg"></i>
+                            </a>
                             <!-- Hapus -->
                             <?php if ($role === 'admin' || ($role === 'kanwil' && $row->level !== 'Merah')): ?>
                                 <a href="<?= site_url('histori/delete/' . $row->id_hasil) ?>"

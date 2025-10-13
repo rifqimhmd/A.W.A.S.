@@ -16,6 +16,9 @@ class Histori extends CI_Controller
 		if (!$this->session->userdata("logged_in")) {
 			redirect("login");
 		}
+
+		// pastikan database dan input aktif
+		$this->load->database();
 		$this->load->model("HistoriModel");
 	}
 
@@ -49,9 +52,6 @@ class Histori extends CI_Controller
 		$this->load->view("front/layouts/main", $data);
 	}
 
-	/**
-	 * Ambil jawaban skrining & faktor untuk modal
-	 */
 	public function get_jawaban($id_hasil)
 	{
 		try {
@@ -86,9 +86,6 @@ class Histori extends CI_Controller
 		}
 	}
 
-	/**
-	 * Hapus hasil
-	 */
 	public function delete($id_hasil)
 	{
 		if (empty($id_hasil)) {
@@ -136,5 +133,59 @@ class Histori extends CI_Controller
 		}
 
 		redirect("histori");
+	}
+	public function edit($id_hasil)
+	{
+		if (empty($id_hasil)) {
+			show_404();
+		}
+
+		$data['title'] = "Edit Data Kerawanan";
+		$data['page'] = "front/pages/datakerawanan/edit_histori";
+
+		$data['hasil'] = $this->db
+			->get_where('tbl_hasil', ['id_hasil' => $id_hasil])
+			->row();
+
+		if (!$data['hasil']) {
+			$this->session->set_flashdata('error', 'Data tidak ditemukan.');
+			redirect('histori');
+		}
+
+		// ambil data tambahan untuk tampilan form
+		$data['list_kanwil'] = $this->HistoriModel->getAllKanwil();
+		$data['list_upt'] = $this->HistoriModel->getAllUpt();
+
+		$this->load->view("front/layouts/main", $data);
+	}
+
+	public function update()
+	{
+		$this->load->database();
+		$this->load->library('input'); // kalau belum autoload
+
+		$id_hasil = $this->input->post('id_hasil');
+		if (empty($id_hasil)) {
+			$this->session->set_flashdata('error', 'ID tidak ditemukan.');
+			redirect('histori');
+		}
+
+		$data_update = [
+			'nilai_akhir' => $this->input->post('nilai_akhir'),
+			'id_antisipasi' => $this->input->post('id_antisipasi'),
+			'updated_at' => date('Y-m-d H:i:s'),
+		];
+
+		$this->db->where('id_hasil', $id_hasil);
+		$this->db->update('tbl_hasil', $data_update);
+
+		// pastikan pakai $this->db->affected_rows()
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('success', 'Data berhasil diperbarui!');
+		} else {
+			$this->session->set_flashdata('warning', 'Tidak ada perubahan data.');
+		}
+
+		redirect('histori');
 	}
 }
