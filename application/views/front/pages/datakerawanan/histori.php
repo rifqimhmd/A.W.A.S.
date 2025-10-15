@@ -98,15 +98,13 @@
                     <div class="flex items-center gap-2">
                         <label for="filter-upt" class="w-24 text-sm text-gray-700">UPT:</label>
                         <?php if (
-                        	$this->session->userdata("role") === "upt"
+                            $this->session->userdata("role") === "upt"
                         ): ?>
                             <?php foreach ($list_upt as $upt): ?>
                                 <input type="text"
                                     class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
                                     value="<?= $upt["nama_upt"] ?>" readonly>
-                                <input type="hidden" name="upt" value="<?= $upt[
-                                	"id_upt"
-                                ] ?>">
+                                <input type="hidden" name="upt" value="<?= $upt["id_upt"] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <select id="filter-upt" name="upt"
@@ -114,10 +112,10 @@
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_upt as $upt): ?>
                                     <option value="<?= htmlspecialchars(
-                                    	$upt["nama_upt"],
-                                    ) ?>">
+                                                        $upt["nama_upt"],
+                                                    ) ?>">
                                         <?= htmlspecialchars(
-                                        	$upt["nama_upt"],
+                                            $upt["nama_upt"],
                                         ) ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -129,18 +127,14 @@
                     <div class="flex items-center gap-2">
                         <label for="filter-kanwil" class="w-24 text-sm text-gray-700">Kanwil:</label>
                         <?php if (
-                        	$this->session->userdata("role") === "kanwil" ||
-                        	$this->session->userdata("role") === "upt"
+                            $this->session->userdata("role") === "kanwil" ||
+                            $this->session->userdata("role") === "upt"
                         ): ?>
                             <?php foreach ($list_kanwil as $kanwil): ?>
                                 <input type="text"
                                     class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                                    value="<?= $kanwil[
-                                    	"nama_kanwil"
-                                    ] ?>" readonly>
-                                <input type="hidden" name="kanwil" value="<?= $kanwil[
-                                	"id_kanwil"
-                                ] ?>">
+                                    value="<?= $kanwil["nama_kanwil"] ?>" readonly>
+                                <input type="hidden" name="kanwil" value="<?= $kanwil["id_kanwil"] ?>">
                             <?php endforeach; ?>
                         <?php else: ?>
                             <select id="filter-kanwil" name="kanwil"
@@ -148,10 +142,10 @@
                                 <option value="all">Semua</option>
                                 <?php foreach ($list_kanwil as $kanwil): ?>
                                     <option value="<?= htmlspecialchars(
-                                    	$kanwil["nama_kanwil"],
-                                    ) ?>">
+                                                        $kanwil["nama_kanwil"],
+                                                    ) ?>">
                                         <?= htmlspecialchars(
-                                        	$kanwil["nama_kanwil"],
+                                            $kanwil["nama_kanwil"],
                                         ) ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -212,7 +206,6 @@
         </script>
     </div>
 
-
     <!-- Table Narkotika -->
     <div id="table-narkotika" class="overflow-x-auto mt-6">
 
@@ -235,68 +228,68 @@
 
                 <tbody class="divide-y divide-gray-100 text-sm sm:text-base text-gray-700">
                     <?php if (!empty($narkotika)):
-                    	$no = 1;
-                    	foreach ($narkotika as $row): ?>
+                        $no = 1;
+                        foreach ($narkotika as $row): ?>
                             <tr class="hover:bg-gray-50 transition-all duration-200"
                                 data-tipe="<?= strtolower(
-                                	$row->tipe_object ?? "-",
-                                ) ?>"
+                                                $row->tipe_object ?? "-",
+                                            ) ?>"
                                 data-level="<?= strtolower(
-                                	$row->level ?? "-",
-                                ) ?>"
+                                                $row->level ?? "-",
+                                            ) ?>"
                                 data-upt="<?= strtolower(
-                                	$row->nama_upt ?? "-",
-                                ) ?>"
+                                                $row->nama_upt ?? "-",
+                                            ) ?>"
                                 data-kanwil="<?= strtolower(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?>">
+                                                    $row->nama_kanwil ?? "-",
+                                                ) ?>">
 
                                 <td class="px-3 sm:px-5 py-3 font-medium text-gray-800"><?= $no++ ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object === "Pegawai"
-                                		? $row->nip ?? "-"
-                                		: $row->no_register ?? "-",
-                                ) ?></td>
+                                                                    $row->tipe_object === "Pegawai"
+                                                                        ? $row->nip ?? "-"
+                                                                        : $row->no_register ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3 font-medium text-left"><?= htmlspecialchars(
-                                	$row->nama_pegawai ??
-                                		($row->nama_narapidana ?? "-"),
-                                ) ?></td>
+                                                                                        $row->nama_pegawai ??
+                                                                                            ($row->nama_narapidana ?? "-"),
+                                                                                    ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?></td>
+                                                                    $row->nama_kanwil ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->nama_upt ?? "-",
-                                ) ?></td>
+                                                                    $row->nama_upt ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3">
                                     <?php
                                     $levelColor = [
-                                    	"Merah" => "bg-red-100 text-red-700",
-                                    	"Kuning" =>
-                                    		"bg-yellow-100 text-yellow-700",
-                                    	"Hijau" =>
-                                    		"bg-green-100 text-green-700",
+                                        "Merah" => "bg-red-100 text-red-700",
+                                        "Kuning" =>
+                                        "bg-yellow-100 text-yellow-700",
+                                        "Hijau" =>
+                                        "bg-green-100 text-green-700",
                                     ];
                                     $color =
-                                    	$levelColor[$row->level] ??
-                                    	"bg-gray-100 text-gray-600";
+                                        $levelColor[$row->level] ??
+                                        "bg-gray-100 text-gray-600";
                                     ?>
                                     <span class="px-3 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                         <?= htmlspecialchars(
-                                        	$row->level ?? "-",
+                                            $row->level ?? "-",
                                         ) ?>
                                     </span>
                                 </td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object ?? "-",
-                                ) ?></td>
+                                                                    $row->tipe_object ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->tindak_lanjut ?? "-",
-                                ) ?></td>
+                                                                    $row->tindak_lanjut ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <button onclick='showDetail(<?= json_encode(
-                                        	$row,
-                                        ) ?>)'
+                                                                        $row,
+                                                                    ) ?>)'
                                             class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
                                             title="Detail">
                                             <i class="ri-search-line text-lg"></i>
@@ -306,26 +299,26 @@
                                             title="Jawaban">
                                             <i class="ri-file-list-2-line text-lg"></i>
                                         </button>
-                                        <a href="<?= site_url(
-                                        	"histori/edit/" . $row->id_hasil,
-                                        ) ?>"
-                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
-                                            title="Edit">
-                                            <i class="ri-edit-2-line text-lg"></i>
-                                        </a>
+                                        <?php if ($row->level !== "Hijau"): ?>
+                                            <a href="<?= site_url('histori/edit/' . $row->id_hasil) ?>"
+                                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
+                                                title="Edit">
+                                                <i class="ri-edit-2-line text-lg"></i>
+                                            </a>
+                                        <?php endif; ?>
                                         <?php
                                         $role = $this->session->userdata(
-                                        	"role",
+                                            "role",
                                         );
                                         if (
-                                        	$role === "admin" ||
-                                        	($role === "kanwil" &&
-                                        		$row->level !== "Merah")
+                                            $role === "admin" ||
+                                            ($role === "kanwil" &&
+                                                $row->level !== "Merah")
                                         ): ?>
                                             <a href="<?= site_url(
-                                            	"histori/delete/" .
-                                            		$row->id_hasil,
-                                            ) ?>"
+                                                            "histori/delete/" .
+                                                                $row->id_hasil,
+                                                        ) ?>"
                                                 onclick="return confirm('Yakin hapus data ini?')"
                                                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                                 title="Hapus">
@@ -338,7 +331,7 @@
                             </tr>
                         <?php endforeach;
                     else:
-                    	 ?>
+                        ?>
                         <tr>
                             <td colspan="8" class="py-10 text-gray-500 italic">Belum ada data narkotika</td>
                         </tr>
@@ -351,15 +344,15 @@
         <!-- Mobile Cards Narkotika -->
         <div class="block sm:hidden space-y-3">
             <?php if (!empty($narkotika)):
-            	$no = 1;
-            	foreach ($narkotika as $row): ?>
+                $no = 1;
+                foreach ($narkotika as $row): ?>
                     <div class="p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg hover:bg-red-50 transition-all duration-200"
                         data-tipe="<?= strtolower($row->tipe_object ?? "-") ?>"
                         data-level="<?= strtolower($row->level ?? "-") ?>"
                         data-upt="<?= strtolower($row->nama_upt ?? "-") ?>"
                         data-kanwil="<?= strtolower(
-                        	$row->nama_kanwil ?? "-",
-                        ) ?>">
+                                            $row->nama_kanwil ?? "-",
+                                        ) ?>">
 
                         <!-- Header -->
                         <div class="flex justify-between items-center mb-2">
@@ -370,20 +363,20 @@
                         <div class="text-gray-700 text-sm space-y-1">
                             <div><span class="font-medium text-gray-900">No Register/NIP:</span>
                                 <?= htmlspecialchars(
-                                	$row->tipe_object === "Pegawai"
-                                		? $row->nip ?? "-"
-                                		: $row->no_register ?? "-",
+                                    $row->tipe_object === "Pegawai"
+                                        ? $row->nip ?? "-"
+                                        : $row->no_register ?? "-",
                                 ) ?>
                             </div>
                             <div><span class="font-medium text-gray-900">Nama:</span>
                                 <?= htmlspecialchars(
-                                	$row->nama_pegawai ??
-                                		($row->nama_narapidana ?? "-"),
+                                    $row->nama_pegawai ??
+                                        ($row->nama_narapidana ?? "-"),
                                 ) ?>
                             </div>
                             <div><span class="font-medium text-gray-900">Kanwil:</span>
                                 <?= htmlspecialchars(
-                                	$row->nama_kanwil ?? "-",
+                                    $row->nama_kanwil ?? "-",
                                 ) ?>
                             </div>
                             <div><span class="font-medium text-gray-900">UPT:</span>
@@ -391,18 +384,18 @@
                             </div>
                             <div><span class="font-medium text-gray-900">Level:</span>
                                 <?php $color =
-                                	$levelColor[$row->level] ??
-                                	"bg-gray-100 text-gray-600"; ?>
+                                    $levelColor[$row->level] ??
+                                    "bg-gray-100 text-gray-600"; ?>
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                     <?= htmlspecialchars($row->level ?? "-") ?>
                                 </span>
                             </div>
                             <div><span class="font-medium text-gray-900">Tindak Lanjut:</span>
-                            	<?= htmlspecialchars($row->tindak_lanjut ?? "-") ?>
+                                <?= htmlspecialchars($row->tindak_lanjut ?? "-") ?>
                             </div>
                             <div><span class="font-medium text-gray-900">Tipe:</span>
                                 <?= htmlspecialchars(
-                                	$row->tipe_object ?? "-",
+                                    $row->tipe_object ?? "-",
                                 ) ?>
                             </div>
                         </div>
@@ -410,8 +403,8 @@
                         <!-- Actions -->
                         <div class="flex justify-end gap-2 mt-4">
                             <button onclick='showDetail(<?= json_encode(
-                            	$row,
-                            ) ?>)'
+                                                            $row,
+                                                        ) ?>)'
                                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
                                 title="Detail">
                                 <i class="ri-search-line text-lg"></i>
@@ -421,20 +414,20 @@
                                 title="Jawaban">
                                 <i class="ri-file-text-line text-lg"></i>
                             </button>
-                            <a href="<?= site_url(
-                            	"histori/edit/" . $row->id_hasil,
-                            ) ?>"
-                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
-                                title="Edit">
-                                <i class="ri-edit-2-line text-lg"></i>
-                            </a>
+                            <?php if ($row->level !== "Hijau"): ?>
+                                <a href="<?= site_url('histori/edit/' . $row->id_hasil) ?>"
+                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
+                                    title="Edit">
+                                    <i class="ri-edit-2-line text-lg"></i>
+                                </a>
+                            <?php endif; ?>
                             <?php if (
-                            	$role === "admin" ||
-                            	($role === "kanwil" && $row->level !== "Merah")
+                                $role === "admin" ||
+                                ($role === "kanwil" && $row->level !== "Merah")
                             ): ?>
                                 <a href="<?= site_url(
-                                	"histori/delete/" . $row->id_hasil,
-                                ) ?>"
+                                                "histori/delete/" . $row->id_hasil,
+                                            ) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                     title="Hapus">
@@ -445,22 +438,11 @@
                     </div>
                 <?php endforeach;
             else:
-            	 ?>
+                ?>
                 <div class="p-4 text-center text-gray-500 italic">Belum ada data narkotika</div>
             <?php
             endif; ?>
         </div>
-
-        <!-- Footer Pagination -->
-        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
-            <div class="text-sm text-gray-600">
-                Menampilkan <?= count($narkotika ?? []) ?> entri
-            </div>
-            <div class="text-sm">
-                <?= $pagination_narkotika ?? "" ?>
-            </div>
-        </div>
-
     </div>
 
     <!-- Table Teroris -->
@@ -485,68 +467,68 @@
 
                 <tbody class="divide-y divide-gray-100 text-sm sm:text-base text-gray-700">
                     <?php if (!empty($teroris)):
-                    	$no = 1;
-                    	foreach ($teroris as $row): ?>
+                        $no = 1;
+                        foreach ($teroris as $row): ?>
                             <tr class="hover:bg-gray-50 transition-all duration-200"
                                 data-tipe="<?= strtolower(
-                                	$row->tipe_object ?? "-",
-                                ) ?>"
+                                                $row->tipe_object ?? "-",
+                                            ) ?>"
                                 data-level="<?= strtolower(
-                                	$row->level ?? "-",
-                                ) ?>"
+                                                $row->level ?? "-",
+                                            ) ?>"
                                 data-upt="<?= strtolower(
-                                	$row->nama_upt ?? "-",
-                                ) ?>"
+                                                $row->nama_upt ?? "-",
+                                            ) ?>"
                                 data-kanwil="<?= strtolower(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?>">
+                                                    $row->nama_kanwil ?? "-",
+                                                ) ?>">
 
                                 <td class="px-3 sm:px-5 py-3 font-medium text-gray-800"><?= $no++ ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object === "Pegawai"
-                                		? $row->nip ?? "-"
-                                		: $row->no_register ?? "-",
-                                ) ?></td>
+                                                                    $row->tipe_object === "Pegawai"
+                                                                        ? $row->nip ?? "-"
+                                                                        : $row->no_register ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3 text-left font-medium"><?= htmlspecialchars(
-                                	$row->nama_pegawai ??
-                                		($row->nama_narapidana ?? "-"),
-                                ) ?></td>
+                                                                                        $row->nama_pegawai ??
+                                                                                            ($row->nama_narapidana ?? "-"),
+                                                                                    ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->nama_kanwil ?? "-",
-                                ) ?></td>
+                                                                    $row->nama_kanwil ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->nama_upt ?? "-",
-                                ) ?></td>
+                                                                    $row->nama_upt ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3">
                                     <?php
                                     $levelColor = [
-                                    	"Merah" => "bg-red-100 text-red-700",
-                                    	"Kuning" =>
-                                    		"bg-yellow-100 text-yellow-700",
-                                    	"Hijau" =>
-                                    		"bg-green-100 text-green-700",
+                                        "Merah" => "bg-red-100 text-red-700",
+                                        "Kuning" =>
+                                        "bg-yellow-100 text-yellow-700",
+                                        "Hijau" =>
+                                        "bg-green-100 text-green-700",
                                     ];
                                     $color =
-                                    	$levelColor[$row->level] ??
-                                    	"bg-gray-100 text-gray-600";
+                                        $levelColor[$row->level] ??
+                                        "bg-gray-100 text-gray-600";
                                     ?>
                                     <span class="px-3 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                         <?= htmlspecialchars(
-                                        	$row->level ?? "-",
+                                            $row->level ?? "-",
                                         ) ?>
                                     </span>
                                 </td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->tipe_object ?? "-",
-                                ) ?></td>
+                                                                    $row->tipe_object ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$row->tindak_lanjut ?? "-",
-                                ) ?></td>
+                                                                    $row->tindak_lanjut ?? "-",
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <button onclick='showDetail(<?= json_encode(
-                                        	$row,
-                                        ) ?>)'
+                                                                        $row,
+                                                                    ) ?>)'
                                             class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
                                             title="Detail">
                                             <i class="ri-search-line text-lg"></i>
@@ -557,26 +539,26 @@
                                             title="Jawaban">
                                             <i class="ri-file-list-2-line text-lg"></i>
                                         </button>
-                                        <a href="<?= site_url(
-                                        	"histori/edit/" . $row->id_hasil,
-                                        ) ?>"
-                                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
-                                            title="Edit">
-                                            <i class="ri-edit-2-line text-lg"></i>
-                                        </a>
+                                        <?php if ($row->level !== "Hijau"): ?>
+                                            <a href="<?= site_url('histori/edit/' . $row->id_hasil) ?>"
+                                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
+                                                title="Edit">
+                                                <i class="ri-edit-2-line text-lg"></i>
+                                            </a>
+                                        <?php endif; ?>
                                         <?php
                                         $role = $this->session->userdata(
-                                        	"role",
+                                            "role",
                                         );
                                         if (
-                                        	$role === "admin" ||
-                                        	($role === "kanwil" &&
-                                        		$row->level !== "Merah")
+                                            $role === "admin" ||
+                                            ($role === "kanwil" &&
+                                                $row->level !== "Merah")
                                         ): ?>
                                             <a href="<?= site_url(
-                                            	"histori/delete/" .
-                                            		$row->id_hasil,
-                                            ) ?>"
+                                                            "histori/delete/" .
+                                                                $row->id_hasil,
+                                                        ) ?>"
                                                 onclick="return confirm('Yakin hapus data ini?')"
                                                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                                 title="Hapus">
@@ -589,7 +571,7 @@
                             </tr>
                         <?php endforeach;
                     else:
-                    	 ?>
+                        ?>
                         <tr>
                             <td colspan="8" class="py-10 text-gray-500 italic">Belum ada data teroris</td>
                         </tr>
@@ -602,15 +584,15 @@
         <!-- Mobile Cards Teroris -->
         <div class="block sm:hidden space-y-3">
             <?php if (!empty($teroris)):
-            	$no = 1;
-            	foreach ($teroris as $row): ?>
+                $no = 1;
+                foreach ($teroris as $row): ?>
                     <div class="p-4 bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg hover:bg-red-50 transition-all duration-200"
                         data-tipe="<?= strtolower($row->tipe_object ?? "-") ?>"
                         data-level="<?= strtolower($row->level ?? "-") ?>"
                         data-upt="<?= strtolower($row->nama_upt ?? "-") ?>"
                         data-kanwil="<?= strtolower(
-                        	$row->nama_kanwil ?? "-",
-                        ) ?>">
+                                            $row->nama_kanwil ?? "-",
+                                        ) ?>">
 
                         <!-- Header -->
                         <div class="flex justify-between items-center mb-2">
@@ -621,20 +603,20 @@
                         <div class="text-gray-700 text-sm space-y-1">
                             <div><span class="font-medium text-gray-900">No Register/NIP:</span>
                                 <?= htmlspecialchars(
-                                	$row->tipe_object === "Pegawai"
-                                		? $row->nip ?? "-"
-                                		: $row->no_register ?? "-",
+                                    $row->tipe_object === "Pegawai"
+                                        ? $row->nip ?? "-"
+                                        : $row->no_register ?? "-",
                                 ) ?>
                             </div>
                             <div><span class="font-medium text-gray-900">Nama:</span>
                                 <?= htmlspecialchars(
-                                	$row->nama_pegawai ??
-                                		($row->nama_narapidana ?? "-"),
+                                    $row->nama_pegawai ??
+                                        ($row->nama_narapidana ?? "-"),
                                 ) ?>
                             </div>
                             <div><span class="font-medium text-gray-900">Kanwil:</span>
                                 <?= htmlspecialchars(
-                                	$row->nama_kanwil ?? "-",
+                                    $row->nama_kanwil ?? "-",
                                 ) ?>
                             </div>
                             <div><span class="font-medium text-gray-900">UPT:</span>
@@ -642,20 +624,20 @@
                             </div>
                             <div><span class="font-medium text-gray-900">Level:</span>
                                 <?php $color =
-                                	$levelColor[$row->level] ??
-                                	"bg-gray-100 text-gray-600"; ?>
+                                    $levelColor[$row->level] ??
+                                    "bg-gray-100 text-gray-600"; ?>
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold <?= $color ?>">
                                     <?= htmlspecialchars($row->level ?? "-") ?>
                                 </span>
                             </div>
                             <div><span class="font-medium text-gray-900">Tindak Lanjut:</span>
                                 <?= htmlspecialchars(
-                                	$row->tindak_lanjut ?? "-",
+                                    $row->tindak_lanjut ?? "-",
                                 ) ?>
                             </div>
                             <div><span class="font-medium text-gray-900">Tipe:</span>
                                 <?= htmlspecialchars(
-                                	$row->tipe_object ?? "-",
+                                    $row->tipe_object ?? "-",
                                 ) ?>
                             </div>
                         </div>
@@ -664,8 +646,8 @@
                         <div class="flex justify-end gap-2 mt-4">
                             <!-- Detail -->
                             <button onclick='showDetail(<?= json_encode(
-                            	$row,
-                            ) ?>)'
+                                                            $row,
+                                                        ) ?>)'
                                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-sm transition"
                                 title="Detail">
                                 <i class="ri-search-line text-lg"></i>
@@ -677,21 +659,21 @@
                                 title="Jawaban">
                                 <i class="ri-file-text-line text-lg"></i>
                             </button>
-                            <a href="<?= site_url(
-                            	"histori/edit/" . $row->id_hasil,
-                            ) ?>"
-                                class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
-                                title="Edit">
-                                <i class="ri-edit-2-line text-lg"></i>
-                            </a>
+                            <?php if ($row->level !== "Hijau"): ?>
+                                <a href="<?= site_url('histori/edit/' . $row->id_hasil) ?>"
+                                    class="w-9 h-9 flex items-center justify-center rounded-lg bg-amber-500 hover:bg-amber-600 text-white shadow-sm transition"
+                                    title="Edit">
+                                    <i class="ri-edit-2-line text-lg"></i>
+                                </a>
+                            <?php endif; ?>
                             <!-- Hapus -->
                             <?php if (
-                            	$role === "admin" ||
-                            	($role === "kanwil" && $row->level !== "Merah")
+                                $role === "admin" ||
+                                ($role === "kanwil" && $row->level !== "Merah")
                             ): ?>
                                 <a href="<?= site_url(
-                                	"histori/delete/" . $row->id_hasil,
-                                ) ?>"
+                                                "histori/delete/" . $row->id_hasil,
+                                            ) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                     title="Hapus">
@@ -702,24 +684,12 @@
                     </div>
                 <?php endforeach;
             else:
-            	 ?>
+                ?>
                 <div class="p-4 text-center text-gray-500 italic">Belum ada data teroris</div>
             <?php
             endif; ?>
         </div>
-
-        <!-- Footer Pagination Teroris -->
-        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
-            <div class="text-sm text-gray-600">
-                Menampilkan <?= count($teroris ?? []) ?> entri
-            </div>
-            <div class="text-sm">
-                <?= $pagination_teroris ?? "" ?>
-            </div>
-        </div>
-
     </div>
-
 
     <!-- Modal Detail -->
     <div id="detailModal"
@@ -743,9 +713,9 @@
                 <p><strong>Solusi:</strong> <span id="detailSolusi">-</span></p>
                 <p><strong>Tindak Lanjut:</strong> <span id="tindaklanjut">-</span></p>
                 <p><strong>Dokumen:</strong>
-                  <a id="fileLink" href="#" target="_blank" class="text-blue-600 underline">
-                    <span id="filedokumen">-</span>
-                  </a>
+                    <a id="fileLink" href="#" target="_blank" class="text-blue-600 underline">
+                        <span id="filedokumen">-</span>
+                    </a>
                 </p>
                 <p><strong>Created At:</strong> <span id="detailCreated">-</span></p>
             </div>
@@ -890,8 +860,8 @@
             const fileLink = document.getElementById("fileLink");
             if (rowData.nama_file) {
                 fileLink.href = "<?= base_url(
-                	"uploads/",
-                ) ?>" + rowData.nama_file;
+                                        "uploads/",
+                                    ) ?>" + rowData.nama_file;
                 fileLink.classList.remove("pointer-events-none", "text-gray-400");
             } else {
                 fileLink.href = "#";

@@ -44,14 +44,14 @@
                 <select id="limit-select" onchange="changeLimit()"
                     class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                     <option value="25" <?= $limit == 25
-                    	? "selected"
-                    	: "" ?>>25</option>
+                                            ? "selected"
+                                            : "" ?>>25</option>
                     <option value="50" <?= $limit == 50
-                    	? "selected"
-                    	: "" ?>>50</option>
+                                            ? "selected"
+                                            : "" ?>>50</option>
                     <option value="100" <?= $limit == 100
-                    	? "selected"
-                    	: "" ?>>100</option>
+                                            ? "selected"
+                                            : "" ?>>100</option>
                 </select>
             </div>
 
@@ -121,14 +121,14 @@
                         <select id="limit-select-mobile" onchange="changeLimitFromMobile()"
                             class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none text-sm">
                             <option value="25" <?= $limit == 25
-                            	? "selected"
-                            	: "" ?>>25</option>
+                                                    ? "selected"
+                                                    : "" ?>>25</option>
                             <option value="50" <?= $limit == 50
-                            	? "selected"
-                            	: "" ?>>50</option>
+                                                    ? "selected"
+                                                    : "" ?>>50</option>
                             <option value="100" <?= $limit == 100
-                            	? "selected"
-                            	: "" ?>>100</option>
+                                                    ? "selected"
+                                                    : "" ?>>100</option>
                         </select>
                     </div>
 
@@ -167,14 +167,14 @@
                             <tr class="hover:bg-gray-50 transition-all duration-200">
                                 <td class="px-3 sm:px-5 py-3 font-medium text-gray-800"><?= $no++ ?></td>
                                 <td class="px-3 sm:px-5 py-3 text-left font-medium"><?= htmlspecialchars(
-                                	$s->indikator_skrining,
-                                ) ?></td>
+                                                                                        $s->indikator_skrining,
+                                                                                    ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$s->jenis_skrining,
-                                ) ?></td>
+                                                                    $s->jenis_skrining,
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$s->nama_instrument,
-                                ) ?></td>
+                                                                    $s->nama_instrument,
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-skrining-<?= $s->id_skrining ?>"
@@ -183,9 +183,9 @@
                                             <i class="ri-edit-2-line text-lg"></i>
                                         </label>
                                         <a href="<?= site_url(
-                                        	"opsi/delete_skrining/" .
-                                        		$s->id_skrining,
-                                        ) ?>"
+                                                        "opsi/delete_skrining/" .
+                                                            $s->id_skrining,
+                                                    ) ?>"
                                             onclick="return confirm('Yakin hapus data ini?')"
                                             class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm cursor-pointer transition"
                                             title="Hapus">
@@ -203,15 +203,15 @@
                                         <i class="ri-edit-2-line"></i> Edit Skrining
                                     </h3>
                                     <form method="post" action="<?= site_url(
-                                    	"opsi/update_skrining/" .
-                                    		$s->id_skrining,
-                                    ) ?>" class="space-y-4">
+                                                                    "opsi/update_skrining/" .
+                                                                        $s->id_skrining,
+                                                                ) ?>" class="space-y-4">
                                         <div>
                                             <label class="block text-gray-700 font-medium mb-1">Indikator Skrining</label>
                                             <input type="text" name="indikator_skrining"
                                                 value="<?= htmlspecialchars(
-                                                	$s->indikator_skrining,
-                                                ) ?>"
+                                                            $s->indikator_skrining,
+                                                        ) ?>"
                                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                         </div>
 
@@ -221,17 +221,17 @@
                                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                                 <?php
                                                 $options = [
-                                                	"Pengguna",
-                                                	"Pengedar",
-                                                	"Pengendali",
-                                                	"Ideolog",
-                                                	"Pengikut",
+                                                    "Pengguna",
+                                                    "Pengedar",
+                                                    "Pengendali",
+                                                    "Ideolog",
+                                                    "Pengikut",
                                                 ];
                                                 foreach ($options as $opt): ?>
                                                     <option value="<?= $opt ?>" <?= $s->jenis_skrining ==
-$opt
-	? "selected"
-	: "" ?>><?= $opt ?></option>
+                                                                                    $opt
+                                                                                    ? "selected"
+                                                                                    : "" ?>><?= $opt ?></option>
                                                 <?php endforeach;
                                                 ?>
                                             </select>
@@ -243,17 +243,17 @@ $opt
                                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                                 <?php
                                                 $instrument_opts = [
-                                                	"Narkotika",
-                                                	"Terorisme",
+                                                    "Narkotika",
+                                                    "Terorisme",
                                                 ];
                                                 foreach (
-                                                	$instrument_opts
-                                                	as $iopt
+                                                    $instrument_opts
+                                                    as $iopt
                                                 ): ?>
                                                     <option value="<?= $iopt ?>" <?= $s->nama_instrument ==
-$iopt
-	? "selected"
-	: "" ?>><?= $iopt ?></option>
+                                                                                        $iopt
+                                                                                        ? "selected"
+                                                                                        : "" ?>><?= $iopt ?></option>
                                                 <?php endforeach;
                                                 ?>
                                             </select>
@@ -303,14 +303,14 @@ $iopt
                             <!-- Body -->
                             <div class="text-gray-700 text-sm space-y-1">
                                 <div><span class="font-medium text-gray-900">Indikator:</span> <?= htmlspecialchars(
-                                	$s->indikator_skrining,
-                                ) ?></div>
+                                                                                                    $s->indikator_skrining,
+                                                                                                ) ?></div>
                                 <div><span class="font-medium text-gray-900">Jenis:</span> <?= htmlspecialchars(
-                                	$s->jenis_skrining,
-                                ) ?></div>
+                                                                                                $s->jenis_skrining,
+                                                                                            ) ?></div>
                                 <div><span class="font-medium text-gray-900">Instrumen:</span> <?= htmlspecialchars(
-                                	$s->nama_instrument,
-                                ) ?></div>
+                                                                                                    $s->nama_instrument,
+                                                                                                ) ?></div>
                             </div>
 
                             <!-- Actions -->
@@ -324,8 +324,8 @@ $iopt
 
                                 <!-- Tombol Hapus -->
                                 <a href="<?= site_url(
-                                	"opsi/delete_skrining/" . $s->id_skrining,
-                                ) ?>"
+                                                "opsi/delete_skrining/" . $s->id_skrining,
+                                            ) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                     title="Hapus">
@@ -339,13 +339,6 @@ $iopt
                     <div class="p-4 text-center text-gray-500 italic">Belum ada data Skrining.</div>
                 <?php endif; ?>
             </div>
-        </div>
-
-        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
-            <div class="text-sm text-gray-600">Menampilkan <?= count(
-            	$skrining ?? [],
-            ) ?> entri</div>
-            <div class="text-sm"><?= $pagination_skrining ?? "" ?></div>
         </div>
     </div>
 
@@ -373,14 +366,14 @@ $iopt
                             <tr class="hover:bg-gray-50 transition-all duration-200">
                                 <td class="px-3 sm:px-5 py-3 font-medium text-gray-800"><?= $no++ ?></td>
                                 <td class="px-3 sm:px-5 py-3 text-left font-medium"><?= htmlspecialchars(
-                                	$f->indikator_faktor,
-                                ) ?></td>
+                                                                                        $f->indikator_faktor,
+                                                                                    ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$f->jenis_faktor,
-                                ) ?></td>
+                                                                    $f->jenis_faktor,
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3"><?= htmlspecialchars(
-                                	$f->nama_instrument,
-                                ) ?></td>
+                                                                    $f->nama_instrument,
+                                                                ) ?></td>
                                 <td class="px-3 sm:px-5 py-3">
                                     <div class="flex items-center justify-center gap-2">
                                         <label for="modal-edit-faktor-<?= $f->id_faktor ?>"
@@ -389,9 +382,9 @@ $iopt
                                             <i class="ri-edit-2-line text-lg"></i>
                                         </label>
                                         <a href="<?= site_url(
-                                        	"opsi/delete_faktor/" .
-                                        		$f->id_faktor,
-                                        ) ?>"
+                                                        "opsi/delete_faktor/" .
+                                                            $f->id_faktor,
+                                                    ) ?>"
                                             onclick="return confirm('Yakin hapus data ini?')"
                                             class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm cursor-pointer transition"
                                             title="Hapus">
@@ -426,14 +419,14 @@ $iopt
                         <!-- Body -->
                         <div class="text-gray-700 text-sm space-y-1">
                             <div><span class="font-medium text-gray-900">Indikator:</span> <?= htmlspecialchars(
-                            	$f->indikator_faktor,
-                            ) ?></div>
+                                                                                                $f->indikator_faktor,
+                                                                                            ) ?></div>
                             <div><span class="font-medium text-gray-900">Jenis:</span> <?= htmlspecialchars(
-                            	$f->jenis_faktor,
-                            ) ?></div>
+                                                                                            $f->jenis_faktor,
+                                                                                        ) ?></div>
                             <div><span class="font-medium text-gray-900">Instrumen:</span> <?= htmlspecialchars(
-                            	$f->nama_instrument,
-                            ) ?></div>
+                                                                                                $f->nama_instrument,
+                                                                                            ) ?></div>
                         </div>
 
                         <!-- Actions -->
@@ -447,8 +440,8 @@ $iopt
 
                             <!-- Tombol Hapus -->
                             <a href="<?= site_url(
-                            	"opsi/delete_faktor/" . $f->id_faktor,
-                            ) ?>"
+                                            "opsi/delete_faktor/" . $f->id_faktor,
+                                        ) ?>"
                                 onclick="return confirm('Yakin hapus data ini?')"
                                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                 title="Hapus">
@@ -473,26 +466,26 @@ $iopt
                             <i class="ri-edit-2-line"></i> Edit Faktor
                         </h3>
                         <form method="post" action="<?= site_url(
-                        	"opsi/update_faktor/" . $f->id_faktor,
-                        ) ?>" class="space-y-4">
+                                                        "opsi/update_faktor/" . $f->id_faktor,
+                                                    ) ?>" class="space-y-4">
                             <div>
                                 <label class="block text-gray-700 font-medium mb-1">Indikator Faktor</label>
                                 <input type="text" name="indikator_faktor" value="<?= htmlspecialchars(
-                                	$f->indikator_faktor,
-                                ) ?>"
+                                                                                        $f->indikator_faktor,
+                                                                                    ) ?>"
                                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                             </div>
                             <div>
                                 <label class="block text-gray-700 font-medium mb-1">Jenis Faktor</label>
                                 <select name="jenis_faktor" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                     <option value="Bahaya" <?= $f->jenis_faktor ==
-                                    "Bahaya"
-                                    	? "selected"
-                                    	: "" ?>>Bahaya</option>
+                                                                "Bahaya"
+                                                                ? "selected"
+                                                                : "" ?>>Bahaya</option>
                                     <option value="Kerentanan" <?= $f->jenis_faktor ==
-                                    "Kerentanan"
-                                    	? "selected"
-                                    	: "" ?>>Kerentanan</option>
+                                                                    "Kerentanan"
+                                                                    ? "selected"
+                                                                    : "" ?>>Kerentanan</option>
                                 </select>
                             </div>
                             <div>
@@ -500,11 +493,11 @@ $iopt
                                 <select name="id_instrument" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none" required>
                                     <?php foreach ($instrument as $i): ?>
                                         <option value="<?= $i->id_instrument ?>" <?= $f->id_instrument ==
-$i->id_instrument
-	? "selected"
-	: "" ?>>
+                                                                                        $i->id_instrument
+                                                                                        ? "selected"
+                                                                                        : "" ?>>
                                             <?= htmlspecialchars(
-                                            	$i->nama_instrument,
+                                                $i->nama_instrument,
                                             ) ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -527,14 +520,6 @@ $i->id_instrument
                 </style>
             <?php endforeach; ?>
         <?php endif; ?>
-
-        <!-- Footer -->
-        <div class="px-4 py-4 border-t flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mt-4 bg-white rounded-b-lg shadow-sm">
-            <div class="text-sm text-gray-600">Menampilkan <?= count(
-            	$faktor ?? [],
-            ) ?> entri</div>
-            <div class="text-sm"><?= $pagination_faktor ?? "" ?></div>
-        </div>
     </div>
 
     <!-- Modal Tambah Opsi -->
@@ -545,8 +530,8 @@ $i->id_instrument
                 <i class="ri-add-line text-red-600"></i> Tambah Opsi
             </h3>
             <form method="post" action="<?= site_url(
-            	"opsi/store",
-            ) ?>" class="space-y-4" id="form-opsi">
+                                            "opsi/store",
+                                        ) ?>" class="space-y-4" id="form-opsi">
                 <div>
                     <label class="block text-gray-700 font-medium mb-1">Pilih Opsi</label>
                     <select name="opsi_type" id="opsi_type" onchange="toggleForm()" required
@@ -593,8 +578,8 @@ $i->id_instrument
                         <select name="id_instrument" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                             <?php foreach ($instrument as $i): ?>
                                 <option value="<?= $i->id_instrument ?>"><?= htmlspecialchars(
-	$i->nama_instrument,
-) ?></option>
+                                                                                $i->nama_instrument,
+                                                                            ) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -848,6 +833,5 @@ $i->id_instrument
             document.getElementById("filter-instrument").addEventListener("change", () => onFilterChange('filter-instrument'));
             document.getElementById("filter-instrument-mobile").addEventListener("change", () => onFilterChange('filter-instrument-mobile'));
         });
-
     </script>
 </main>

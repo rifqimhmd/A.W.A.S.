@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: sql109.infinityfree.com
--- Generation Time: Sep 24, 2025 at 06:45 AM
--- Server version: 11.4.7-MariaDB
--- PHP Version: 7.2.22
+-- Host: 127.0.0.1
+-- Generation Time: Oct 15, 2025 at 06:19 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `if0_39852325_awas`
+-- Database: `awas_baru`
 --
 
 -- --------------------------------------------------------
@@ -66,13 +65,13 @@ CREATE TABLE `tbl_faktor` (
 --
 
 INSERT INTO `tbl_faktor` (`id_faktor`, `indikator_faktor`, `jenis_faktor`, `id_instrument`, `created_at`) VALUES
-('16a8828f-7439-4ff6-9ec7-543c1cd420f1', 'Pegawai terlibat memfasilitasi kebutuhan teroris', 'Kerentanan', 'ed689f05-8d48-11f0-808b-54e1ad047dec', 2025),
 ('16ce855e-6656-476b-b749-dda8b743897f', 'Tidak dipisah/ditempatkan terduga berpengaruh/bahaya', 'Kerentanan', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', 2025),
 ('2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 'Lapas/Rutan/LPKA terdapat idiolog  1 (satu) orang/lebih', 'Bahaya', 'ed689f05-8d48-11f0-808b-54e1ad047dec', 2025),
-('41a19ec1-c6e4-4b85-97ea-89cf3449b84e', 'Pegawai terlibat dalam peredaran dan pengendalian', 'Kerentanan', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', 2025),
 ('5ce2874b-f773-4ece-9f33-b8a6ec668d50', 'Lapas/Rutan/LPKA terdapat pengendali', 'Bahaya', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', 2025),
 ('7b1de438-7c64-42ac-8ba9-e13e7ec09976', 'Terdapat kelompok berpengaruh/berbahaya', 'Kerentanan', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', 2025),
 ('7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 'Lapas/Rutan/LPKA terdapat pengedar', 'Bahaya', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', 2025),
+('94e844c0-7958-4301-bf16-d9d27e8c0b90', 'Pegawai terlibat memfasilitasi kebutuhan teroris', 'Kerentanan', 'ed689f05-8d48-11f0-808b-54e1ad047dec', 2025),
+('95d6ae69-879f-428c-a183-f2609578c612', 'Pegawai terlibat dalam peredaran dan pengendalian', 'Kerentanan', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', 2025),
 ('9788a308-aa7b-4558-8003-3cc722e3247d', 'Jumlah petugas tidak sebanding dengan hunian', 'Kerentanan', 'ed689f05-8d48-11f0-808b-54e1ad047dec', 2025),
 ('984751c8-590b-49c7-a509-7fa8bcef2c1f', 'Lapas/Rutan/LPKA terdapat pengguna lebih dari 1 (satu) orang', 'Bahaya', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', 2025),
 ('a6375dc2-0dd8-4cd8-a617-d56f7c623bf1', 'Jumlah petugas tidak sebanding dengan hunian', 'Kerentanan', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', 2025),
@@ -104,9 +103,9 @@ CREATE TABLE `tbl_hasil` (
 --
 
 INSERT INTO `tbl_hasil` (`id_hasil`, `id_user`, `nilai_skrining`, `nilai_bahaya`, `nilai_kerentanan`, `nilai_akhir`, `id_antisipasi`, `id_object`, `created_at`) VALUES
-('20f2c636-1e25-42f1-a18f-62330cb4954e', '4bfdd547-9184-44dc-8fca-bd2397bab8ef', 100, 50, 100, 83, '4', '111112222', '2025-09-24 11:01:27'),
-('48e05c32-da98-4ce0-8878-6ad1198f0a0a', '4bfdd547-9184-44dc-8fca-bd2397bab8ef', 63, 100, 100, 88, '1', '123', '2025-09-24 10:57:09'),
-('ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '4bfdd547-9184-44dc-8fca-bd2397bab8ef', 89, 100, 100, 96, '1', '3333', '2025-09-24 10:59:02');
+('81324bc5-8017-4304-bfaf-347bd17ce465', '4bfdd547-9184-44dc-8fca-bd2397bab8ef', 80, 100, 100, 93, '4', '4445555', '2025-10-14 22:57:32'),
+('897f1386-6155-4c09-acf2-66f2cb703795', '4bfdd547-9184-44dc-8fca-bd2397bab8ef', 0, 50, 25, 25, '6', '200009092023031005', '2025-10-14 22:58:42'),
+('a84a4ab0-7737-4f24-b2eb-c6113b404db1', '4bfdd547-9184-44dc-8fca-bd2397bab8ef', 100, 0, 100, 67, '5', '199309192019031002', '2025-10-14 22:56:03');
 
 -- --------------------------------------------------------
 
@@ -127,58 +126,39 @@ CREATE TABLE `tbl_hasil_indikator` (
 --
 
 INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
-('09519222-dd5f-405b-990a-e13417ca2d06', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '9349e2c1-ed0e-41ba-91af-b3d915ebdd36', '', 1),
-('0e706baf-83a9-4726-8475-4fcb7eaa5094', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', 'e0d9eafe-6f74-470b-a576-3437d51aec79', '', 1),
-('0ecb99ac-c68d-4db2-8cd8-9ea1ee9c379d', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', 'f4869fe6-4a78-4d0e-b753-b5f7ab4fec87', '', 1),
-('13eddefd-59e1-48dd-8fb9-ad3813516122', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '7405602f-4d48-4dc7-a07a-08978dac2503', '', 1),
-('169e0afb-c6b8-40ed-af99-2a91b9476a08', '20f2c636-1e25-42f1-a18f-62330cb4954e', '7976f42d-25ec-4c44-a008-38bc219b308f', '', 1),
-('1d4f6bf2-4333-44bb-825c-2cce1618d90c', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '76945e28-f121-4506-9103-ef45a1caf54d', '', 1),
-('29cce3d8-e146-4701-9ffc-6e16d29890e5', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
-('34ef8ec3-e473-48b2-8c06-c56b6f1cadf4', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '926d20fc-fba6-4953-99d3-43cd04267222', '', 1),
-('3724bce4-9c3a-407e-a65f-883c625c4554', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '2cb6d67a-766f-45be-a78e-1bd44e6711ea', '', 1),
-('3a9597ee-12f5-4b6f-afb7-3fd93d6fdf6f', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '362d8be0-0639-4abc-bb33-896aba729178', '', 0),
-('3cb3ff97-a002-45d4-b2e5-8fc6ad722e29', '20f2c636-1e25-42f1-a18f-62330cb4954e', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 1),
-('3e416045-145d-4d8a-975f-668b7023b0e4', '20f2c636-1e25-42f1-a18f-62330cb4954e', '', '16a8828f-7439-4ff6-9ec7-543c1cd420f1', 1),
-('416fa1ba-a8ce-4b65-b1a3-5b5133dd9e8b', '20f2c636-1e25-42f1-a18f-62330cb4954e', '2859e0b5-4f8d-4912-9e62-51a2f993c607', '', 1),
-('43aaca02-202a-4bf4-878f-d8669b8ef649', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '', '41a19ec1-c6e4-4b85-97ea-89cf3449b84e', 1),
-('48d5ca4d-a48f-4447-9d21-5d2a41abe5a6', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
-('4f77ee92-a20c-4108-ab8a-58d273747c21', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1),
-('5394e47d-6785-4f89-99d1-855380f71370', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '', '7b1de438-7c64-42ac-8ba9-e13e7ec09976', 1),
-('54f03637-9889-4267-a0d0-25ed6a805209', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
-('55a867f7-ff3f-4ff6-bd13-6d5b9dfbbfd2', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
-('6557cc5e-8251-4c01-8c9a-5239f39f72ff', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '', '7b1de438-7c64-42ac-8ba9-e13e7ec09976', 1),
-('6aeca1ac-0e2b-4f5f-8038-dd29ab62d9be', '20f2c636-1e25-42f1-a18f-62330cb4954e', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 1),
-('70c0f8e9-5360-4e2c-bc0e-5e61240eba25', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
-('73043221-572e-4c79-a5af-72e88f852941', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
-('79700ee1-8f9e-4e68-96f1-acd665bc2c47', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', 'df20c8df-5731-4b44-9428-34b79134e7a5', '', 1),
-('7b0b1da7-a796-4804-8745-46690daa8d03', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '', '41a19ec1-c6e4-4b85-97ea-89cf3449b84e', 1),
-('8adee4b5-a649-478f-b4cb-0074b728fd12', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', 'a18966f3-609e-453b-bbca-a77a8fdc458c', '', 1),
-('961ddb77-0c9e-463d-8590-0ae2b96c60d4', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '', 'a6375dc2-0dd8-4cd8-a617-d56f7c623bf1', 1),
-('9721cc39-5095-476b-95d0-139abd5ec033', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', 'd4ec3816-94cd-4e5c-9ad0-fdb1cb23945d', '', 0),
-('9c65be8e-397d-46ab-beae-e9a159289175', '20f2c636-1e25-42f1-a18f-62330cb4954e', '14800371-6ecb-46ef-9f60-aa81493131ff', '', 1),
-('b4e09960-7a3e-40cf-beb9-d3dff819343a', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', 'a73f0669-7bbb-4f18-9890-a9da9f75903b', '', 1),
-('b8c69991-db8d-4fc4-9610-5969764b4ef9', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 1),
-('bba164b4-a814-4020-95b1-540f5c57a72e', '20f2c636-1e25-42f1-a18f-62330cb4954e', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 1),
-('bc4a5f49-cdea-4dfc-957b-71fa0812ecf4', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '', 'a6375dc2-0dd8-4cd8-a617-d56f7c623bf1', 1),
-('bf514e9c-3310-4f4d-ab6d-be803e08ae18', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '751fba6b-c5e4-42a9-88a6-791bc5a6daab', '', 0),
-('c28606fb-422f-4c80-9636-dc2fb4ed0ba6', '20f2c636-1e25-42f1-a18f-62330cb4954e', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 0),
-('c673d379-9ab4-4d47-b97f-5e363758822f', '20f2c636-1e25-42f1-a18f-62330cb4954e', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 1),
-('c7950a58-bad2-4b4a-bd80-0f66e6d52564', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
-('ca1eba92-e281-4c4f-bf02-9f13d7070eb7', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '0d6a2693-2d88-4eb8-a323-9178c2c6e3da', '', 1),
-('cd5623b5-8718-4680-9cb2-04f1e095dea1', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 0),
-('d7903dfe-a354-45e3-8a3a-d08728fe308f', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', 'deee553e-8158-4027-9778-3c224a273623', '', 0),
-('e0f7bb3b-911a-4887-9ceb-cc47f87d06a2', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', 'b0331018-05d7-45c3-9975-d39deb7ddf58', '', 1),
-('e1efbca7-ffa8-4832-bd71-94ce62072811', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '314d591c-455e-4df0-a3a2-e32161dbe8a1', '', 0),
-('e2972259-316e-4fea-82e5-e3526eeae226', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '4b7a8dc0-cb3d-4a02-bce3-45a26be5c562', '', 1),
-('e3cd982f-0822-4f18-bbfe-d95451d93de9', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 1),
-('ea1ab43c-cba1-4c68-b62f-1fefebe43b98', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', 'eadcd755-cf80-4727-9572-cd11d90bff6e', '', 1),
-('ed5b9a4e-866b-42f3-beb8-3953c8e0c60c', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', 'f1bb55d1-e80b-45f2-b087-7c807556ccc5', '', 1),
-('f3809d8e-6b15-435a-a832-c846a1136a11', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', 'c4ce7ee9-401a-4c7e-b2f4-5abb14f5ed4d', '', 0),
-('f413ce52-dddc-4e5a-8706-f84372eff262', '20f2c636-1e25-42f1-a18f-62330cb4954e', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 1),
-('f47ae662-9933-49c3-84d5-52af2921c6cf', '48e05c32-da98-4ce0-8878-6ad1198f0a0a', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1),
-('f9699d1e-77d9-47d6-a4d4-dd81b8ce5370', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 1),
-('fd0eafa9-96ba-4630-a06a-7e08721b4db4', '20f2c636-1e25-42f1-a18f-62330cb4954e', '2e40c083-6ff0-4428-9171-8929077375cc', '', 1),
-('ff22c165-bfd8-44f0-b7d9-157ac05b5444', 'ab5cdae6-76e0-4cc3-aa95-efc8d0b019b4', 'c8a243d3-8cf6-40fb-9bdf-ab7a81fc390d', '', 1);
+('025043bc-9de1-496f-9c84-af3d879b2603', '81324bc5-8017-4304-bfaf-347bd17ce465', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 1),
+('030caa61-e5e8-41c9-9e97-95e3207fde5a', '81324bc5-8017-4304-bfaf-347bd17ce465', '14800371-6ecb-46ef-9f60-aa81493131ff', '', 1),
+('0f095ae6-ea87-422e-9f9c-43d3f5b2ab24', '81324bc5-8017-4304-bfaf-347bd17ce465', '2859e0b5-4f8d-4912-9e62-51a2f993c607', '', 1),
+('175da729-6d98-411f-9b2f-bd7e93e05d5a', '897f1386-6155-4c09-acf2-66f2cb703795', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 0),
+('1c37fe7e-d398-4d0e-baf0-01d3ada584e9', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '7976f42d-25ec-4c44-a008-38bc219b308f', '', 1),
+('216c256d-17be-4b39-ab4b-b9d253ac524f', '897f1386-6155-4c09-acf2-66f2cb703795', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 0),
+('22262f0d-5f28-4dad-a1f6-5941719dd182', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '2859e0b5-4f8d-4912-9e62-51a2f993c607', '', 1),
+('2b0cb2e2-bebd-4d80-98bf-4ba3fd5ea164', '897f1386-6155-4c09-acf2-66f2cb703795', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 0),
+('3251a001-15f5-48d1-b732-f81f2e2ea800', '81324bc5-8017-4304-bfaf-347bd17ce465', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 1),
+('38247740-1e1e-49fb-81b5-21b6eb36d4c7', '81324bc5-8017-4304-bfaf-347bd17ce465', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 1),
+('3ac34ec3-532b-4972-a2bd-d2c49432e153', '897f1386-6155-4c09-acf2-66f2cb703795', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 0),
+('3f922cf3-12e1-4e3a-8e0a-fd7e69c545b6', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 1),
+('43924f17-a6d0-46e9-a226-fda99e254790', '897f1386-6155-4c09-acf2-66f2cb703795', '7976f42d-25ec-4c44-a008-38bc219b308f', '', 0),
+('4bb04a85-3705-422b-b144-e9f9edfaa9b9', '81324bc5-8017-4304-bfaf-347bd17ce465', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 1),
+('5b37f67e-8a83-4c3c-99c2-a30cc7b2f484', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '14800371-6ecb-46ef-9f60-aa81493131ff', '', 1),
+('5c3ce2b1-daaf-49cb-adb3-86a086ed9008', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '2e40c083-6ff0-4428-9171-8929077375cc', '', 1),
+('63bc70b2-75a4-40df-9696-fdc0e4590e22', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 1),
+('66d74154-449b-43d0-8a21-f177a412e8fe', '81324bc5-8017-4304-bfaf-347bd17ce465', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 1),
+('83006dc9-5f47-4f7c-9738-06b752caa235', '81324bc5-8017-4304-bfaf-347bd17ce465', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 1),
+('839e49c3-751d-4386-af7a-d560a60af64c', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 0),
+('87fff962-420d-4332-b8d4-50a50abef86e', '81324bc5-8017-4304-bfaf-347bd17ce465', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 1),
+('8f142ca0-71ce-4f8e-a2ea-520ebf5f06db', '81324bc5-8017-4304-bfaf-347bd17ce465', '2e40c083-6ff0-4428-9171-8929077375cc', '', 1),
+('92dc4154-527e-452b-88f1-12d562eaf514', '897f1386-6155-4c09-acf2-66f2cb703795', '2859e0b5-4f8d-4912-9e62-51a2f993c607', '', 0),
+('9baef764-650b-4269-b41e-9aa93b79b328', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 0),
+('a1e47a12-dd1a-426f-a319-f6b151925179', '897f1386-6155-4c09-acf2-66f2cb703795', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 1),
+('acad125e-b1f4-4ce4-840d-653d2f908b22', '897f1386-6155-4c09-acf2-66f2cb703795', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 0),
+('ad4ed9fd-0dfa-43ca-9848-c063eb1a0042', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 1),
+('b1acb300-1205-4ad7-9099-6bfb352a9dbb', '81324bc5-8017-4304-bfaf-347bd17ce465', '7976f42d-25ec-4c44-a008-38bc219b308f', '', 0),
+('b2cd073a-4d6f-4d1e-8b1a-93136b35f66b', '897f1386-6155-4c09-acf2-66f2cb703795', '2e40c083-6ff0-4428-9171-8929077375cc', '', 0),
+('d079e0c5-e4ae-47e1-a476-95db700bc13b', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 1),
+('d6556ea0-8b0d-4455-a077-8b62deba461b', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 1),
+('dbb0862b-73cb-4ff5-8a50-91e24e61d9d6', '897f1386-6155-4c09-acf2-66f2cb703795', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 1),
+('fd154dc5-f236-4afd-9d6f-99eaf2b51892', '897f1386-6155-4c09-acf2-66f2cb703795', '14800371-6ecb-46ef-9f60-aa81493131ff', '', 0);
 
 -- --------------------------------------------------------
 
@@ -244,8 +224,7 @@ CREATE TABLE `tbl_narapidana` (
 
 INSERT INTO `tbl_narapidana` (`no_register`, `nama_narapidana`, `perkara`, `lama_pidana`, `alamat`, `tempat_penahanan`) VALUES
 ('11111111111111111111', 'Degasss', 'Cabul', '5 Tahun 3 Bulan', 'Sragentina', 'Lapas Jakarta 2'),
-('111112222', 'Julian', 'Pemboman', '10 Tahun 3 Bulan', 'Jakarta', 'Lapas Jakarta 1'),
-('3333', 'Yanto', 'Pencurian', '5 Tahun 3 Bulan', 'Jakarta', 'Lapas Jakarta 1');
+('4445555', 'Ahmad', 'Narkoba', '17 Tahun 4 Bulan', 'Jakarta', 'Lapas Jakarta 1');
 
 -- --------------------------------------------------------
 
@@ -282,7 +261,8 @@ CREATE TABLE `tbl_pegawai` (
 --
 
 INSERT INTO `tbl_pegawai` (`nip`, `nama_pegawai`, `golongan_pangkat`, `jabatan`, `nama_upt`) VALUES
-('123', 'Jono', 'Penata (III/c)', 'Penjaga Tahanan', 'Lapas Jakarta 1');
+('199309192019031002', 'Jolly', 'Penata Muda Tingkat', 'Anggota', 'Lapas Jakarta 1'),
+('200009092023031005', 'Jono', 'Penata Muda (III/a)', 'Anggota', 'Lapas Jakarta 1');
 
 -- --------------------------------------------------------
 
@@ -353,10 +333,10 @@ INSERT INTO `tbl_skrining` (`id_skrining`, `indikator_skrining`, `jenis_skrining
 ('751fba6b-c5e4-42a9-88a6-791bc5a6daab', 'Terduga menyedot idung terus menerus', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:12:51'),
 ('76945e28-f121-4506-9103-ef45a1caf54d', 'Terduga memiliki hp', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:27'),
 ('7976f42d-25ec-4c44-a008-38bc219b308f', 'Terduga kelompok takfiri', 'Pengikut', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:10:41'),
-('7dd8dd11-54c9-41ae-8e4f-d0bbbc0dcfe0', 'Komunikasi menggunakan sandi', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:17:20'),
 ('838f844c-baa2-4973-b71a-c8268ff4f31e', 'Terhubung dengan pihak luar selain dari narapidana', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:17:33'),
 ('8721af22-7a61-45ab-9682-3e74fd7bbd4d', 'Terduga memiliki posisi penting di jaringan', 'Ideolog', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:19:12'),
 ('890cd0fe-71ba-4d63-aceb-ec28e4af0287', 'Sering dikunjungi orang yang berbeda', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:17:27'),
+('8b18ee6c-5cc2-4cc1-a1cc-30c07a843bc8', 'Komunikasi menggunakan sandi', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-28 22:14:43'),
 ('926d20fc-fba6-4953-99d3-43cd04267222', 'Terduga selalu \"royal\"', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:21'),
 ('9349e2c1-ed0e-41ba-91af-b3d915ebdd36', 'Terduga mengalami radang paru-paru', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:13:28'),
 ('a18966f3-609e-453b-bbca-a77a8fdc458c', 'Terduga berpenampilan kotor', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:14:11'),
@@ -410,8 +390,17 @@ CREATE TABLE `tbl_test_urin` (
 CREATE TABLE `tbl_upload` (
   `id_upload` varchar(100) NOT NULL,
   `id_hasil` varchar(100) NOT NULL,
+  `tindak_lanjut` varchar(255) NOT NULL,
   `nama_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_upload`
+--
+
+INSERT INTO `tbl_upload` (`id_upload`, `id_hasil`, `tindak_lanjut`, `nama_file`) VALUES
+('5724e953-0a87-45e7-a2cf-b7441671f0f6', '81324bc5-8017-4304-bfaf-347bd17ce465', 'Belum ditindaklanjuti', ''),
+('7270e8ea-eaba-40bf-b02c-c2e88bd56fc0', 'a84a4ab0-7737-4f24-b2eb-c6113b404db1', 'Belum ditindaklanjuti', '');
 
 -- --------------------------------------------------------
 
@@ -458,11 +447,10 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`id_user`, `id_kanwil`, `id_upt`, `username`, `password`, `role`, `status`, `created_at`) VALUES
 ('02896b2b-8424-4a77-aad2-6ae5b5bd48f0', '9d1d2034-8d2f-11f0-808b-54e1ad047dec', 'a82da46b-978d-11f0-b49c-54e1ad047dec', 'jabar1', '202cb962ac59075b964b07152d234b70', 'upt', 'aktif', '2025-09-22 03:25:56'),
+('07225de1-3e1e-4286-aa25-a49625482f78', '9d1d2034-8d2f-11f0-808b-54e1ad047dec', NULL, 'jabar', '202cb962ac59075b964b07152d234b70', 'kanwil', 'aktif', '2025-10-05 21:50:52'),
 ('4bfdd547-9184-44dc-8fca-bd2397bab8ef', '49985e4d-8d2f-11f0-808b-54e1ad047dec', '0e74ad4a-8d30-11f0-808b-54e1ad047dec', 'jakarta1', '202cb962ac59075b964b07152d234b70', 'upt', 'aktif', '2025-09-09 01:42:16'),
-('5ebe58ee-4ad4-4c82-a80f-ae992f8d6cef', '49985e4d-8d2f-11f0-808b-54e1ad047dec', '30112907-8d30-11f0-808b-54e1ad047dec', 'jakarta2', '202cb962ac59075b964b07152d234b70', 'upt', 'tidak aktif', '2025-09-22 22:50:48'),
 ('6b10aac2-8d30-11f0-808b-54e1ad047dec', NULL, NULL, 'pamintel', '202cb962ac59075b964b07152d234b70', 'admin', 'aktif', '2025-09-09 03:52:34'),
-('89baa26c-8d30-11f0-808b-54e1ad047dec', '49985e4d-8d2f-11f0-808b-54e1ad047dec', NULL, 'jakarta', '202cb962ac59075b964b07152d234b70', 'kanwil', 'aktif', '2025-09-09 03:53:25'),
-('b5fd68e3-cddf-41e0-ab5b-72bbb37d2971', '9d1d2034-8d2f-11f0-808b-54e1ad047dec', NULL, 'jabar', '202cb962ac59075b964b07152d234b70', 'kanwil', 'aktif', '2025-09-09 01:41:35');
+('89baa26c-8d30-11f0-808b-54e1ad047dec', '49985e4d-8d2f-11f0-808b-54e1ad047dec', NULL, 'jakarta', '202cb962ac59075b964b07152d234b70', 'kanwil', 'aktif', '2025-09-09 03:53:25');
 
 --
 -- Indexes for dumped tables
