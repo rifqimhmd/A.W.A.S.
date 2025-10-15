@@ -168,6 +168,7 @@ class Histori extends CI_Controller
 		$data["title"] = "Edit Data Kerawanan";
 		$data["page"] = "front/pages/datakerawanan/edit_histori";
 
+		// Ambil data hasil
 		$data["hasil"] = $this->db
 			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])
 			->row();
@@ -175,9 +176,21 @@ class Histori extends CI_Controller
 		if (!$data["hasil"]) {
 			$this->session->set_flashdata("error", "Data tidak ditemukan.");
 			redirect("histori");
+			return;
 		}
 
-		// ambil data tambahan untuk tampilan form
+		// Ambil data user dari session
+		$id_user = $this->session->userdata("id_user");
+		$role = $this->session->userdata("role");
+
+		// 🔒 Cek hak akses: hanya admin atau pemilik data yang boleh edit
+		if ($role !== "admin" && $data["hasil"]->id_user != $id_user) {
+			$this->session->set_flashdata("error", "Anda tidak memiliki akses untuk mengedit data ini.");
+			redirect("histori");
+			return;
+		}
+
+		// Ambil data tambahan untuk tampilan form
 		$data["list_kanwil"] = $this->HistoriModel->getAllKanwil();
 		$data["list_upt"] = $this->HistoriModel->getAllUpt();
 
@@ -186,7 +199,7 @@ class Histori extends CI_Controller
 
 	public function update()
 	{
-		$this->load->database(); // kalau belum autoload
+		$this->load->database();
 
 		$id_hasil = $this->input->post("id_hasil");
 		$tindak_lanjut = $this->input->post("tindak_lanjut");
@@ -197,13 +210,31 @@ class Histori extends CI_Controller
 			return;
 		}
 
+		// Ambil data hasil untuk validasi akses
+		$hasil = $this->db->get_where("tbl_hasil", ["id_hasil" => $id_hasil])->row();
+		if (!$hasil) {
+			$this->session->set_flashdata("error", "Data tidak ditemukan.");
+			redirect("histori");
+			return;
+		}
+
+		// Ambil data user dari session
+		$id_user = $this->session->userdata("id_user");
+		$role = $this->session->userdata("role");
+
+		// 🔒 Cek hak akses: hanya admin atau pemilik data yang boleh update
+		if ($role !== "admin" && $hasil->id_user != $id_user) {
+			$this->session->set_flashdata("error", "Anda tidak memiliki akses untuk memperbarui data ini.");
+			redirect("histori");
+			return;
+		}
+
 		// Konfigurasi upload
 		$config["upload_path"] = "./uploads/";
 		$config["allowed_types"] = "pdf";
 		$config["max_size"] = 2048;
 		$config["encrypt_name"] = true;
 
-		// Pastikan folder upload ada
 		if (!is_dir($config["upload_path"])) {
 			mkdir($config["upload_path"], 0777, true);
 		}
@@ -212,38 +243,27 @@ class Histori extends CI_Controller
 
 		$file_dokumen = null;
 
-		// Cek apakah ada file baru diunggah
 		if (!empty($_FILES["file_dokumen"]["name"])) {
 			if ($this->upload->do_upload("file_dokumen")) {
 				$upload_data = $this->upload->data();
 				$file_dokumen = $upload_data["file_name"];
 			} else {
-				// Jika upload gagal
-				$this->session->set_flashdata(
-					"error",
-					$this->upload->display_errors(),
-				);
+				$this->session->set_flashdata("error", $this->upload->display_errors());
 				redirect("histori/edit/" . $id_hasil);
 				return;
 			}
 		}
 
-		// Data yang akan disimpan
 		$data = [
 			"tindak_lanjut" => $tindak_lanjut,
 		];
 
-		// Jika ada file baru, update kolom file_dokumen
 		if ($file_dokumen) {
 			$data["nama_file"] = $file_dokumen;
 		}
 
-		// Simpan ke database
 		if ($this->HistoriModel->update($id_hasil, $data)) {
-			$this->session->set_flashdata(
-				"success",
-				"Data berhasil diperbarui.",
-			);
+			$this->session->set_flashdata("success", "Data berhasil diperbarui.");
 		} else {
 			$this->session->set_flashdata("error", "Gagal memperbarui data.");
 		}
