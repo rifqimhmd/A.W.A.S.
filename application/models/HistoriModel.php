@@ -18,6 +18,8 @@ class HistoriModel extends CI_Model
             n.perkara,
             n.no_register,
             p.nip,
+            up_load.tindak_lanjut,
+            up_load.nama_file,
             COALESCE(u_peg.nama_upt, u_nap.nama_upt) AS nama_upt,
             COALESCE(k_peg.nama_kanwil, k_nap.nama_kanwil) AS nama_kanwil
         ");
@@ -44,6 +46,12 @@ class HistoriModel extends CI_Model
 		$this->db->join(
 			"tbl_antisipasi a",
 			"a.id_antisipasi = h.id_antisipasi",
+			"left",
+		);
+
+		$this->db->join(
+			"tbl_upload up_load",
+			"up_load.id_hasil = h.id_hasil",
 			"left",
 		);
 
@@ -208,5 +216,11 @@ class HistoriModel extends CI_Model
 		}
 
 		return $this->db->get()->result_array();
+	}
+
+	public function update($id, $data)
+	{
+		$this->db->where("id_hasil", $id);
+		return $this->db->update("tbl_upload", $data);
 	}
 }

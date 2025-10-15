@@ -20,11 +20,12 @@ class Histori extends CI_Controller
 		// pastikan database dan input aktif
 		$this->load->database();
 		$this->load->model("HistoriModel");
+		$this->load->library("upload");
 	}
 
 	public function index()
 	{
-		$data['title'] = "A.W.A.S. - Riwayat Kerawanan";
+		$data["title"] = "A.W.A.S. - Riwayat Kerawanan";
 		$data["page"] = "front/pages/datakerawanan/histori";
 
 		$user = [
@@ -144,52 +145,89 @@ class Histori extends CI_Controller
 			show_404();
 		}
 
-		$data['title'] = "Edit Data Kerawanan";
-		$data['page'] = "front/pages/datakerawanan/edit_histori";
+		$data["title"] = "Edit Data Kerawanan";
+		$data["page"] = "front/pages/datakerawanan/edit_histori";
 
-		$data['hasil'] = $this->db
-			->get_where('tbl_hasil', ['id_hasil' => $id_hasil])
+		$data["hasil"] = $this->db
+			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])
 			->row();
 
-		if (!$data['hasil']) {
-			$this->session->set_flashdata('error', 'Data tidak ditemukan.');
-			redirect('histori');
+		if (!$data["hasil"]) {
+			$this->session->set_flashdata("error", "Data tidak ditemukan.");
+			redirect("histori");
 		}
 
 		// ambil data tambahan untuk tampilan form
-		$data['list_kanwil'] = $this->HistoriModel->getAllKanwil();
-		$data['list_upt'] = $this->HistoriModel->getAllUpt();
+		$data["list_kanwil"] = $this->HistoriModel->getAllKanwil();
+		$data["list_upt"] = $this->HistoriModel->getAllUpt();
 
 		$this->load->view("front/layouts/main", $data);
 	}
 
 	public function update()
 	{
-		$this->load->database();
-		$this->load->library('input'); // kalau belum autoload
+		$this->load->database(); // kalau belum autoload
 
-		$id_hasil = $this->input->post('id_hasil');
+		$id_hasil = $this->input->post("id_hasil");
+		$tindak_lanjut = $this->input->post("tindak_lanjut");
+
 		if (empty($id_hasil)) {
-			$this->session->set_flashdata('error', 'ID tidak ditemukan.');
-			redirect('histori');
+			$this->session->set_flashdata("error", "ID tidak ditemukan.");
+			redirect("histori");
+			return;
 		}
 
-		$data_update = [
-			'nilai_akhir' => $this->input->post('nilai_akhir'),
-			'id_antisipasi' => $this->input->post('id_antisipasi'),
-			'updated_at' => date('Y-m-d H:i:s'),
+		// Konfigurasi upload
+		$config["upload_path"] = "./uploads/";
+		$config["allowed_types"] = "pdf";
+		$config["max_size"] = 2048;
+		$config["encrypt_name"] = true;
+
+		// Pastikan folder upload ada
+		if (!is_dir($config["upload_path"])) {
+			mkdir($config["upload_path"], 0777, true);
+		}
+
+		$this->upload->initialize($config);
+
+		$file_dokumen = null;
+
+		// Cek apakah ada file baru diunggah
+		if (!empty($_FILES["file_dokumen"]["name"])) {
+			if ($this->upload->do_upload("file_dokumen")) {
+				$upload_data = $this->upload->data();
+				$file_dokumen = $upload_data["file_name"];
+			} else {
+				// Jika upload gagal
+				$this->session->set_flashdata(
+					"error",
+					$this->upload->display_errors(),
+				);
+				redirect("histori/edit/" . $id_hasil);
+				return;
+			}
+		}
+
+		// Data yang akan disimpan
+		$data = [
+			"tindak_lanjut" => $tindak_lanjut,
 		];
 
-		$this->db->where('id_hasil', $id_hasil);
-		$this->db->update('tbl_hasil', $data_update);
-
-		// pastikan pakai $this->db->affected_rows()
-		if ($this->db->affected_rows() > 0) {
-			$this->session->set_flashdata('success', 'Data berhasil diperbarui!');
-		} else {
-			$this->session->set_flashdata('warning', 'Tidak ada perubahan data.');
+		// Jika ada file baru, update kolom file_dokumen
+		if ($file_dokumen) {
+			$data["nama_file"] = $file_dokumen;
 		}
 
-		redirect('histori');
+		// Simpan ke database
+		if ($this->HistoriModel->update($id_hasil, $data)) {
+			$this->session->set_flashdata(
+				"success",
+				"Data berhasil diperbarui.",
+			);
+		} else {
+			$this->session->set_flashdata("error", "Gagal memperbarui data.");
+		}
+
+		redirect("histori");
 	}
 }
