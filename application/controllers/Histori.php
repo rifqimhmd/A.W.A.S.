@@ -7,6 +7,8 @@ defined("BASEPATH") or exit("No direct script access allowed");
  * @property CI_Session $session
  * @property CI_DB_query_builder $db
  * @property HistoriModel $HistoriModel
+ * @property CI_Input $input
+ * @property CI_Upload $upload
  */
 class Histori extends CI_Controller
 {
@@ -97,6 +99,23 @@ class Histori extends CI_Controller
 		// Mulai transaksi
 		$this->db->trans_start();
 
+		// Ambil semua data upload terkait sebelum dihapus (untuk hapus file fisik)
+		$uploads = $this->db
+			->get_where("tbl_upload", ["id_hasil" => $id_hasil])
+			->result();
+
+		// Hapus file fisik di folder uploads
+		if (!empty($uploads)) {
+			foreach ($uploads as $upload) {
+				// Sesuaikan kolom nama file sesuai struktur tabel kamu
+				$file_path = FCPATH . "uploads/" . $upload->nama_file;
+
+				if (file_exists($file_path)) {
+					@unlink($file_path); // Gunakan @ untuk mencegah warning jika file sudah tidak ada
+				}
+			}
+		}
+
 		// Hapus dari tbl_hasil_indikator
 		$this->db->where("id_hasil", $id_hasil);
 		$this->db->delete("tbl_hasil_indikator");
@@ -139,6 +158,7 @@ class Histori extends CI_Controller
 
 		redirect("histori");
 	}
+
 	public function edit($id_hasil)
 	{
 		if (empty($id_hasil)) {

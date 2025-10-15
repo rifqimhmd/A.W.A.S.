@@ -14,8 +14,8 @@
             <select name="tindak_lanjut"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-red-300">
                 <option value="">-- Pilih Tindak Lanjut --</option>
-                <option value="pemindahan">Pemindahan</option>
-                <option value="pembinaan">Pembinaan</option>
+                <option value="Pemindahan">Pemindahan</option>
+                <option value="Pembinaan">Pembinaan</option>
             </select>
         </div>
 
