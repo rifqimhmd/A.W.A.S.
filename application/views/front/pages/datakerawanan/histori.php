@@ -307,25 +307,15 @@
                                             </a>
                                         <?php endif; ?>
                                         <?php
-                                        $role = $this->session->userdata(
-                                            "role",
-                                        );
-                                        if (
-                                            $role === "admin" ||
-                                            ($role === "kanwil" &&
-                                                $row->level !== "Merah")
-                                        ): ?>
-                                            <a href="<?= site_url(
-                                                            "histori/delete/" .
-                                                                $row->id_hasil,
-                                                        ) ?>"
+                                        $role = $this->session->userdata("role");
+                                        if ($role === "admin"): ?>
+                                            <a href="<?= site_url("histori/delete/" . $row->id_hasil) ?>"
                                                 onclick="return confirm('Yakin hapus data ini?')"
                                                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                                 title="Hapus">
                                                 <i class="ri-delete-bin-6-line text-lg"></i>
                                             </a>
-                                        <?php endif;
-                                        ?>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>
@@ -421,13 +411,10 @@
                                     <i class="ri-edit-2-line text-lg"></i>
                                 </a>
                             <?php endif; ?>
-                            <?php if (
-                                $role === "admin" ||
-                                ($role === "kanwil" && $row->level !== "Merah")
-                            ): ?>
-                                <a href="<?= site_url(
-                                                "histori/delete/" . $row->id_hasil,
-                                            ) ?>"
+                            <?php
+                            $role = $this->session->userdata("role");
+                            if ($role === "admin"): ?>
+                                <a href="<?= site_url("histori/delete/" . $row->id_hasil) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                     title="Hapus">
@@ -547,25 +534,15 @@
                                             </a>
                                         <?php endif; ?>
                                         <?php
-                                        $role = $this->session->userdata(
-                                            "role",
-                                        );
-                                        if (
-                                            $role === "admin" ||
-                                            ($role === "kanwil" &&
-                                                $row->level !== "Merah")
-                                        ): ?>
-                                            <a href="<?= site_url(
-                                                            "histori/delete/" .
-                                                                $row->id_hasil,
-                                                        ) ?>"
+                                        $role = $this->session->userdata("role");
+                                        if ($role === "admin"): ?>
+                                            <a href="<?= site_url("histori/delete/" . $row->id_hasil) ?>"
                                                 onclick="return confirm('Yakin hapus data ini?')"
                                                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                                 title="Hapus">
                                                 <i class="ri-delete-bin-6-line text-lg"></i>
                                             </a>
-                                        <?php endif;
-                                        ?>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>
@@ -666,14 +643,10 @@
                                     <i class="ri-edit-2-line text-lg"></i>
                                 </a>
                             <?php endif; ?>
-                            <!-- Hapus -->
-                            <?php if (
-                                $role === "admin" ||
-                                ($role === "kanwil" && $row->level !== "Merah")
-                            ): ?>
-                                <a href="<?= site_url(
-                                                "histori/delete/" . $row->id_hasil,
-                                            ) ?>"
+                            <?php
+                            $role = $this->session->userdata("role");
+                            if ($role === "admin"): ?>
+                                <a href="<?= site_url("histori/delete/" . $row->id_hasil) ?>"
                                     onclick="return confirm('Yakin hapus data ini?')"
                                     class="w-9 h-9 flex items-center justify-center rounded-lg bg-red-500 hover:bg-red-600 text-white shadow-sm transition"
                                     title="Hapus">

@@ -94,6 +94,15 @@ class Histori extends CI_Controller
 		if (empty($id_hasil)) {
 			$this->session->set_flashdata("error", "ID hasil tidak valid.");
 			redirect("histori");
+			return;
+		}
+
+		// 🔐 Cek role user dari session
+		$role = $this->session->userdata("role");
+		if ($role !== "admin") {
+			$this->session->set_flashdata("error", "Anda tidak memiliki hak untuk menghapus data ini.");
+			redirect("histori");
+			return;
 		}
 
 		// Mulai transaksi
@@ -107,11 +116,9 @@ class Histori extends CI_Controller
 		// Hapus file fisik di folder uploads
 		if (!empty($uploads)) {
 			foreach ($uploads as $upload) {
-				// Sesuaikan kolom nama file sesuai struktur tabel kamu
 				$file_path = FCPATH . "uploads/" . $upload->nama_file;
-
 				if (file_exists($file_path)) {
-					@unlink($file_path); // Gunakan @ untuk mencegah warning jika file sudah tidak ada
+					@unlink($file_path);
 				}
 			}
 		}
@@ -120,24 +127,22 @@ class Histori extends CI_Controller
 		$this->db->where("id_hasil", $id_hasil);
 		$this->db->delete("tbl_hasil_indikator");
 
-		// Hapus dari tbl_upload (berdasarkan id_hasil)
+		// Hapus dari tbl_upload
 		$this->db->where("id_hasil", $id_hasil);
 		$this->db->delete("tbl_upload");
 
-		// Ambil data dari tbl_hasil sebelum dihapus
+		// Ambil data dari tbl_hasil sebelum dihapus (untuk hapus di tabel terkait)
 		$hasil = $this->db
 			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])
 			->row();
 
 		if ($hasil) {
-			// Hapus di tbl_pegawai (jika ada NIP)
 			if (!empty($hasil->id_object)) {
+				// Hapus dari tbl_pegawai
 				$this->db->where("nip", $hasil->id_object);
 				$this->db->delete("tbl_pegawai");
-			}
 
-			// Hapus di tbl_narapidana (jika ada no_register)
-			if (!empty($hasil->id_object)) {
+				// Hapus dari tbl_narapidana
 				$this->db->where("no_register", $hasil->id_object);
 				$this->db->delete("tbl_narapidana");
 			}
