@@ -742,7 +742,11 @@
                 <p><strong>Antisipasi:</strong> <span id="detailAntisipasi">-</span></p>
                 <p><strong>Solusi:</strong> <span id="detailSolusi">-</span></p>
                 <p><strong>Tindak Lanjut:</strong> <span id="tindaklanjut">-</span></p>
-                <p><strong>Dokumen:</strong> <span id="filedokumen">-</span></p>
+                <p><strong>Dokumen:</strong>
+                  <a id="fileLink" href="#" target="_blank" class="text-blue-600 underline">
+                    <span id="filedokumen">-</span>
+                  </a>
+                </p>
                 <p><strong>Created At:</strong> <span id="detailCreated">-</span></p>
             </div>
             <div class="flex justify-end space-x-3 p-6 pt-0">
@@ -882,6 +886,17 @@
             document.getElementById("detailCreated").textContent = rowData.created_at || "-";
             document.getElementById("tindaklanjut").textContent = rowData.tindak_lanjut || "-";
             document.getElementById("filedokumen").textContent = rowData.nama_file || "-";
+
+            const fileLink = document.getElementById("fileLink");
+            if (rowData.nama_file) {
+                fileLink.href = "<?= base_url(
+                	"uploads/",
+                ) ?>" + rowData.nama_file;
+                fileLink.classList.remove("pointer-events-none", "text-gray-400");
+            } else {
+                fileLink.href = "#";
+                fileLink.classList.add("pointer-events-none", "text-gray-400");
+            }
 
             const modal = document.getElementById("detailModal");
             modal.classList.remove("opacity-0", "pointer-events-none", "hidden");
