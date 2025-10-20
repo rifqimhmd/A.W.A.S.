@@ -143,7 +143,6 @@
 
     </div>
 
-
     <!-- CONTENT CARD: Skrining -->
     <div id="table-skrining" class="overflow-x-auto">
         <div class="overflow-hidden bg-white shadow-md rounded-lg sm:border sm:border-gray-200">
@@ -340,11 +339,17 @@
                 <?php endif; ?>
             </div>
         </div>
+        <!-- Pagination Skrining -->
+        <?php if (!empty($pagination_skrining)): ?>
+            <div class="mt-6 flex justify-center">
+                <?= $pagination_skrining ?>
+            </div>
+        <?php endif; ?>
     </div>
+
 
     <!-- CONTENT CARD: Faktor -->
     <div id="table-faktor" class="overflow-x-auto hidden mt-6">
-
         <!-- Tampilan Desktop (Table) -->
         <div class="hidden sm:block overflow-hidden min-w-[600px] bg-white shadow-md rounded-lg border border-gray-200">
             <table class="min-w-full text-center border-collapse">
@@ -403,7 +408,6 @@
                 </tbody>
             </table>
         </div>
-
         <!-- Tampilan Mobile (Cards) -->
         <div id="mobile" class="block sm:hidden space-y-3">
             <?php if (!empty($faktor)): ?>
@@ -455,6 +459,12 @@
                 <div class="p-4 text-center text-gray-500 italic">Belum ada data Faktor.</div>
             <?php endif; ?>
         </div>
+        <!-- Pagination Faktor -->
+        <?php if (!empty($pagination_faktor)): ?>
+            <div class="mt-6 flex justify-center">
+                <?= $pagination_faktor ?>
+            </div>
+        <?php endif; ?>
 
         <!-- Modal Edit Faktor (Diletakkan di luar agar bisa diakses desktop & mobile) -->
         <?php if (!empty($faktor)): ?>
@@ -520,6 +530,7 @@
                 </style>
             <?php endforeach; ?>
         <?php endif; ?>
+
     </div>
 
     <!-- Modal Tambah Opsi -->

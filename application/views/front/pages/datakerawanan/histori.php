@@ -722,8 +722,8 @@
                     <table class="table-auto w-full border border-gray-300 rounded-lg text-sm">
                         <thead class="bg-gray-100 text-gray-700">
                             <tr>
-                                <th class="border px-4 py-2 text-left">Indikator Skrining</th>
-                                <th class="border px-4 py-2 text-left">Jawaban</th>
+                                <th class="border px-4 py-2">Indikator Skrining</th>
+                                <th class="border px-4 py-2">Jawaban</th>
                             </tr>
                         </thead>
                         <tbody id="skriningTable" class="divide-y divide-gray-200 text-gray-600"></tbody>
@@ -733,8 +733,8 @@
                     <table class="table-auto w-full border border-gray-300 rounded-lg text-sm">
                         <thead class="bg-gray-100 text-gray-700">
                             <tr>
-                                <th class="border px-4 py-2 text-left">Indikator Faktor</th>
-                                <th class="border px-4 py-2 text-left">Jawaban</th>
+                                <th class="border px-4 py-2">Indikator Faktor</th>
+                                <th class="border px-4 py-2">Jawaban</th>
                             </tr>
                         </thead>
                         <tbody id="bahayaTable" class="divide-y divide-gray-200 text-gray-600"></tbody>
@@ -744,8 +744,8 @@
                     <table class="table-auto w-full border border-gray-300 rounded-lg text-sm">
                         <thead class="bg-gray-100 text-gray-700">
                             <tr>
-                                <th class="border px-4 py-2 text-left">Indikator Faktor</th>
-                                <th class="border px-4 py-2 text-left">Jawaban</th>
+                                <th class="border px-4 py-2">Indikator Faktor</th>
+                                <th class="border px-4 py-2">Jawaban</th>
                             </tr>
                         </thead>
                         <tbody id="kerentananTable" class="divide-y divide-gray-200 text-gray-600"></tbody>
@@ -860,7 +860,7 @@
                         if (item.indikator_skrining && item.jawaban !== null) {
                             skriningHtml += `<tr>
                         <td class="border px-4 py-2">${item.indikator_skrining}</td>
-                        <td class="border px-4 py-2">${item.jawaban}</td>
+                        <td class="border px-4 py-2 text-center">${item.jawaban}</td>
                     </tr>`;
                         }
                     });
@@ -871,7 +871,7 @@
                     data.bahaya.forEach(item => {
                         bahayaHtml += `<tr>
                     <td class="border px-4 py-2">${item.indikator_faktor}</td>
-                    <td class="border px-4 py-2">${item.jawaban}</td>
+                    <td class="border px-4 py-2 text-center">${item.jawaban}</td>
                 </tr>`;
                     });
                     document.getElementById("bahayaTable").innerHTML =
@@ -881,7 +881,7 @@
                     data.kerentanan.forEach(item => {
                         kerentananHtml += `<tr>
                     <td class="border px-4 py-2">${item.indikator_faktor}</td>
-                    <td class="border px-4 py-2">${item.jawaban}</td>
+                    <td class="border px-4 py-2 text-center">${item.jawaban}</td>
                 </tr>`;
                     });
                     document.getElementById("kerentananTable").innerHTML =
