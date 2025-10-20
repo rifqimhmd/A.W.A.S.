@@ -165,44 +165,49 @@ class Histori extends CI_Controller
 	}
 
 	public function edit($id_hasil)
-	{
-		if (empty($id_hasil)) {
-			show_404();
-		}
+{
+    if (empty($id_hasil)) {
+        show_404();
+    }
 
-		$data["title"] = "Edit Data Kerawanan";
-		$data["page"] = "front/pages/datakerawanan/edit_histori";
+    $data["title"] = "Edit Data Kerawanan";
+    $data["page"] = "front/pages/datakerawanan/edit_histori";
 
-		// Ambil data hasil
-		$data["hasil"] = $this->db
-			->join("tbl_pegawai", "tbl_pegawai.nip = tbl_hasil.id_object", "left")
-			->join("tbl_narapidana", "tbl_narapidana.no_register = tbl_hasil.id_object", "left")
-			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])
-			->row();
+    // Ambil data hasil (gunakan alias dan nama tabel eksplisit untuk hindari ambiguitas)
+    $data["hasil"] = $this->db
+        ->select("tbl_hasil.*, tbl_pegawai.*, tbl_upload.*, tbl_narapidana.*")
+        ->from("tbl_hasil")
+        ->join("tbl_pegawai", "tbl_pegawai.nip = tbl_hasil.id_object", "left")
+        ->join("tbl_upload", "tbl_upload.id_hasil = tbl_hasil.id_hasil", "left")
+        ->join("tbl_narapidana", "tbl_narapidana.no_register = tbl_hasil.id_object", "left")
+        ->where("tbl_hasil.id_hasil", $id_hasil) // ✅ tambahkan nama tabel di sini
+        ->get()
+        ->row();
 
-		if (!$data["hasil"]) {
-			$this->session->set_flashdata("error", "Data tidak ditemukan.");
-			redirect("histori");
-			return;
-		}
+    if (!$data["hasil"]) {
+        $this->session->set_flashdata("error", "Data tidak ditemukan.");
+        redirect("histori");
+        return;
+    }
 
-		// Ambil data user dari session
-		$id_user = $this->session->userdata("id_user");
-		$role = $this->session->userdata("role");
+    // Ambil data user dari session
+    $id_user = $this->session->userdata("id_user");
+    $role = $this->session->userdata("role");
 
-		// 🔒 Cek hak akses: hanya admin atau pemilik data yang boleh edit
-		if ($role !== "admin" && $data["hasil"]->id_user != $id_user) {
-			$this->session->set_flashdata("error", "Anda tidak memiliki akses untuk mengedit data ini.");
-			redirect("histori");
-			return;
-		}
+    // 🔒 Cek hak akses: hanya admin atau pemilik data yang boleh edit
+    if ($role !== "admin" && $data["hasil"]->id_user != $id_user) {
+        $this->session->set_flashdata("error", "Anda tidak memiliki akses untuk mengedit data ini.");
+        redirect("histori");
+        return;
+    }
 
-		// Ambil data tambahan untuk tampilan form
-		$data["list_kanwil"] = $this->HistoriModel->getAllKanwil();
-		$data["list_upt"] = $this->HistoriModel->getAllUpt();
+    // Ambil data tambahan untuk tampilan form
+    $data["list_kanwil"] = $this->HistoriModel->getAllKanwil();
+    $data["list_upt"] = $this->HistoriModel->getAllUpt();
 
-		$this->load->view("front/layouts/main", $data);
-	}
+    $this->load->view("front/layouts/main", $data);
+}
+
 
 	public function update()
 	{
