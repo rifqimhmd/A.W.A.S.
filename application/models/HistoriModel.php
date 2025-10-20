@@ -5,102 +5,70 @@ class HistoriModel extends CI_Model
 {
 	public function get_histori_by_instrument($instrument, $user)
 	{
+		// Aktifkan SQL_BIG_SELECTS
+		$this->db->query("SET SQL_BIG_SELECTS=1");
+
 		$this->db->select("
-            h.id_hasil,
-            h.nilai_akhir,
-            DATE_FORMAT(h.created_at, '%d-%m-%Y') AS created_at,
-            a.nama_antisipasi,
-            a.warna_antisipasi,
-            i.nama_instrument,
-            s.jenis_skrining,
-            p.nama_pegawai,
-            n.nama_narapidana,
-            n.perkara,
-            n.no_register,
-            p.nip,
-            up_load.tindak_lanjut,
-            up_load.nama_file,
-            COALESCE(u_peg.nama_upt, u_nap.nama_upt) AS nama_upt,
-            COALESCE(k_peg.nama_kanwil, k_nap.nama_kanwil) AS nama_kanwil
-        ");
+        h.id_hasil,
+        h.nilai_akhir,
+        DATE_FORMAT(h.created_at, '%d-%m-%Y') AS created_at,
+        a.nama_antisipasi,
+        a.warna_antisipasi,
+        i.nama_instrument,
+        s.jenis_skrining,
+        p.nama_pegawai,
+        n.nama_narapidana,
+        n.perkara,
+        n.no_register,
+        p.nip,
+        up_load.tindak_lanjut,
+        up_load.nama_file,
+        COALESCE(u_peg1.nama_upt, u_peg2.nama_upt, u_nap1.nama_upt, u_nap2.nama_upt) AS nama_upt,
+        COALESCE(k_peg.nama_kanwil, k_nap.nama_kanwil) AS nama_kanwil
+    ");
 		$this->db->from("tbl_hasil h");
 
 		// Hasil indikator -> skrining -> instrument
-		$this->db->join(
-			"tbl_hasil_indikator hi",
-			"hi.id_hasil = h.id_hasil",
-			"left",
-		);
-		$this->db->join(
-			"tbl_skrining s",
-			"s.id_skrining = hi.id_skrining",
-			"left",
-		);
-		$this->db->join(
-			"tbl_instrument i",
-			"i.id_instrument = s.id_instrument",
-			"left",
-		);
+		$this->db->join("tbl_hasil_indikator hi", "hi.id_hasil = h.id_hasil", "left");
+		$this->db->join("tbl_skrining s", "s.id_skrining = hi.id_skrining", "left");
+		$this->db->join("tbl_instrument i", "i.id_instrument = s.id_instrument", "left");
 
 		// Antisipasi
-		$this->db->join(
-			"tbl_antisipasi a",
-			"a.id_antisipasi = h.id_antisipasi",
-			"left",
-		);
+		$this->db->join("tbl_antisipasi a", "a.id_antisipasi = h.id_antisipasi", "left");
 
-		$this->db->join(
-			"tbl_upload up_load",
-			"up_load.id_hasil = h.id_hasil",
-			"left",
-		);
+		// Upload
+		$this->db->join("tbl_upload up_load", "up_load.id_hasil = h.id_hasil", "left");
 
-		// Relasi pegawai -> UPT -> Kanwil
+		// Pegawai
 		$this->db->join("tbl_pegawai p", "p.nip = h.id_object", "left");
-		$this->db->join(
-			"tbl_upt u_peg",
-			"u_peg.id_upt = p.nama_upt OR u_peg.nama_upt = p.nama_upt",
-			"left",
-		);
-		$this->db->join(
-			"tbl_kanwil k_peg",
-			"k_peg.id_kanwil = u_peg.id_kanwil",
-			"left",
-		);
 
-		// Relasi narapidana -> UPT -> Kanwil
-		$this->db->join(
-			"tbl_narapidana n",
-			"n.no_register = h.id_object",
-			"left",
-		);
-		$this->db->join(
-			"tbl_upt u_nap",
-			"u_nap.id_upt = n.tempat_penahanan OR u_nap.nama_upt = n.tempat_penahanan",
-			"left",
-		);
-		$this->db->join(
-			"tbl_kanwil k_nap",
-			"k_nap.id_kanwil = u_nap.id_kanwil",
-			"left",
-		);
+		// Pisahkan JOIN tbl_upt untuk menghindari OR
+		$this->db->join("tbl_upt u_peg1", "u_peg1.id_upt = p.nama_upt", "left");
+		$this->db->join("tbl_upt u_peg2", "u_peg2.nama_upt = p.nama_upt", "left");
+		$this->db->join("tbl_kanwil k_peg", "k_peg.id_kanwil = COALESCE(u_peg1.id_kanwil, u_peg2.id_kanwil)", "left");
+
+		// Narapidana
+		$this->db->join("tbl_narapidana n", "n.no_register = h.id_object", "left");
+		$this->db->join("tbl_upt u_nap1", "u_nap1.id_upt = n.tempat_penahanan", "left");
+		$this->db->join("tbl_upt u_nap2", "u_nap2.nama_upt = n.tempat_penahanan", "left");
+		$this->db->join("tbl_kanwil k_nap", "k_nap.id_kanwil = COALESCE(u_nap1.id_kanwil, u_nap2.id_kanwil)", "left");
 
 		// Filter berdasarkan instrument
 		$this->db->where("LOWER(i.nama_instrument)", strtolower($instrument));
 
 		// Filter sesuai role user
 		if ($user["role"] === "upt") {
-			$this->db
-				->group_start()
-				->where("u_peg.id_upt", $user["id_upt"])
-				->or_where("u_nap.id_upt", $user["id_upt"])
-				->group_end();
+			$this->db->group_start();
+			$this->db->where("u_peg1.id_upt", $user["id_upt"]);
+			$this->db->or_where("u_peg2.id_upt", $user["id_upt"]);
+			$this->db->or_where("u_nap1.id_upt", $user["id_upt"]);
+			$this->db->or_where("u_nap2.id_upt", $user["id_upt"]);
+			$this->db->group_end();
 		} elseif ($user["role"] === "kanwil") {
-			$this->db
-				->group_start()
-				->where("k_peg.id_kanwil", $user["id_kanwil"])
-				->or_where("k_nap.id_kanwil", $user["id_kanwil"])
-				->group_end();
+			$this->db->group_start();
+			$this->db->where("k_peg.id_kanwil", $user["id_kanwil"]);
+			$this->db->or_where("k_nap.id_kanwil", $user["id_kanwil"]);
+			$this->db->group_end();
 		}
 		// Admin → tampilkan semua data
 
@@ -113,8 +81,7 @@ class HistoriModel extends CI_Model
 			$nilai = (int) $row->nilai_akhir;
 			if ($nilai >= 71) {
 				$row->level = "Merah"; // Tinggi
-				$row->solusi =
-					"Pembatasan gerak dan pemindahan dengan isolasi.";
+				$row->solusi = "Pembatasan gerak dan pemindahan dengan isolasi.";
 			} elseif ($nilai >= 41) {
 				$row->level = "Kuning"; // Sedang
 				$row->solusi = "Pembatasan gerak atau isolasi.";
