@@ -10,6 +10,16 @@
 
         <!-- Tindak Lanjut -->
         <div>
+            <label class="block text-gray-600 mb-2">No Register/NIP</label>
+            <input type="text" name="no_register_nip" value="<?= $hasil->id_object ?>" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-red-300" readonly />
+        </div>
+
+        <div>
+            <label class="block text-gray-600 mb-2">Nama</label>
+            <input type="text" name="nama" value="<?= $hasil->nama_pegawai ?? $hasil->nama_narapidana ?>" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-red-300" readonly />
+        </div>
+
+        <div>
             <label class="block text-gray-600 mb-2">Tindak Lanjut</label>
             <select name="tindak_lanjut"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring focus:ring-red-300">

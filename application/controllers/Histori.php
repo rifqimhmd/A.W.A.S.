@@ -175,6 +175,8 @@ class Histori extends CI_Controller
 
 		// Ambil data hasil
 		$data["hasil"] = $this->db
+			->join("tbl_pegawai", "tbl_pegawai.nip = tbl_hasil.id_object", "left")
+			->join("tbl_narapidana", "tbl_narapidana.no_register = tbl_hasil.id_object", "left")
 			->get_where("tbl_hasil", ["id_hasil" => $id_hasil])
 			->row();
 
