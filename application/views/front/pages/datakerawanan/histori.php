@@ -905,7 +905,7 @@
             const level = document.getElementById("filter-level")?.value || "all";
             const upt = document.getElementById("filter-upt")?.value || "all";
             const kanwil = document.getElementById("filter-kanwil")?.value || "all";
-            const tindak = document.getElementById("filter-tindaklanjut")?.value || "all"; // 🔹 ambil dari dropdown
+            const tindak = document.getElementById("filter-tindaklanjut")?.value || "all"; // ✅ ambil dari dropdown
 
             // ===== Update hash hanya jika bukan load pertama =====
             if (!initialLoad) {
@@ -914,8 +914,7 @@
                 if (level !== "all") params.set("level", level);
                 if (upt !== "all") params.set("upt", upt);
                 if (kanwil !== "all") params.set("kanwil", kanwil);
-                if (tindak !== "all") params.set("tindak", tindak); // 🔹 tambahkan ke hash
-
+                if (tindak !== "all") params.set("tindak", tindak);
                 window.location.hash = params.toString();
             }
 
@@ -923,39 +922,55 @@
 
             tables.forEach(tableId => {
                 // ===== Desktop rows =====
+                let visibleCount = 0; // Nomor dinamis
                 document.querySelectorAll(`#table-${tableId} tbody tr[data-tipe]`).forEach(row => {
                     const rowTipe = row.dataset.tipe;
                     const rowLevel = row.dataset.level;
                     const rowUpt = row.dataset.upt;
                     const rowKanwil = row.dataset.kanwil;
-                    const rowTindak = row.dataset.tindak; // 🔹 ambil dari dataset
+                    const rowTindak = row.dataset.tindak;
 
-                    row.style.display =
+                    const showRow =
                         (tipe === "all" || rowTipe === tipe.toLowerCase()) &&
                         (level === "all" || rowLevel === level.toLowerCase()) &&
                         (upt === "all" || rowUpt === upt.toLowerCase()) &&
                         (kanwil === "all" || rowKanwil === kanwil.toLowerCase()) &&
-                        (tindak === "all" || rowTindak === tindak.toLowerCase()) ? // 🔹 cek filter tindak lanjut
-                        "table-row" :
-                        "none";
+                        (tindak === "all" || rowTindak === tindak.toLowerCase());
+
+                    if (showRow) {
+                        row.style.display = "table-row";
+                        visibleCount++;
+                        // Update nomor dinamis
+                        row.querySelector("td:first-child").textContent = visibleCount;
+                    } else {
+                        row.style.display = "none";
+                    }
                 });
 
                 // ===== Mobile cards =====
+                let mobileCount = 0;
                 document.querySelectorAll(`#table-${tableId} .block.sm\\:hidden > div[data-tipe]`).forEach(card => {
                     const cardTipe = card.dataset.tipe;
                     const cardLevel = card.dataset.level;
                     const cardUpt = card.dataset.upt;
                     const cardKanwil = card.dataset.kanwil;
-                    const cardTindak = card.dataset.tindak; // 🔹 ambil juga
+                    const cardTindak = card.dataset.tindak;
 
-                    card.style.display =
+                    const showCard =
                         (tipe === "all" || cardTipe === tipe.toLowerCase()) &&
                         (level === "all" || cardLevel === level.toLowerCase()) &&
                         (upt === "all" || cardUpt === upt.toLowerCase()) &&
                         (kanwil === "all" || cardKanwil === kanwil.toLowerCase()) &&
-                        (tindak === "all" || cardTindak === tindak.toLowerCase()) ? // 🔹 cek filter tindak lanjut
-                        "block" :
-                        "none";
+                        (tindak === "all" || cardTindak === tindak.toLowerCase());
+
+                    if (showCard) {
+                        card.style.display = "block";
+                        mobileCount++;
+                        // Update nomor dinamis di header card
+                        card.querySelector("span.font-semibold.text-red-600").textContent = "#" + mobileCount;
+                    } else {
+                        card.style.display = "none";
+                    }
                 });
             });
         }
