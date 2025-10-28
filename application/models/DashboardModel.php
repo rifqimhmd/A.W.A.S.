@@ -3,49 +3,59 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class DashboardModel extends CI_Model
 {
-    public function __construct()
+    public function getRekapHasilByInstrument()
     {
-        parent::__construct();
+        $this->db->select('i.nama_instrument, a.warna_antisipasi, COUNT(h.id_hasil) AS total_hasil');
+        $this->db->from('tbl_hasil h');
+        $this->db->join('tbl_antisipasi a', 'a.id_antisipasi = h.id_antisipasi');
+        $this->db->join('tbl_instrument i', 'i.id_instrument = a.id_instrument');
+        $this->db->group_by(['i.nama_instrument', 'a.warna_antisipasi']);
+        $this->db->order_by('i.nama_instrument', 'ASC');
+        $this->db->order_by('a.warna_antisipasi', 'ASC');
+        return $this->db->get()->result_array();
     }
 
-    // Pivot data per Kanwil
-    public function get_pivot_kanwil_warna()
+    public function getDetailByWarna($warna)
     {
-        $this->db->select("k.nama_kanwil,
-            SUM(CASE WHEN a.warna_antisipasi = 'Merah' THEN 1 ELSE 0 END) AS Merah,
-            SUM(CASE WHEN a.warna_antisipasi = 'Kuning' THEN 1 ELSE 0 END) AS Kuning,
-            SUM(CASE WHEN a.warna_antisipasi = 'Hijau' THEN 1 ELSE 0 END) AS Hijau");
-        $this->db->from('hasil h');
-        $this->db->join('antisipasi a', 'h.id_antisipasi = a.id_antisipasi');
-        $this->db->join('user u', 'h.id_user = u.id_user');
-        $this->db->join('kanwil k', 'u.id_kanwil = k.id_kanwil');
-        $this->db->group_by('k.nama_kanwil');
-
-        $this->db->order_by('Merah', 'DESC');
-        $this->db->order_by('Kuning', 'DESC');
-        $this->db->order_by('Hijau', 'DESC');
-
-        return $this->db->get()->result();
+        $this->db->select('h.id_hasil, h.nilai_akhir, i.nama_instrument, a.nama_antisipasi, a.warna_antisipasi');
+        $this->db->from('tbl_hasil h');
+        $this->db->join('tbl_antisipasi a', 'a.id_antisipasi = h.id_antisipasi');
+        $this->db->join('tbl_instrument i', 'i.id_instrument = a.id_instrument');
+        $this->db->where('LOWER(a.warna_antisipasi)', strtolower($warna));
+        $this->db->order_by('i.nama_instrument', 'ASC');
+        return $this->db->get()->result_array();
     }
 
-    // Pivot data per UPT untuk kanwil tertentu
-    public function get_pivot_upt_warna($id_kanwil)
+    private function getRankingByInstrument($instrumentName)
     {
-        $this->db->select("up.nama_upt,
-            SUM(CASE WHEN a.warna_antisipasi = 'Merah' THEN 1 ELSE 0 END) AS Merah,
-            SUM(CASE WHEN a.warna_antisipasi = 'Kuning' THEN 1 ELSE 0 END) AS Kuning,
-            SUM(CASE WHEN a.warna_antisipasi = 'Hijau' THEN 1 ELSE 0 END) AS Hijau");
-        $this->db->from('hasil h');
-        $this->db->join('antisipasi a', 'h.id_antisipasi = a.id_antisipasi');
-        $this->db->join('user u', 'h.id_user = u.id_user');
-        $this->db->join('upt up', 'u.id_upt = up.id_upt');
-        $this->db->where('u.id_kanwil', $id_kanwil);
-        $this->db->group_by('up.nama_upt');
+        $query = $this->db->query("
+            SELECT 
+                k.nama_kanwil,
+                i.nama_instrument,
+                SUM(CASE WHEN a.warna_antisipasi = 'merah' THEN 1 ELSE 0 END) AS total_merah,
+                SUM(CASE WHEN a.warna_antisipasi = 'kuning' THEN 1 ELSE 0 END) AS total_kuning,
+                SUM(CASE WHEN a.warna_antisipasi = 'hijau' THEN 1 ELSE 0 END) AS total_hijau,
+                COUNT(h.id_hasil) AS total_data
+            FROM tbl_hasil h
+            JOIN tbl_antisipasi a ON a.id_antisipasi = h.id_antisipasi
+            JOIN tbl_instrument i ON i.id_instrument = a.id_instrument
+            JOIN tbl_user u ON u.id_user = h.id_user
+            JOIN tbl_kanwil k ON k.id_kanwil = u.id_kanwil
+            WHERE i.nama_instrument = ?
+            GROUP BY k.id_kanwil, i.id_instrument
+            ORDER BY total_merah DESC, total_kuning DESC, total_hijau DESC
+        ", [$instrumentName]);
 
-        $this->db->order_by('Merah', 'DESC');
-        $this->db->order_by('Kuning', 'DESC');
-        $this->db->order_by('Hijau', 'DESC');
+        return $query->result_array();
+    }
 
-        return $this->db->get()->result();
+    public function getRankingNarkotika()
+    {
+        return $this->getRankingByInstrument('Narkotika');
+    }
+
+    public function getRankingTeroris()
+    {
+        return $this->getRankingByInstrument('Teroris');
     }
 }

@@ -7,8 +7,8 @@ defined("BASEPATH") or exit("No direct script access allowed");
  * @property DashboardModel $dashboardModel
  * @property CI_Session     $session
  * @property CI_Loader      $load
+ * @property CI_Input       $input
  */
-
 class Dashboard extends CI_Controller
 {
 	public function __construct()
@@ -20,77 +20,30 @@ class Dashboard extends CI_Controller
 
 	public function index()
 	{
-		// $role = $this->session->userdata('role');
-
-		// if ($role === 'admin') {
-		//     // Data Kanwil
-		//     $hasil = $this->dashboardModel->get_pivot_kanwil_warna();
-
-		//     $peringkat = 1;
-		//     $prev_merah = $prev_kuning = $prev_hijau = null;
-		//     $hasil_ranked = [];
-
-		//     foreach ($hasil as $index => $row) {
-		//         if ($index == 0) {
-		//             $row->peringkat = $peringkat;
-		//         } else {
-		//             if ($row->Merah == $prev_merah && $row->Kuning == $prev_kuning && $row->Hijau == $prev_hijau) {
-		//                 $row->peringkat = $peringkat;
-		//             } else {
-		//                 $peringkat = $index + 1;
-		//                 $row->peringkat = $peringkat;
-		//             }
-		//         }
-
-		//         $prev_merah = $row->Merah;
-		//         $prev_kuning = $row->Kuning;
-		//         $prev_hijau = $row->Hijau;
-
-		//         $hasil_ranked[] = $row;
-		//     }
-
-		//     $data['hasil_kanwil'] = $hasil_ranked;
-		//     $data['hasil_upt'] = null;
-		//     $data['message'] = null;
-		// } elseif ($role === 'kanwil') {
-		//     // Data UPT berdasarkan kanwil pengguna
-		//     $id_kanwil = $this->session->userdata('id_kanwil');
-		//     $hasil = $this->dashboardModel->get_pivot_upt_warna($id_kanwil);
-
-		//     $peringkat = 1;
-		//     $prev_merah = $prev_kuning = $prev_hijau = null;
-		//     $hasil_ranked = [];
-
-		//     foreach ($hasil as $index => $row) {
-		//         if ($index == 0) {
-		//             $row->peringkat = $peringkat;
-		//         } else {
-		//             if ($row->Merah == $prev_merah && $row->Kuning == $prev_kuning && $row->Hijau == $prev_hijau) {
-		//                 $row->peringkat = $peringkat;
-		//             } else {
-		//                 $peringkat = $index + 1;
-		//                 $row->peringkat = $peringkat;
-		//             }
-		//         }
-
-		//         $prev_merah = $row->Merah;
-		//         $prev_kuning = $row->Kuning;
-		//         $prev_hijau = $row->Hijau;
-
-		//         $hasil_ranked[] = $row;
-		//     }
-
-		//     $data['hasil_upt'] = $hasil_ranked;
-		//     $data['hasil_kanwil'] = null;
-		//     $data['message'] = null;
-		// } else {
-		//     // Non-admin / non-kanwil
-		//     $data['hasil_kanwil'] = null;
-		//     $data['hasil_upt'] = null;
-		//     $data['message'] = "Anda tidak memiliki akses untuk melihat data ini.";
-		// }
+		$data['hasil'] = $this->dashboardModel->getRekapHasilByInstrument();
 		$data['title'] = "A.W.A.S. - Beranda";
 		$data["page"] = "front/pages/home/dashboard";
 		$this->load->view("front/layouts/main", $data);
 	}
+
+	// API endpoint untuk detail warna
+	public function getDetailByWarna()
+	{
+		$warna = $this->input->get('warna');
+		$data = $this->dashboardModel->getDetailByWarna($warna);
+		
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+
+	// Endpoint JSON untuk AJAX
+    public function getDataNarkotika()
+    {
+        echo json_encode($this->dashboardModel->getRankingNarkotika());
+    }
+
+    public function getDataTeroris()
+    {
+        echo json_encode($this->dashboardModel->getRankingTeroris());
+    }
 }
