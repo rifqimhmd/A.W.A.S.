@@ -167,7 +167,7 @@
     const modalContent = document.getElementById("modalContent");
 
     modal.classList.remove("hidden");
-    modalTitle.innerText = "Detail Warna: " + warna.charAt(0).toUpperCase() + warna.slice(1);
+    modalTitle.innerText = "Detail Zona " + warna.charAt(0).toUpperCase() + warna.slice(1);
 
     modalContent.innerHTML = `
     <div class="flex justify-center py-10">
