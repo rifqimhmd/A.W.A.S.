@@ -12,48 +12,47 @@
       </p>
       <div class="mt-2 mx-auto w-24 h-1 bg-gradient-to-r from-red-600 via-yellow-500 to-green-600 rounded-full"></div>
     </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <!-- Zona Merah -->
       <div onclick="showDetail('merah')"
-        class="group cursor-pointer bg-gradient-to-br from-red-600 to-red-700 text-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:scale-105 hover:shadow-2xl transition-all duration-300">
+        class="group cursor-pointer bg-gradient-to-br from-red-600 to-red-700 text-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center hover:scale-105 hover:shadow-lg transition-all duration-300">
         <div
-          class="w-14 h-14 flex items-center justify-center bg-white/20 rounded-full mb-3 group-hover:rotate-12 transition-transform duration-300">
-          <i class="ri-alert-line text-2xl"></i>
+          class="w-9 h-9 flex items-center justify-center bg-white/20 rounded-full mb-2 group-hover:rotate-12 transition-transform duration-300">
+          <i class="ri-alert-line text-lg"></i>
         </div>
-        <h2 class="text-lg font-semibold tracking-wide uppercase">Zona Merah</h2>
-        <p class="text-5xl font-extrabold mt-2 drop-shadow-md">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-white/90">Zona Merah</h2>
+        <p class="text-5xl font-black mt-1 tracking-tight drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform duration-300">
           <?= array_sum(array_column(array_filter($hasil, fn($r) => strtolower($r['warna_antisipasi']) === 'merah'), 'total_hasil')) ?>
         </p>
-        <p class="mt-1 text-xs text-white/90">Risiko tinggi</p>
+        <p class="mt-1 text-[11px] text-white/80">Risiko tinggi</p>
       </div>
 
       <!-- Zona Kuning -->
       <div onclick="showDetail('kuning')"
-        class="group cursor-pointer bg-gradient-to-br from-yellow-400 to-yellow-500 text-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:scale-105 hover:shadow-2xl transition-all duration-300">
+        class="group cursor-pointer bg-gradient-to-br from-yellow-400 to-yellow-500 text-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center hover:scale-105 hover:shadow-lg transition-all duration-300">
         <div
-          class="w-14 h-14 flex items-center justify-center bg-white/20 rounded-full mb-3 group-hover:rotate-12 transition-transform duration-300">
-          <i class="ri-error-warning-line text-2xl"></i>
+          class="w-9 h-9 flex items-center justify-center bg-white/20 rounded-full mb-2 group-hover:rotate-12 transition-transform duration-300">
+          <i class="ri-error-warning-line text-lg"></i>
         </div>
-        <h2 class="text-lg font-semibold tracking-wide uppercase">Zona Kuning</h2>
-        <p class="text-5xl font-extrabold mt-2 drop-shadow-md">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-white/90">Zona Kuning</h2>
+        <p class="text-5xl font-black mt-1 tracking-tight drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform duration-300">
           <?= array_sum(array_column(array_filter($hasil, fn($r) => strtolower($r['warna_antisipasi']) === 'kuning'), 'total_hasil')) ?>
         </p>
-        <p class="mt-1 text-xs text-white/90">Perlu diwaspadai</p>
+        <p class="mt-1 text-[11px] text-white/80">Perlu diwaspadai</p>
       </div>
 
       <!-- Zona Hijau -->
       <div onclick="showDetail('hijau')"
-        class="group cursor-pointer bg-gradient-to-br from-green-600 to-green-700 text-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:scale-105 hover:shadow-2xl transition-all duration-300">
+        class="group cursor-pointer bg-gradient-to-br from-green-600 to-green-700 text-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center hover:scale-105 hover:shadow-lg transition-all duration-300">
         <div
-          class="w-14 h-14 flex items-center justify-center bg-white/20 rounded-full mb-3 group-hover:rotate-12 transition-transform duration-300">
-          <i class="ri-checkbox-circle-line text-2xl"></i>
+          class="w-9 h-9 flex items-center justify-center bg-white/20 rounded-full mb-2 group-hover:rotate-12 transition-transform duration-300">
+          <i class="ri-checkbox-circle-line text-lg"></i>
         </div>
-        <h2 class="text-lg font-semibold tracking-wide uppercase">Zona Hijau</h2>
-        <p class="text-5xl font-extrabold mt-2 drop-shadow-md">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-white/90">Zona Hijau</h2>
+        <p class="text-5xl font-black mt-1 tracking-tight drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform duration-300">
           <?= array_sum(array_column(array_filter($hasil, fn($r) => strtolower($r['warna_antisipasi']) === 'hijau'), 'total_hasil')) ?>
         </p>
-        <p class="mt-1 text-xs text-white/90">Aman & terkendali</p>
+        <p class="mt-1 text-[11px] text-white/80">Aman & terkendali</p>
       </div>
     </div>
   </section>
