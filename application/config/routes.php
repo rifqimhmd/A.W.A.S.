@@ -61,5 +61,6 @@ $route["login"] = "login/index";
 $route["histori"] = "histori/index";
 $route["user"] = "user/index";
 $route["opsi"] = "opsi/index";
+$route['dashboard/getDetailByWarna'] = 'dashboard/getDetailByWarna';
 
 //front adalah nama controller

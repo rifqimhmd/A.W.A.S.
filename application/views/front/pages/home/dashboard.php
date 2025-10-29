@@ -180,37 +180,51 @@
         }
       })
       .then(res => {
-        const data = res.data;
+        const {
+          success,
+          data,
+          message
+        } = res.data;
+        if (!success) {
+          modalContent.innerHTML = `<p class='text-center text-red-500 py-6'>${message || "Gagal memuat data."}</p>`;
+          return;
+        }
         if (!data || !data.length) {
           modalContent.innerHTML = "<p class='text-center text-gray-400 py-6'>Tidak ada data.</p>";
           return;
         }
 
         let html = `<div class="overflow-x-auto rounded-lg border border-gray-200">
-                    <table class="w-full text-sm text-left">
-                      <thead class="bg-gray-100 text-gray-700 font-semibold sticky top-0">
-                        <tr>
-                          <th class="px-3 py-2 border-b">#</th>
-                          <th class="px-3 py-2 border-b">Instrument</th>
-                          <th class="px-3 py-2 border-b">Antisipasi</th>
-                          <th class="px-3 py-2 border-b">Nilai Akhir</th>
-                        </tr>
-                      </thead>
-                      <tbody>`;
+                <table class="w-full text-sm text-left">
+                  <thead class="bg-gray-100 text-gray-700 font-semibold sticky top-0">
+                    <tr>
+                      <th class="px-3 py-2 border-b">#</th>
+                      <th class="px-3 py-2 border-b">No Register | NIP</th>
+                      <th class="px-3 py-2 border-b">Kanwil</th>
+                      <th class="px-3 py-2 border-b">UPT</th>
+                      <th class="px-3 py-2 border-b">Instrument</th>
+                    </tr>
+                  </thead>
+                  <tbody>`;
+
         data.forEach((d, i) => {
           html += `<tr class="border-t hover:bg-gray-50">
-                   <td class="px-3 py-2">${i + 1}</td>
-                   <td class="px-3 py-2">${d.nama_instrument}</td>
-                   <td class="px-3 py-2">${d.nama_antisipasi}</td>
-                   <td class="px-3 py-2">${d.nilai_akhir}</td>
-                 </tr>`;
+               <td class="px-3 py-2">${i + 1}</td>
+               <td class="px-3 py-2">${d.identitas ?? '-'}</td>
+               <td class="px-3 py-2">${d.nama_kanwil ?? '-'}</td>
+               <td class="px-3 py-2">${d.nama_upt ?? '-'}</td>
+               <td class="px-3 py-2">${d.nama_instrument ?? '-'}</td>
+             </tr>`;
         });
+
         html += `</tbody></table></div>`;
         modalContent.innerHTML = html;
       })
-      .catch(() => {
+      .catch(err => {
+        console.error(err);
         modalContent.innerHTML = "<p class='text-center text-red-500 py-6'>Terjadi kesalahan saat memuat data.</p>";
       });
+
   }
 
   function closeModal() {
