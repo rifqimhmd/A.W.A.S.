@@ -43,7 +43,7 @@ class DashboardModel extends CI_Model
         $this->db->join('tbl_pegawai p', 'p.nip = h.id_object', 'left');
         $this->db->join('tbl_narapidana n', 'n.no_register = h.id_object', 'left');
         $this->db->where('LOWER(a.warna_antisipasi)', strtolower($warna));
-        $this->db->order_by('i.nama_instrument', 'ASC');
+        $this->db->order_by('k.nama_kanwil ASC, i.nama_instrument ASC');
         $query = $this->db->get();
         if (!$query) {
             log_message('error', 'DB error: ' . $this->db->_error_message());

@@ -198,22 +198,22 @@
                 <table class="w-full text-sm text-left">
                   <thead class="bg-gray-100 text-gray-700 font-semibold sticky top-0">
                     <tr>
-                      <th class="px-3 py-2 border-b">#</th>
-                      <th class="px-3 py-2 border-b">No Register | NIP</th>
-                      <th class="px-3 py-2 border-b">Kanwil</th>
-                      <th class="px-3 py-2 border-b">UPT</th>
-                      <th class="px-3 py-2 border-b">Instrument</th>
+                      <th class="px-3 py-2 border-b text-center">No</th>
+                      <th class="px-3 py-2 border-b text-center">No Register | NIP</th>
+                      <th class="px-3 py-2 border-b text-center">Kanwil</th>
+                      <th class="px-3 py-2 border-b text-center">UPT</th>
+                      <th class="px-3 py-2 border-b text-center">Instrument</th>
                     </tr>
                   </thead>
                   <tbody>`;
 
         data.forEach((d, i) => {
           html += `<tr class="border-t hover:bg-gray-50">
-               <td class="px-3 py-2">${i + 1}</td>
-               <td class="px-3 py-2">${d.identitas ?? '-'}</td>
-               <td class="px-3 py-2">${d.nama_kanwil ?? '-'}</td>
-               <td class="px-3 py-2">${d.nama_upt ?? '-'}</td>
-               <td class="px-3 py-2">${d.nama_instrument ?? '-'}</td>
+               <td class="px-3 py-2 text-center">${i + 1}</td>
+               <td class="px-3 py-2 text-center">${d.identitas ?? '-'}</td>
+               <td class="px-3 py-2 text-center">${d.nama_kanwil ?? '-'}</td>
+               <td class="px-3 py-2 text-center">${d.nama_upt ?? '-'}</td>
+               <td class="px-3 py-2 text-center">${d.nama_instrument ?? '-'}</td>
              </tr>`;
         });
 
