@@ -61,4 +61,28 @@ class Dashboard extends CI_Controller
 	{
 		echo json_encode($this->dashboardModel->getRankingTeroris());
 	}
+
+	// API endpoint untuk detail per Kanwil
+	public function getDetailByKanwil()
+	{
+		$kanwil = $this->input->get('kanwil');
+		$instrument = $this->input->get('instrument');
+		$response = ['success' => false, 'data' => [], 'message' => ''];
+
+		try {
+			if (empty($kanwil) || empty($instrument)) {
+				throw new Exception('Parameter tidak lengkap.');
+			}
+
+			$data = $this->dashboardModel->getDetailByKanwil($kanwil, $instrument);
+			$response['success'] = true;
+			$response['data'] = $data;
+		} catch (Exception $e) {
+			$response['message'] = $e->getMessage();
+		}
+
+		$this->output
+			->set_content_type('application/json')
+			->set_output(json_encode($response));
+	}
 }

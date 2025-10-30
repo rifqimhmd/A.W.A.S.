@@ -241,7 +241,7 @@
     return await res.json();
   }
 
-  function updateTable(data, tbodyId) {
+  function updateTable(data, tbodyId, instrument) {
     const tbody = document.getElementById(tbodyId);
     tbody.innerHTML = '';
     if (!data.length) {
@@ -252,7 +252,15 @@
       tbody.insertAdjacentHTML('beforeend', `
       <tr class="hover:bg-gray-100 transition">
         <td class="py-2 px-4">${i + 1}</td>
-        <td class="py-2 px-4 font-semibold">${r.nama_kanwil}</td>
+        <td class="py-2 px-4 font-semibold cursor-pointer" 
+            onclick="showDetailKanwil('${r.nama_kanwil}', '${instrument}')">
+          <span class="relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-0.5
+                after:h-[2px] after:w-0 after:bg-red-600 after:transition-all after:duration-300
+                hover:after:w-full">
+            ${r.nama_kanwil}
+          </span>
+        </td>
+
         <td class="py-2 px-4 text-red-600 font-bold">${r.total_merah}</td>
         <td class="py-2 px-4 text-yellow-500 font-bold">${r.total_kuning}</td>
         <td class="py-2 px-4 text-green-600 font-bold">${r.total_hijau}</td>
@@ -261,6 +269,7 @@
     `);
     });
   }
+
 
   function updateChart(data, chartRef, canvasId, color) {
     const labels = data.map(r => r.nama_kanwil);
@@ -317,12 +326,81 @@
     return newChart;
   }
 
+  function showDetailKanwil(kanwil, instrument) {
+    const modal = document.getElementById("modalDetail");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalContent = document.getElementById("modalContent");
+
+    modal.classList.remove("hidden");
+    modalTitle.innerText = `Detail ${instrument} - ${kanwil}`;
+
+    modalContent.innerHTML = `
+    <div class="flex justify-center py-10">
+      <div class="w-10 h-10 border-4 border-gray-300 border-t-red-500 rounded-full animate-spin"></div>
+    </div>`;
+
+    axios.get("<?= base_url('dashboard/getDetailByKanwil') ?>", {
+        params: {
+          kanwil,
+          instrument
+        }
+      })
+      .then(res => {
+        const {
+          success,
+          data,
+          message
+        } = res.data;
+        if (!success) {
+          modalContent.innerHTML = `<p class='text-center text-red-500 py-6'>${message || "Gagal memuat data."}</p>`;
+          return;
+        }
+        if (!data || !data.length) {
+          modalContent.innerHTML = "<p class='text-center text-gray-400 py-6'>Tidak ada data.</p>";
+          return;
+        }
+
+        let html = `<div class="overflow-x-auto rounded-lg border border-gray-200">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-gray-100 text-gray-700 font-semibold sticky top-0">
+              <tr>
+                <th class="px-3 py-2 border-b text-center">No</th>
+                <th class="px-3 py-2 border-b text-center">Nama UPT</th>
+                <th class="px-3 py-2 border-b text-center">Zona Merah</th>
+                <th class="px-3 py-2 border-b text-center">Zona Kuning</th>
+                <th class="px-3 py-2 border-b text-center">Zona Hijau</th>
+                <th class="px-3 py-2 border-b text-center">Total</th>
+              </tr>
+            </thead>
+            <tbody>`;
+
+        data.forEach((d, i) => {
+          html += `<tr class="border-t hover:bg-gray-50">
+          <td class="px-3 py-2 text-center">${i + 1}</td>
+          <td class="px-3 py-2 text-center">${d.nama_upt ?? '-'}</td>
+          <td class="px-3 py-2 text-center text-red-600 font-bold">${d.total_merah}</td>
+          <td class="px-3 py-2 text-center text-yellow-500 font-bold">${d.total_kuning}</td>
+          <td class="px-3 py-2 text-center text-green-600 font-bold">${d.total_hijau}</td>
+          <td class="px-3 py-2 text-center">${d.total_data}</td>
+        </tr>`;
+        });
+
+        html += `</tbody></table></div>`;
+        modalContent.innerHTML = html;
+      })
+      .catch(err => {
+        console.error(err);
+        modalContent.innerHTML = "<p class='text-center text-red-500 py-6'>Terjadi kesalahan saat memuat data.</p>";
+      });
+  }
+
+
   async function refreshData() {
     const dataNarko = await fetchData('<?= base_url("dashboard/getDataNarkotika") ?>');
     const dataTeror = await fetchData('<?= base_url("dashboard/getDataTeroris") ?>');
 
-    updateTable(dataNarko, 'bodyNarkotika');
-    updateTable(dataTeror, 'bodyTeroris');
+    updateTable(dataNarko, 'bodyNarkotika', 'Narkotika');
+    updateTable(dataTeror, 'bodyTeroris', 'Teroris');
 
     chartNarkotika = updateChart(dataNarko, chartNarkotika, 'chartNarkotika', 'red');
     chartTeroris = updateChart(dataTeror, chartTeroris, 'chartTeroris', 'blue');

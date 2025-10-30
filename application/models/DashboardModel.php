@@ -85,4 +85,27 @@ class DashboardModel extends CI_Model
     {
         return $this->getRankingByInstrument('Teroris');
     }
+
+    public function getDetailByKanwil($kanwil, $instrument)
+    {
+        $query = $this->db->query("
+        SELECT 
+            up.nama_upt,
+            SUM(CASE WHEN a.warna_antisipasi = 'merah' THEN 1 ELSE 0 END) AS total_merah,
+            SUM(CASE WHEN a.warna_antisipasi = 'kuning' THEN 1 ELSE 0 END) AS total_kuning,
+            SUM(CASE WHEN a.warna_antisipasi = 'hijau' THEN 1 ELSE 0 END) AS total_hijau,
+            COUNT(h.id_hasil) AS total_data
+        FROM tbl_hasil h
+        JOIN tbl_antisipasi a ON a.id_antisipasi = h.id_antisipasi
+        JOIN tbl_instrument i ON i.id_instrument = a.id_instrument
+        JOIN tbl_user u ON u.id_user = h.id_user
+        JOIN tbl_kanwil k ON k.id_kanwil = u.id_kanwil
+        JOIN tbl_upt up ON up.id_upt = u.id_upt
+        WHERE k.nama_kanwil = ? AND i.nama_instrument = ?
+        GROUP BY up.id_upt
+        ORDER BY total_merah DESC, total_kuning DESC, total_hijau DESC
+    ", [$kanwil, $instrument]);
+
+        return $query->result_array();
+    }
 }
