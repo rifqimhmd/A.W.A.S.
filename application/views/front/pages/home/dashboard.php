@@ -1,7 +1,4 @@
 <main class="w-full min-h-screen p-4">
-  <!-- =============================
-       RINGKASAN WARNA ANTISIPASI
-  ============================== -->
   <section class="mb-10">
     <div class="text-center mb-10">
       <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">
@@ -13,48 +10,60 @@
       <div class="mt-2 mx-auto w-24 h-1 bg-gradient-to-r from-red-600 via-yellow-500 to-green-600 rounded-full"></div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
       <!-- Zona Merah -->
       <div onclick="showDetail('merah')"
-        class="group cursor-pointer bg-gradient-to-br from-red-600 to-red-700 text-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center hover:scale-105 hover:shadow-lg transition-all duration-300">
-        <div
-          class="w-9 h-9 flex items-center justify-center bg-white/20 rounded-full mb-2 group-hover:rotate-12 transition-transform duration-300">
-          <i class="ri-alert-line text-lg"></i>
+        class="group cursor-pointer bg-white rounded-2xl shadow-sm border border-red-100 p-5 flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+        <div class="w-10 h-10 flex items-center justify-center bg-rose-100 text-rose-600 rounded-xl mb-3 group-hover:scale-110 transition">
+          <i class="ri-alert-line text-xl"></i>
         </div>
-        <h2 class="text-sm font-semibold uppercase tracking-wide text-white/90">Zona Merah</h2>
-        <p class="text-5xl font-black mt-1 tracking-tight drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform duration-300">
+
+        <h2 class="text-sm font-semibold text-gray-700 uppercase tracking-wide">Zona Merah</h2>
+
+        <p class="text-5xl font-black mt-2 text-rose-600 tracking-tight group-hover:scale-110 transition">
           <?= array_sum(array_column(array_filter($hasil, fn($r) => strtolower($r['warna_antisipasi']) === 'merah'), 'total_hasil')) ?>
         </p>
-        <p class="mt-1 text-[11px] text-white/80">Risiko tinggi</p>
+
+        <p class="mt-1 text-[11px] text-gray-500">Risiko tinggi</p>
       </div>
 
       <!-- Zona Kuning -->
       <div onclick="showDetail('kuning')"
-        class="group cursor-pointer bg-gradient-to-br from-yellow-400 to-yellow-500 text-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center hover:scale-105 hover:shadow-lg transition-all duration-300">
-        <div
-          class="w-9 h-9 flex items-center justify-center bg-white/20 rounded-full mb-2 group-hover:rotate-12 transition-transform duration-300">
-          <i class="ri-error-warning-line text-lg"></i>
+        class="group cursor-pointer bg-white rounded-2xl shadow-sm border border-yellow-100 p-5 flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+        <div class="w-10 h-10 flex items-center justify-center bg-yellow-100 text-yellow-600 rounded-xl mb-3 group-hover:scale-110 transition">
+          <i class="ri-error-warning-line text-xl"></i>
         </div>
-        <h2 class="text-sm font-semibold uppercase tracking-wide text-white/90">Zona Kuning</h2>
-        <p class="text-5xl font-black mt-1 tracking-tight drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform duration-300">
+
+        <h2 class="text-sm font-semibold text-gray-700 uppercase tracking-wide">Zona Kuning</h2>
+
+        <p class="text-5xl font-black mt-2 text-yellow-600 tracking-tight group-hover:scale-110 transition">
           <?= array_sum(array_column(array_filter($hasil, fn($r) => strtolower($r['warna_antisipasi']) === 'kuning'), 'total_hasil')) ?>
         </p>
-        <p class="mt-1 text-[11px] text-white/80">Perlu diwaspadai</p>
+
+        <p class="mt-1 text-[11px] text-gray-500">Perlu perhatian</p>
       </div>
 
       <!-- Zona Hijau -->
       <div onclick="showDetail('hijau')"
-        class="group cursor-pointer bg-gradient-to-br from-green-600 to-green-700 text-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center hover:scale-105 hover:shadow-lg transition-all duration-300">
-        <div
-          class="w-9 h-9 flex items-center justify-center bg-white/20 rounded-full mb-2 group-hover:rotate-12 transition-transform duration-300">
-          <i class="ri-checkbox-circle-line text-lg"></i>
+        class="group cursor-pointer bg-white rounded-2xl shadow-sm border border-green-100 p-5 flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+
+        <div class="w-10 h-10 flex items-center justify-center bg-green-100 text-green-600 rounded-xl mb-3 group-hover:scale-110 transition">
+          <i class="ri-checkbox-circle-line text-xl"></i>
         </div>
-        <h2 class="text-sm font-semibold uppercase tracking-wide text-white/90">Zona Hijau</h2>
-        <p class="text-5xl font-black mt-1 tracking-tight drop-shadow-[0_2px_3px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform duration-300">
+
+        <h2 class="text-sm font-semibold text-gray-700 uppercase tracking-wide">Zona Hijau</h2>
+
+        <p class="text-5xl font-black mt-2 text-green-600 tracking-tight group-hover:scale-110 transition">
           <?= array_sum(array_column(array_filter($hasil, fn($r) => strtolower($r['warna_antisipasi']) === 'hijau'), 'total_hasil')) ?>
         </p>
-        <p class="mt-1 text-[11px] text-white/80">Aman & terkendali</p>
+
+        <p class="mt-1 text-[11px] text-gray-500">Aman & Terkendali</p>
       </div>
+
     </div>
+
   </section>
 
   <div class="flex flex-col md:flex-row justify-between">
@@ -67,9 +76,9 @@
       </h2>
 
       <!-- Tabel -->
-      <div class="overflow-x-auto bg-white rounded-2xl shadow-lg mb-8">
+      <div class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-100 mb-8">
         <table class="min-w-full text-sm text-center">
-          <thead class="bg-red-600 text-white text-xs uppercase tracking-wider">
+          <thead class="bg-gray-50 text-gray-600 text-xs uppercase font-semibold tracking-wide">
             <tr>
               <th class="py-3 px-4">No</th>
               <th class="py-3 px-4">Kanwil</th>
@@ -79,7 +88,7 @@
               <th class="py-3 px-4">Total</th>
             </tr>
           </thead>
-          <tbody id="bodyNarkotika" class="divide-y divide-gray-200">
+          <tbody id="bodyNarkotika" class="divide-y divide-gray-100">
             <tr>
               <td colspan="6" class="py-4 text-gray-500">Memuat data...</td>
             </tr>
@@ -105,9 +114,9 @@
       </h2>
 
       <!-- Tabel -->
-      <div class="overflow-x-auto bg-white rounded-2xl shadow-lg mb-8">
+      <div class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-100 mb-8">
         <table class="min-w-full text-sm text-center">
-          <thead class="bg-red-600 text-white text-xs uppercase tracking-wider">
+          <thead class="bg-gray-50 text-gray-600 text-xs uppercase font-semibold tracking-wide">
             <tr>
               <th class="py-3 px-4">No</th>
               <th class="py-3 px-4">Kanwil</th>
@@ -117,7 +126,7 @@
               <th class="py-3 px-4">Total</th>
             </tr>
           </thead>
-          <tbody id="bodyTeroris" class="divide-y divide-gray-200">
+          <tbody id="bodyTeroris" class="divide-y divide-gray-100">
             <tr>
               <td colspan="6" class="py-4 text-gray-500">Memuat data...</td>
             </tr>
@@ -137,16 +146,17 @@
          MODAL DETAIL
 ============================== -->
 <div id="modalDetail"
-  class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-  <div class="bg-white rounded-2xl shadow-2xl w-11/12 sm:w-2/3 md:w-1/2 p-6 relative animate-fadeIn">
+  class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+
+  <div class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl w-11/12 sm:w-2/3 md:w-1/2 p-7 border border-white/40 relative animate-fadeIn">
+
     <button onclick="closeModal()"
-      class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl leading-none">&times;</button>
+      class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+
     <h2 id="modalTitle" class="text-xl font-semibold mb-4 text-gray-800"></h2>
+
     <div id="modalContent"
-      class="overflow-y-auto max-h-[60vh] text-gray-700 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-      <div class="flex justify-center py-10" id="loadingSpinner">
-        <div class="w-10 h-10 border-4 border-gray-300 border-t-red-500 rounded-full animate-spin"></div>
-      </div>
+      class="overflow-y-auto max-h-[60vh] px-1 text-gray-700 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
     </div>
   </div>
 </div>
@@ -412,6 +422,7 @@
 </script>
 
 <style>
+  /* Animasi fadeIn tetap */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -426,5 +437,106 @@
 
   .animate-fadeIn {
     animation: fadeIn 0.3s ease-out;
+  }
+
+  /* ================================
+     CARD ZONA — MODERN ELEVATED RED
+  ================================= */
+  .zona-card {
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    /* red-500 */
+    background: rgba(255, 255, 255, 0.85);
+    transition: all .35s ease;
+  }
+
+  .zona-card:hover {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 20px 35px rgba(220, 38, 38, 0.28);
+    /* red shadow */
+    border-color: rgba(239, 68, 68, 0.45);
+  }
+
+  /* Icon hover twist */
+  .zona-icon {
+    transition: transform .3s ease;
+    color: #dc2626;
+    /* red-600 */
+  }
+
+  .zona-icon:hover {
+    transform: rotate(14deg) scale(1.1);
+  }
+
+  /* ================================
+     TABLE MODERN — RED CLEAN
+  ================================= */
+  table thead {
+    letter-spacing: 0.5px;
+    background: #dc2626;
+    /* red-600 */
+    color: white;
+  }
+
+  table tbody tr {
+    transition: background 0.25s ease;
+  }
+
+  table tbody tr:hover {
+    background: rgba(220, 38, 38, 0.06);
+    /* soft red hover */
+  }
+
+  /* Rounded table on scroll */
+  .table-wrapper {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(220, 38, 38, 0.35);
+  }
+
+  /* ================================
+     MODAL — RED GLASSMORPHISM
+  ================================= */
+  #modalDetail>div {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    /* red-500 */
+    box-shadow: 0 25px 45px rgba(220, 38, 38, 0.25);
+    /* red-600 */
+  }
+
+  /* Scrollbar modern */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #f87171;
+    /* red-400 */
+    border-radius: 10px;
+  }
+
+  /* Header underline animation (red) */
+  .section-title {
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 3px;
+    width: 0%;
+    background: #dc2626;
+    /* red-600 */
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .section-title:hover::after {
+    width: 100%;
   }
 </style>

@@ -156,9 +156,11 @@
                                     ) ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
                     <?php endif; ?>
                     <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana Prasarana</a>
+                    <a href="#" class="block px-6 py-2 hover:bg-red-700">Eksternal</a>
+                    <a href="#" class="block px-6 py-2 hover:bg-red-700">Pembinaan</a>
                     <div class="accordion nested">
                         <button class="accordion-btn flex justify-between w-full px-6 py-2 hover:bg-red-700 rounded-md transition">
-                            Operasional
+                            Operasional Kamtib
                             <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
@@ -191,9 +193,11 @@
                                     ) ?>" class="block px-6 py-2 hover:bg-red-700">Narapidana</a>
                     <?php endif; ?>
                     <a href="#" class="block px-6 py-2 hover:bg-red-700">Sarana Prasarana</a>
+                    <a href="#" class="block px-6 py-2 hover:bg-red-700">Eksternal</a>
+                    <a href="#" class="block px-6 py-2 hover:bg-red-700">Pembinaan</a>
                     <div class="accordion nested">
                         <button class="accordion-btn flex justify-between w-full px-6 py-2 hover:bg-red-700 rounded-md transition">
-                            Operasional
+                            Operasional Kamtib
                             <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>

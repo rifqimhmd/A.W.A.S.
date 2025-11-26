@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: sql109.infinityfree.com
--- Generation Time: Oct 20, 2025 at 04:12 AM
--- Server version: 11.4.7-MariaDB
--- PHP Version: 7.2.22
+-- Host: 127.0.0.1
+-- Generation Time: Oct 29, 2025 at 09:57 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `if0_39852325_awas`
+-- Database: `awas_baru`
 --
 
 -- --------------------------------------------------------
@@ -2800,7 +2799,7 @@ INSERT INTO `tbl_upload` (`id_upload`, `id_hasil`, `tindak_lanjut`, `nama_file`)
 ('36015179-ecba-4387-bc28-8814dc9329f0', '4f7c832d-8dba-4bad-9061-6bc54573f16e', 'Belum ditindaklanjuti', ''),
 ('37b11bc6-ee51-4343-a909-3f382a966416', 'bf5cd4c0-4732-4ac4-bfe1-a0746c9c63ad', 'Belum ditindaklanjuti', ''),
 ('3a4d6dab-b704-420b-b313-61a37eb70197', 'ddf41c58-8e41-4845-8de2-8dc99ea459fd', 'Belum ditindaklanjuti', ''),
-('3a807c1a-a752-4f60-abd8-358d1a1c6b6b', '882cf623-a3ab-4277-9a39-0d27839f3572', 'Belum ditindaklanjuti', ''),
+('3a807c1a-a752-4f60-abd8-358d1a1c6b6b', '882cf623-a3ab-4277-9a39-0d27839f3572', 'Pemindahan', ''),
 ('3c310a73-2313-4bdf-82d6-99809379f3a6', '40c3ef39-ddf9-49be-bffc-2c02c2bba389', 'Belum ditindaklanjuti', ''),
 ('3eef7026-b36f-42db-a5e8-9f53b192732a', '52e55ef7-1c05-4602-8690-ca5a6865c721', 'Belum ditindaklanjuti', ''),
 ('3f7e15a1-0ef9-4b66-b488-3a29dae89642', '2e8ab74f-69ed-4c85-a43e-5ca70064bb92', 'Belum ditindaklanjuti', ''),
@@ -2809,7 +2808,7 @@ INSERT INTO `tbl_upload` (`id_upload`, `id_hasil`, `tindak_lanjut`, `nama_file`)
 ('43a9fb6e-c3cf-4f6c-a251-5f6472f7cfe9', '506ed801-b605-4163-a388-4cf7c1be4f88', 'Belum ditindaklanjuti', ''),
 ('44b2a5a9-be93-4073-ab54-5eacda9a1199', '7bcbc572-e109-4305-b98e-c5c63f67b516', 'Belum ditindaklanjuti', ''),
 ('45fd9b58-ca9b-4f0c-8245-6006c7efea09', 'bdce7f68-1c32-4d8c-8dfc-eca5a457de34', 'Belum ditindaklanjuti', ''),
-('4b1b0071-3b19-4c8d-b5c5-eac237b9819c', '3055ed5f-4b1f-415f-9847-ca41c12025b8', 'Belum ditindaklanjuti', ''),
+('4b1b0071-3b19-4c8d-b5c5-eac237b9819c', '3055ed5f-4b1f-415f-9847-ca41c12025b8', 'Pembinaan', ''),
 ('4b287790-07e1-4efb-96fc-3a3bc6dbab03', '2f5b2b6f-5779-4347-9f74-e0ec86ccf247', 'Belum ditindaklanjuti', ''),
 ('4b973ce5-08e7-4cec-9bef-9bdf68554d2d', '4577bd12-07f9-4b82-8037-1aab58643aa1', 'Belum ditindaklanjuti', ''),
 ('4d52474f-6aa1-40e7-8853-11af08794fc6', 'c69dc155-9d8a-46ef-93e6-cd247fc47fe1', 'Belum ditindaklanjuti', ''),
