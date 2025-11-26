@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 29, 2025 at 09:57 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Host: sql109.infinityfree.com
+-- Generation Time: Nov 26, 2025 at 06:13 PM
+-- Server version: 11.4.7-MariaDB
+-- PHP Version: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `awas_baru`
+-- Database: `if0_39852325_awas`
 --
 
 -- --------------------------------------------------------
@@ -110,6 +111,7 @@ INSERT INTO `tbl_hasil` (`id_hasil`, `id_user`, `nilai_skrining`, `nilai_bahaya`
 ('0a6bb18c-01b9-44f0-9127-314823069cc4', '88126dd7-1d00-4731-b349-88aa6db6246d', 40, 100, 25, 55, '5', '	BI.400022025', '2025-10-20 10:15:16'),
 ('0a75c0fe-6fa7-4855-8903-906f0f2da7f8', 'f87e1383-009d-48cf-afb8-94c8b632ba81', 100, 100, 60, 87, '1', 'BI.20022025', '2025-10-20 10:07:34'),
 ('0d86e43e-271f-4694-91de-055c556ebe22', '0094818c-098f-4a14-91b0-a42f95e96310', 100, 100, 100, 100, '1', 'BI.90082025', '2025-10-20 11:02:23'),
+('10a0d062-4295-4ea2-a97b-e870c1baf12f', '67beb18b-b90b-4296-905a-3d680901fa50', 60, 50, 100, 70, '5', '12345.Jakarta', '2025-11-24 06:18:46'),
 ('14f6d772-7dc3-46e0-80ec-dbc0c3157899', 'd0b70bbd-42be-4f09-817d-6c69a084acf5', 33, 50, 25, 36, '6', 'BI.1300052025', '2025-10-20 10:57:53'),
 ('167082a7-fe4c-4251-8a3d-6111a75f860f', '67beb18b-b90b-4296-905a-3d680901fa50', 78, 33, 40, 50, '2', 'BI.100032025', '2025-10-20 09:39:03'),
 ('16e051e5-e5ff-4bc0-8b64-8d8011e31317', '316daa71-f3a4-4f47-bfb1-453b7b8e4490', 50, 50, 25, 42, '5', 'BI.50042025', '2025-10-20 10:32:29'),
@@ -177,6 +179,7 @@ INSERT INTO `tbl_hasil` (`id_hasil`, `id_user`, `nilai_skrining`, `nilai_bahaya`
 ('769f5824-2017-47f8-9467-9f8cbe0155ee', '2311c007-6350-48dc-a8c2-2c4615325613', 0, 0, 0, 0, '6', 'BI.90152025', '2025-10-20 11:11:31'),
 ('7bcbc572-e109-4305-b98e-c5c63f67b516', '06a02db3-6604-42d4-af42-2b426bba0aa6', 67, 33, 100, 67, '2', 'BI.900012025', '2025-10-20 10:39:39'),
 ('7cb58245-4635-4515-a8fc-a34bdfa82f4d', 'f87e1383-009d-48cf-afb8-94c8b632ba81', 83, 100, 75, 86, '4', 'BI.20042025', '2025-10-20 10:10:46'),
+('7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '67beb18b-b90b-4296-905a-3d680901fa50', 100, 100, 100, 100, '4', 'Test 123', '2025-10-30 10:59:35'),
 ('80c7d720-ca00-410a-862b-75d2d4082d68', '0094818c-098f-4a14-91b0-a42f95e96310', 60, 50, 50, 53, '5', 'BI.90102025', '2025-10-20 11:04:43'),
 ('87efdaab-7aa8-4a2d-8b08-ed3f88f4e93c', '7e2f4ba0-78d4-42d7-8703-0451edaada23', 73, 100, 100, 91, '1', 'BI.800032025', '2025-10-20 10:37:38'),
 ('882cf623-a3ab-4277-9a39-0d27839f3572', '67beb18b-b90b-4296-905a-3d680901fa50', 73, 100, 80, 84, '1', 'BI.100042025', '2025-10-20 09:39:53'),
@@ -333,6 +336,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('08525549-72c5-4aaa-b53b-cc4663e7059c', 'f9f7957c-4835-4237-be64-a6790f288188', '', '7b1de438-7c64-42ac-8ba9-e13e7ec09976', 1),
 ('08bf6973-074d-42d6-9625-70db808a5359', '2f5b2b6f-5779-4347-9f74-e0ec86ccf247', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 1),
 ('08cf7e05-8df2-45d6-8fa9-47047a26fca6', '87efdaab-7aa8-4a2d-8b08-ed3f88f4e93c', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 1),
+('08f13759-7a12-4853-add5-992aaf8bd31a', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '2e40c083-6ff0-4428-9171-8929077375cc', '', 1),
 ('09238110-94bf-4dc0-8434-60a3abf971c9', '07f8e1a2-093e-4ea3-a095-fa71e758ce65', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
 ('09298cce-3c3b-4271-9333-d4fc3c217e2a', '14f6d772-7dc3-46e0-80ec-dbc0c3157899', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 0),
 ('094ee877-ce64-4eb9-9864-1940cdc87281', '3dfb789a-698a-4372-9b2e-b701acfdb98c', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
@@ -643,9 +647,9 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('29fa69d3-ae14-40ed-85b7-ee0185d6a13a', '506ed801-b605-4163-a388-4cf7c1be4f88', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 0),
 ('2a2d4b3a-59a0-4365-ac87-16546703ec74', '53f1725b-b1c4-4570-a8c1-6ac016ab7c6e', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 0),
 ('2a60f1ab-a257-4c42-bdd8-12d451df760c', '167082a7-fe4c-4251-8a3d-6111a75f860f', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
-('2a695980-7306-4273-83f5-5609cd622a7c', '3e5a949b-e612-4eb4-92f2-2bb1e28fb10f', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
-('2a7f8bc9-43a2-403c-b26b-e8be0ff3b470', 'f1b3c6d6-357f-47a0-b182-7333561b1aa3', '745270d6-01aa-40f2-93cb-5a0042b855fe', '', 1);
+('2a695980-7306-4273-83f5-5609cd622a7c', '3e5a949b-e612-4eb4-92f2-2bb1e28fb10f', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1);
 INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
+('2a7f8bc9-43a2-403c-b26b-e8be0ff3b470', 'f1b3c6d6-357f-47a0-b182-7333561b1aa3', '745270d6-01aa-40f2-93cb-5a0042b855fe', '', 1),
 ('2a91ed74-5922-4713-a478-d3422a255f2f', '6502cf78-e252-4dc9-bc07-2060a14fda96', 'd4ec3816-94cd-4e5c-9ad0-fdb1cb23945d', '', 1),
 ('2ab03360-1fb3-4909-8672-f0981ce0f07f', '490aa092-220f-4ed5-8257-55c1eb87ae0c', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 0),
 ('2acaf5d2-1911-444e-aee6-61dadf1bb6c7', '48d99e7e-8d56-421e-bc17-3e75815eb04b', 'deee553e-8158-4027-9778-3c224a273623', '', 0),
@@ -768,6 +772,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('38038063-a8b7-40c0-819c-f2cfacdc3b81', '224dede3-9531-4109-96de-7b43d474c1dd', 'c4ce7ee9-401a-4c7e-b2f4-5abb14f5ed4d', '', 0),
 ('3829421b-cc9b-4f44-8c09-0ba133fd03ad', '4f7c832d-8dba-4bad-9061-6bc54573f16e', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 1),
 ('385f0219-9bf3-45fa-a21b-456644f97f75', '604ce007-000b-4599-8609-6e4f82506040', 'e0d9eafe-6f74-470b-a576-3437d51aec79', '', 0),
+('3870fd0c-556a-48a3-9658-04199978be31', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 1),
 ('387f3adf-2362-4eee-84aa-0b3f8519ccb1', 'e114fa95-e48c-4f3f-8032-8469cbc75c02', 'a73f0669-7bbb-4f18-9890-a9da9f75903b', '', 0),
 ('38a9cda7-3a14-4732-85f1-8b991528d810', '4f7c832d-8dba-4bad-9061-6bc54573f16e', '2859e0b5-4f8d-4912-9e62-51a2f993c607', '', 1),
 ('38c0f6e1-edd2-4d24-b9a0-f310b130a905', 'cd524a20-0daf-4405-962b-9d355cd5be3b', '926d20fc-fba6-4953-99d3-43cd04267222', '', 1),
@@ -1035,10 +1040,10 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('58e7bb03-4117-4c10-810c-efa32e73af62', '9cd44b9e-3c26-4d5f-b7f1-e7220ad77e79', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 0),
 ('58efc636-4cb7-4492-b2f9-996a8f6bf571', '36671887-a8a0-4826-8fca-0515dae0a6a0', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
 ('58f52ab3-c293-4d39-a415-d4ef1e38d7d7', '167082a7-fe4c-4251-8a3d-6111a75f860f', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 1),
-('5920ddf0-d232-4ed5-88c4-0077ea48b51c', 'd1f0d0ef-a4f5-4dfb-aa48-b20174380ca3', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 1),
-('5922d608-a009-4a59-ad53-d739d9fc121d', 'f97550f0-0338-4cb9-8ef8-a270b748ce03', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
-('593d4c1a-41ec-4cf8-b788-a5daabe35dc7', 'e114fa95-e48c-4f3f-8032-8469cbc75c02', '', 'a6375dc2-0dd8-4cd8-a617-d56f7c623bf1', 1);
+('5920ddf0-d232-4ed5-88c4-0077ea48b51c', 'd1f0d0ef-a4f5-4dfb-aa48-b20174380ca3', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 1);
 INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
+('5922d608-a009-4a59-ad53-d739d9fc121d', 'f97550f0-0338-4cb9-8ef8-a270b748ce03', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
+('593d4c1a-41ec-4cf8-b788-a5daabe35dc7', 'e114fa95-e48c-4f3f-8032-8469cbc75c02', '', 'a6375dc2-0dd8-4cd8-a617-d56f7c623bf1', 1),
 ('59544ea5-c7ec-40e6-9972-7867d2d1c234', '1cd32a62-0ec7-4313-b225-cc3ad2964b11', 'a73f0669-7bbb-4f18-9890-a9da9f75903b', '', 0),
 ('5973a3c8-16e0-4137-bdb1-e4d82e736345', '506ed801-b605-4163-a388-4cf7c1be4f88', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 0),
 ('59a1bb4c-cfd7-437c-8510-683a79fe5aaa', '3055ed5f-4b1f-415f-9847-ca41c12025b8', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
@@ -1102,6 +1107,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('5fafc536-578e-4487-95dc-3f03196c1d06', 'b28dd5a6-7e0e-42c8-bf51-c7b604bca320', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 0),
 ('5fbe73f9-a28d-4d7c-a6be-a6a897b8e194', '386f6e9a-bcd8-451c-9ed9-28905ab0bb1f', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
 ('5fc25683-7997-4f40-b70e-dfb03a6a95da', '0d86e43e-271f-4694-91de-055c556ebe22', '', '95d6ae69-879f-428c-a183-f2609578c612', 1),
+('6028b717-e800-4736-8ce0-07cab28b434e', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '2e40c083-6ff0-4428-9171-8929077375cc', '', 1),
 ('6033835b-4c84-47ed-859f-581236697013', '010659c1-67d2-421b-b171-1dbc7012d633', 'a73f0669-7bbb-4f18-9890-a9da9f75903b', '', 0),
 ('604f67a6-e409-4bd0-8d98-25217f78f317', '490aa092-220f-4ed5-8257-55c1eb87ae0c', '14800371-6ecb-46ef-9f60-aa81493131ff', '', 1),
 ('608c66bb-f3c7-4c2b-a4fd-194498d5f203', 'cff80d18-a728-45d9-9eb9-139aed70ea7e', '44df33b5-3ac3-4b20-b8a0-285755ee8a1f', '', 1),
@@ -1151,6 +1157,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('6620d187-887e-4b0c-883f-dd1882e2b0ea', '48debeb1-bcd2-49d1-a1d0-ce59d2bcf621', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
 ('664373db-bee9-489d-b234-ff562e11c0d3', '4f77bf02-058a-4887-a012-64877efd33c4', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 0),
 ('665806af-c296-44a5-ba23-8c78abacd81f', '1cfb2d72-0425-4df5-a9af-364cbca9ecc7', '', 'a6375dc2-0dd8-4cd8-a617-d56f7c623bf1', 1),
+('6666b704-baf4-4a43-8e3d-3b08a412e9d9', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '14800371-6ecb-46ef-9f60-aa81493131ff', '', 1),
 ('66725b3c-c522-4a48-9eac-f492428e75ea', '9395c324-a73c-44a2-b277-c8761b2691d8', '', '95d6ae69-879f-428c-a183-f2609578c612', 1),
 ('66d17831-8ffd-475f-8536-c935c90a4bea', '682e4d73-84b7-4aad-9725-ac8052e6537c', '2e40c083-6ff0-4428-9171-8929077375cc', '', 1),
 ('66efd0aa-efa9-4ce4-a38a-f79a12dfd23c', 'a8a5e748-471c-4492-9844-325739cbec8c', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
@@ -1303,11 +1310,13 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('76a1050f-79ed-4af9-8a04-3c19abfbd0f8', '4577bd12-07f9-4b82-8037-1aab58643aa1', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
 ('76eb2af1-eec6-4e3b-9931-5b65e83bed64', 'd1f0d0ef-a4f5-4dfb-aa48-b20174380ca3', 'b0a76bb2-7cbf-41f4-b965-3a35d4c43d2b', '', 1),
 ('77021f17-9f26-4344-9725-862f00523de0', 'cff80d18-a728-45d9-9eb9-139aed70ea7e', '1900d304-a2bb-44a9-a2a7-802a3843f8f0', '', 1),
+('774f8a41-5add-4338-889c-93105f229865', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 1),
 ('77a52e64-54f6-459a-bdc8-b536b8edf2b6', 'ab09e94a-f5ee-47e4-bfe2-c6738e812598', '926d20fc-fba6-4953-99d3-43cd04267222', '', 1),
 ('77b718f7-3ccc-4942-8df6-8a1294127f33', '4f77bf02-058a-4887-a012-64877efd33c4', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 0),
 ('77c56f97-cc31-4360-85d5-139e21b4ccbc', '309266ea-fbaf-40fc-8715-8619606ae7ee', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
 ('77d880a3-895e-45a3-85d5-72db1758aec2', '0d86e43e-271f-4694-91de-055c556ebe22', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1),
 ('77f3ff0a-4246-4c9b-be65-9d54d65f05f9', '309266ea-fbaf-40fc-8715-8619606ae7ee', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 0),
+('7811c15b-f0ec-4dbf-a759-f461429881bf', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '2859e0b5-4f8d-4912-9e62-51a2f993c607', '', 1),
 ('7856aa27-e655-458c-888b-83cc18672e6e', '1c85da69-871b-4cb0-b29c-5d23b7de1504', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1),
 ('788c59de-7b80-4a98-927e-eae8529009bd', '87efdaab-7aa8-4a2d-8b08-ed3f88f4e93c', '1bc6f687-ebb5-4838-b601-54a9b7d39333', '', 1),
 ('78ac5a2b-103b-479e-a76d-932227a111f7', '5911c8dc-3b94-480e-ad02-e40dc31f86a1', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 1),
@@ -1424,14 +1433,14 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('87838ffa-83ff-4a9b-af27-8c690a9896dd', '90f33175-12a2-4484-a36d-2ff2ad9b275e', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
 ('87a35e3a-0807-41e5-bc54-e2c852036c2e', 'cd524a20-0daf-4405-962b-9d355cd5be3b', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1),
 ('87b308bd-ed97-404e-b6cb-a8e66b4436d3', '39db00b1-3cc2-4574-a1a1-36376c17c33d', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 1),
-('87bf374d-d77e-46e1-b075-f5e28f0d0a23', '16e051e5-e5ff-4bc0-8b64-8d8011e31317', '558fe4fa-4614-4a30-a32e-47b272fac129', '', 1),
+('87bf374d-d77e-46e1-b075-f5e28f0d0a23', '16e051e5-e5ff-4bc0-8b64-8d8011e31317', '558fe4fa-4614-4a30-a32e-47b272fac129', '', 1);
+INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
 ('87e87e5c-656f-464a-83a8-4550c0a74727', '07f8e1a2-093e-4ea3-a095-fa71e758ce65', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
 ('87ea69df-13c1-4d47-9c6a-58590abeb087', '245ce318-13e5-49c9-be50-ffcaf3517daf', '8b18ee6c-5cc2-4cc1-a1cc-30c07a843bc8', '', 0),
 ('87fd8f6d-06b7-4d36-bfb3-de93fac6191a', 'e99485be-b083-4291-9c3b-f6af1d7c82c2', 'b0331018-05d7-45c3-9975-d39deb7ddf58', '', 1),
 ('883009ad-dbe7-490e-a067-0e23efba4145', '07f8e1a2-093e-4ea3-a095-fa71e758ce65', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
 ('8886b162-e2d4-4444-a0ec-f501fa969122', '3acf60ca-b2a9-4288-a747-9e9bc3fe71a4', 'e0d9eafe-6f74-470b-a576-3437d51aec79', '', 0),
-('889af785-11b2-4f4d-8ecd-27c5174149f8', '1cd32a62-0ec7-4313-b225-cc3ad2964b11', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 0);
-INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
+('889af785-11b2-4f4d-8ecd-27c5174149f8', '1cd32a62-0ec7-4313-b225-cc3ad2964b11', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 0),
 ('88b231d8-8259-48b1-9e5b-f871e20f4c12', '591d46e1-1f0b-4f9c-93d5-0eab52954948', '1bc6f687-ebb5-4838-b601-54a9b7d39333', '', 1),
 ('88dcd4dc-6a35-418e-99bc-5bda55854672', '7cb58245-4635-4515-a8fc-a34bdfa82f4d', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 0),
 ('88fb4037-6233-49b5-837a-86ff541c41d7', '48debeb1-bcd2-49d1-a1d0-ce59d2bcf621', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 1),
@@ -1449,6 +1458,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('89fbcefe-4f7b-4b9f-b3ec-7f22766f803c', 'f9f7957c-4835-4237-be64-a6790f288188', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
 ('8a16a94f-a578-497b-af47-1b809b01dc45', '2fd05a4a-1578-43e2-9abf-db7942e85708', 'c8a243d3-8cf6-40fb-9bdf-ab7a81fc390d', '', 1),
 ('8a175f57-8a36-41ff-93c1-25645c628076', '6502cf78-e252-4dc9-bc07-2060a14fda96', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
+('8a2e3669-3028-49ff-b688-4c2d33d3f0f9', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 0),
 ('8a337713-f740-49bf-87bd-bce77d9fb911', '52e55ef7-1c05-4602-8690-ca5a6865c721', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 0),
 ('8a76c2d1-dc50-40f1-9be0-cad229ec013c', '8d3def70-4677-416a-bb06-4d5a112797b5', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1),
 ('8a774285-182b-4a05-ac6d-b2a61d49f8e7', '769f5824-2017-47f8-9467-9f8cbe0155ee', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 0),
@@ -1483,6 +1493,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('8d857291-eb32-44d7-9135-ff5df6593b79', '8cf666b0-b55c-40fd-b24b-77ce7351a07f', 'a18966f3-609e-453b-bbca-a77a8fdc458c', '', 1),
 ('8d9958d5-ed4f-41ac-8973-a120a2c395fd', 'bf5cd4c0-4732-4ac4-bfe1-a0746c9c63ad', '751fba6b-c5e4-42a9-88a6-791bc5a6daab', '', 0),
 ('8db2f61b-9882-41e3-ba79-1325fb9fa730', 'cd524a20-0daf-4405-962b-9d355cd5be3b', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
+('8dd37056-3cc3-4a39-a93f-ba5d49daef9d', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 1),
 ('8e0d3576-337a-4c5f-8cef-83b46a99175e', '48d99e7e-8d56-421e-bc17-3e75815eb04b', '0d6a2693-2d88-4eb8-a323-9178c2c6e3da', '', 1),
 ('8e3fc88a-d11c-42b1-898c-b318dd0e4559', '3acf60ca-b2a9-4288-a747-9e9bc3fe71a4', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
 ('8e515cc7-61d2-47be-9368-0b0d1954aaa1', '4577bd12-07f9-4b82-8037-1aab58643aa1', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 1),
@@ -1573,6 +1584,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('9876239e-f704-406b-aa5e-8d5c9cbbd78d', '380af9fe-7c18-4596-9cbd-a19ec657b597', 'e0d9eafe-6f74-470b-a576-3437d51aec79', '', 1),
 ('98794821-53b0-4ef3-a245-85ddc62d7d8f', '882cf623-a3ab-4277-9a39-0d27839f3572', '', '95d6ae69-879f-428c-a183-f2609578c612', 1),
 ('98a39e9f-3f15-4881-9423-0bcfcb9d3585', '9395c324-a73c-44a2-b277-c8761b2691d8', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 0),
+('98ae4578-331f-4a0f-b3cc-ff1454d73d3b', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 1),
 ('98fd6873-9a19-4b3b-8460-edc53db78a5a', '35895362-aa9e-4583-87b5-be0ccc55bc66', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 0),
 ('9901cdd2-9413-4763-a1ac-54079b8a7cf8', 'cfda193b-9355-47a7-9f90-b7e9bbf92caf', 'e0d9eafe-6f74-470b-a576-3437d51aec79', '', 1),
 ('994d1451-2ed0-4934-9e64-da47c87fe919', 'bca4956d-999e-4d7f-93bc-f9d7e3d2a25b', '3576bd83-d32b-47da-ab1d-9c374be4a0d1', '', 1),
@@ -1744,6 +1756,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('acad2ac9-2530-400d-a7ec-472bfeacadad', '48d99e7e-8d56-421e-bc17-3e75815eb04b', '', '7b1de438-7c64-42ac-8ba9-e13e7ec09976', 1),
 ('acc632ee-a1cb-4868-a7d8-1fc1bd397cf4', 'efe50cca-da0d-48f2-816d-525a17d22664', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 0),
 ('acd4b09e-c386-4fb6-ba43-32e6ca3ae49b', '8d3def70-4677-416a-bb06-4d5a112797b5', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
+('ad2f8ff5-134e-488c-a405-b935c93a5634', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 1),
 ('ad822ab1-a98a-4948-ab5f-64354bfeff79', 'c9bf9126-412b-4003-b263-f0ed874ca6ef', 'f7b835a1-d3cf-4a31-943f-3fb18e043e62', '', 1),
 ('ad9a4bbc-4536-4308-9326-0de817fd4fb5', 'bf5cd4c0-4732-4ac4-bfe1-a0746c9c63ad', 'f1bb55d1-e80b-45f2-b087-7c807556ccc5', '', 0),
 ('ada83bdc-f12d-4d4a-a29f-f626e4e7c69c', '6f049331-6433-4e02-a4aa-12d9c92ff4ef', 'e0d9eafe-6f74-470b-a576-3437d51aec79', '', 1),
@@ -1768,6 +1781,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('b0108a2f-131d-4ee8-b969-d9a5e59430f7', 'aa6819cf-749a-474c-98ba-95f332f4b8f8', 'b0331018-05d7-45c3-9975-d39deb7ddf58', '', 1),
 ('b010f33c-8d31-4a82-aecb-e2d566b004bc', '5f74b7ef-cd13-4056-b56d-17fff6c85f27', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
 ('b02dc714-4b17-41ca-a719-6b249495cb97', '53c256ae-6893-4fee-9d7b-614cd79a0a7a', 'f7b835a1-d3cf-4a31-943f-3fb18e043e62', '', 1),
+('b0351d22-7e81-40a7-bf0a-dd6c5845a035', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 1),
 ('b03b4971-0591-45bb-ad7b-56110e2587cd', '6f049331-6433-4e02-a4aa-12d9c92ff4ef', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 0),
 ('b03cb6cb-ae7d-48ea-9e8a-858461560e47', '48debeb1-bcd2-49d1-a1d0-ce59d2bcf621', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
 ('b0476da7-21cc-433f-b2e1-41601ffa8973', '2e8ab74f-69ed-4c85-a43e-5ca70064bb92', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 0),
@@ -1777,7 +1791,9 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('b0798918-109e-4af7-80bb-ec8abba37293', '99c98aae-ee42-44f3-9a80-873c0f9ba488', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
 ('b09157ce-bd02-46de-8077-f68d2481b5a0', '80c7d720-ca00-410a-862b-75d2d4082d68', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 1),
 ('b0a1636d-728d-46c1-9571-abdf59725fa4', 'b40f506e-311f-421d-bb78-d5c8832ceb47', '', '95d6ae69-879f-428c-a183-f2609578c612', 1),
+('b0a3e752-0e24-4425-b812-171143b97b2c', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 0),
 ('b112af0d-c8e9-48af-bf84-8c670a18f322', 'ea5ae0ca-3760-43d8-a8d2-3d5dfcf61189', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1),
+('b136fe4b-7238-45db-b1ec-80a057bdff50', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '2859e0b5-4f8d-4912-9e62-51a2f993c607', '', 1),
 ('b1954b63-7105-437f-b279-1c8bf4846257', '3bc7d906-6487-44c0-a7bc-deeca6be1428', '', '9788a308-aa7b-4558-8003-3cc722e3247d', 1),
 ('b1d27b16-75fe-4914-b23d-4ec0d9874066', '769f5824-2017-47f8-9467-9f8cbe0155ee', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 0),
 ('b1f0ba18-33ed-4947-80c1-85af88c66028', '72476ae2-d0f4-4b3c-9889-a4312a28ed8c', '838f844c-baa2-4973-b71a-c8268ff4f31e', '', 0),
@@ -1810,7 +1826,8 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('b54b3b54-0647-46f6-960c-f8dd94fd248d', '506ed801-b605-4163-a388-4cf7c1be4f88', '19991893-f060-4253-8adf-ba6293b9b41f', '', 1),
 ('b5628dbe-8bbc-495c-950a-74f1e9859e7c', '6502cf78-e252-4dc9-bc07-2060a14fda96', '7405602f-4d48-4dc7-a07a-08978dac2503', '', 1),
 ('b57f882b-1825-46ee-b81d-d8337ba56cd8', '63c226fd-1b54-430d-b846-38f03538e7f4', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 0),
-('b5baf6cd-96bd-4e21-ad51-f63fc479f57a', 'bca4956d-999e-4d7f-93bc-f9d7e3d2a25b', 'f7b835a1-d3cf-4a31-943f-3fb18e043e62', '', 0),
+('b5baf6cd-96bd-4e21-ad51-f63fc479f57a', 'bca4956d-999e-4d7f-93bc-f9d7e3d2a25b', 'f7b835a1-d3cf-4a31-943f-3fb18e043e62', '', 0);
+INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
 ('b5c30292-d901-4d38-83f3-8b90d1437a06', 'aa6819cf-749a-474c-98ba-95f332f4b8f8', '0d6a2693-2d88-4eb8-a323-9178c2c6e3da', '', 1),
 ('b5cb8a8d-d1a0-4c76-9ce9-0b06245ffc26', '380af9fe-7c18-4596-9cbd-a19ec657b597', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
 ('b5f0547b-198a-41dc-9b8e-6c97e6687233', 'b1313159-44ad-4a9d-8bf2-6a9b19e18160', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
@@ -1823,14 +1840,15 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('b65162a9-c62b-491b-8631-4d82f4925259', '56f02b29-a4ab-438c-a940-0b85e80fb4fa', 'df20c8df-5731-4b44-9428-34b79134e7a5', '', 0),
 ('b68a1559-0465-4ae7-a508-a07ded391830', 'e114fa95-e48c-4f3f-8032-8469cbc75c02', '2cb6d67a-766f-45be-a78e-1bd44e6711ea', '', 1),
 ('b6a15923-ac57-4e05-9e07-8e659fb33ecd', 'e99485be-b083-4291-9c3b-f6af1d7c82c2', '2cb6d67a-766f-45be-a78e-1bd44e6711ea', '', 1),
-('b6a67e81-b940-4a95-a354-ed52d9ec84e0', '4f7c832d-8dba-4bad-9061-6bc54573f16e', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 0);
-INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
+('b6a67e81-b940-4a95-a354-ed52d9ec84e0', '4f7c832d-8dba-4bad-9061-6bc54573f16e', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 0),
 ('b6cf74c1-682c-427b-a3b5-e3a927b3080f', '40c3ef39-ddf9-49be-bffc-2c02c2bba389', '558fe4fa-4614-4a30-a32e-47b272fac129', '', 1),
 ('b6d4d85a-1d36-40a9-91c7-d88ca6782b1b', '53131d19-7d97-48a9-910b-da7f17649bc2', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
 ('b70258cc-d0d1-49e5-be67-d3737b6c0168', 'e540f7dc-0641-4a19-ac4e-f13318050548', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 1),
 ('b71dd2f0-61b4-4e8d-a9be-3d2b9500a346', 'd1f0d0ef-a4f5-4dfb-aa48-b20174380ca3', '8721af22-7a61-45ab-9682-3e74fd7bbd4d', '', 0),
 ('b7207203-1262-4a5d-99d2-227242a4abd1', '167082a7-fe4c-4251-8a3d-6111a75f860f', '', '7b1de438-7c64-42ac-8ba9-e13e7ec09976', 0),
 ('b75d2340-d1a8-4a7c-8bc3-428da78a3b5d', '724b5401-abad-458a-a139-4f7a2ffc5ff5', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
+('b761481d-a6a7-4993-87bd-11067e72d3ea', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '14800371-6ecb-46ef-9f60-aa81493131ff', '', 1),
+('b77441d3-3de4-4d89-b82e-d2345db271bd', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 1),
 ('b79a5753-3c43-4b93-b49e-39a3631a2487', '99c98aae-ee42-44f3-9a80-873c0f9ba488', '', '95d6ae69-879f-428c-a183-f2609578c612', 1),
 ('b7af473e-fce9-4163-8598-7a0ee45eb3f1', '48debeb1-bcd2-49d1-a1d0-ce59d2bcf621', 'c8a243d3-8cf6-40fb-9bdf-ab7a81fc390d', '', 0),
 ('b7cc28dc-6056-4af1-a899-70dc059202cb', '240ac968-a45f-4a58-ae88-c927f90cf191', 'b0a76bb2-7cbf-41f4-b965-3a35d4c43d2b', '', 0),
@@ -2039,6 +2057,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('d0c93a01-6eb6-43bd-8439-844cca7b2271', '8f20231c-e890-40cd-8a0f-6f212c416d25', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
 ('d0c98a5b-15b6-4980-b8ee-79a8322a80c2', '4f7c832d-8dba-4bad-9061-6bc54573f16e', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 1),
 ('d0dd2b6e-eafb-4981-9c14-d21ad9bc18ba', '56f02b29-a4ab-438c-a940-0b85e80fb4fa', '', '7b1de438-7c64-42ac-8ba9-e13e7ec09976', 1),
+('d0fe4746-825b-46e2-8b8f-2f4fbb88c296', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 1),
 ('d129642a-85c4-4776-92e4-361ddce4476f', 'e26a1afd-4429-4d45-b800-e85280c80686', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 1),
 ('d1559e06-4811-4fc1-9578-1e50af001e77', '36671887-a8a0-4826-8fca-0515dae0a6a0', '', 'f6775b03-9f9a-468b-baa2-957f7702c80b', 0),
 ('d16280e0-a3bf-4cd8-9f10-004c74fe22e1', 'e1eae8b0-1e92-416e-89da-b0b749254914', '44df33b5-3ac3-4b20-b8a0-285755ee8a1f', '', 0),
@@ -2134,12 +2153,14 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('db7881ae-ea31-4c9c-b915-5132169ba5f6', '4f77bf02-058a-4887-a012-64877efd33c4', '', '7b1de438-7c64-42ac-8ba9-e13e7ec09976', 1),
 ('db7a8536-ea43-4297-b493-b4b786a202a3', '1cd32a62-0ec7-4313-b225-cc3ad2964b11', 'd4ec3816-94cd-4e5c-9ad0-fdb1cb23945d', '', 0),
 ('db8e4652-b305-49ea-8e95-91fd7cdd046b', '90f33175-12a2-4484-a36d-2ff2ad9b275e', 'e0d9eafe-6f74-470b-a576-3437d51aec79', '', 1),
+('dba6170e-5ad0-4c42-917e-d493e0b54448', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '7976f42d-25ec-4c44-a008-38bc219b308f', '', 1),
 ('dbab7d36-3b46-4007-819d-f210b80fa1c4', '010659c1-67d2-421b-b171-1dbc7012d633', 'b0331018-05d7-45c3-9975-d39deb7ddf58', '', 0),
 ('dbbe9dbe-7db3-4be1-8c17-3a44809484bb', 'b1313159-44ad-4a9d-8bf2-6a9b19e18160', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 1),
 ('dbeb89fc-c389-4473-9a5f-2062fc14270b', '380af9fe-7c18-4596-9cbd-a19ec657b597', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
 ('dc2fc384-d56e-4c47-ba5b-ed10b03a39ba', 'b86f3f83-6292-4753-8c86-ec52c7aa93d1', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
 ('dc5510f2-de4c-4727-bb3b-c3e6d9213e1e', '591d46e1-1f0b-4f9c-93d5-0eab52954948', '1900d304-a2bb-44a9-a2a7-802a3843f8f0', '', 1),
 ('dc7defe9-3c0a-4d8a-ab57-647ee59764c2', 'fb6914cf-c753-4470-b3a4-43976b569ab6', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 1),
+('dca48be4-509e-4b07-9b0a-dd884ac13e8c', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '', 'ec4d2e58-efde-4065-82c3-bc84f46f50b6', 1),
 ('dcad0d45-91e0-46fb-af6e-4a955d7f1df0', '3a330c9d-6c7d-4153-98e0-7887a4c7597b', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 1),
 ('dcc4de6f-7d03-4c1a-bf58-f6392d251953', '3759198b-6ae7-4958-80af-bfc544fadf3c', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 0),
 ('dcd1aa27-3621-44c5-966f-de6e798df662', '3dfb789a-698a-4372-9b2e-b701acfdb98c', 'df20c8df-5731-4b44-9428-34b79134e7a5', '', 0),
@@ -2161,6 +2182,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('deffcba9-bcb6-463e-98db-b5987d431c10', 'cfda193b-9355-47a7-9f90-b7e9bbf92caf', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
 ('df078888-1e67-4e58-aafc-99974a98f8c3', '48debeb1-bcd2-49d1-a1d0-ce59d2bcf621', '926d20fc-fba6-4953-99d3-43cd04267222', '', 1),
 ('df6f0bde-ec4c-4156-8cf4-dbedc382fa07', '9cd44b9e-3c26-4d5f-b7f1-e7220ad77e79', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 0),
+('df828f6b-1335-41f5-b07a-0da5a9206c4d', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '', 'e76bd7c2-65c2-4ba6-8983-160c6497392d', 1),
 ('df8efaad-b2fb-4a04-af97-fcd5aab21ec7', '9c96f20a-c55a-478e-af8a-5132b7baf3cb', '838f844c-baa2-4973-b71a-c8268ff4f31e', '', 1),
 ('dfa9138e-a3b2-4262-bf05-5d16536c57c5', 'b1313159-44ad-4a9d-8bf2-6a9b19e18160', '76945e28-f121-4506-9103-ef45a1caf54d', '', 0),
 ('dfac2368-ebf2-482c-8107-5917815e4779', '55c37de2-1ff2-4667-aa26-1a618253f4a2', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
@@ -2197,7 +2219,8 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('e3532adb-5108-43bb-8817-a3ffabead8f1', 'ab09e94a-f5ee-47e4-bfe2-c6738e812598', 'df20c8df-5731-4b44-9428-34b79134e7a5', '', 1),
 ('e434e93d-a993-4b3e-b486-4227c8963102', 'f01d4e05-8e64-413d-a8a9-c3c8dadd3fc7', 'b0a76bb2-7cbf-41f4-b965-3a35d4c43d2b', '', 1),
 ('e43acf06-d5b1-430e-a0ac-f0514f115cec', '0a75c0fe-6fa7-4855-8903-906f0f2da7f8', '000003eb-22eb-4fb3-8d77-4f854c0b82bc', '', 1),
-('e4725616-b582-4e54-91b7-3c417c0ab85e', '038c1ece-c971-4f51-a570-48a4c3aa9fad', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1),
+('e4725616-b582-4e54-91b7-3c417c0ab85e', '038c1ece-c971-4f51-a570-48a4c3aa9fad', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 1);
+INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
 ('e474a2d9-d5bb-4ce3-b54f-f5d0fb04bc76', 'f6f4296c-0b44-44a6-a219-21d98ff9f4da', 'c8a243d3-8cf6-40fb-9bdf-ab7a81fc390d', '', 0),
 ('e4826afe-12ab-46a3-8b7c-3a9ca9048f4f', '8d3def70-4677-416a-bb06-4d5a112797b5', '', '7b1de438-7c64-42ac-8ba9-e13e7ec09976', 0),
 ('e494a3e9-c9d8-490d-98aa-fb5a5832f776', 'e1eae8b0-1e92-416e-89da-b0b749254914', '', '5ce2874b-f773-4ece-9f33-b8a6ec668d50', 0),
@@ -2216,8 +2239,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('e5ebfe3a-2922-4a97-a68d-7d8a4b26d9be', '5f74b7ef-cd13-4056-b56d-17fff6c85f27', '314d591c-455e-4df0-a3a2-e32161dbe8a1', '', 1),
 ('e5ecb706-716f-4253-912d-2a296a79a37b', '591d46e1-1f0b-4f9c-93d5-0eab52954948', '', '95d6ae69-879f-428c-a183-f2609578c612', 0),
 ('e6163085-6caf-4620-b4e9-8886c0a74bfd', '167082a7-fe4c-4251-8a3d-6111a75f860f', 'f4869fe6-4a78-4d0e-b753-b5f7ab4fec87', '', 0),
-('e66333f3-61ca-4c48-afe0-94dc7bb827f1', '7bcbc572-e109-4305-b98e-c5c63f67b516', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 0);
-INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrining`, `id_faktor`, `jawaban`) VALUES
+('e66333f3-61ca-4c48-afe0-94dc7bb827f1', '7bcbc572-e109-4305-b98e-c5c63f67b516', '', '7dca2dd6-ac16-4709-891b-c11f7fbf27bf', 0),
 ('e670caeb-52e0-488f-a1e3-7602b687c5f1', '3edb03c0-b4f7-4ab0-bb6e-33c2629a072e', '314d591c-455e-4df0-a3a2-e32161dbe8a1', '', 1),
 ('e68d7909-b246-41eb-bf6f-4bd5c6f19e49', 'f6f4296c-0b44-44a6-a219-21d98ff9f4da', '', '16ce855e-6656-476b-b749-dda8b743897f', 0),
 ('e6c4b7be-f7fc-4a48-8a57-5656bff916db', 'f198ccd8-160b-46cf-a4e5-517acce855d7', 'b0a76bb2-7cbf-41f4-b965-3a35d4c43d2b', '', 0),
@@ -2252,6 +2274,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('eb1f8021-5c3c-4542-a9b8-c4fe7aefab83', 'e540f7dc-0641-4a19-ac4e-f13318050548', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 0),
 ('eb3531e6-3f87-4bd8-9934-8d297168d26b', '245ce318-13e5-49c9-be50-ffcaf3517daf', '', '16ce855e-6656-476b-b749-dda8b743897f', 1),
 ('eb4e9280-242d-4ca7-a0af-7b397db13e8b', '53131d19-7d97-48a9-910b-da7f17649bc2', '', '95d6ae69-879f-428c-a183-f2609578c612', 0),
+('eb7adc11-89c0-42df-987c-d4d099fc211c', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '', '94e844c0-7958-4301-bf16-d9d27e8c0b90', 1),
 ('eba0e85f-2c70-459f-aca2-8ec13a696952', '36671887-a8a0-4826-8fca-0515dae0a6a0', '1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', '', 1),
 ('ebdf9e19-ad3a-4f6a-a8b4-f2cba832942a', 'bca4956d-999e-4d7f-93bc-f9d7e3d2a25b', '19991893-f060-4253-8adf-ba6293b9b41f', '', 1),
 ('ebf9e77d-854c-4161-b271-b746fb94b417', '35895362-aa9e-4583-87b5-be0ccc55bc66', '', '2eda37dc-5a6c-4eb7-af5c-508e6f9e2ea1', 1),
@@ -2336,6 +2359,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('f4a9cd9e-8854-4a81-89bf-cdfb8fde8e6a', '1cd32a62-0ec7-4313-b225-cc3ad2964b11', 'a18966f3-609e-453b-bbca-a77a8fdc458c', '', 1),
 ('f4e8a365-622a-4fc8-a2a0-6dab99b1044d', '1c85da69-871b-4cb0-b29c-5d23b7de1504', 'df20c8df-5731-4b44-9428-34b79134e7a5', '', 0),
 ('f4e8d234-f683-44a3-9012-f565d36492de', '9c96f20a-c55a-478e-af8a-5132b7baf3cb', '21f8c858-e61b-4e5b-9809-252a1d33696c', '', 0),
+('f50223ca-f65b-4a9a-8b40-9650e97e4ad0', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', '6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', '', 1),
 ('f5055726-cf43-4fe8-a240-81e8e3fb3abe', 'e26a1afd-4429-4d45-b800-e85280c80686', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
 ('f50c9fe7-aa4b-4810-987f-7d37d0a2b272', 'c73b7810-cc72-477d-bd2a-bf8f59fa41e0', 'c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', '', 1),
 ('f5942a5b-2d2e-49e9-835f-09efd95d99e6', 'b8c451b5-23ce-49d9-99af-12326c7d5844', '', 'd91bd271-ef8a-46a6-afa6-ec8530cb76dc', 0),
@@ -2354,6 +2378,7 @@ INSERT INTO `tbl_hasil_indikator` (`id_hasil_indikator`, `id_hasil`, `id_skrinin
 ('f7d1f786-cfab-4573-9034-8b0ae1f69b1b', '2f5b2b6f-5779-4347-9f74-e0ec86ccf247', 'b0a76bb2-7cbf-41f4-b965-3a35d4c43d2b', '', 0),
 ('f7eb60f7-3bc3-4425-8b30-3853bf6041ff', '2bfcbd64-fc17-4d2a-a966-3c4fc076875d', '926d20fc-fba6-4953-99d3-43cd04267222', '', 1),
 ('f7f3fdba-6ff2-4c9b-9f7f-21693e38409d', 'f97550f0-0338-4cb9-8ef8-a270b748ce03', '2c4517d0-fc22-4224-af5b-d06b1584c6d6', '', 1),
+('f8177ebb-eb48-401f-89ff-ef811ee75055', '10a0d062-4295-4ea2-a97b-e870c1baf12f', '7976f42d-25ec-4c44-a008-38bc219b308f', '', 0),
 ('f8203267-3a5a-4500-aa41-7e3a2d10578a', '99c98aae-ee42-44f3-9a80-873c0f9ba488', '000003eb-22eb-4fb3-8d77-4f854c0b82bc', '', 1),
 ('f831a8f9-a9db-4f6f-b871-3c68e0896668', 'cc92045d-7dba-48bf-b16e-d8ad61948e2b', '', '984751c8-590b-49c7-a509-7fa8bcef2c1f', 1),
 ('f84ab095-bf71-4ce5-96e6-9e81d93c033c', '224dede3-9531-4109-96de-7b43d474c1dd', '314d591c-455e-4df0-a3a2-e32161dbe8a1', '', 0),
@@ -2497,6 +2522,7 @@ INSERT INTO `tbl_narapidana` (`no_register`, `nama_narapidana`, `perkara`, `lama
 ('	BI.500042025', 'WBP Jakarta5 - 4', 'Teroris', '2 Tahun', 'Jl. Cipinang', 'Lapas Jakarta 5'),
 ('	BI.500052025', 'WBP Jakarta5 - 5', 'Teroris', '1 Tahun 2 Bulan', 'Jl. Cipinang', 'Lapas Jakarta 5'),
 ('11111111111111111111', 'Degasss', 'Cabul', '5 Tahun 3 Bulan', 'Sragentina', 'Lapas Jakarta 2'),
+('12345.Jakarta', 'Yanto', 'Terorisme', '10 Tahun', 'Jakarta', 'Lapas Jakarta 1'),
 ('BI.1000012025', 'WBP Aceh5 - 1', 'Teroris', '2 Tahun', 'Jl. Aceh', 'Lapas Aceh 5'),
 ('BI.1000022025', 'WBP Aceh5 - 2', 'Teroris', '2 Tahun', 'Jl. Aceh', 'Lapas Aceh 5'),
 ('BI.1000032025', 'WBP Aceh5 - 3', 'Narkoba', '2 Tahun', 'Jl. Aceh', 'Lapas Aceh 5'),
@@ -2613,7 +2639,8 @@ INSERT INTO `tbl_narapidana` (`no_register`, `nama_narapidana`, `perkara`, `lama
 ('BI.90122025', 'WBP Maluku5 2', 'Narkoba', '4', 'Jl. Maluku 5 no 2', 'Lapas Maluku 5'),
 ('BI.90132025', 'WBP Maluku5 3', 'Narkoba', '7', 'Jl. Maluku 5 no 3', 'Lapas Maluku 5'),
 ('BI.90142025', 'WBP Maluku5 4', 'Penipuan', '2', 'Jl. Maluku 5 no 4', 'Lapas Maluku 5'),
-('BI.90152025', 'WBP Maluku5 5', 'Penipuan', '2', 'Jl. Maluku 5 no 5', 'Lapas Maluku 5');
+('BI.90152025', 'WBP Maluku5 5', 'Penipuan', '2', 'Jl. Maluku 5 no 5', 'Lapas Maluku 5'),
+('Test 123', 'Test 123', 'Test 123', 'Test', 'Test', 'Lapas Jakarta 1');
 
 -- --------------------------------------------------------
 
@@ -2689,53 +2716,32 @@ CREATE TABLE `tbl_skrining` (
 --
 
 INSERT INTO `tbl_skrining` (`id_skrining`, `indikator_skrining`, `jenis_skrining`, `id_instrument`, `created_at`) VALUES
-('000003eb-22eb-4fb3-8d77-4f854c0b82bc', 'Menerapkan struktur perintah puncak', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 03:22:49'),
-('0d6a2693-2d88-4eb8-a323-9178c2c6e3da', 'Terduga terlihat suka menyendiri', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:13:59'),
-('14800371-6ecb-46ef-9f60-aa81493131ff', 'Terduga patuh dengan pimpinan', 'Pengikut', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:19:31'),
-('1882a39a-bb3e-43e5-ae61-42df7d6c6f7b', 'Terduga memiliki pembantu', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:14:45'),
-('1900d304-a2bb-44a9-a2a7-802a3843f8f0', 'Tidak banyak bicara', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:16:09'),
-('19991893-f060-4253-8adf-ba6293b9b41f', 'Terduga memiliki jaringan', 'Ideolog', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:19:00'),
-('1aa7b289-f7de-4336-9be4-8762c4d0a5ed', 'Berpakaian sederhana', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:16:15'),
-('1bc6f687-ebb5-4838-b601-54a9b7d39333', 'Eksploitasi perempuan sebagai kurir', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:17:46'),
-('21f8c858-e61b-4e5b-9809-252a1d33696c', 'Komunikasi tersembunyi', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:16:19'),
-('2859e0b5-4f8d-4912-9e62-51a2f993c607', 'Terduga masih keras karena pengaruh pimpinan', 'Pengikut', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:19:25'),
-('2c4517d0-fc22-4224-af5b-d06b1584c6d6', 'Terduga berpenghasilan tanpa bekerja', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:05'),
-('2cb6d67a-766f-45be-a78e-1bd44e6711ea', 'Terduga menghabiskan uang banyak', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:14:06'),
-('2e40c083-6ff0-4428-9171-8929077375cc', 'Terduga berpakaian sesuai kelompoknya', 'Pengikut', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:19:38'),
-('314d591c-455e-4df0-a3a2-e32161dbe8a1', 'Terduga terlihat selalu lelah', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:12:16'),
-('3576bd83-d32b-47da-ab1d-9c374be4a0d1', 'Paham takfiri (mengkafirkan pihak lain)', 'Ideolog', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:19:05'),
-('362d8be0-0639-4abc-bb33-896aba729178', 'Terduga sering membahayakan diri dan orang lain', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:46:17'),
-('44df33b5-3ac3-4b20-b8a0-285755ee8a1f', 'Mempengaruhi', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:16:51'),
-('4b7a8dc0-cb3d-4a02-bce3-45a26be5c562', 'Terduga mengalami perubahan kepribadian', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:13:39'),
-('558fe4fa-4614-4a30-a32e-47b272fac129', 'Terduga memiliki pengikut di dalam', 'Ideolog', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:18:01'),
-('6f8090b7-e69c-4d3a-b4c4-026b1f4f650a', 'Terduga menolak fasilitas negara', 'Pengikut', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:19:46'),
-('7405602f-4d48-4dc7-a07a-08978dac2503', 'Terduga mengalami depresi', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:13:53'),
-('745270d6-01aa-40f2-93cb-5a0042b855fe', 'Berpura-pura miskin', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:16:41'),
-('751fba6b-c5e4-42a9-88a6-791bc5a6daab', 'Terduga menyedot idung terus menerus', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:12:51'),
-('76945e28-f121-4506-9103-ef45a1caf54d', 'Terduga memiliki hp', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:27'),
-('7976f42d-25ec-4c44-a008-38bc219b308f', 'Terduga kelompok takfiri', 'Pengikut', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:10:41'),
-('838f844c-baa2-4973-b71a-c8268ff4f31e', 'Terhubung dengan pihak luar selain dari narapidana', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:17:33'),
-('8721af22-7a61-45ab-9682-3e74fd7bbd4d', 'Terduga memiliki posisi penting di jaringan', 'Ideolog', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:19:12'),
-('890cd0fe-71ba-4d63-aceb-ec28e4af0287', 'Sering dikunjungi orang yang berbeda', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:17:27'),
-('8b18ee6c-5cc2-4cc1-a1cc-30c07a843bc8', 'Komunikasi menggunakan sandi', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-28 22:14:43'),
-('926d20fc-fba6-4953-99d3-43cd04267222', 'Terduga selalu \"royal\"', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:21'),
-('9349e2c1-ed0e-41ba-91af-b3d915ebdd36', 'Terduga mengalami radang paru-paru', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:13:28'),
-('a18966f3-609e-453b-bbca-a77a8fdc458c', 'Terduga berpenampilan kotor', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:14:11'),
-('a73f0669-7bbb-4f18-9890-a9da9f75903b', 'Terduga mengalami mata merah', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:09:42'),
-('b0331018-05d7-45c3-9975-d39deb7ddf58', 'Terduga sering flu', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:13:22'),
-('b0a76bb2-7cbf-41f4-b965-3a35d4c43d2b', 'Terduga menyebarkan informasi melalui berbagai media', 'Ideolog', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:18:52'),
-('c4ce7ee9-401a-4c7e-b2f4-5abb14f5ed4d', 'Terduga mengalami penurunan berat badan', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:12:25'),
-('c5a4aab8-9bd2-4c48-b092-e355f1cf5acb', 'Terduga sering mendapatkan kiriman barang', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:45'),
-('c8a243d3-8cf6-40fb-9bdf-ab7a81fc390d', 'Terduga sering dikunjungi oleh orang yang berbeda', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:38'),
-('d4ec3816-94cd-4e5c-9ad0-fdb1cb23945d', 'Terduga emosional', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:13:46'),
-('deee553e-8158-4027-9778-3c224a273623', 'Terduga sering mengalami infeksi bakteri', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:13:33'),
-('df20c8df-5731-4b44-9428-34b79134e7a5', 'Terduga menjadi pusat pergaulan', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:14:40'),
-('e0d9eafe-6f74-470b-a576-3437d51aec79', 'Terduga memiliki  lebih dari satu hp', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:33'),
-('eadcd755-cf80-4727-9572-cd11d90bff6e', 'Terduga terlihat kulit pucat', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:12:32'),
-('ed1e1e4b-4ea0-4f18-a6df-d4f25483e2bc', 'Sangat santun', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:16:04'),
-('f1bb55d1-e80b-45f2-b087-7c807556ccc5', 'Terduga sering melanggar tata tertib', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:14:35'),
-('f4869fe6-4a78-4d0e-b753-b5f7ab4fec87', 'Terduga memiliki pengaruh di lingkungan', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:15:15'),
-('f7b835a1-d3cf-4a31-943f-3fb18e043e62', 'Terduga masih sangat keras', 'Ideolog', 'ed689f05-8d48-11f0-808b-54e1ad047dec', '2025-09-09 02:17:55');
+('0046e211-ab9f-4ab8-8489-931bd6a9ca38', 'Terduga terlihat suka menyendiri', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:27:40'),
+('0b98a558-7d1b-42cd-b72d-1664a702f3ec', 'Terduga berpenghasilan tanpa bekerja', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:30:29'),
+('0c538580-06e1-413c-aa96-1afa72ee7f4d', 'Terduga terlihat kulit pucat', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:27:00'),
+('0ccb2a9c-6264-4ce8-a59f-8eba82b0f086', 'Terduga berkomunikasi menggunakan sandi atau istilah', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:36:39'),
+('17dfbb04-b0f5-42d3-a237-223bebfb29b8', 'Terduga sering mendapatkan kiriman barang besukan', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:32:17'),
+('23924131-80a5-4110-8f80-86a705d36d74', 'Terduga melakukan komunikasi tersembunyi', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:35:06'),
+('2949477d-e673-4a9c-994c-627ddb4d82c4', 'Terduga sering menggunakan alat komunikasi', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:37:26'),
+('3f619f09-5abc-43cc-9adf-47c4bb54295a', 'Terduga sangat berpengaruh ke petugas dan penghuni', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:36:05'),
+('488bd1e9-c828-4705-97c3-6017b7b37bb4', 'Terduga sering menghabiskan uang banyak', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:28:15'),
+('50fe6a1d-4d44-423c-b98a-10517dfa313f', 'Terduga menjadi pusat pergaulan', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:29:33'),
+('56580355-0d9a-42bb-b269-3310e6a723f2', 'Terduga sering dikunjungi oleh orang yang berbeda', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:32:03'),
+('59a9d8bd-6813-4bad-b4c7-8f5d8c8c2191', 'Terduga berpakaian sederhana', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:33:54'),
+('5a9b3c1e-ccb5-4f70-b026-9605cf3dfca1', 'Terduga memiliki pembantu', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:30:16'),
+('66e28aff-2a6c-4f6f-88dd-c65daec1d137', 'Terduga memiliki pengaruh di lingkungan', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:31:06'),
+('6a78ec6e-e71f-421b-99c6-7aeb06bd45a6', 'Terduga berpura-pura miskin', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:34:22'),
+('772050c4-75bf-4d65-ad3b-4c385d672a10', 'Terduga mengalami mata merah', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:26:31'),
+('81cc5811-48e8-4e8c-a251-653beb28bcf1', 'Terduga sering menggunakan alat komunikasi', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:32:38'),
+('84a8e446-2f66-49d7-b686-c6c1abce9327', 'Terduga tidak banyak bicara', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:33:30'),
+('98a67ac3-1995-4e44-a3b2-dcc340983bd4', 'Terduga sering membahayakan diri dan orang lain', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:28:47'),
+('a6742362-afcd-4457-9cf6-18b364ec07c7', 'Terduga sangat santun', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:33:10'),
+('ac524e9c-def4-41f6-b774-254c3d63152f', 'Terduga mengalami penurunan berat badan', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:26:44'),
+('bdfc5244-16ec-42cf-a90c-8c82c572be49', 'Terduga mengalami perubahan kepribadian', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:27:12'),
+('be305942-8b89-488d-9092-38e0e5c572f9', 'Terduga sering melanggar tata tertib', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:29:09'),
+('d7c7dd46-10d3-41bb-87d9-19d0378b2bf9', 'Terduga selalu “royal”', 'Pengedar', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:31:46'),
+('e00ed51a-3b16-4a13-bd52-405465447104', 'Terduga emosional', 'Pengguna', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:27:28'),
+('e54a5835-1a22-461e-9246-61b0fce6737b', 'Terduga sering mendapatkan kiriman barang besukan', 'Pengendali', 'e0eba92c-8d48-11f0-808b-54e1ad047dec', '2025-11-26 11:36:57');
 
 -- --------------------------------------------------------
 
@@ -2841,12 +2847,14 @@ INSERT INTO `tbl_upload` (`id_upload`, `id_hasil`, `tindak_lanjut`, `nama_file`)
 ('8e63fd53-3cd5-42b3-92d3-52e6de490eb5', '5911c8dc-3b94-480e-ad02-e40dc31f86a1', 'Belum ditindaklanjuti', ''),
 ('8ea6c9b4-ce2c-46e9-af7f-56c1e3754ede', '5f74b7ef-cd13-4056-b56d-17fff6c85f27', 'Belum ditindaklanjuti', ''),
 ('919db635-b8c8-431c-8059-ba51a53e33b0', '72476ae2-d0f4-4b3c-9889-a4312a28ed8c', 'Belum ditindaklanjuti', ''),
+('94d8ddd4-ae5e-4b71-a662-606f11effdb3', '7d84e610-9302-4ead-8063-c9fdbe7cf4b1', 'Belum ditindaklanjuti', ''),
 ('96a2ce4a-bc70-4df1-9b54-f65eef75b655', 'cd524a20-0daf-4405-962b-9d355cd5be3b', 'Belum ditindaklanjuti', ''),
 ('97d1ccbe-fa92-45a7-a763-b84fa065be90', '704c4dda-9a8a-4d3a-813f-d9ff776354fc', 'Belum ditindaklanjuti', ''),
 ('9b37da3b-4bfe-4882-be06-b6eb8a890f7e', '3bc7d906-6487-44c0-a7bc-deeca6be1428', 'Belum ditindaklanjuti', ''),
 ('9b9d671c-248a-4167-8322-02473b028de2', '48debeb1-bcd2-49d1-a1d0-ce59d2bcf621', 'Belum ditindaklanjuti', ''),
 ('9c27871e-ede0-4e9a-8ec2-7f5ad61540f3', 'f1b3c6d6-357f-47a0-b182-7333561b1aa3', 'Belum ditindaklanjuti', ''),
 ('9c7217b5-0f71-430b-9a8f-6236a043108c', 'cc92045d-7dba-48bf-b16e-d8ad61948e2b', 'Belum ditindaklanjuti', ''),
+('a386192d-f50d-4b33-bf70-6cf2841719d2', '10a0d062-4295-4ea2-a97b-e870c1baf12f', 'Pemindahan', '55ae3105c11b398f9e8cdd928539bfe7.pdf'),
 ('a3bd4024-7a63-4d23-aba5-ece5c7630a95', '380af9fe-7c18-4596-9cbd-a19ec657b597', 'Belum ditindaklanjuti', ''),
 ('a49ad4e8-bafc-4a91-9539-fcc2f590700f', '724b5401-abad-458a-a139-4f7a2ffc5ff5', 'Belum ditindaklanjuti', ''),
 ('a88d68c2-e6f7-474f-af69-5da709bb7211', 'c9bf9126-412b-4003-b263-f0ed874ca6ef', 'Belum ditindaklanjuti', ''),
