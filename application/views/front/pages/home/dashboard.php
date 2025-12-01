@@ -536,9 +536,8 @@
   }
 </style>
 
-<h2 class="section-title mt-6 mb-4 sm:mt-8 sm:mb-6 lg:mt-10 lg:mb-8">
-  📘 Pustaka SOP & Regulasi
-</h2>
+<h2 class="section-title">Pustaka SOP & Regulasi</h2>
+
 <div id="pustakaGrid" class="pustaka-grid"></div>
 
 <script>
@@ -631,28 +630,27 @@
   }
 
   h2.section-title {
-    font-size: 1.7rem;
+    font-size: clamp(1.3rem, 1.8vw, 1.9rem);
     font-weight: 700;
-    margin-bottom: 28px;
     color: #1f2937;
     text-align: center;
-    position: relative;
-    display: inline-block;
-  }
 
-  h2.section-title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 2px;
-    width: 0%;
-    background: #dc2626;
-    transition: width .25s ease;
-  }
-
-  h2.section-title:hover::after {
+    /* Tetap center full-width */
+    display: block;
     width: 100%;
+
+    /* Jarak atas–bawah */
+    margin: 40px auto 32px auto;
+
+    /* Tambahan keamanan mobile */
+    padding-inline: 0.5rem;
+
+    position: relative;
+  }
+
+  /* UNDERLINE DIHILANGKAN */
+  h2.section-title::after {
+    content: none !important;
   }
 
   /* GRID */
@@ -664,7 +662,7 @@
     padding-bottom: 40px;
   }
 
-  /* CARD – mengikuti gaya zona-card */
+  /* CARD */
   .pustaka-card {
     width: 220px;
     background: #ffffff;
@@ -685,7 +683,7 @@
     border-color: #d1d5db;
   }
 
-  /* THUMBNAIL WRAPPER */
+  /* THUMB */
   .thumb-box {
     width: 130px;
     height: 130px;
@@ -699,7 +697,6 @@
     margin-bottom: 16px;
   }
 
-  /* icon ikut membesar saat hover */
   .pustaka-card:hover .thumb-box {
     transform: scale(1.06);
   }
