@@ -523,133 +523,6 @@
   }
 </style>
 
-<style>
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  .animate-fadeIn {
-    animation: fadeIn .25s ease-out;
-  }
-
-  body {
-    margin-bottom: 50px;
-  }
-
-  h2.section-title {
-    font-size: 1.7rem;
-    font-weight: 700;
-    margin-bottom: 28px;
-    color: #1f2937;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-  }
-
-  h2.section-title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 2px;
-    width: 0%;
-    background: #dc2626;
-    transition: width .25s ease;
-  }
-
-  h2.section-title:hover::after {
-    width: 100%;
-  }
-
-  /* GRID */
-  .pustaka-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 26px;
-    justify-content: center;
-  }
-
-  /* CARD – mengikuti gaya zona-card */
-  .pustaka-card {
-    width: 220px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    padding: 22px 16px;
-    cursor: pointer;
-    text-align: center;
-    transition: all .25s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pustaka-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
-    border-color: #d1d5db;
-  }
-
-  /* THUMBNAIL WRAPPER */
-  .thumb-box {
-    width: 130px;
-    height: 130px;
-    border-radius: 14px;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e5e7eb;
-    transition: transform .25s ease;
-    margin-bottom: 16px;
-  }
-
-  /* icon ikut membesar saat hover */
-  .pustaka-card:hover .thumb-box {
-    transform: scale(1.06);
-  }
-
-  .pustaka-thumb {
-    max-width: 85%;
-    max-height: 85%;
-    object-fit: contain;
-  }
-
-  /* TITLE */
-  .pustaka-title {
-    font-size: 14.5px;
-    font-weight: 600;
-    color: #111827;
-    line-height: 1.45;
-    min-height: 50px;
-  }
-
-  @media (max-width: 550px) {
-    .pustaka-card {
-      width: 180px;
-      padding: 18px 12px;
-    }
-
-    .thumb-box {
-      width: 110px;
-      height: 110px;
-    }
-
-    .pustaka-title {
-      font-size: 13px;
-      min-height: 40px;
-    }
-  }
-</style>
-
 <h2 class="section-title">📘 Pustaka SOP & Regulasi</h2>
 <div id="pustakaGrid" class="pustaka-grid"></div>
 
@@ -724,3 +597,127 @@
 
   loadPustakaCards();
 </script>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn .25s ease-out;
+  }
+
+  h2.section-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #1f2937;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+  }
+
+  h2.section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 2px;
+    width: 0%;
+    background: #dc2626;
+    transition: width .25s ease;
+  }
+
+  h2.section-title:hover::after {
+    width: 100%;
+  }
+
+  /* GRID */
+  .pustaka-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    justify-content: center;
+    padding-bottom: 40px;
+  }
+
+  /* CARD – mengikuti gaya zona-card */
+  .pustaka-card {
+    width: 220px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 22px 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: all .25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pustaka-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+    border-color: #d1d5db;
+  }
+
+  /* THUMBNAIL WRAPPER */
+  .thumb-box {
+    width: 130px;
+    height: 130px;
+    border-radius: 14px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    transition: transform .25s ease;
+    margin-bottom: 16px;
+  }
+
+  /* icon ikut membesar saat hover */
+  .pustaka-card:hover .thumb-box {
+    transform: scale(1.06);
+  }
+
+  .pustaka-thumb {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+  }
+
+  /* TITLE */
+  .pustaka-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.45;
+    min-height: 50px;
+  }
+
+  @media (max-width: 550px) {
+    .pustaka-card {
+      width: 180px;
+      padding: 18px 12px;
+    }
+
+    .thumb-box {
+      width: 110px;
+      height: 110px;
+    }
+
+    .pustaka-title {
+      font-size: 13px;
+      min-height: 40px;
+    }
+  }
+</style>

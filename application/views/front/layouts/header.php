@@ -73,32 +73,47 @@
 
                     <!-- User -->
                     <div class="relative">
-                        <?php $username = $this->session->userdata(
-                            "username",
-                        ); ?>
+                        <?php $username = $this->session->userdata("username"); ?>
+
                         <button id="user-btn"
-                            class="text-white px-3 sm:px-4 py-2 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 cursor-pointer flex items-center gap-2 shadow-md transition-all duration-300">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            class="text-white px-3 sm:px-4 py-2 rounded-full 
+               bg-gradient-to-br from-gray-800 to-gray-900 
+               hover:from-gray-700 hover:to-gray-800 cursor-pointer 
+               flex items-center gap-2 shadow-md transition-all duration-300
+               text-sm sm:text-base">
+
+                            <!-- Icon User -->
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4
-               1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6
-               2.67-6 6h12c0-3.33-2.67-6-6-6z" />
+                1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6
+                2.67-6 6h12c0-3.33-2.67-6-6-6z" />
                             </svg>
-                            <span class="text-sm font-medium"><?= htmlspecialchars(
-                                                                    $username,
-                                                                ) ?></span>
-                            <svg class="w-4 h-4 inline-block transition-transform duration-300"
+
+                            <!-- Username -->
+                            <span class="font-medium text-xs sm:text-sm">
+                                <?= htmlspecialchars($username) ?>
+                            </span>
+
+                            <!-- Arrow -->
+                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 inline-block transition-transform duration-300"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
 
+                        <!-- DROPDOWN -->
                         <div id="user-dropdown"
-                            class="hidden absolute top-full right-0 mt-2 w-32 bg-white text-gray-800 border border-gray-200 shadow-xl rounded-lg overflow-hidden z-50 animate-fadeIn">
+                            class="hidden absolute top-full right-0 mt-2 w-36 sm:w-40 
+               bg-white text-gray-800 border border-gray-200 shadow-xl 
+               rounded-lg overflow-hidden z-50 animate-fadeIn">
+
                             <a href="<?= base_url("login/logout") ?>"
-                                class="block px-4 py-2 hover:bg-red-50 text-sm flex items-center gap-2">
-                                <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                class="block px-4 py-2 hover:bg-red-50 text-xs sm:text-sm 
+                   flex items-center gap-2">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-red-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 17l5-5-5-5M15 12H3" />
                                 </svg>
@@ -110,11 +125,17 @@
                 <?php else: ?>
                     <!-- Tombol Masuk -->
                     <a href="<?= base_url("login") ?>"
-                        class="text-white px-4 py-2 rounded-full bg-gradient-to-br from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 flex items-center gap-2 shadow-md transition-all duration-300">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full 
+           bg-gradient-to-br from-red-600 to-red-700 
+           hover:from-red-700 hover:to-red-800 
+           flex items-center gap-2 shadow-md 
+           transition-all duration-300 text-sm md:text-base">
+
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12H3m12 0l-4 4m4-4l-4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
+
                         Masuk
                     </a>
                 <?php endif; ?>
