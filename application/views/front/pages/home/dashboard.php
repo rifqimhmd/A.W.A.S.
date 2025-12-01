@@ -1,3 +1,8 @@
+<!-- AXIOS -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <main class="w-full min-h-screen p-4">
   <section class="mb-10">
     <div class="text-center mb-10">
@@ -66,25 +71,34 @@
 
   </section>
 
-  <div class="flex flex-col md:flex-row justify-between">
+  <div class="w-full max-w-[2000px] mx-auto px-4 lg:px-8 xl:px-10 
+            flex flex-col gap-16 lg:gap-20 
+            md:flex-row md:items-start md:justify-between">
 
     <!-- Narkotika -->
-    <section class="mb-12">
-      <h2 class="relative text-2xl font-semibold mb-6 text-red-600 inline-block after:content-[''] after:block after:w-0 after:h-[3px] after:bg-red-600 after:transition-all after:duration-300 hover:after:w-full">
+    <section class="w-full md:w-[48%]">
+      <h2
+        class="relative text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 
+                   text-red-600 inline-block 
+                   after:content-[''] after:block after:w-0 after:h-[3px] 
+                   after:bg-red-600 after:transition-all after:duration-300 
+                   hover:after:w-full">
         Instrument: Narkotika
       </h2>
 
       <!-- Tabel -->
-      <div class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-100 mb-8">
-        <table class="min-w-full text-sm text-center">
-          <thead class="bg-gray-50 text-gray-600 text-xs uppercase font-semibold tracking-wide">
+      <div
+        class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-100 mb-8 
+                   w-full min-w-0">
+        <table class="min-w-full text-xs sm:text-sm text-center">
+          <thead class="bg-gray-50 text-gray-600 uppercase font-semibold tracking-wide">
             <tr>
-              <th class="py-3 px-4">No</th>
-              <th class="py-3 px-4">Kanwil</th>
-              <th class="py-3 px-4">Zona Merah</th>
-              <th class="py-3 px-4">Zona Kuning</th>
-              <th class="py-3 px-4">Zona Hijau</th>
-              <th class="py-3 px-4">Total</th>
+              <th class="py-3 px-2 sm:px-4">No</th>
+              <th class="py-3 px-2 sm:px-4">Kanwil</th>
+              <th class="py-3 px-2 sm:px-4">Zona Merah</th>
+              <th class="py-3 px-2 sm:px-4">Zona Kuning</th>
+              <th class="py-3 px-2 sm:px-4">Zona Hijau</th>
+              <th class="py-3 px-2 sm:px-4">Total</th>
             </tr>
           </thead>
           <tbody id="bodyNarkotika" class="divide-y divide-gray-100">
@@ -96,31 +110,36 @@
       </div>
 
       <!-- Chart -->
-      <div class="bg-white rounded-2xl shadow-lg p-6">
-        <canvas id="chartNarkotika" height="120"></canvas>
+      <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
+        <canvas id="chartNarkotika" class="w-full h-[260px] sm:h-[320px] lg:h-[420px]"></canvas>
       </div>
     </section>
 
+
     <!-- Teroris -->
-    <section>
-      <h2 class="relative text-2xl font-semibold mb-6 text-red-600 inline-block
-           after:content-[''] after:block after:w-0 after:h-[3px]
-           after:bg-red-600 after:transition-all after:duration-300
-           hover:after:w-full">
+    <section class="w-full md:w-[48%]">
+      <h2
+        class="relative text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 
+                   text-red-600 inline-block
+                   after:content-[''] after:block after:w-0 after:h-[3px]
+                   after:bg-red-600 after:transition-all after:duration-300
+                   hover:after:w-full">
         Instrument: Teroris
       </h2>
 
       <!-- Tabel -->
-      <div class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-100 mb-8">
-        <table class="min-w-full text-sm text-center">
-          <thead class="bg-gray-50 text-gray-600 text-xs uppercase font-semibold tracking-wide">
+      <div
+        class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-100 mb-8 
+                   w-full min-w-0">
+        <table class="min-w-full text-xs sm:text-sm text-center">
+          <thead class="bg-gray-50 text-gray-600 uppercase font-semibold tracking-wide">
             <tr>
-              <th class="py-3 px-4">No</th>
-              <th class="py-3 px-4">Kanwil</th>
-              <th class="py-3 px-4">Zona Merah</th>
-              <th class="py-3 px-4">Zona Kuning</th>
-              <th class="py-3 px-4">Zona Hijau</th>
-              <th class="py-3 px-4">Total</th>
+              <th class="py-3 px-2 sm:px-4">No</th>
+              <th class="py-3 px-2 sm:px-4">Kanwil</th>
+              <th class="py-3 px-2 sm:px-4">Zona Merah</th>
+              <th class="py-3 px-2 sm:px-4">Zona Kuning</th>
+              <th class="py-3 px-2 sm:px-4">Zona Hijau</th>
+              <th class="py-3 px-2 sm:px-4">Total</th>
             </tr>
           </thead>
           <tbody id="bodyTeroris" class="divide-y divide-gray-100">
@@ -132,12 +151,11 @@
       </div>
 
       <!-- Chart -->
-      <div class="bg-white rounded-2xl shadow-lg p-6">
-        <canvas id="chartTeroris" height="120"></canvas>
+      <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
+        <canvas id="chartTeroris" class="w-full h-[260px] sm:h-[320px] lg:h-[420px]"></canvas>
       </div>
     </section>
   </div>
-
 
 </main>
 
@@ -156,11 +174,6 @@
     </div>
   </div>
 </div>
-
-<!-- AXIOS -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
   // Detail Modal
@@ -523,7 +536,9 @@
   }
 </style>
 
-<h2 class="section-title">📘 Pustaka SOP & Regulasi</h2>
+<h2 class="section-title mt-6 mb-4 sm:mt-8 sm:mb-6 lg:mt-10 lg:mb-8">
+  📘 Pustaka SOP & Regulasi
+</h2>
 <div id="pustakaGrid" class="pustaka-grid"></div>
 
 <script>
