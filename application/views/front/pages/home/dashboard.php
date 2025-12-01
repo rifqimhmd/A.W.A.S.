@@ -67,9 +67,8 @@
   </section>
 
   <div class="flex flex-col md:flex-row justify-between">
-    <!-- =============================
-       BAGIAN 1 - NARKOTIKA
-  ============================== -->
+
+    <!-- Narkotika -->
     <section class="mb-12">
       <h2 class="relative text-2xl font-semibold mb-6 text-red-600 inline-block after:content-[''] after:block after:w-0 after:h-[3px] after:bg-red-600 after:transition-all after:duration-300 hover:after:w-full">
         Instrument: Narkotika
@@ -102,9 +101,7 @@
       </div>
     </section>
 
-    <!-- =============================
-       BAGIAN 2 - TERORIS
-  ============================== -->
+    <!-- Teroris -->
     <section>
       <h2 class="relative text-2xl font-semibold mb-6 text-red-600 inline-block
            after:content-[''] after:block after:w-0 after:h-[3px]
@@ -140,11 +137,10 @@
       </div>
     </section>
   </div>
+
+
 </main>
 
-<!-- =============================
-         MODAL DETAIL
-============================== -->
 <div id="modalDetail"
   class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
 
@@ -163,14 +159,11 @@
 
 <!-- AXIOS -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  /* ========================
-      MODAL DETAIL
-======================== */
+  // Detail Modal
   function showDetail(warna) {
     const modal = document.getElementById("modalDetail");
     const modalTitle = document.getElementById("modalTitle");
@@ -241,9 +234,7 @@
     document.getElementById("modalDetail").classList.add("hidden");
   }
 
-  /* ========================
-       CHART DAN TABEL
-  ======================== */
+  // Chart - Tabel
   let chartNarkotika, chartTeroris;
 
   async function fetchData(url) {
@@ -416,108 +407,101 @@
     chartTeroris = updateChart(dataTeror, chartTeroris, 'chartTeroris', 'blue');
   }
 
-  // Jalankan otomatis
   refreshData();
   setInterval(refreshData, 5000);
 </script>
 
 <style>
-  /* Animasi fadeIn tetap */
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: scale(0.95);
+      transform: translateY(4px);
     }
 
     to {
       opacity: 1;
-      transform: scale(1);
+      transform: none;
     }
   }
 
   .animate-fadeIn {
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn .25s ease-out;
   }
 
-  /* ================================
-     CARD ZONA — MODERN ELEVATED RED
-  ================================= */
   .zona-card {
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(239, 68, 68, 0.25);
-    /* red-500 */
-    background: rgba(255, 255, 255, 0.85);
-    transition: all .35s ease;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    transition: all .25s ease;
   }
 
   .zona-card:hover {
-    transform: translateY(-6px) scale(1.04);
-    box-shadow: 0 20px 35px rgba(220, 38, 38, 0.28);
-    /* red shadow */
-    border-color: rgba(239, 68, 68, 0.45);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+    border-color: #d1d5db;
   }
 
-  /* Icon hover twist */
   .zona-icon {
-    transition: transform .3s ease;
-    color: #dc2626;
-    /* red-600 */
+    transition: transform .25s ease;
   }
 
-  .zona-icon:hover {
-    transform: rotate(14deg) scale(1.1);
+  .zona-card:hover .zona-icon {
+    transform: scale(1.08);
   }
 
-  /* ================================
-     TABLE MODERN — RED CLEAN
-  ================================= */
+  .table-wrapper {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
   table thead {
-    letter-spacing: 0.5px;
-    background: #dc2626;
-    /* red-600 */
-    color: white;
+    background: #f9fafb;
+    color: #374151;
+    font-weight: 600;
+    font-size: 0.85rem;
   }
 
   table tbody tr {
-    transition: background 0.25s ease;
+    transition: background .18s ease;
   }
 
   table tbody tr:hover {
-    background: rgba(220, 38, 38, 0.06);
-    /* soft red hover */
+    background: #f3f4f6;
   }
 
-  /* Rounded table on scroll */
-  .table-wrapper {
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid rgba(220, 38, 38, 0.35);
+  table th,
+  table td {
+    padding: .75rem .6rem;
   }
 
-  /* ================================
-     MODAL — RED GLASSMORPHISM
-  ================================= */
+  @media (min-width: 640px) {
+
+    table th,
+    table td {
+      padding: .85rem .75rem;
+    }
+  }
+
   #modalDetail>div {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(239, 68, 68, 0.35);
-    /* red-500 */
-    box-shadow: 0 25px 45px rgba(220, 38, 38, 0.25);
-    /* red-600 */
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(10px);
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+    animation: fadeIn .3s ease-out;
   }
 
-  /* Scrollbar modern */
   .scrollbar-thin::-webkit-scrollbar {
     width: 6px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: #f87171;
-    /* red-400 */
+    background: #d1d5db;
     border-radius: 10px;
   }
 
-  /* Header underline animation (red) */
   .section-title {
     position: relative;
     display: inline-block;
@@ -527,16 +511,216 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: -4px;
-    height: 3px;
+    bottom: -3px;
+    height: 2px;
     width: 0%;
     background: #dc2626;
-    /* red-600 */
-    border-radius: 2px;
-    transition: width 0.3s ease;
+    transition: width .25s ease;
   }
 
   .section-title:hover::after {
     width: 100%;
   }
 </style>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn .25s ease-out;
+  }
+
+  body {
+    margin-bottom: 50px;
+  }
+
+  h2.section-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #1f2937;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+  }
+
+  h2.section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 2px;
+    width: 0%;
+    background: #dc2626;
+    transition: width .25s ease;
+  }
+
+  h2.section-title:hover::after {
+    width: 100%;
+  }
+
+  /* GRID */
+  .pustaka-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    justify-content: center;
+  }
+
+  /* CARD – mengikuti gaya zona-card */
+  .pustaka-card {
+    width: 220px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 22px 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: all .25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pustaka-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+    border-color: #d1d5db;
+  }
+
+  /* THUMBNAIL WRAPPER */
+  .thumb-box {
+    width: 130px;
+    height: 130px;
+    border-radius: 14px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    transition: transform .25s ease;
+    margin-bottom: 16px;
+  }
+
+  /* icon ikut membesar saat hover */
+  .pustaka-card:hover .thumb-box {
+    transform: scale(1.06);
+  }
+
+  .pustaka-thumb {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+  }
+
+  /* TITLE */
+  .pustaka-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.45;
+    min-height: 50px;
+  }
+
+  @media (max-width: 550px) {
+    .pustaka-card {
+      width: 180px;
+      padding: 18px 12px;
+    }
+
+    .thumb-box {
+      width: 110px;
+      height: 110px;
+    }
+
+    .pustaka-title {
+      font-size: 13px;
+      min-height: 40px;
+    }
+  }
+</style>
+
+<h2 class="section-title">📘 Pustaka SOP & Regulasi</h2>
+<div id="pustakaGrid" class="pustaka-grid"></div>
+
+<script>
+  const files = [{
+      file: "uploads/pustaka/AWAS -  Narkoba - Panduan Penggunaan dan Pengumpulan Data.pdf",
+      thumb: "https://i.ibb.co.com/1NBJQGN/panduan.png",
+      title: "AWAS Narkoba - Panduan Penggunaan & Pengumpulan Data"
+    },
+    {
+      file: "uploads/pustaka/AWAS -  Terorisme - Panduan Penggunaan dan Pengumpulan Data.pdf",
+      thumb: "https://i.ibb.co.com/1NBJQGN/panduan.png",
+      title: "AWAS Terorisme - Panduan Penggunaan & Pengumpulan Data"
+    },
+    {
+      file: "uploads/pustaka/SOP Penggunaan Instrumen Deteksi Dini Kerawanan Narkoba di Rutan, LPAS, Lapas, dan LPKA.pdf",
+      thumb: "https://i.ibb.co.com/KTsQmFz/sop.png",
+      title: "SOP Penggunaan Instrumen Deteksi Dini Kerawanan Narkoba"
+    },
+    {
+      file: "uploads/pustaka/SOP Penggunaan Instrumen Deteksi Dini Kerawanan Terorisme di Rutan, LPAS, Lapas, dan LPKA.pdf",
+      thumb: "https://i.ibb.co.com/KTsQmFz/sop.png",
+      title: "SOP Penggunaan Instrumen Deteksi Dini Kerawanan Terorisme"
+    },
+    {
+      file: "uploads/pustaka/Kepdirjen Pemasyarakatan Nomor PAS-44.PR.01.03 Tahun 2025 Tentang Standar Pemulihan Gangguan Kamtib Pada Rutan, Lpas, Lapas, Dan Lpka.pdf",
+      thumb: "https://i.ibb.co.com/cSpgFNs4/rules.png",
+      title: "Kepdirjen PAS 44/2025 Tentang Standar Pemulihan Gangguan Kamtib"
+    },
+    {
+      file: "uploads/pustaka/Kepdirjen Pemasyarakatan Nomor PAS-45.PR.01.03 Tahun 2025 Tentang Standar Penindakan & Penegakan Disiplin Gangguan Kamtib Pada Rutan, Lpas, Lapas, Dan Lpka.pdf",
+      thumb: "https://i.ibb.co.com/cSpgFNs4/rules.png",
+      title: "Kepdirjen PAS 45/2025 Tentang Standar Penindakan & Penegakan Disiplin Kamtib"
+    },
+    {
+      file: "uploads/pustaka/Kepdirjen Pemasyarakatan Nomor PAS-46.PR.01.03 Tahun 2025 Tentang Standar Pencegahan Gangguan Kamtib Pada Rutan, Lpas, Lapas, Dan Lpka.pdf",
+      thumb: "https://i.ibb.co.com/cSpgFNs4/rules.png",
+      title: "Kepdirjen PAS 46/2025 Tentang Standar Pencegahan Gangguan Kamtib"
+    },
+    {
+      file: "uploads/pustaka/Permenkumham Nomor 7-Tahun 2023 tentang Intelijen Pemasyarakatan.pdf",
+      thumb: "https://i.ibb.co.com/cSpgFNs4/rules.png",
+      title: "Permenkumham 7/2023 Tentang Intelijen Pemasyarakatan"
+    },
+    {
+      file: "uploads/pustaka/Permenkumham Nomor 8 Tahun 2024 tentang Penyelenggaraan Keamanan dan Ketertiban pada Satuan Kerja Pemasyarakatan.pdf",
+      thumb: "https://i.ibb.co.com/cSpgFNs4/rules.png",
+      title: "Permenkumham 8/2024 Tentang Penyelenggaraan Keamanan & Ketertiban"
+    },
+    {
+      file: "uploads/pustaka/UU Nomor 22 Tahun 2022 tentang Pemasyarakatan.pdf",
+      thumb: "https://i.ibb.co.com/cSpgFNs4/rules.png",
+      title: "UU Nomor 22 Tahun 2022 tentang Pemasyarakatan"
+    }
+  ];
+
+  function loadPustakaCards() {
+    const grid = document.getElementById("pustakaGrid");
+    grid.innerHTML = "";
+    files.forEach(item => {
+      const card = `
+        <div class="pustaka-card" onclick="window.open('${item.file}','_blank')">
+          <div class="thumb-box">
+            <img src="${item.thumb}" class="pustaka-thumb" alt="Cover" />
+          </div>
+          <div class="pustaka-title">${item.title}</div>
+        </div>
+      `;
+      grid.innerHTML += card;
+    });
+  }
+
+  loadPustakaCards();
+</script>
